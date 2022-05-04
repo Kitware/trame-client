@@ -1,0 +1,40 @@
+{
+  "name": "trame-components",
+  "version": "2.0.0",
+  "description": "Components and application for a trame server",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build:components": "vue-cli-service build --target lib --name trame-components --filename trame-components src/use.js --dest ./dist"
+  },
+  "dependencies": {
+    "@kitware/vtk.js": "24.8.0",
+    "core-js": "^3.20.3",
+    "v-runtime-template": "^1.10.0",
+    "vue": "^2.6.14",
+    "wslink": "1.6.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.4",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.4",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "prettier": "^2.4.1",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "funding": {
+    "type": "Kitware Support",
+    "url": "https://www.kitware.com/what-we-offer/#support"
+  },
+  "keywords": [
+    "Kitware",
+    "trame"
+  ],
+  "license": "MIT"
+}

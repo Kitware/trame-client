@@ -1,0 +1,4 @@
+graft trame_client/resources
+graft trame_client/module/www
+recursive-exclude trame_client/module/www *.map
+include trame_client/LICENSE

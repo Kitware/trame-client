@@ -1,0 +1,30 @@
+{
+    "events": {
+        "*": [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu"
+        ]
+    },
+    "attributes": {
+        "*": [
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once"
+        ]
+    }
+}
