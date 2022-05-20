@@ -1,4 +1,13 @@
 class AbstractLayout:
+    """
+    A layout is responsible for a section if not all the ui of your application.
+    It follow the same logic as any HTML container except that it also have to
+    evaluate its content so it can be reflected on the client side.
+    Usually to do that you will need call `flush_content` or by using it as a ContextManager.
+
+    A layout needs to be bound to a server
+    """
+
     def __init__(self, _server, _root_elem, template_name="main", **kwargs):
         self._server = _server
         self._current_root = _root_elem
@@ -14,6 +23,7 @@ class AbstractLayout:
 
     @root.setter
     def root(self, new_root):
+        """Swap the current root with a new one by adding the previous one as a child of that new one."""
         if new_root and self._current_root != new_root:
             new_root.children += [self._current_root]
             self._current_root = new_root
@@ -27,24 +37,17 @@ class AbstractLayout:
 
     @property
     def server(self):
+        """Return the server"""
         return self._server
 
     @property
     def controller(self):
+        """Return the server.controller"""
         return self._server.controller
 
     @property
     def state(self):
-        """
-        Return App state as a dictionary or extend it when setting.
-        This is a safe way to build the state incrementaly.
-        >>> layout.state = { "a": 1, "b": 2 }
-        >>> print(layout.state)
-        ... {"a": 1, "b": 2}
-        >>> layout.state = { "c": 3, "d": 4 }
-        >>> print(layout.state)
-        ... {"a": 1, "b": 2, "c": 3, "d": 4}
-        """
+        """Return the server.state"""
         return self._server.state
 
     def flush_content(self):

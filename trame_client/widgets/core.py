@@ -184,9 +184,11 @@ class AbstractElement:
 
     @property
     def server(self):
+        """Return the associated server"""
         return self._server
 
     def set_server(self, v):
+        """Update the associated server"""
         self._server = v
 
     # -------------------------------------------------------------------------
@@ -498,16 +500,32 @@ def to_str(v):
     return f'"{v}"'
 
 
+def to_doc_str(v):
+    if isinstance(v, (tuple, list)):
+        return v[0]
+    return v
+
+
 class HtmlEntry:
     def __init__(self, html_element, html_attributes, html_events):
         self.name = html_element.capitalize()
         self.html_element = html_element
         self.html_attributes = list(map(to_str, html_attributes))
         self.html_events = list(map(to_str, html_events))
+        self._raw_props = html_attributes
+        self._raw_events = html_events
 
     def __str__(self):
         lines = []
         lines.append(f"class {self.name}(HtmlElement):")
+        lines.append(f'    """')
+        lines.append(f"    Properties:")
+        for name in self._raw_props:
+            lines.append(f"       - {to_doc_str(name)}")
+        lines.append(f"    Events:")
+        for name in self._raw_events:
+            lines.append(f"       - {to_doc_str(name)}")
+        lines.append(f'    """')
         lines.append(f"    def __init__(self, children=None, **kwargs):")
         lines.append(
             f'        super().__init__("{self.html_element}", children, **kwargs)'
