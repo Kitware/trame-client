@@ -519,13 +519,13 @@ class HtmlEntry:
         lines = []
         lines.append(f"class {self.name}(HtmlElement):")
         lines.append(f'    """')
-        lines.append(f"    Properties:")
+        lines.append(f"    Properties:\n")
         for name in self._raw_props:
-            lines.append(f"       - {to_doc_str(name)}")
-        lines.append(f"    Events:")
+            lines.append(f"    :param {to_doc_str(name)}:")
+        lines.append(f"\n    Events:\n")
         for name in self._raw_events:
-            lines.append(f"       - {to_doc_str(name)}")
-        lines.append(f'    """')
+            lines.append(f"    :param {to_doc_str(name)}:")
+        lines.append(f'\n    """')
         lines.append(f"    def __init__(self, children=None, **kwargs):")
         lines.append(
             f'        super().__init__("{self.html_element}", children, **kwargs)'
