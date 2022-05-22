@@ -1,4 +1,5 @@
 import vtk from './vtk';
+import fmt from './fmt';
 
 function download(filename, content, type = 'application/octet-stream') {
   const blob = new Blob([content], { type });
@@ -53,4 +54,5 @@ export default {
   get,
   safe,
   vtk,
+  fmt,
 };
