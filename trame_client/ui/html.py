@@ -5,6 +5,7 @@ __all__ = [
     "DivLayout",
 ]
 
+
 class DivLayout(AbstractLayout):
     def __init__(self, _server, template_name="main", **kwargs):
         """

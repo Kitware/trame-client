@@ -580,7 +580,7 @@ def generate_html_elements():
     dst_file = Path(__file__).parent / Path("html.py")
     output = [
         "# Generated file - DO NOT EDIT",
-        "from .core import HtmlElement",
+        "from .core import HtmlElement, Template",
         "from .. import module",
         "",
         "HtmlElement.MODULE = module",
@@ -589,6 +589,7 @@ def generate_html_elements():
 
     # Fill __all__
     output.append("__all__ = [")
+    output.append(f'    "Template",')
     for elem in HTML_ELEMENTS:
         output.append(f'    "{elem.capitalize()}",')
     output.append("]\n\n")

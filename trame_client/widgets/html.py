@@ -1,425 +1,94 @@
 # Generated file - DO NOT EDIT
-from .core import HtmlElement
+from .core import HtmlElement, Template
 from .. import module
 
 HtmlElement.MODULE = module
 
 __all__ = [
-    "Tbody",
-    "Isindex",
-    "Html",
-    "Source",
-    "Time",
-    "Label",
-    "Pre",
-    "Tr",
-    "Col",
-    "Th",
-    "Track",
-    "Frameset",
-    "A",
-    "Object",
-    "Colgroup",
-    "Iframe",
-    "Canvas",
-    "Hr",
-    "Video",
+    "Template",
+    "Embed",
     "Menu",
     "Param",
-    "Area",
-    "Option",
-    "Dialog",
-    "Applet",
-    "Details",
-    "Frame",
-    "H1",
-    "H6",
-    "Tfoot",
+    "Track",
     "Base",
-    "Li",
-    "Map",
-    "Input",
-    "Optgroup",
-    "Fieldset",
-    "Dir",
-    "Font",
-    "Meta",
-    "Meter",
-    "I",
-    "Ol",
-    "Style",
-    "Button",
-    "Audio",
-    "Img",
-    "Output",
-    "Link",
-    "Span",
-    "Td",
-    "Caption",
-    "Body",
-    "Progress",
-    "Select",
-    "Textarea",
-    "Ins",
-    "Form",
-    "Q",
-    "Br",
-    "Basefont",
-    "Div",
-    "Ul",
-    "Embed",
-    "Slot",
+    "Tfoot",
+    "Video",
+    "Th",
+    "Time",
     "H2",
-    "Thead",
+    "Html",
+    "Q",
+    "Ins",
+    "Basefont",
+    "Input",
+    "Button",
+    "H1",
     "Data",
-    "B",
-    "Dl",
-    "Script",
-    "Head",
-    "Blockquote",
-    "H5",
-    "Legend",
-    "Del",
+    "Td",
     "P",
-    "Table",
-    "H4",
+    "Head",
+    "Canvas",
+    "Hr",
+    "Legend",
+    "Span",
+    "Body",
+    "Link",
+    "Frameset",
+    "Area",
+    "I",
+    "Option",
     "H3",
+    "Isindex",
+    "Audio",
+    "Del",
+    "Label",
+    "A",
+    "H4",
+    "Optgroup",
+    "Ol",
+    "Form",
+    "B",
+    "Caption",
+    "Thead",
+    "Dialog",
+    "Style",
+    "Script",
+    "Pre",
+    "Ul",
+    "Blockquote",
+    "Img",
+    "Tbody",
+    "Br",
+    "Source",
+    "Output",
+    "Details",
+    "Fieldset",
+    "H6",
+    "Div",
+    "Progress",
+    "Dl",
+    "Col",
+    "Textarea",
+    "H5",
+    "Li",
+    "Select",
+    "Table",
+    "Dir",
+    "Tr",
+    "Colgroup",
+    "Iframe",
+    "Applet",
+    "Map",
+    "Meter",
+    "Font",
+    "Frame",
+    "Object",
+    "Meta",
+    "Slot",
 ]
 
 
-class Tbody(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-    :param char:
-    :param charoff:
-    :param valign:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("tbody", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-            "char",
-            "charoff",
-            "valign",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Isindex(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param prompt:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("isindex", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "prompt",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Html(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param manifest:
-    :param version:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("html", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "manifest",
-            "version",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Source(HtmlElement):
+class Embed(HtmlElement):
     """
     Properties:
 
@@ -463,10 +132,7 @@ class Source(HtmlElement):
     :param v_pre:
     :param v_once:
     :param height:
-    :param media:
-    :param sizes:
     :param src:
-    :param srcset:
     :param type:
     :param width:
 
@@ -480,13 +146,14 @@ class Source(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("source", children, **kwargs)
+        super().__init__("embed", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -509,9 +176,9 @@ class Source(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -523,10 +190,7 @@ class Source(HtmlElement):
             "v_pre",
             "v_once",
             "height",
-            "media",
-            "sizes",
             "src",
-            "srcset",
             "type",
             "width",
         ]
@@ -539,7 +203,8 @@ class Source(HtmlElement):
             "contextmenu",
         ]
 
-class Time(HtmlElement):
+
+class Menu(HtmlElement):
     """
     Properties:
 
@@ -582,7 +247,7 @@ class Time(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param datetime:
+    :param compact:
 
     Events:
 
@@ -594,13 +259,14 @@ class Time(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("time", children, **kwargs)
+        super().__init__("menu", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -623,9 +289,9 @@ class Time(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -636,7 +302,7 @@ class Time(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "datetime",
+            "compact",
         ]
         self._event_names += [
             "click",
@@ -647,7 +313,8 @@ class Time(HtmlElement):
             "contextmenu",
         ]
 
-class Label(HtmlElement):
+
+class Param(HtmlElement):
     """
     Properties:
 
@@ -690,8 +357,10 @@ class Label(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param for:
-    :param form:
+    :param name:
+    :param type:
+    :param value:
+    :param valuetype:
 
     Events:
 
@@ -703,13 +372,14 @@ class Label(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("label", children, **kwargs)
+        super().__init__("param", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -732,9 +402,9 @@ class Label(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -745,8 +415,10 @@ class Label(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "for",
-            "form",
+            "name",
+            "type",
+            "value",
+            "valuetype",
         ]
         self._event_names += [
             "click",
@@ -757,7 +429,8 @@ class Label(HtmlElement):
             "contextmenu",
         ]
 
-class Pre(HtmlElement):
+
+class Track(HtmlElement):
     """
     Properties:
 
@@ -800,7 +473,11 @@ class Pre(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param width:
+    :param default:
+    :param kind:
+    :param label:
+    :param src:
+    :param srclang:
 
     Events:
 
@@ -812,13 +489,14 @@ class Pre(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("pre", children, **kwargs)
+        super().__init__("track", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -841,9 +519,9 @@ class Pre(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -854,7 +532,11 @@ class Pre(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "width",
+            "default",
+            "kind",
+            "label",
+            "src",
+            "srclang",
         ]
         self._event_names += [
             "click",
@@ -865,7 +547,120 @@ class Pre(HtmlElement):
             "contextmenu",
         ]
 
-class Tr(HtmlElement):
+
+class Base(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param href:
+    :param target:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("base", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "href",
+            "target",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Tfoot(HtmlElement):
     """
     Properties:
 
@@ -909,7 +704,6 @@ class Tr(HtmlElement):
     :param v_pre:
     :param v_once:
     :param align:
-    :param bgcolor:
     :param char:
     :param charoff:
     :param valign:
@@ -924,13 +718,14 @@ class Tr(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("tr", children, **kwargs)
+        super().__init__("tfoot", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -953,9 +748,9 @@ class Tr(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -967,7 +762,6 @@ class Tr(HtmlElement):
             "v_pre",
             "v_once",
             "align",
-            "bgcolor",
             "char",
             "charoff",
             "valign",
@@ -981,7 +775,8 @@ class Tr(HtmlElement):
             "contextmenu",
         ]
 
-class Col(HtmlElement):
+
+class Video(HtmlElement):
     """
     Properties:
 
@@ -1024,11 +819,16 @@ class Col(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param align:
-    :param char:
-    :param charoff:
-    :param span:
-    :param valign:
+    :param autoplay:
+    :param controls:
+    :param crossorigin:
+    :param height:
+    :param loop:
+    :param muted:
+    :param playsinline:
+    :param poster:
+    :param preload:
+    :param src:
     :param width:
 
     Events:
@@ -1041,13 +841,14 @@ class Col(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("col", children, **kwargs)
+        super().__init__("video", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -1070,9 +871,9 @@ class Col(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -1083,11 +884,16 @@ class Col(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "align",
-            "char",
-            "charoff",
-            "span",
-            "valign",
+            "autoplay",
+            "controls",
+            "crossorigin",
+            "height",
+            "loop",
+            "muted",
+            "playsinline",
+            "poster",
+            "preload",
+            "src",
             "width",
         ]
         self._event_names += [
@@ -1098,6 +904,7 @@ class Col(HtmlElement):
             "mouseleave",
             "contextmenu",
         ]
+
 
 class Th(HtmlElement):
     """
@@ -1167,13 +974,14 @@ class Th(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("th", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -1196,9 +1004,9 @@ class Th(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -1233,7 +1041,8 @@ class Th(HtmlElement):
             "contextmenu",
         ]
 
-class Track(HtmlElement):
+
+class Time(HtmlElement):
     """
     Properties:
 
@@ -1276,11 +1085,7 @@ class Track(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param default:
-    :param kind:
-    :param label:
-    :param src:
-    :param srclang:
+    :param datetime:
 
     Events:
 
@@ -1292,13 +1097,14 @@ class Track(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("track", children, **kwargs)
+        super().__init__("time", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -1321,9 +1127,9 @@ class Track(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -1334,11 +1140,7 @@ class Track(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "default",
-            "kind",
-            "label",
-            "src",
-            "srclang",
+            "datetime",
         ]
         self._event_names += [
             "click",
@@ -1349,249 +1151,8 @@ class Track(HtmlElement):
             "contextmenu",
         ]
 
-class Frameset(HtmlElement):
-    """
-    Properties:
 
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param cols:
-    :param rows:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("frameset", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "cols",
-            "rows",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class A(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param charset:
-    :param coords:
-    :param download:
-    :param href:
-    :param hreflang:
-    :param name:
-    :param ping:
-    :param referrerpolicy:
-    :param rel:
-    :param rev:
-    :param shape:
-    :param target:
-    :param type:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("a", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "charset",
-            "coords",
-            "download",
-            "href",
-            "hreflang",
-            "name",
-            "ping",
-            "referrerpolicy",
-            "rel",
-            "rev",
-            "shape",
-            "target",
-            "type",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Object(HtmlElement):
+class H2(HtmlElement):
     """
     Properties:
 
@@ -1635,23 +1196,6 @@ class Object(HtmlElement):
     :param v_pre:
     :param v_once:
     :param align:
-    :param archive:
-    :param border:
-    :param classid:
-    :param codebase:
-    :param codetype:
-    :param data:
-    :param declare:
-    :param form:
-    :param height:
-    :param hspace:
-    :param name:
-    :param standby:
-    :param type:
-    :param typemustmatch:
-    :param usemap:
-    :param vspace:
-    :param width:
 
     Events:
 
@@ -1663,13 +1207,14 @@ class Object(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("object", children, **kwargs)
+        super().__init__("h2", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -1692,9 +1237,9 @@ class Object(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -1706,23 +1251,6 @@ class Object(HtmlElement):
             "v_pre",
             "v_once",
             "align",
-            "archive",
-            "border",
-            "classid",
-            "codebase",
-            "codetype",
-            "data",
-            "declare",
-            "form",
-            "height",
-            "hspace",
-            "name",
-            "standby",
-            "type",
-            "typemustmatch",
-            "usemap",
-            "vspace",
-            "width",
         ]
         self._event_names += [
             "click",
@@ -1733,7 +1261,8 @@ class Object(HtmlElement):
             "contextmenu",
         ]
 
-class Colgroup(HtmlElement):
+
+class Html(HtmlElement):
     """
     Properties:
 
@@ -1776,12 +1305,8 @@ class Colgroup(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param align:
-    :param char:
-    :param charoff:
-    :param span:
-    :param valign:
-    :param width:
+    :param manifest:
+    :param version:
 
     Events:
 
@@ -1793,13 +1318,14 @@ class Colgroup(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("colgroup", children, **kwargs)
+        super().__init__("html", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -1822,9 +1348,9 @@ class Colgroup(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -1835,12 +1361,8 @@ class Colgroup(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "align",
-            "char",
-            "charoff",
-            "span",
-            "valign",
-            "width",
+            "manifest",
+            "version",
         ]
         self._event_names += [
             "click",
@@ -1851,7 +1373,8 @@ class Colgroup(HtmlElement):
             "contextmenu",
         ]
 
-class Iframe(HtmlElement):
+
+class Q(HtmlElement):
     """
     Properties:
 
@@ -1894,24 +1417,7 @@ class Iframe(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param align:
-    :param allow:
-    :param allowfullscreen:
-    :param allowpaymentrequest:
-    :param allowusermedia:
-    :param frameborder:
-    :param height:
-    :param loading:
-    :param longdesc:
-    :param marginheight:
-    :param marginwidth:
-    :param name:
-    :param referrerpolicy:
-    :param sandbox:
-    :param scrolling:
-    :param src:
-    :param srcdoc:
-    :param width:
+    :param cite:
 
     Events:
 
@@ -1923,13 +1429,14 @@ class Iframe(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("iframe", children, **kwargs)
+        super().__init__("q", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -1952,9 +1459,9 @@ class Iframe(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -1965,24 +1472,7 @@ class Iframe(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "align",
-            "allow",
-            "allowfullscreen",
-            "allowpaymentrequest",
-            "allowusermedia",
-            "frameborder",
-            "height",
-            "loading",
-            "longdesc",
-            "marginheight",
-            "marginwidth",
-            "name",
-            "referrerpolicy",
-            "sandbox",
-            "scrolling",
-            "src",
-            "srcdoc",
-            "width",
+            "cite",
         ]
         self._event_names += [
             "click",
@@ -1993,7 +1483,8 @@ class Iframe(HtmlElement):
             "contextmenu",
         ]
 
-class Canvas(HtmlElement):
+
+class Ins(HtmlElement):
     """
     Properties:
 
@@ -2036,8 +1527,8 @@ class Canvas(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param height:
-    :param width:
+    :param cite:
+    :param datetime:
 
     Events:
 
@@ -2049,13 +1540,14 @@ class Canvas(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("canvas", children, **kwargs)
+        super().__init__("ins", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -2078,9 +1570,9 @@ class Canvas(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -2091,8 +1583,8 @@ class Canvas(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "height",
-            "width",
+            "cite",
+            "datetime",
         ]
         self._event_names += [
             "click",
@@ -2103,7 +1595,8 @@ class Canvas(HtmlElement):
             "contextmenu",
         ]
 
-class Hr(HtmlElement):
+
+class Basefont(HtmlElement):
     """
     Properties:
 
@@ -2146,10 +1639,9 @@ class Hr(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param align:
-    :param noshade:
+    :param color:
+    :param face:
     :param size:
-    :param width:
 
     Events:
 
@@ -2161,13 +1653,14 @@ class Hr(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("hr", children, **kwargs)
+        super().__init__("basefont", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -2190,9 +1683,9 @@ class Hr(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -2203,10 +1696,9 @@ class Hr(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "align",
-            "noshade",
+            "color",
+            "face",
             "size",
-            "width",
         ]
         self._event_names += [
             "click",
@@ -2217,1723 +1709,6 @@ class Hr(HtmlElement):
             "contextmenu",
         ]
 
-class Video(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param autoplay:
-    :param controls:
-    :param crossorigin:
-    :param height:
-    :param loop:
-    :param muted:
-    :param playsinline:
-    :param poster:
-    :param preload:
-    :param src:
-    :param width:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("video", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "autoplay",
-            "controls",
-            "crossorigin",
-            "height",
-            "loop",
-            "muted",
-            "playsinline",
-            "poster",
-            "preload",
-            "src",
-            "width",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Menu(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param compact:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("menu", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "compact",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Param(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param name:
-    :param type:
-    :param value:
-    :param valuetype:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("param", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "name",
-            "type",
-            "value",
-            "valuetype",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Area(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param alt:
-    :param coords:
-    :param download:
-    :param href:
-    :param hreflang:
-    :param nohref:
-    :param ping:
-    :param referrerpolicy:
-    :param rel:
-    :param shape:
-    :param target:
-    :param type:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("area", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "alt",
-            "coords",
-            "download",
-            "href",
-            "hreflang",
-            "nohref",
-            "ping",
-            "referrerpolicy",
-            "rel",
-            "shape",
-            "target",
-            "type",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Option(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param disabled:
-    :param label:
-    :param selected:
-    :param value:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("option", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "disabled",
-            "label",
-            "selected",
-            "value",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Dialog(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param open:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("dialog", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "open",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Applet(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-    :param alt:
-    :param archive:
-    :param code:
-    :param codebase:
-    :param height:
-    :param hspace:
-    :param name:
-    :param object:
-    :param vspace:
-    :param width:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("applet", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-            "alt",
-            "archive",
-            "code",
-            "codebase",
-            "height",
-            "hspace",
-            "name",
-            "object",
-            "vspace",
-            "width",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Details(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param open:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("details", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "open",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Frame(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param frameborder:
-    :param longdesc:
-    :param marginheight:
-    :param marginwidth:
-    :param name:
-    :param noresize:
-    :param scrolling:
-    :param src:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("frame", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "frameborder",
-            "longdesc",
-            "marginheight",
-            "marginwidth",
-            "name",
-            "noresize",
-            "scrolling",
-            "src",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class H1(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("h1", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class H6(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("h6", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Tfoot(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-    :param char:
-    :param charoff:
-    :param valign:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("tfoot", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-            "char",
-            "charoff",
-            "valign",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Base(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param href:
-    :param target:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("base", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "href",
-            "target",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Li(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param type:
-    :param value:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("li", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "type",
-            "value",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Map(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param name:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("map", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "name",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
 
 class Input(HtmlElement):
     """
@@ -4022,13 +1797,14 @@ class Input(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("input", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -4051,9 +1827,9 @@ class Input(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -4107,1013 +1883,6 @@ class Input(HtmlElement):
             "contextmenu",
         ]
 
-class Optgroup(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param disabled:
-    :param label:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("optgroup", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "disabled",
-            "label",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Fieldset(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param disabled:
-    :param form:
-    :param name:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("fieldset", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "disabled",
-            "form",
-            "name",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Dir(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param compact:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("dir", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "compact",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Font(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param color:
-    :param face:
-    :param size:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("font", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "color",
-            "face",
-            "size",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Meta(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param charset:
-    :param content:
-    :param http-equiv:
-    :param media:
-    :param name:
-    :param scheme:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("meta", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "charset",
-            "content",
-            "http-equiv",
-            "media",
-            "name",
-            "scheme",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Meter(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param high:
-    :param low:
-    :param max:
-    :param min:
-    :param optimum:
-    :param value:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("meter", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "high",
-            "low",
-            "max",
-            "min",
-            "optimum",
-            "value",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class I(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("i", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Ol(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param compact:
-    :param reversed:
-    :param start:
-    :param type:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("ol", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "compact",
-            "reversed",
-            "start",
-            "type",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Style(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param media:
-    :param type:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("style", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "media",
-            "type",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
 
 class Button(HtmlElement):
     """
@@ -5179,13 +1948,14 @@ class Button(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("button", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -5208,9 +1978,9 @@ class Button(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -5240,6 +2010,1979 @@ class Button(HtmlElement):
             "mouseleave",
             "contextmenu",
         ]
+
+
+class H1(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("h1", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Data(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param value:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("data", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "value",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Td(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param abbr:
+    :param align:
+    :param axis:
+    :param bgcolor:
+    :param char:
+    :param charoff:
+    :param colspan:
+    :param headers:
+    :param height:
+    :param nowrap:
+    :param rowspan:
+    :param scope:
+    :param valign:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("td", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "abbr",
+            "align",
+            "axis",
+            "bgcolor",
+            "char",
+            "charoff",
+            "colspan",
+            "headers",
+            "height",
+            "nowrap",
+            "rowspan",
+            "scope",
+            "valign",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class P(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("p", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Head(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param profile:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("head", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "profile",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Canvas(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param height:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("canvas", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "height",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Hr(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param noshade:
+    :param size:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("hr", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "noshade",
+            "size",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Legend(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("legend", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Span(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("span", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Body(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param alink:
+    :param background:
+    :param bgcolor:
+    :param link:
+    :param text:
+    :param vlink:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("body", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "alink",
+            "background",
+            "bgcolor",
+            "link",
+            "text",
+            "vlink",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Link(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param as:
+    :param charset:
+    :param color:
+    :param crossorigin:
+    :param disabled:
+    :param href:
+    :param hreflang:
+    :param imagesizes:
+    :param imagesrcset:
+    :param integrity:
+    :param media:
+    :param referrerpolicy:
+    :param rel:
+    :param rev:
+    :param sizes:
+    :param target:
+    :param type:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("link", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "as",
+            "charset",
+            "color",
+            "crossorigin",
+            "disabled",
+            "href",
+            "hreflang",
+            "imagesizes",
+            "imagesrcset",
+            "integrity",
+            "media",
+            "referrerpolicy",
+            "rel",
+            "rev",
+            "sizes",
+            "target",
+            "type",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Frameset(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param cols:
+    :param rows:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("frameset", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "cols",
+            "rows",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Area(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param alt:
+    :param coords:
+    :param download:
+    :param href:
+    :param hreflang:
+    :param nohref:
+    :param ping:
+    :param referrerpolicy:
+    :param rel:
+    :param shape:
+    :param target:
+    :param type:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("area", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "alt",
+            "coords",
+            "download",
+            "href",
+            "hreflang",
+            "nohref",
+            "ping",
+            "referrerpolicy",
+            "rel",
+            "shape",
+            "target",
+            "type",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class I(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("i", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Option(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param disabled:
+    :param label:
+    :param selected:
+    :param value:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("option", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "disabled",
+            "label",
+            "selected",
+            "value",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class H3(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("h3", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Isindex(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param prompt:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("isindex", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "prompt",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
 
 class Audio(HtmlElement):
     """
@@ -5302,13 +4045,14 @@ class Audio(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("audio", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -5331,9 +4075,9 @@ class Audio(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -5360,6 +4104,1845 @@ class Audio(HtmlElement):
             "mouseleave",
             "contextmenu",
         ]
+
+
+class Del(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param cite:
+    :param datetime:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("del", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "cite",
+            "datetime",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Label(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param for:
+    :param form:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("label", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "for",
+            "form",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class A(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param charset:
+    :param coords:
+    :param download:
+    :param href:
+    :param hreflang:
+    :param name:
+    :param ping:
+    :param referrerpolicy:
+    :param rel:
+    :param rev:
+    :param shape:
+    :param target:
+    :param type:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("a", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "charset",
+            "coords",
+            "download",
+            "href",
+            "hreflang",
+            "name",
+            "ping",
+            "referrerpolicy",
+            "rel",
+            "rev",
+            "shape",
+            "target",
+            "type",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class H4(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("h4", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Optgroup(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param disabled:
+    :param label:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("optgroup", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "disabled",
+            "label",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Ol(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param compact:
+    :param reversed:
+    :param start:
+    :param type:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("ol", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "compact",
+            "reversed",
+            "start",
+            "type",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Form(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param accept:
+    :param accept-charset:
+    :param action:
+    :param autocomplete:
+    :param enctype:
+    :param method:
+    :param name:
+    :param novalidate:
+    :param target:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("form", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "accept",
+            "accept-charset",
+            "action",
+            "autocomplete",
+            "enctype",
+            "method",
+            "name",
+            "novalidate",
+            "target",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class B(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("b", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Caption(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("caption", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Thead(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param char:
+    :param charoff:
+    :param valign:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("thead", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "char",
+            "charoff",
+            "valign",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Dialog(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param open:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("dialog", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "open",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Style(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param media:
+    :param type:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("style", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "media",
+            "type",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Script(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param async:
+    :param charset:
+    :param crossorigin:
+    :param defer:
+    :param integrity:
+    :param language:
+    :param nomodule:
+    :param referrerpolicy:
+    :param src:
+    :param type:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("script", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "async",
+            "charset",
+            "crossorigin",
+            "defer",
+            "integrity",
+            "language",
+            "nomodule",
+            "referrerpolicy",
+            "src",
+            "type",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Pre(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("pre", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Ul(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param compact:
+    :param type:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("ul", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "compact",
+            "type",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Blockquote(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param cite:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("blockquote", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "cite",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
 
 class Img(HtmlElement):
     """
@@ -5433,13 +6016,14 @@ class Img(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("img", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -5462,9 +6046,9 @@ class Img(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -5502,6 +6086,355 @@ class Img(HtmlElement):
             "mouseleave",
             "contextmenu",
         ]
+
+
+class Tbody(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param char:
+    :param charoff:
+    :param valign:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("tbody", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "char",
+            "charoff",
+            "valign",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Br(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param clear:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("br", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "clear",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Source(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param height:
+    :param media:
+    :param sizes:
+    :param src:
+    :param srcset:
+    :param type:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("source", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "height",
+            "media",
+            "sizes",
+            "src",
+            "srcset",
+            "type",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
 
 class Output(HtmlElement):
     """
@@ -5560,13 +6493,14 @@ class Output(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("output", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -5589,9 +6523,9 @@ class Output(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -5615,7 +6549,8 @@ class Output(HtmlElement):
             "contextmenu",
         ]
 
-class Link(HtmlElement):
+
+class Details(HtmlElement):
     """
     Properties:
 
@@ -5658,23 +6593,119 @@ class Link(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param as:
-    :param charset:
-    :param color:
-    :param crossorigin:
+    :param open:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("details", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "open",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Fieldset(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
     :param disabled:
-    :param href:
-    :param hreflang:
-    :param imagesizes:
-    :param imagesrcset:
-    :param integrity:
-    :param media:
-    :param referrerpolicy:
-    :param rel:
-    :param rev:
-    :param sizes:
-    :param target:
-    :param type:
+    :param form:
+    :param name:
 
     Events:
 
@@ -5686,13 +6717,14 @@ class Link(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("link", children, **kwargs)
+        super().__init__("fieldset", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -5715,9 +6747,9 @@ class Link(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -5728,23 +6760,9 @@ class Link(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "as",
-            "charset",
-            "color",
-            "crossorigin",
             "disabled",
-            "href",
-            "hreflang",
-            "imagesizes",
-            "imagesrcset",
-            "integrity",
-            "media",
-            "referrerpolicy",
-            "rel",
-            "rev",
-            "sizes",
-            "target",
-            "type",
+            "form",
+            "name",
         ]
         self._event_names += [
             "click",
@@ -5755,247 +6773,8 @@ class Link(HtmlElement):
             "contextmenu",
         ]
 
-class Span(HtmlElement):
-    """
-    Properties:
 
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("span", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Td(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param abbr:
-    :param align:
-    :param axis:
-    :param bgcolor:
-    :param char:
-    :param charoff:
-    :param colspan:
-    :param headers:
-    :param height:
-    :param nowrap:
-    :param rowspan:
-    :param scope:
-    :param valign:
-    :param width:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("td", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "abbr",
-            "align",
-            "axis",
-            "bgcolor",
-            "char",
-            "charoff",
-            "colspan",
-            "headers",
-            "height",
-            "nowrap",
-            "rowspan",
-            "scope",
-            "valign",
-            "width",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Caption(HtmlElement):
+class H6(HtmlElement):
     """
     Properties:
 
@@ -6050,13 +6829,14 @@ class Caption(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("caption", children, **kwargs)
+        super().__init__("h6", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -6079,9 +6859,9 @@ class Caption(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -6103,7 +6883,8 @@ class Caption(HtmlElement):
             "contextmenu",
         ]
 
-class Body(HtmlElement):
+
+class Div(HtmlElement):
     """
     Properties:
 
@@ -6146,12 +6927,7 @@ class Body(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param alink:
-    :param background:
-    :param bgcolor:
-    :param link:
-    :param text:
-    :param vlink:
+    :param align:
 
     Events:
 
@@ -6163,13 +6939,14 @@ class Body(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("body", children, **kwargs)
+        super().__init__("div", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -6192,9 +6969,9 @@ class Body(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -6205,12 +6982,7 @@ class Body(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "alink",
-            "background",
-            "bgcolor",
-            "link",
-            "text",
-            "vlink",
+            "align",
         ]
         self._event_names += [
             "click",
@@ -6220,6 +6992,7 @@ class Body(HtmlElement):
             "mouseleave",
             "contextmenu",
         ]
+
 
 class Progress(HtmlElement):
     """
@@ -6277,13 +7050,14 @@ class Progress(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("progress", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -6306,9 +7080,9 @@ class Progress(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -6331,7 +7105,8 @@ class Progress(HtmlElement):
             "contextmenu",
         ]
 
-class Select(HtmlElement):
+
+class Dl(HtmlElement):
     """
     Properties:
 
@@ -6374,13 +7149,7 @@ class Select(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param autocomplete:
-    :param disabled:
-    :param form:
-    :param multiple:
-    :param name:
-    :param required:
-    :param size:
+    :param compact:
 
     Events:
 
@@ -6392,13 +7161,14 @@ class Select(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("select", children, **kwargs)
+        super().__init__("dl", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -6421,9 +7191,9 @@ class Select(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -6434,13 +7204,7 @@ class Select(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "autocomplete",
-            "disabled",
-            "form",
-            "multiple",
-            "name",
-            "required",
-            "size",
+            "compact",
         ]
         self._event_names += [
             "click",
@@ -6450,6 +7214,127 @@ class Select(HtmlElement):
             "mouseleave",
             "contextmenu",
         ]
+
+
+class Col(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param char:
+    :param charoff:
+    :param span:
+    :param valign:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("col", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "char",
+            "charoff",
+            "span",
+            "valign",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
 
 class Textarea(HtmlElement):
     """
@@ -6518,13 +7403,14 @@ class Textarea(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("textarea", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -6547,9 +7433,9 @@ class Textarea(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -6583,1893 +7469,6 @@ class Textarea(HtmlElement):
             "contextmenu",
         ]
 
-class Ins(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param cite:
-    :param datetime:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("ins", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "cite",
-            "datetime",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Form(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param accept:
-    :param accept-charset:
-    :param action:
-    :param autocomplete:
-    :param enctype:
-    :param method:
-    :param name:
-    :param novalidate:
-    :param target:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("form", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "accept",
-            "accept-charset",
-            "action",
-            "autocomplete",
-            "enctype",
-            "method",
-            "name",
-            "novalidate",
-            "target",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Q(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param cite:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("q", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "cite",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Br(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param clear:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("br", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "clear",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Basefont(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param color:
-    :param face:
-    :param size:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("basefont", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "color",
-            "face",
-            "size",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Div(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("div", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Ul(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param compact:
-    :param type:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("ul", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "compact",
-            "type",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Embed(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param height:
-    :param src:
-    :param type:
-    :param width:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("embed", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "height",
-            "src",
-            "type",
-            "width",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Slot(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param name:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("slot", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "name",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class H2(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("h2", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Thead(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-    :param char:
-    :param charoff:
-    :param valign:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("thead", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-            "char",
-            "charoff",
-            "valign",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Data(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param value:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("data", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "value",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class B(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("b", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Dl(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param compact:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("dl", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "compact",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Script(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param async:
-    :param charset:
-    :param crossorigin:
-    :param defer:
-    :param integrity:
-    :param language:
-    :param nomodule:
-    :param referrerpolicy:
-    :param src:
-    :param type:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("script", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "async",
-            "charset",
-            "crossorigin",
-            "defer",
-            "integrity",
-            "language",
-            "nomodule",
-            "referrerpolicy",
-            "src",
-            "type",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Head(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param profile:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("head", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "profile",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
-
-class Blockquote(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param cite:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("blockquote", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "cite",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
 
 class H5(HtmlElement):
     """
@@ -8526,13 +7525,14 @@ class H5(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("h5", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -8555,9 +7555,9 @@ class H5(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -8579,7 +7579,8 @@ class H5(HtmlElement):
             "contextmenu",
         ]
 
-class Legend(HtmlElement):
+
+class Li(HtmlElement):
     """
     Properties:
 
@@ -8622,7 +7623,8 @@ class Legend(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param align:
+    :param type:
+    :param value:
 
     Events:
 
@@ -8634,13 +7636,14 @@ class Legend(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("legend", children, **kwargs)
+        super().__init__("li", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -8663,9 +7666,9 @@ class Legend(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -8676,7 +7679,8 @@ class Legend(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "align",
+            "type",
+            "value",
         ]
         self._event_names += [
             "click",
@@ -8687,7 +7691,8 @@ class Legend(HtmlElement):
             "contextmenu",
         ]
 
-class Del(HtmlElement):
+
+class Select(HtmlElement):
     """
     Properties:
 
@@ -8730,8 +7735,13 @@ class Del(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param cite:
-    :param datetime:
+    :param autocomplete:
+    :param disabled:
+    :param form:
+    :param multiple:
+    :param name:
+    :param required:
+    :param size:
 
     Events:
 
@@ -8743,13 +7753,14 @@ class Del(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("del", children, **kwargs)
+        super().__init__("select", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -8772,9 +7783,9 @@ class Del(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -8785,8 +7796,13 @@ class Del(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "cite",
-            "datetime",
+            "autocomplete",
+            "disabled",
+            "form",
+            "multiple",
+            "name",
+            "required",
+            "size",
         ]
         self._event_names += [
             "click",
@@ -8797,113 +7813,6 @@ class Del(HtmlElement):
             "contextmenu",
         ]
 
-class P(HtmlElement):
-    """
-    Properties:
-
-    :param accesskey:
-    :param autocapitalize:
-    :param autofocus:
-    :param classes:
-    :param contenteditable:
-    :param dir:
-    :param draggable:
-    :param enterkeyhint:
-    :param hidden:
-    :param id:
-    :param inputmode:
-    :param is:
-    :param itemid:
-    :param itemprop:
-    :param itemref:
-    :param itemscope:
-    :param itemtype:
-    :param lang:
-    :param nonce:
-    :param slot:
-    :param spellcheck:
-    :param style:
-    :param tabindex:
-    :param title:
-    :param translate:
-    :param ref:
-    :param key:
-    :param v_on:
-    :param v_bind:
-    :param v_text:
-    :param v_html:
-    :param v_show:
-    :param v_if:
-    :param v_else:
-    :param v_else_if:
-    :param v_for:
-    :param v_model:
-    :param v_pre:
-    :param v_once:
-    :param align:
-
-    Events:
-
-    :param click:
-    :param mousedown:
-    :param mouseup:
-    :param mouseenter:
-    :param mouseleave:
-    :param contextmenu:
-
-    """
-    def __init__(self, children=None, **kwargs):
-        super().__init__("p", children, **kwargs)
-        self._attr_names += [
-            "accesskey",
-            "autocapitalize",
-            "autofocus",
-            ['classes', 'class'],
-            "contenteditable",
-            "dir",
-            "draggable",
-            "enterkeyhint",
-            "hidden",
-            "id",
-            "inputmode",
-            "is",
-            "itemid",
-            "itemprop",
-            "itemref",
-            "itemscope",
-            "itemtype",
-            "lang",
-            "nonce",
-            "slot",
-            "spellcheck",
-            "style",
-            "tabindex",
-            "title",
-            "translate",
-            "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
-            "v_text",
-            "v_html",
-            "v_show",
-            "v_if",
-            "v_else",
-            "v_else_if",
-            "v_for",
-            "v_model",
-            "v_pre",
-            "v_once",
-            "align",
-        ]
-        self._event_names += [
-            "click",
-            "mousedown",
-            "mouseup",
-            "mouseenter",
-            "mouseleave",
-            "contextmenu",
-        ]
 
 class Table(HtmlElement):
     """
@@ -8968,13 +7877,14 @@ class Table(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
         super().__init__("table", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -8997,9 +7907,9 @@ class Table(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -9029,7 +7939,8 @@ class Table(HtmlElement):
             "contextmenu",
         ]
 
-class H4(HtmlElement):
+
+class Dir(HtmlElement):
     """
     Properties:
 
@@ -9072,7 +7983,7 @@ class H4(HtmlElement):
     :param v_model:
     :param v_pre:
     :param v_once:
-    :param align:
+    :param compact:
 
     Events:
 
@@ -9084,13 +7995,14 @@ class H4(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("h4", children, **kwargs)
+        super().__init__("dir", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -9113,9 +8025,9 @@ class H4(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -9126,7 +8038,7 @@ class H4(HtmlElement):
             "v_model",
             "v_pre",
             "v_once",
-            "align",
+            "compact",
         ]
         self._event_names += [
             "click",
@@ -9137,7 +8049,8 @@ class H4(HtmlElement):
             "contextmenu",
         ]
 
-class H3(HtmlElement):
+
+class Tr(HtmlElement):
     """
     Properties:
 
@@ -9181,6 +8094,10 @@ class H3(HtmlElement):
     :param v_pre:
     :param v_once:
     :param align:
+    :param bgcolor:
+    :param char:
+    :param charoff:
+    :param valign:
 
     Events:
 
@@ -9192,13 +8109,14 @@ class H3(HtmlElement):
     :param contextmenu:
 
     """
+
     def __init__(self, children=None, **kwargs):
-        super().__init__("h3", children, **kwargs)
+        super().__init__("tr", children, **kwargs)
         self._attr_names += [
             "accesskey",
             "autocapitalize",
             "autofocus",
-            ['classes', 'class'],
+            ["classes", "class"],
             "contenteditable",
             "dir",
             "draggable",
@@ -9221,9 +8139,9 @@ class H3(HtmlElement):
             "title",
             "translate",
             "ref",
-            ['key', ':key'],
-            ['v_on', 'v-on'],
-            ['v_bind', 'v-bind'],
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
             "v_text",
             "v_html",
             "v_show",
@@ -9235,6 +8153,1246 @@ class H3(HtmlElement):
             "v_pre",
             "v_once",
             "align",
+            "bgcolor",
+            "char",
+            "charoff",
+            "valign",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Colgroup(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param char:
+    :param charoff:
+    :param span:
+    :param valign:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("colgroup", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "char",
+            "charoff",
+            "span",
+            "valign",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Iframe(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param allow:
+    :param allowfullscreen:
+    :param allowpaymentrequest:
+    :param allowusermedia:
+    :param frameborder:
+    :param height:
+    :param loading:
+    :param longdesc:
+    :param marginheight:
+    :param marginwidth:
+    :param name:
+    :param referrerpolicy:
+    :param sandbox:
+    :param scrolling:
+    :param src:
+    :param srcdoc:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("iframe", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "allow",
+            "allowfullscreen",
+            "allowpaymentrequest",
+            "allowusermedia",
+            "frameborder",
+            "height",
+            "loading",
+            "longdesc",
+            "marginheight",
+            "marginwidth",
+            "name",
+            "referrerpolicy",
+            "sandbox",
+            "scrolling",
+            "src",
+            "srcdoc",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Applet(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param alt:
+    :param archive:
+    :param code:
+    :param codebase:
+    :param height:
+    :param hspace:
+    :param name:
+    :param object:
+    :param vspace:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("applet", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "alt",
+            "archive",
+            "code",
+            "codebase",
+            "height",
+            "hspace",
+            "name",
+            "object",
+            "vspace",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Map(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param name:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("map", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "name",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Meter(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param high:
+    :param low:
+    :param max:
+    :param min:
+    :param optimum:
+    :param value:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("meter", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "high",
+            "low",
+            "max",
+            "min",
+            "optimum",
+            "value",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Font(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param color:
+    :param face:
+    :param size:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("font", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "color",
+            "face",
+            "size",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Frame(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param frameborder:
+    :param longdesc:
+    :param marginheight:
+    :param marginwidth:
+    :param name:
+    :param noresize:
+    :param scrolling:
+    :param src:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("frame", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "frameborder",
+            "longdesc",
+            "marginheight",
+            "marginwidth",
+            "name",
+            "noresize",
+            "scrolling",
+            "src",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Object(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param align:
+    :param archive:
+    :param border:
+    :param classid:
+    :param codebase:
+    :param codetype:
+    :param data:
+    :param declare:
+    :param form:
+    :param height:
+    :param hspace:
+    :param name:
+    :param standby:
+    :param type:
+    :param typemustmatch:
+    :param usemap:
+    :param vspace:
+    :param width:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("object", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "align",
+            "archive",
+            "border",
+            "classid",
+            "codebase",
+            "codetype",
+            "data",
+            "declare",
+            "form",
+            "height",
+            "hspace",
+            "name",
+            "standby",
+            "type",
+            "typemustmatch",
+            "usemap",
+            "vspace",
+            "width",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Meta(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param charset:
+    :param content:
+    :param http-equiv:
+    :param media:
+    :param name:
+    :param scheme:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("meta", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "charset",
+            "content",
+            "http-equiv",
+            "media",
+            "name",
+            "scheme",
+        ]
+        self._event_names += [
+            "click",
+            "mousedown",
+            "mouseup",
+            "mouseenter",
+            "mouseleave",
+            "contextmenu",
+        ]
+
+
+class Slot(HtmlElement):
+    """
+    Properties:
+
+    :param accesskey:
+    :param autocapitalize:
+    :param autofocus:
+    :param classes:
+    :param contenteditable:
+    :param dir:
+    :param draggable:
+    :param enterkeyhint:
+    :param hidden:
+    :param id:
+    :param inputmode:
+    :param is:
+    :param itemid:
+    :param itemprop:
+    :param itemref:
+    :param itemscope:
+    :param itemtype:
+    :param lang:
+    :param nonce:
+    :param slot:
+    :param spellcheck:
+    :param style:
+    :param tabindex:
+    :param title:
+    :param translate:
+    :param ref:
+    :param key:
+    :param v_on:
+    :param v_bind:
+    :param v_text:
+    :param v_html:
+    :param v_show:
+    :param v_if:
+    :param v_else:
+    :param v_else_if:
+    :param v_for:
+    :param v_model:
+    :param v_pre:
+    :param v_once:
+    :param name:
+
+    Events:
+
+    :param click:
+    :param mousedown:
+    :param mouseup:
+    :param mouseenter:
+    :param mouseleave:
+    :param contextmenu:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("slot", children, **kwargs)
+        self._attr_names += [
+            "accesskey",
+            "autocapitalize",
+            "autofocus",
+            ["classes", "class"],
+            "contenteditable",
+            "dir",
+            "draggable",
+            "enterkeyhint",
+            "hidden",
+            "id",
+            "inputmode",
+            "is",
+            "itemid",
+            "itemprop",
+            "itemref",
+            "itemscope",
+            "itemtype",
+            "lang",
+            "nonce",
+            "slot",
+            "spellcheck",
+            "style",
+            "tabindex",
+            "title",
+            "translate",
+            "ref",
+            ["key", ":key"],
+            ["v_on", "v-on"],
+            ["v_bind", "v-bind"],
+            "v_text",
+            "v_html",
+            "v_show",
+            "v_if",
+            "v_else",
+            "v_else_if",
+            "v_for",
+            "v_model",
+            "v_pre",
+            "v_once",
+            "name",
         ]
         self._event_names += [
             "click",
