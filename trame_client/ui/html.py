@@ -2,7 +2,6 @@ from .core import AbstractLayout
 from ..widgets.html import Div
 
 __all__ = [
-    "AbstractLayout",
     "DivLayout",
 ]
 
