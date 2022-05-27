@@ -1,0 +1,17 @@
+[flake8]
+
+ignore =
+    # Black and flake8 conflict here
+    E203
+    # Just assume black did a good job with the line lengths
+    E501
+    # Black and flake8 conflict here
+    W503
+
+exclude =
+    # These are auto-generated. Just ignore any issues.
+    trame_client/widgets/html.py
+
+per-file-ignores =
+    # These directories will always contain "from ... import *"
+    trame/*:F401,F403

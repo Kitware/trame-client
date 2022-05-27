@@ -245,7 +245,7 @@ class AbstractElement:
     def attrs(self, *names):
         """
         Calling this function will process the provided attribute names and
-        configure its internal so the macthing HTML string could easily be
+        configure its internal so the matching HTML string could easily be
         generated later on.
 
         :param names: The names attribute to process
@@ -294,7 +294,7 @@ class AbstractElement:
                     self._attributes[name] = f'{js_key}="{value}"'
                 else:
                     print(
-                        f"Error: Don't know how to handle attribue name '{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
+                        f"Error: Don't know how to handle attribute name '{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
                     )
 
         return self
@@ -302,7 +302,7 @@ class AbstractElement:
     def events(self, *names):
         """
         Calling this function will process the provided event names and
-        configure its internal so the macthing HTML string could easily be
+        configure its internal so the matching HTML string could easily be
         generated later on.
 
         :param names: The names events to process
@@ -518,15 +518,15 @@ class HtmlEntry:
     def __str__(self):
         lines = []
         lines.append(f"class {self.name}(HtmlElement):")
-        lines.append(f'    """')
-        lines.append(f"    Properties:\n")
+        lines.append('    """')
+        lines.append("    Properties:\n")
         for name in self._raw_props:
             lines.append(f"    :param {to_doc_str(name)}:")
-        lines.append(f"\n    Events:\n")
+        lines.append("\n    Events:\n")
         for name in self._raw_events:
             lines.append(f"    :param {to_doc_str(name)}:")
-        lines.append(f'\n    """')
-        lines.append(f"    def __init__(self, children=None, **kwargs):")
+        lines.append('\n    """')
+        lines.append("    def __init__(self, children=None, **kwargs):")
         lines.append(
             f'        super().__init__("{self.html_element}", children, **kwargs)'
         )
@@ -589,7 +589,7 @@ def generate_html_elements():
 
     # Fill __all__
     output.append("__all__ = [")
-    output.append(f'    "Template",')
+    output.append('    "Template",')
     for elem in HTML_ELEMENTS:
         output.append(f'    "{elem.capitalize()}",')
     output.append("]\n\n")
