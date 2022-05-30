@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.2 (2022-05-30)
+### Fix
+* **state:** Properly handle _filter after reload ([`c43046b`](https://github.com/Kitware/trame-client/commit/c43046b2e6f2387655be6e54fca183b904b68ee4))
+
 ## v2.0.1 (2022-05-27)
 ### Fix
 * **CI:** Add initial CI with semantic-release ([`51323fd`](https://github.com/Kitware/trame-client/commit/51323fdcbd9e519dfa594948557cbaf6b30c88ac))
