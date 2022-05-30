@@ -211,7 +211,7 @@ export class TrameState {
             if (subKey[0] === '_') {
               continue;
             }
-            if (prevValue[subKey] !== value[subKey]) {
+            if (prevValue === undefined || prevValue[subKey] !== value[subKey]) {
               modified = true;
             }
           }
