@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.3 (2022-06-03)
+### Fix
+* **use_:** Fix case sensitivity of use_host(name) ([`78c4bfd`](https://github.com/Kitware/trame-client/commit/78c4bfd85277ad05bc2955233b3e13c1e7386ca8))
+
 ## v2.0.2 (2022-05-30)
 ### Fix
 * **state:** Properly handle _filter after reload ([`c43046b`](https://github.com/Kitware/trame-client/commit/c43046b2e6f2387655be6e54fca183b904b68ee4))
