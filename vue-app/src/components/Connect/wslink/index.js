@@ -31,11 +31,11 @@ function configDecorator(config) {
 
   // Process sessionURL
   if (outputConfig.sessionURL) {
-    let sessionURL = outputConfig.sessionURL;
+    let sessionURL = outputConfig.sessionURL.toLowerCase();
     const httpURL = window.location;
 
     // handle protocol mapping http(s) => ws(s)
-    if (sessionURL.includes('USE_')) {
+    if (sessionURL.includes('use_')) {
       const wsURL = new URL(sessionURL);
       wsURL.protocol = WS_PROTOCOL[httpURL.protocol];
       sessionURL = wsURL.toString();
@@ -43,8 +43,8 @@ function configDecorator(config) {
 
     // handle variable replacement
     const use_mapping = {
-      USE_HOSTNAME: httpURL.hostname,
-      USE_HOST: httpURL.host,
+      use_hostname: httpURL.hostname,
+      use_host: httpURL.host,
     };
     for (const [key, value] of Object.entries(use_mapping)) {
       sessionURL = sessionURL.replaceAll(key, value);
