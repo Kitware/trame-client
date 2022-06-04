@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.0 (2022-06-04)
+### Feature
+* **VirtualNode:** Introduce the virtual node concept ([`e1585ed`](https://github.com/Kitware/trame-client/commit/e1585ed09b0e4bc1076a9f1e608ad0426a60925b))
+
 ## v2.0.3 (2022-06-03)
 ### Fix
 * **use_:** Fix case sensitivity of use_host(name) ([`78c4bfd`](https://github.com/Kitware/trame-client/commit/78c4bfd85277ad05bc2955233b3e13c1e7386ca8))
