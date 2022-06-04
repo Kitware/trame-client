@@ -90,6 +90,109 @@ class ElementContextManager:
 HTML_CTX = ElementContextManager()
 
 
+class VirtualNode:
+    """
+    A VirtualNode element allow to logically define UI element that
+    can be filled or used in an independent order and yet update
+    dynamically the layout upon change.
+    """
+
+    def __init__(self, trame_server=None, **_):
+        self._server = trame_server
+        self._children = []
+        self._layouts = set()
+
+    @property
+    def server(self):
+        """Return the associated server"""
+        return self._server
+
+    def set_server(self, v):
+        """Update the associated server"""
+        self._server = v
+
+    def add_child(self, child):
+        """
+        Add a component to this component's children
+
+        :param child: The component to add as a child
+        :type child: str | AbstractElement
+        """
+        self._children.append(child)
+
+    def add_children(self, children):
+        """
+        Add components to this component's children.
+        The provided children is expected to be a list.
+
+        :param children: The list of components to add to the children
+        :type children: list
+        """
+        self._children += children
+
+    @property
+    def children(self):
+        """
+        Children components
+        """
+        return self._children
+
+    def clear(self):
+        """
+        Remove all children
+        """
+        self._children.clear()
+
+    @property
+    def html(self):
+        """
+        Return a string representation of the HTML component
+        """
+        out_buffer = []
+        try:
+            for elem in self._children:
+                if isinstance(elem, str):
+                    out_buffer.append(elem)
+                else:
+                    out_buffer.append(elem.html)
+        except Exception as e:
+            print(e)
+
+        return "\n".join(out_buffer)
+
+    # -------------------------------------------------------------------------
+    # Resource manager
+    # -------------------------------------------------------------------------
+
+    def __enter__(self):
+        HTML_CTX.enter(self)
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        HTML_CTX.exit(self)
+        self.flush_content()
+
+    # -------------------------------------------------------------------------
+    # Layout handling
+    # -------------------------------------------------------------------------
+
+    def clear_layouts(self):
+        """Remove any reference to previously registered layout"""
+        self._layouts.clear()
+
+    def flush_content(self):
+        """Push VirtualNode content to registered layouts"""
+        for layout in self._layouts:
+            layout.flush_content()
+
+    def __call__(self, layout=None, **kwargs):
+        if layout is not None:
+            self._layouts.add(layout)
+            self._server = layout.server
+
+        HTML_CTX.add_child(self)
+
+
 class AbstractElement:
     """
     A Vue component which can integrate with the rest of trame
