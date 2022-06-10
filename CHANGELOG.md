@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.1 (2022-06-10)
+### Fix
+* **state:** Prevent equal value to trigger change ([`8ab648d`](https://github.com/Kitware/trame-client/commit/8ab648ddc4ab14140ccccded5892c6d285c850e3))
+
+### Documentation
+* **contributing:** Add CONTRIBUTING.rst ([`ad214da`](https://github.com/Kitware/trame-client/commit/ad214da65ac48b298f592fe98591379110926486))
+
 ## v2.1.0 (2022-06-04)
 ### Feature
 * **VirtualNode:** Introduce the virtual node concept ([`e1585ed`](https://github.com/Kitware/trame-client/commit/e1585ed09b0e4bc1076a9f1e608ad0426a60925b))
