@@ -402,6 +402,11 @@ export class TrameState {
   }
 
   async set(key, value) {
+    // Prevent triggering change when same value is set
+    if (this.state[key] === value) {
+      return;
+    }
+
     this.ts += 1;
     this.state[key] = value;
     this.keyTS[key] = this.ts;
@@ -412,9 +417,11 @@ export class TrameState {
   async update(obj) {
     this.ts += 1;
     for (const [key, value] of Object.entries(obj)) {
-      this.state[key] = value;
-      this.keyTS[key] = this.ts;
-      this.dirty(key);
+      if (this.state[key] !== value) {
+        this.state[key] = value;
+        this.keyTS[key] = this.ts;
+        this.dirty(key);
+      }
     }
     await this.flush();
   }
