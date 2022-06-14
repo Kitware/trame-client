@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.3 (2022-06-14)
+### Fix
+* **desktop:** Add edge 18 support ([`2238072`](https://github.com/Kitware/trame-client/commit/2238072e261a76315d4014dc236a0b1793671f3e))
+
 ## v2.1.2 (2022-06-14)
 ### Fix
 * **cfe:** Add chrome 66 compatibility for cfe runtime ([`5dc7b5b`](https://github.com/Kitware/trame-client/commit/5dc7b5b6d7b0f58a461ca1dd2d3522d6d2d686e9))
