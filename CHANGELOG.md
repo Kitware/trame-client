@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.2 (2022-06-14)
+### Fix
+* **cfe:** Add chrome 66 compatibility for cfe runtime ([`5dc7b5b`](https://github.com/Kitware/trame-client/commit/5dc7b5b6d7b0f58a461ca1dd2d3522d6d2d686e9))
+
 ## v2.1.1 (2022-06-10)
 ### Fix
 * **state:** Prevent equal value to trigger change ([`8ab648d`](https://github.com/Kitware/trame-client/commit/8ab648ddc4ab14140ccccded5892c6d285c850e3))
