@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.4 (2022-06-19)
+### Fix
+* **virtual-node:** Follow builder pattern when possible ([`d0a5ce8`](https://github.com/Kitware/trame-client/commit/d0a5ce867c999675e57008b3005e17f0b813282f))
+
 ## v2.1.3 (2022-06-14)
 ### Fix
 * **desktop:** Add edge 18 support ([`2238072`](https://github.com/Kitware/trame-client/commit/2238072e261a76315d4014dc236a0b1793671f3e))
