@@ -119,6 +119,7 @@ class VirtualNode:
         :type child: str | AbstractElement
         """
         self._children.append(child)
+        return self
 
     def add_children(self, children):
         """
@@ -129,6 +130,7 @@ class VirtualNode:
         :type children: list
         """
         self._children += children
+        return self
 
     @property
     def children(self):
@@ -142,6 +144,7 @@ class VirtualNode:
         Remove all children
         """
         self._children.clear()
+        return self
 
     @property
     def html(self):
@@ -179,11 +182,13 @@ class VirtualNode:
     def clear_layouts(self):
         """Remove any reference to previously registered layout"""
         self._layouts.clear()
+        return self
 
     def flush_content(self):
         """Push VirtualNode content to registered layouts"""
         for layout in self._layouts:
             layout.flush_content()
+        return self
 
     def __call__(self, layout=None, **kwargs):
         if layout is not None:
