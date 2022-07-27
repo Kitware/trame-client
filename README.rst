@@ -1,4 +1,4 @@
-trame-html: core client for trame
+trame-client: core client for trame
 ===========================================================================
 
 .. image:: https://github.com/Kitware/trame-client/actions/workflows/test_and_release.yml/badge.svg
