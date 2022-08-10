@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.5 (2022-08-10)
+### Fix
+* **download:** Allow promise as content ([`87bc3d7`](https://github.com/Kitware/trame-client/commit/87bc3d7728b4ddca0a24b9466558583cc7fb224e))
+
+### Documentation
+* **coverage:** Remove codecov PR comment ([`e9b0d9b`](https://github.com/Kitware/trame-client/commit/e9b0d9b96346f694559a6077e7408d6899efe976))
+* **coverage:** Add .coveragerc ([`f451bad`](https://github.com/Kitware/trame-client/commit/f451bad3c73ac6791ab78ced92bbab1f7eb9751e))
+* **ci:** Add coverage and codecov upload ([`c90ed26`](https://github.com/Kitware/trame-client/commit/c90ed264f99cb29c92ad7cb191ed3690a1560f29))
+* **readme:** Add CI badge ([`77cafe2`](https://github.com/Kitware/trame-client/commit/77cafe24155e9d225b52f0abfd2ae086e8539155))
+
 ## v2.1.4 (2022-06-19)
 ### Fix
 * **virtual-node:** Follow builder pattern when possible ([`d0a5ce8`](https://github.com/Kitware/trame-client/commit/d0a5ce867c999675e57008b3005e17f0b813282f))
