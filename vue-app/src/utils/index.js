@@ -1,7 +1,8 @@
 import vtk from './vtk';
 import fmt from './fmt';
 
-function download(filename, content, type = 'application/octet-stream') {
+async function download(filename, contentOrPromise, type = 'application/octet-stream') {
+  const content = await Promise.resolve(contentOrPromise);
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
