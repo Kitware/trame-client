@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.0 (2022-08-29)
+### Feature
+* **decorator:** Implement file chunking to prevent size limit ([`171a787`](https://github.com/Kitware/trame-client/commit/171a78779deea3d5d02651cc9dff0cf6aabb7cab))
+
 ## v2.1.5 (2022-08-10)
 ### Fix
 * **download:** Allow promise as content ([`87bc3d7`](https://github.com/Kitware/trame-client/commit/87bc3d7728b4ddca0a24b9466558583cc7fb224e))
