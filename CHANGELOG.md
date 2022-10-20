@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.1 (2022-10-20)
+### Fix
+* **state:** Local change don't need server round trip ([`4eba70d`](https://github.com/Kitware/trame-client/commit/4eba70d3b0867e5d0c02c5fc34e46dc098e64c4a))
+
 ## v2.2.0 (2022-08-29)
 ### Feature
 * **decorator:** Implement file chunking to prevent size limit ([`171a787`](https://github.com/Kitware/trame-client/commit/171a78779deea3d5d02651cc9dff0cf6aabb7cab))
