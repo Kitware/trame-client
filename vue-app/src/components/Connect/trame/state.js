@@ -434,8 +434,10 @@ export class TrameState {
     keys.forEach((key) => {
       if (this.canDirty(key)) {
         this.dirtyKeys.add(key);
-      } else if (this.vueInstance) {
-        // Make sure client side is aware of that change...
+      }
+
+      // Make sure client side is aware of that change...
+      if (this.vueInstance) {
         this.vueInstance.$emit('stateChange', [key]);
       }
     });
