@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.2 (2022-10-21)
+### Fix
+* **state:** Ensure flush to not skip pending change ([`73694c5`](https://github.com/Kitware/trame-client/commit/73694c5a9e58da8e5689a85a10af5bf110008f9c))
+
 ## v2.2.1 (2022-10-20)
 ### Fix
 * **state:** Local change don't need server round trip ([`4eba70d`](https://github.com/Kitware/trame-client/commit/4eba70d3b0867e5d0c02c5fc34e46dc098e64c4a))
