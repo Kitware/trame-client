@@ -465,6 +465,11 @@ export class TrameState {
       const values = await Promise.all(waitOn);
       const deltaState = keys.map((key, i) => ({ key, value: values[i] }));
       await this.client.getRemote().Trame.updateState(deltaState);
+
+      // Make sure we don't leave any pending update...
+      if (this.dirtyKeys.size) {
+        this.flush();
+      }
     }
 
     // when connection died, the client is busy...
