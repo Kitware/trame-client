@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.0 (2022-10-24)
+### Feature
+* **install:** Generator json files dependency optional for runtime ([`9312181`](https://github.com/Kitware/trame-client/commit/93121815d0b2c09256783efa2a62d03f7b8b9dd2))
+
 ## v2.2.2 (2022-10-21)
 ### Fix
 * **state:** Ensure flush to not skip pending change ([`73694c5`](https://github.com/Kitware/trame-client/commit/73694c5a9e58da8e5689a85a10af5bf110008f9c))
