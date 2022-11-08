@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.1 (2022-11-08)
+### Fix
+* **protocol:** Update wslink for protocol resolution ([`12b64ab`](https://github.com/Kitware/trame-client/commit/12b64ab5972b32a835af08af2f3c3aa1529ebe64))
+
 ## v2.3.0 (2022-10-24)
 ### Feature
 * **install:** Generator json files dependency optional for runtime ([`9312181`](https://github.com/Kitware/trame-client/commit/93121815d0b2c09256783efa2a62d03f7b8b9dd2))
