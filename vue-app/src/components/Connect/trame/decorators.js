@@ -16,7 +16,13 @@ export const fileHandler = {
     if (value === null || value === undefined) return value;
     if (value.constructor && value.constructor === File) {
       const { name, lastModified, size, type } = value;
-      const arrayBuffer = await value.arrayBuffer();
+      const arrayBuffer = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.addEventListener('loadend', () => {
+          resolve(reader.result);
+        });
+        reader.readAsArrayBuffer(value);
+      });
       let content = null;
       if (arrayBuffer.byteLength < CHUNK_SIZE) {
         content = CTX.addAttachement(arrayBuffer);
