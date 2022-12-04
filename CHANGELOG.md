@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.2 (2022-12-04)
+### Fix
+* **decorators:** Replace blob.arrayBuffer with backward-compatible code ([`439b50e`](https://github.com/Kitware/trame-client/commit/439b50eed98b58e1e8eaf25b7f0dd8042bf9ec3b))
+
 ## v2.3.1 (2022-11-08)
 ### Fix
 * **protocol:** Update wslink for protocol resolution ([`12b64ab`](https://github.com/Kitware/trame-client/commit/12b64ab5972b32a835af08af2f3c3aa1529ebe64))
