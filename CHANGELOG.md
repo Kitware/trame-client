@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.3 (2022-12-07)
+### Fix
+* **sessionManagerURL:** Use data-session-manager-url ([`b9cbd68`](https://github.com/Kitware/trame-client/commit/b9cbd68729917637dfcad9437506e54c00d50c09))
+* **sessionManagerURL:** Add option to read it from the html element dataset ([`7d174c4`](https://github.com/Kitware/trame-client/commit/7d174c4fbbe371eb59023da553305b1d9a6a52c0))
+
 ## v2.3.2 (2022-12-04)
 ### Fix
 * **decorators:** Replace blob.arrayBuffer with backward-compatible code ([`439b50e`](https://github.com/Kitware/trame-client/commit/439b50eed98b58e1e8eaf25b7f0dd8042bf9ec3b))
