@@ -59,7 +59,7 @@ function configDecorator(config) {
     document.querySelector('html').dataset.appName || outputConfig.application;
 
   const sessionManagerURL =
-    document.querySelector('html').dataset.sessionManagerURL || outputConfig.sessionManagerURL;
+    document.querySelector('html').dataset.sessionManagerUrl || outputConfig.sessionManagerURL;
   if (sessionManagerURL) {
     outputConfig.sessionManagerURL = sessionManagerURL;
   }
