@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.4 (2022-12-08)
+### Fix
+* **wslink:** Update version to support relative sessionManagerURL ([`2e62e57`](https://github.com/Kitware/trame-client/commit/2e62e578603819fa336b259b6df3a61b192a9ca0))
+* **Style:** Add wwidget.client.Style widget to add custom css ([`48d0e0c`](https://github.com/Kitware/trame-client/commit/48d0e0c4e115192be946c8667ba27a5a7c93e50b))
+* **trigger:** Apply decorators on args/kwargs ([`8a3971a`](https://github.com/Kitware/trame-client/commit/8a3971ad62a64b9e07dc7bc58acbd893cdc6ee9b))
+
 ## v2.3.3 (2022-12-07)
 ### Fix
 * **sessionManagerURL:** Use data-session-manager-url ([`b9cbd68`](https://github.com/Kitware/trame-client/commit/b9cbd68729917637dfcad9437506e54c00d50c09))
