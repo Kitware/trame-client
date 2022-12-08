@@ -5,6 +5,7 @@ __all__ = [
     "Loading",
     "ServerTemplate",
     "StateResolver",
+    "Style",
 ]
 
 
@@ -103,3 +104,25 @@ class StateResolver(AbstractElement):
         self._attr_names += [
             "names",
         ]
+
+
+# -----------------------------------------------------------------------------
+# TrameStyle
+# -----------------------------------------------------------------------------
+class Style(AbstractElement):
+    """Provide means to inject global CSS rules"""
+
+    def __init__(self, css_content=None, **kwargs):
+        super().__init__("trame-style", **kwargs)
+        self._key = f"trame__inline_style_{self._id}"
+        self._attributes["_css"] = f':css="{self._key}"'
+        self.server.state.setdefault(self._key, css_content)
+
+    def update(self, css_content):
+        """Update style content"""
+        self.server.state[self._key] = css_content
+
+    @property
+    def var_name(self):
+        """Name the the state variable used by this widget"""
+        return self._key

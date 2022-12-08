@@ -3,6 +3,7 @@ import TrameConnect from './Connect';
 import TrameLoading from './Loading';
 import TrameServerTemplate from './ServerTemplate';
 import TrameStateResolver from './StateResolver';
+import TrameStyle from './Style';
 
 export default {
   TrameApp,
@@ -10,4 +11,5 @@ export default {
   TrameLoading,
   TrameServerTemplate,
   TrameStateResolver,
+  TrameStyle,
 };
