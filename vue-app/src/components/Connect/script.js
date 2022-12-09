@@ -1,6 +1,6 @@
 import wslink from './wslink';
 import { TrameState } from './trame/state';
-import { setAddAttachment } from './trame/decorators';
+import { decorate, setAddAttachment } from './trame/decorators';
 
 export default {
   name: 'TrameConnect',
@@ -142,7 +142,31 @@ export default {
       this.state.set('trame__template_main', `<trame-loading message="${message}"/>`);
     },
     async trigger(name, args = [], kwargs = {}) {
-      return await this.client.getRemote().Trame.trigger(name, args, kwargs);
+      let decoratedArgs = [];
+      const decoratedKwargs = {};
+
+      if (args) {
+        const decorateArgs = args.map((arg) => decorate(arg));
+        decoratedArgs = await Promise.all(decorateArgs);
+      }
+
+      if (kwargs) {
+        const keys = [];
+        const values = [];
+        Object.entries(kwargs).forEach((key, value) => {
+          keys.push(key);
+          values.push(decorate(value));
+        });
+
+        const resolvedValues = await Promise.all(values);
+        for (let i = 0; i < keys.length; i++) {
+          decoratedKwargs[keys[i]] = resolvedValues[i];
+        }
+      }
+
+      return await this.trame.client
+        .getRemote()
+        .Trame.trigger(name, decoratedArgs, decoratedKwargs);
     },
   },
   provide() {
