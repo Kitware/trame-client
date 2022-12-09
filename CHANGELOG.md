@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.5 (2022-12-09)
+### Fix
+* **trigger:** Add decorator logic for file objects ([`05235d5`](https://github.com/Kitware/trame-client/commit/05235d514d707231632cdf83315c83d4bc0a04e2))
+
 ## v2.3.4 (2022-12-08)
 ### Fix
 * **wslink:** Update version to support relative sessionManagerURL ([`2e62e57`](https://github.com/Kitware/trame-client/commit/2e62e578603819fa336b259b6df3a61b192a9ca0))
