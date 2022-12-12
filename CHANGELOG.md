@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.6 (2022-12-12)
+### Fix
+* **trigger:** Access client via `this.client` ([`9963d32`](https://github.com/Kitware/trame-client/commit/9963d32555ab783c462833bf6776501e3bf56b60))
+
 ## v2.3.5 (2022-12-09)
 ### Fix
 * **trigger:** Add decorator logic for file objects ([`05235d5`](https://github.com/Kitware/trame-client/commit/05235d514d707231632cdf83315c83d4bc0a04e2))
