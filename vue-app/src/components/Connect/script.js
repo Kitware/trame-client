@@ -164,9 +164,7 @@ export default {
         }
       }
 
-      return await this.trame.client
-        .getRemote()
-        .Trame.trigger(name, decoratedArgs, decoratedKwargs);
+      return await this.client.getRemote().Trame.trigger(name, decoratedArgs, decoratedKwargs);
     },
   },
   provide() {
