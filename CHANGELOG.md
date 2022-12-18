@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.4.0 (2022-12-18)
+### Feature
+* **Reconnect:** Add support for reconnection ([`45a3b20`](https://github.com/Kitware/trame-client/commit/45a3b2040bead26da83cde8b5bb51cd8423f59ff))
+
+### Fix
+* **cache:** Try to prevent web caching ([`2bb25a0`](https://github.com/Kitware/trame-client/commit/2bb25a0a6e8a1e42b3bfe7c652a0c59b375e540d))
+
 ## v2.3.6 (2022-12-12)
 ### Fix
 * **trigger:** Access client via `this.client` ([`9963d32`](https://github.com/Kitware/trame-client/commit/9963d32555ab783c462833bf6776501e3bf56b60))
