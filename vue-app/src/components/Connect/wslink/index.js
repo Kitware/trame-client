@@ -122,12 +122,17 @@ function getClient(name) {
   return client;
 }
 
+function resetClient(name) {
+  WS_CLIENTS[name] = null;
+}
+
 function getStatus(name) {
   return WS_CLIENTS[name].status;
 }
 
 export default {
   getClient,
+  resetClient,
   getStatus,
   configDecorator,
 };
