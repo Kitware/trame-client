@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.4.1 (2023-01-13)
+### Fix
+* **Reconnect:** Allow template name to be used ([`3cad023`](https://github.com/Kitware/trame-client/commit/3cad0237582f46fe0f46e726b5fa1d9b71812f6b))
+
 ## v2.4.0 (2022-12-18)
 ### Feature
 * **Reconnect:** Add support for reconnection ([`45a3b20`](https://github.com/Kitware/trame-client/commit/45a3b2040bead26da83cde8b5bb51cd8423f59ff))
