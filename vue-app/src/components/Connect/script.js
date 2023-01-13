@@ -1,6 +1,7 @@
 import wslink from './wslink';
 import { TrameState } from './trame/state';
 import { decorate, setAddAttachment } from './trame/decorators';
+import vtkURLExtract from '@kitware/vtk.js/Common/Core/URLExtract';
 
 export default {
   name: 'TrameConnect',
@@ -51,10 +52,14 @@ export default {
   },
   methods: {
     reportError(message = 'Something unexpected happened...') {
+      let templateName = 'trame__template_main';
+      if (this.useUrl && vtkURLExtract.extractURLParameters().ui) {
+        templateName = `trame__template_${vtkURLExtract.extractURLParameters().ui}`;
+      }
       if (this?.client?.getConfig()?.reconnect) {
-        this.state.set('trame__template_main', `<trame-reconnect message="${message}"/>`);
+        this.state.set(templateName, `<trame-reconnect message="${message}"/>`);
       } else {
-        this.state.set('trame__template_main', `<trame-loading message="${message}"/>`);
+        this.state.set(templateName, `<trame-loading message="${message}"/>`);
       }
     },
     async connect() {
