@@ -115,10 +115,10 @@ export default {
         this.client.onConnectionClose((httpReq) => {
           this.connected = false;
           this.status = {
-            type: 'Connection close',
+            type: 'Connection closed',
             message: httpReq?.response?.error,
           };
-          this.reportError(httpReq?.response?.error || 'Connection close');
+          this.reportError(httpReq?.response?.error || 'Connection closed');
           this.$emit('statusChange', this.status);
         })
       );

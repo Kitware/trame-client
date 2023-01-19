@@ -112,7 +112,7 @@ function getClient(name) {
     subscriptions.push(
       client.onConnectionClose((httpReq) => {
         updateStatus({
-          type: 'Connection close',
+          type: 'Connection closed',
           message: httpReq?.response?.error,
         });
       })
