@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.4.2 (2023-01-19)
+### Fix
+* **text:** Fix error message text grammar ([`911259f`](https://github.com/Kitware/trame-client/commit/911259fcfa17f2a093bfc4685c1abc7573a56f5f))
+
 ## v2.4.1 (2023-01-13)
 ### Fix
 * **Reconnect:** Allow template name to be used ([`3cad023`](https://github.com/Kitware/trame-client/commit/3cad0237582f46fe0f46e726b5fa1d9b71812f6b))
