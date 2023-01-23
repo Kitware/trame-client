@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.0 (2023-01-23)
+### Feature
+* **utils.tree:** Add helper to convert obj for VTreeview ([`f78edd9`](https://github.com/Kitware/trame-client/commit/f78edd9311dbbba4fbf9773f7cce5970dd26f79f))
+
 ## v2.4.2 (2023-01-19)
 ### Fix
 * **text:** Fix error message text grammar ([`911259f`](https://github.com/Kitware/trame-client/commit/911259fcfa17f2a093bfc4685c1abc7573a56f5f))
