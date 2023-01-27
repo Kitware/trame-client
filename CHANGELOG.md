@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.1 (2023-01-27)
+### Fix
+* **version:** Add trame_client.__version__ ([`0b970b5`](https://github.com/Kitware/trame-client/commit/0b970b562df52b8d8c2f26ac08cbec1d171ef9ba))
+
 ## v2.5.0 (2023-01-23)
 ### Feature
 * **utils.tree:** Add helper to convert obj for VTreeview ([`f78edd9`](https://github.com/Kitware/trame-client/commit/f78edd9311dbbba4fbf9773f7cce5970dd26f79f))
