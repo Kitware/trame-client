@@ -81,9 +81,15 @@ jobs:
         with:
           node-version: 14
 
-      - name: Build Vue App
+      - name: Build Vue2 App
         run: |
-          cd vue-app
+          cd vue2-app
+          npm ci
+          npm run build
+
+      - name: Build Vue3 App
+        run: |
+          cd vue3-app
           npm ci
           npm run build
 
@@ -103,9 +109,15 @@ jobs:
         with:
           node-version: 14
 
-      - name: Build Vue App
+      - name: Build Vue2 App
         run: |
-          cd vue-app
+          cd vue2-app
+          npm ci
+          npm run build
+
+      - name: Build Vue3 App
+        run: |
+          cd vue3-app
           npm ci
           npm run build
 
