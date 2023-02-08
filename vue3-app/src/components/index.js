@@ -1,13 +1,15 @@
 import TrameApp from "./TrameApp";
-import TrameTemplate from "./TrameTemplate";
-import TrameStyle from "./TrameStyle";
+import TrameExec from "./TrameExec";
 import TrameLoading from "./TrameLoading";
 import TrameReconnect from "./TrameReconnect";
+import TrameStyle from "./TrameStyle";
+import TrameTemplate from "./TrameTemplate";
 
 export default {
   TrameApp,
-  TrameTemplate,
-  TrameStyle,
+  TrameExec,
   TrameLoading,
   TrameReconnect,
+  TrameStyle,
+  TrameTemplate,
 };

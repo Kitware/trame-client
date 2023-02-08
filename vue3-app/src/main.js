@@ -80,7 +80,6 @@ async function start() {
 
   // Load resources (js/css)
   const uses = await handlePageResources(trame.state.state);
-  console.log(uses);
   for (let i = 0; i < uses.length; i++) {
     app.use(...uses[i]);
     console.info(`Vue.use(${uses[i]})`);

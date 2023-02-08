@@ -36,7 +36,9 @@ export default {
     const trame = window.Vue.inject("trame");
     const state = window.Vue.reactive({});
     const modifiedState = {};
-    const publicAPI = { trame, utils, state };
+    const tts = window.Vue.ref(0);
+    const publicAPI = { trame, utils, state, tts };
+    let actionSubscription = null;
 
     // Dynamic state reactivity
     trame.state.getAllKeys().forEach((name) => {
@@ -53,6 +55,10 @@ export default {
         templateName = vtkURLExtract.extractURLParameters()[props.urlKey];
       }
       return window.Vue.unref(publicAPI[`trame__template_${templateName}`]);
+    });
+    window.Vue.watch([publicAPI.__template], async () => {
+      await window.Vue.nextTick();
+      publicAPI.tts.value++;
     });
 
     // Server update reactivity
@@ -77,10 +83,39 @@ export default {
 
     window.Vue.onMounted(() => {
       trame.state.addListener(onDirty);
+
+      // js_call handling
+      const vueInstance = window.Vue.getCurrentInstance();
+      function execAction(action) {
+        const { ref, type } = action;
+        const elem = vueInstance.refs[ref];
+
+        // -------------------------------------------------------------
+        // FIXME
+        // Need to figure out how to get to a vue instance from its ref
+        console.log("refs", vueInstance.refs);
+        console.log(`getRef(${ref})=`, elem);
+        // -------------------------------------------------------------
+
+        if (elem && type === "method") {
+          const { method, args } = action;
+          elem[method](...args);
+        }
+        if (elem && type === "property") {
+          const { property, value } = action;
+          elem[property] = value;
+        }
+      }
+      actionSubscription = trame.client
+        .getRemote()
+        .Trame.subscribeToActions(([actions]) => actions.map(execAction));
     });
 
     window.Vue.onBeforeUnmount(() => {
       trame.state.removeListener(onDirty);
+      if (actionSubscription) {
+        trame?.client?.getRemote()?.Trame?.unsubscribe(actionSubscription);
+      }
     });
 
     // Expose API

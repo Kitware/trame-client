@@ -6,6 +6,7 @@ __all__ = [
     "ServerTemplate",
     "StateResolver",
     "Style",
+    "JSEval",
 ]
 
 
@@ -13,6 +14,7 @@ __all__ = [
 # TrameApp
 # -----------------------------------------------------------------------------
 # SKIP: built-in client not to be use within a server template
+
 
 # -----------------------------------------------------------------------------
 # TrameConnect
@@ -91,6 +93,33 @@ class ServerTemplate(AbstractElement):
             ("use_url", "useUrl"),
             ("url_key", "urlKey"),
         ]
+
+
+# -----------------------------------------------------------------------------
+# TrameExec
+# -----------------------------------------------------------------------------
+class JSEval(AbstractElement):
+    """Provide means to execute JS code"""
+
+    _next_id = 0
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("trame-exec", children, **kwargs)
+        JSEval._next_id += 1
+        self.__ref = kwargs.get("ref", f"trame_exec_ref_{JSEval._next_id}")
+        self._attributes["ref"] = f'ref="{self.__ref}"'
+        self._attr_names += [
+            "event",
+        ]
+        self._event_names += [
+            "exec",
+        ]
+
+    def exec(self, event=None):
+        if event is None:
+            self.server.js_call(self.__ref, "exec")
+        else:
+            self.server.js_call(self.__ref, "exec", event)
 
 
 # -----------------------------------------------------------------------------
