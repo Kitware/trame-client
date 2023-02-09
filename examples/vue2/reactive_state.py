@@ -3,9 +3,8 @@ from trame.widgets import html
 from trame.ui.html import DivLayout
 
 server = get_server()
+server.client_type = "vue2"
 state, ctrl = server.state, server.controller
-
-server.client_type = "vue2"  # default until trame>=3.x
 
 state.count = 2
 state.double = 4

@@ -58,6 +58,12 @@ export default {
         ready.value = true;
         connected.value = true;
       }
+
+      // Attach lifecycles
+      trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_connected");
+      window.addEventListener("beforeunload", () =>
+        trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited")
+      );
     }
 
     window.Vue.onBeforeMount(() => {

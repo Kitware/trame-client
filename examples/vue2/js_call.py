@@ -3,7 +3,7 @@ from trame.widgets import client, html
 from trame.ui.html import DivLayout
 
 server = get_server()
-server.client_type = "vue3"
+server.client_type = "vue2"
 state, ctrl = server.state, server.controller
 
 
