@@ -289,7 +289,7 @@ export class TrameState {
     let refCount = 0;
 
     this.trameTemplate = {
-      name: 'TrameTemplate',
+      name: 'TrameTemplateInternal',
       inject: ['trame'],
       props: {
         templateName: {
