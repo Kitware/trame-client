@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.0 (2023-02-09)
+### Feature
+* **vue3:** Add support for vue@3 ([`423599b`](https://github.com/Kitware/trame-client/commit/423599bbb6a64fb93b837814442e1d2c14a73354))
+
+### Fix
+* **py:** Removed unused component from Python ([`d581e43`](https://github.com/Kitware/trame-client/commit/d581e432ecffed7a1e325276ac5da3c7bf087e0e))
+* **vue2:** Rename components to match vue3 trame ones ([`ae98400`](https://github.com/Kitware/trame-client/commit/ae98400cd747b4279bf03202e96f2cf30cb9585b))
+* **vue2/3:** Parity ([`0d91ded`](https://github.com/Kitware/trame-client/commit/0d91ded312523ad05f6438fa5265cd41accca6fb))
+* **refs:** Start on js_call/ref handling ([`3aa2c53`](https://github.com/Kitware/trame-client/commit/3aa2c531cc4ed20773d5f83cb6ae95a7169f3e47))
+
+### Documentation
+* **example:** Add client widgets example ([`e81909f`](https://github.com/Kitware/trame-client/commit/e81909fff5775b673b3eb491c95761bea615a5a2))
+
 ## v2.5.1 (2023-01-27)
 ### Fix
 * **version:** Add trame_client.__version__ ([`0b970b5`](https://github.com/Kitware/trame-client/commit/0b970b562df52b8d8c2f26ac08cbec1d171ef9ba))
