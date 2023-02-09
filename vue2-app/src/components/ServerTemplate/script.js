@@ -32,7 +32,7 @@ export default {
   },
   created() {
     this.onNewTemplate = () => {
-      this.$options.components.trameTemplate = this.trame.state.trameTemplate;
+      this.$options.components.trameTemplateInternal = this.trame.state.trameTemplate;
       this.trameTemplateTS = this.trame.state.trameTemplateTS;
     };
     this.trame.$on('trameTemplateChange', this.onNewTemplate);

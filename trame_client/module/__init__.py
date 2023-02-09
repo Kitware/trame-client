@@ -1,3 +1,17 @@
-from pathlib import Path
+def setup(server, **kargs):
+    client_type = "vue2"
+    if hasattr(server, "client_type"):
+        client_type = server.client_type
 
-www = str(Path(__file__).with_name("www").resolve())
+    if client_type == "vue2":
+        from . import vue2
+
+        server.enable_module(vue2)
+    elif client_type == "vue3":
+        from . import vue3
+
+        server.enable_module(vue3)
+    else:
+        raise TypeError(
+            f"Trying to initialize trame_client with unknown client_type={client_type}"
+        )

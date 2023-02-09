@@ -1,51 +1,11 @@
 from .core import AbstractElement
 
 __all__ = [
-    "Connect",
     "Loading",
     "ServerTemplate",
-    "StateResolver",
     "Style",
+    "JSEval",
 ]
-
-
-# -----------------------------------------------------------------------------
-# TrameApp
-# -----------------------------------------------------------------------------
-# SKIP: built-in client not to be use within a server template
-
-# -----------------------------------------------------------------------------
-# TrameConnect
-# -----------------------------------------------------------------------------
-class Connect(AbstractElement):
-    """
-    Container managing the handshake and connection to a trame server
-
-    :param name: Application name
-    :type name: str
-
-    :param config: Dict object capturing all the key/value pair needed to start
-                   or configure the connection.
-    :type name: {}
-
-    :param use_url: Should we process the URL to extend the connection config
-    :type use_url: bool
-
-    :param trame_template_change: Event notification when a template has changed
-    :param state_change: Event notification when something in the state has changed
-    """
-
-    def __init__(self, children=None, **kwargs):
-        super().__init__("trame-connect", children, **kwargs)
-        self._attr_names += [
-            "name",
-            "config",
-            ("use_url", "useUrl"),
-        ]
-        self._event_names += [
-            ("trame_template_change", "trameTemplateChange"),
-            ("state_change", "stateChange"),
-        ]
 
 
 # -----------------------------------------------------------------------------
@@ -85,7 +45,7 @@ class ServerTemplate(AbstractElement):
     """
 
     def __init__(self, children=None, **kwargs):
-        super().__init__("trame-server-template", children, **kwargs)
+        super().__init__("trame-template", children, **kwargs)
         self._attr_names += [
             ("name", "templateName"),
             ("use_url", "useUrl"),
@@ -94,16 +54,30 @@ class ServerTemplate(AbstractElement):
 
 
 # -----------------------------------------------------------------------------
-# TrameStateResolver
+# TrameExec
 # -----------------------------------------------------------------------------
-class StateResolver(AbstractElement):
-    """Provide means to extract sub-state for its slots"""
+class JSEval(AbstractElement):
+    """Provide means to execute JS code"""
+
+    _next_id = 0
 
     def __init__(self, children=None, **kwargs):
-        super().__init__("trame-state-resolver", children, **kwargs)
+        super().__init__("trame-exec", children, **kwargs)
+        JSEval._next_id += 1
+        self.__ref = kwargs.get("ref", f"trame_exec_ref_{JSEval._next_id}")
+        self._attributes["ref"] = f'ref="{self.__ref}"'
         self._attr_names += [
-            "names",
+            "event",
         ]
+        self._event_names += [
+            "exec",
+        ]
+
+    def exec(self, event=None):
+        if event is None:
+            self.server.js_call(self.__ref, "exec")
+        else:
+            self.server.js_call(self.__ref, "exec", event)
 
 
 # -----------------------------------------------------------------------------

@@ -92,8 +92,7 @@ Build client side code base
 
 .. code-block:: console
 
-    cd vue-app
-    npm i
+    cd vue[2,3]-app
+    npm install
     npm run build            # build trame client application
-    npm run build:components # build trame components for integration purpose
     cd -
