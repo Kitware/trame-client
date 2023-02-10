@@ -1,3 +1,4 @@
 pytest
 seleniumbase
 pytest-xprocess
+trame
