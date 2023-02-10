@@ -56,6 +56,20 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Install Chrome
+      run: |
+        sudo apt install google-chrome-stable
+
+    - name: Check the console scripts interface
+      run: |
+        pip install seleniumbase
+        seleniumbase
+        sbase
+
+    - name: Install chromedriver
+      run: |
+        seleniumbase install chromedriver
+
     - name: Install and Run Tests
       run: |
         pip install .
