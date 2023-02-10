@@ -18,8 +18,9 @@ class TrameServerMonitor:
         last_state_line = "STATE: {}"
         with open(self._log_path, "r") as f:
             for line in f.readlines():
-                if "Network:" in line:
-                    self.port = line.split(":").pop().split("/")[0]
+                print(line)
+                if "SERVER_PORT:" in line:
+                    self.port = int(line[13:])
                 if line[:7] == "STATE: ":
                     last_state_line = line
 

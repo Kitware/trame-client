@@ -1,6 +1,5 @@
-import json
 from trame.app import get_server
-
+from trame_client.utils.testing import enable_testing
 
 server = get_server()
 server.state.count = 1
@@ -11,10 +10,5 @@ server.state.trame__template_main = """
     </div>
 """
 
-
-@server.state.change("count")
-def print_state(**kwargs):
-    print("STATE:", json.dumps(kwargs), flush=True)
-
-
+enable_testing(server, "count")
 server.start()

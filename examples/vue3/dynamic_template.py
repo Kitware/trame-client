@@ -1,7 +1,7 @@
-import json
 from trame.app import get_server
 from trame.widgets import html
 from trame.ui.html import DivLayout
+from trame_client.utils.testing import enable_testing
 
 server = get_server()
 server.client_type = "vue3"
@@ -21,10 +21,6 @@ def update_ui():
         html.Button("count++", click="count++", classes="plusBtn")
 
 
-@state.change("count")
-def print_state(**kwargs):
-    print("STATE:", json.dumps(kwargs), flush=True)
-
-
 update_ui()
+enable_testing(server, "count")
 server.start()
