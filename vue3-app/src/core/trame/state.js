@@ -163,7 +163,7 @@ export class SharedState {
     // Make sure client side is aware of that change...
     this.notifyListeners({
       type: "dirty-state",
-      keys: Array.from(this.dirtyKeys),
+      keys,
     });
   }
 
