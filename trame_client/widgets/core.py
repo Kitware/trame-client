@@ -382,7 +382,11 @@ class AbstractElement:
 
                 if isinstance(value, (tuple, list)):
                     if len(value) > 1:
-                        self.server.state.setdefault(value[0], value[1])
+                        if isinstance(value[1], dict):
+                            for k, v in value[1].items():
+                                self.server.state.setdefault(k, v)
+                        else:
+                            self.server.state.setdefault(value[0], value[1])
 
                     if js_key.startswith("v-"):
                         self._attributes[name] = f'{js_key}="{value[0]}"'
