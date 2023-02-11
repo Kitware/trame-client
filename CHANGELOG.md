@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.1 (2023-02-11)
+### Fix
+* **vue3:** Fix client update for client_only props ([`093cecd`](https://github.com/Kitware/trame-client/commit/093cecdaceb2d25804c273586dbc1a459739db52))
+* **default-var:** Allow right default to be a dict to update many vars ([`ca7a5dc`](https://github.com/Kitware/trame-client/commit/ca7a5dc96332aa229e1a97f62b003ad69090c395))
+
 ## v2.6.0 (2023-02-09)
 ### Feature
 * **vue3:** Add support for vue@3 ([`423599b`](https://github.com/Kitware/trame-client/commit/423599bbb6a64fb93b837814442e1d2c14a73354))
