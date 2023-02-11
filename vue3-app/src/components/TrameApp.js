@@ -5,7 +5,7 @@ export default {
       default: false,
     },
   },
-  setup(props, { emit }) {
+  setup() {
     const trame = window.Vue.inject("trame");
     const connected = window.Vue.ref(false);
     const ready = window.Vue.ref(false);
@@ -27,16 +27,12 @@ export default {
     }
 
     function onBusy(count) {
-      const emitBusyChange = !count !== !window.Vue.unref(busy);
       busy.value = count;
-      if (emitBusyChange && trame.state) {
+      if (trame.state) {
         trame.state.set("trame__busy", count);
       }
       if (count === 0) {
         trame.state.flush();
-      }
-      if (emitBusyChange) {
-        emit("busyChange", count);
       }
     }
 
