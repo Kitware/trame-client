@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.3 (2023-02-13)
+### Fix
+* **vue2.7:** Include composition API in vue2 ([`ead4c74`](https://github.com/Kitware/trame-client/commit/ead4c748b65c56d3809385ffc8672fc0abc55717))
+
 ## v2.6.2 (2023-02-13)
 ### Fix
 * **vue3:** Add support for ref/js_call ([`ec983ff`](https://github.com/Kitware/trame-client/commit/ec983ff6c5ee3f869673c3de1d175732bff3f184))
