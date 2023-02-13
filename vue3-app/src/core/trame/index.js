@@ -4,7 +4,7 @@ import { decorate, setAddAttachment } from "./decorators";
 import utils from "../../utils";
 
 export function createTrameInstance() {
-  const trame = { client: null, state: null, config: null, utils };
+  const trame = { client: null, state: null, config: null, utils, refs: {} };
   let listeners = [];
   let initialized = false;
 
