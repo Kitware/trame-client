@@ -517,6 +517,17 @@ class AbstractElement:
             self.attrs(*self._attr_names)
             self.events(*self._event_names)
 
+            # Patch ref to use trame registration
+            if (
+                self.server.client_type == "vue3"
+                and "ref" in self._attributes
+                and self._attributes["ref"].startswith("ref=")
+            ):
+                ref_name = self._attributes["ref"][5:-1]
+                self._attributes[
+                    "ref"
+                ] = f''':ref="(el) => trame.refs['{ref_name}'] = el"'''
+
             # Compute HTML str
             if len(self._children):
                 out_buffer = []

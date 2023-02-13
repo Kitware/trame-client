@@ -85,17 +85,9 @@ export default {
       trame.state.addListener(onDirty);
 
       // js_call handling
-      const vueInstance = window.Vue.getCurrentInstance();
       function execAction(action) {
         const { ref, type } = action;
-        const elem = vueInstance.refs[ref];
-
-        // -------------------------------------------------------------
-        // FIXME
-        // Need to figure out how to get to a vue instance from its ref
-        console.log("refs", vueInstance.refs);
-        console.log(`getRef(${ref})=`, elem);
-        // -------------------------------------------------------------
+        const elem = trame.refs[ref];
 
         if (elem && type === "method") {
           const { method, args } = action;

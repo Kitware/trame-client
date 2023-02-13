@@ -30,39 +30,6 @@ The `Trame Tutorial <https://kitware.github.io/trame/docs/tutorial.html>`_ is th
 
 The `API Reference <https://trame.readthedocs.io/en/latest/index.html>`_ documentation provides API-level documentation.
 
-This library specifically brings the following set of vue.js components to the core client side application.
-They will be available as a library on NPM to support trame integration into existing vue.js based application.
-
-.. code-block:: html
-
-    <trame-connect name="TrameConnect" :config="{}" :exclude="[]" use-url forward-errors>
-        <trame-server-template template-name="main" />
-
-        <trame-loading message="welcome" />
-
-        <trame-state-resolver :names="['a', 'b', 'c']" v-slot="{a, b, c, set, trame}">
-            <div>
-                <div>
-                    A: {{ a }}
-                </div>
-                <div>
-                    B: {{ b }}
-                </div>
-                <div>
-                    C: {{ c }}
-                </div>
-                <br>
-                <button @click="trame.state.set('a', a + 1)">A+</button>
-                <br>
-                <button @click="set('a', a - 1)">A-</button>
-                <br>
-                <button>B</button>
-                <br>
-                <button>C</button>
-            </div>
-        </trame-state-resolver>
-    </trame-connect>
-
 License
 -----------------------------------------------------------
 
