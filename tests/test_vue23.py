@@ -28,3 +28,23 @@ def test_dynamic_template(server, baseline_image):
         sb.assert_exact_text("count = 6", ".countDiv")
         sb.assert_exact_text("tts = 2", ".ttsDiv")
         sb.check_window(name="final", level=3)
+
+
+@pytest.mark.parametrize(
+    "server_path",
+    ["examples/vue2/js_call.py", "examples/vue3/js_call.py"],
+)
+def test_js_call(server, baseline_image):
+    with SB() as sb:
+        url = f"http://localhost:{server.port}/"
+        sb.open(url)
+        sb.assert_exact_text("Alert", ".jsAlert")
+        assert server.get("message") == "hello world"
+        sb.click(".alertMsg")
+        sb.assert_exact_text("hello world", ".jsAlert")
+        sb.click(".alertMe")
+        sb.assert_exact_text("Yes me", ".jsAlert")
+        sb.click(".swapMsg")
+        assert server.get("message") == "dlrow olleh"
+        sb.click(".alertMsg")
+        sb.assert_exact_text("dlrow olleh", ".jsAlert")
