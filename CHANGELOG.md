@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.2 (2023-02-13)
+### Fix
+* **vue3:** Add support for ref/js_call ([`ec983ff`](https://github.com/Kitware/trame-client/commit/ec983ff6c5ee3f869673c3de1d175732bff3f184))
+
+### Documentation
+* **readme:** Cleanup for vue2-3 ([`3846b2c`](https://github.com/Kitware/trame-client/commit/3846b2c25dc4cf78b1d0a2195fe4ff1cc10dbad2))
+
 ## v2.6.1 (2023-02-11)
 ### Fix
 * **vue3:** Fix client update for client_only props ([`093cecd`](https://github.com/Kitware/trame-client/commit/093cecdaceb2d25804c273586dbc1a459739db52))
