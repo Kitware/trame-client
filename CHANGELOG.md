@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.0 (2023-02-14)
+### Feature
+* **vue2:** Properly expose vue 2.7.14 for composition API ([`0371a12`](https://github.com/Kitware/trame-client/commit/0371a12db5f49bef616faed2bc86050c20dcb450))
+
 ## v2.6.3 (2023-02-13)
 ### Fix
 * **vue2.7:** Include composition API in vue2 ([`ead4c74`](https://github.com/Kitware/trame-client/commit/ead4c748b65c56d3809385ffc8672fc0abc55717))
