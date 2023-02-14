@@ -17,8 +17,6 @@ function reportWsError() {
 }
 
 async function initializeApplication(Vue) {
-  window.Vue = Vue;
-
   // Add default trame components
   Vue.use(Trame);
 

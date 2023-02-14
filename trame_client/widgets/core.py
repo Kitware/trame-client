@@ -1,3 +1,5 @@
+from ..utils.defaults import TrameDefault
+
 SHARED_ATTRIBUTES = [
     "accesskey",
     "autocapitalize",
@@ -382,9 +384,13 @@ class AbstractElement:
 
                 if isinstance(value, (tuple, list)):
                     if len(value) > 1:
-                        if isinstance(value[1], dict):
-                            for k, v in value[1].items():
-                                self.server.state.setdefault(k, v)
+                        # handle vue3 syntax {name}.value / state.{name}
+                        if value[0].startswith("state."):
+                            self.server.state.setdefault(value[0][6:], value[1])
+                        elif value[0].endswith(".value"):
+                            self.server.state.setdefault(value[0][:-6], value[1])
+                        elif isinstance(value[1], TrameDefault):
+                            value[1].set_defaults(self.server)
                         else:
                             self.server.state.setdefault(value[0], value[1])
 
