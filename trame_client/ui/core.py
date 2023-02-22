@@ -11,6 +11,7 @@ class AbstractLayout:
     def __init__(self, _server, _root_elem, template_name="main", **kwargs):
         self._server = _server
         self._current_root = _root_elem
+        self._original_root = _root_elem
         self._template_name = f"trame__template_{template_name}"
         self._server.state[self._template_name] = ""
 
@@ -59,9 +60,9 @@ class AbstractLayout:
     # -------------------------------------------------------------------------
 
     def __enter__(self):
-        self.root.__enter__()
+        self._original_root.__enter__()
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        self.root.__exit__(exc_type, exc_value, exc_traceback)
+        self._original_root.__exit__(exc_type, exc_value, exc_traceback)
         self.flush_content()
