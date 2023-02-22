@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.1 (2023-02-22)
+### Fix
+* **layout:** Keep track of the original root ([`66355b3`](https://github.com/Kitware/trame-client/commit/66355b30e75f7c28937b4d9a41fd939bd8812024))
+
 ## v2.7.0 (2023-02-14)
 ### Feature
 * **vue2:** Properly expose vue 2.7.14 for composition API ([`0371a12`](https://github.com/Kitware/trame-client/commit/0371a12db5f49bef616faed2bc86050c20dcb450))
