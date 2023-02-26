@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.3 (2023-02-26)
+### Fix
+* **vue3:** Destruct from window ([`9350e37`](https://github.com/Kitware/trame-client/commit/9350e371625bd17ee11c3cf3157db63cc8f3c7a8))
+
 ## v2.7.2 (2023-02-26)
 ### Fix
 * **vue3:** Keep template syntax similar to vue2 ([`c6778bc`](https://github.com/Kitware/trame-client/commit/c6778bc33e82849b175128b02626cafb6bdfd698))
