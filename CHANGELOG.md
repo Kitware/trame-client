@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.2 (2023-02-26)
+### Fix
+* **vue3:** Keep template syntax similar to vue2 ([`c6778bc`](https://github.com/Kitware/trame-client/commit/c6778bc33e82849b175128b02626cafb6bdfd698))
+
+### Documentation
+* **examples:** Update vue3 template without .value ([`276c389`](https://github.com/Kitware/trame-client/commit/276c3894ba1b28830d6268b681e0dd02aa83f88f))
+
 ## v2.7.1 (2023-02-22)
 ### Fix
 * **layout:** Keep track of the original root ([`66355b3`](https://github.com/Kitware/trame-client/commit/66355b30e75f7c28937b4d9a41fd939bd8812024))
