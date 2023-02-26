@@ -1,3 +1,4 @@
+const { unref } = window.Vue;
 let ID = 1;
 
 function getNextId() {
@@ -25,7 +26,7 @@ export default {
   },
   methods: {
     updateStyle(cssContent) {
-      cssContent = window.Vue.unref(cssContent);
+      cssContent = unref(cssContent);
       let elem = document.querySelector(`#${this.elemId}`);
       if (cssContent) {
         if (!elem) {

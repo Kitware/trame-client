@@ -1,5 +1,7 @@
 import vtkURLExtract from "@kitware/vtk.js/Common/Core/URLExtract";
 
+const { inject, onMounted, onBeforeUnmount } = window.Vue;
+
 export default {
   props: {
     message: {
@@ -16,7 +18,7 @@ export default {
     },
   },
   setup(props) {
-    const trame = window.Vue.inject("trame");
+    const trame = inject("trame");
     let interval = null;
     let retryCount = 0;
 
@@ -31,7 +33,7 @@ export default {
       }
     }
 
-    window.Vue.onMounted(() => {
+    onMounted(() => {
       retryCount = 0;
       const reconnect = vtkURLExtract.extractURLParameters().reconnect;
       if (reconnect) {
@@ -48,7 +50,7 @@ export default {
       }
     });
 
-    window.Vue.onBeforeUnmount(() => {
+    onBeforeUnmount(() => {
       resetRetry();
     });
 

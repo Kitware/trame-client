@@ -1,4 +1,7 @@
 import { setup } from "./TrameTemplate";
+
+const { inject, ref, onBeforeMount, onBeforeUnmount } = window.Vue;
+
 export default {
   props: {
     useUrl: {
@@ -7,11 +10,11 @@ export default {
     },
   },
   setup() {
-    const trame = window.Vue.inject("trame");
-    const connected = window.Vue.ref(false);
-    const ready = window.Vue.ref(false);
-    const busy = window.Vue.ref(1);
-    const refreshTS = window.Vue.ref(1);
+    const trame = inject("trame");
+    const connected = ref(false);
+    const ready = ref(false);
+    const busy = ref(1);
+    const refreshTS = ref(1);
     const subscriptions = [];
 
     function registerComponent(name) {
@@ -105,12 +108,12 @@ export default {
       );
     }
 
-    window.Vue.onBeforeMount(() => {
+    onBeforeMount(() => {
       trame.addConnectListener(onConnect);
     });
 
     // Clean subscription at delete
-    window.Vue.onBeforeUnmount(() => {
+    onBeforeUnmount(() => {
       trame.removeConnectListener(onConnect);
       trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_unmounted");
       while (subscriptions.length) {

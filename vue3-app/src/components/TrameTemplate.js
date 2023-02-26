@@ -1,8 +1,18 @@
 import vtkURLExtract from "@kitware/vtk.js/Common/Core/URLExtract";
 import utils from "../utils";
 
+const {
+  inject,
+  ref,
+  computed,
+  onMounted,
+  onBeforeUnmount,
+  nextTick,
+  customRef,
+} = window.Vue;
+
 function toRef(trame, name, triggers) {
-  return window.Vue.customRef((track, trigger) => {
+  return customRef((track, trigger) => {
     triggers[name] = trigger;
     return {
       get() {
@@ -17,9 +27,9 @@ function toRef(trame, name, triggers) {
   });
 }
 
-export function setup(props) {
-  const trame = window.Vue.inject("trame");
-  const tts = window.Vue.ref(0);
+export function setup() {
+  const trame = inject("trame");
+  const tts = ref(0);
   const modifiedState = {};
   const publicAPI = { trame, window, utils, tts };
 
@@ -48,11 +58,11 @@ export function setup(props) {
     }
   };
 
-  window.Vue.onMounted(() => {
+  onMounted(() => {
     trame.state.addListener(onDirty);
   });
 
-  window.Vue.onBeforeUnmount(() => {
+  onBeforeUnmount(() => {
     trame.state.removeListener(onDirty);
   });
 
@@ -84,9 +94,9 @@ export default {
     },
   },
   setup(props) {
-    const trame = window.Vue.inject("trame");
-    const tts = window.Vue.ref(0);
-    const componentName = window.Vue.computed(() => {
+    const trame = inject("trame");
+    const tts = ref(0);
+    const componentName = computed(() => {
       let templateName = props.templateName;
       if (props.useUrl && vtkURLExtract.extractURLParameters()[props.urlKey]) {
         templateName = vtkURLExtract.extractURLParameters()[props.urlKey];
@@ -95,7 +105,7 @@ export default {
     });
 
     async function updateTemplate() {
-      await window.Vue.nextTick();
+      await nextTick();
       tts.value++;
     }
 
@@ -112,10 +122,10 @@ export default {
         }
       }
     };
-    window.Vue.onMounted(() => {
+    onMounted(() => {
       trame.state.addListener(onDirty);
     });
-    window.Vue.onBeforeUnmount(() => {
+    onBeforeUnmount(() => {
       trame.state.removeListener(onDirty);
     });
 
