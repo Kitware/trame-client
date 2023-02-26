@@ -6,9 +6,17 @@ server = get_server()
 server.client_type = "vue2"
 state, ctrl = server.state, server.controller
 
+dyna_var_count = 1
+
 
 def revert_message():
     state.message = state.message[::-1]
+
+
+def add_new_var():
+    global dyna_var_count
+    state[f"new_var_{dyna_var_count}"] = "hello"
+    dyna_var_count += 1
 
 
 # Default UI
@@ -42,5 +50,7 @@ with DivLayout(server, template_name="redSide"):
         html.Button("Exec", click=ctrl.exec)
         html.Button("Exec with arg", click=(ctrl.exec, "['Yes me']"))
         html.Button("Change message", click=revert_message)
+        html.Br()
+        html.Button("New var", click=add_new_var)
 
 server.start()

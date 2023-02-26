@@ -18,9 +18,8 @@ state.trame__template_main = """
     <div>
         <label>{{ client_type }}</label>
         <div>count = {{ count }}</div>
-        <div>2 x count = {{ double }}</div>
-        <input type="range" min="0" max="10" step="1" v-model.number="count.value" />
-        <input type="range" min="0" max="10" step="1" v-model.number="state.count" />
+        <div>2 x count = {{ utils.fmt.bytes(double) }}</div>
+        <input type="range" min="0" max="1000000" step="1000" v-model.number="count" />
     </div>
 """
 

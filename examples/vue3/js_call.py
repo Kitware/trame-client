@@ -14,7 +14,7 @@ def revert_message():
 with DivLayout(server) as layout:
     eval_js = client.JSEval(
         event=("message", "hello world"),
-        exec="alert($event)",
+        exec="window.alert($event)",
     )
     ctrl.exec = eval_js.exec
     html.Div("{{ message }}")

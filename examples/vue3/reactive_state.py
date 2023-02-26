@@ -23,15 +23,7 @@ with DivLayout(server) as layout:
         min=0,
         max=10,
         step=1,
-        v_model_number="count.value",
-        __properties=[("v_model_number", "v-model.number")],
-    )
-    html.Input(
-        type="range",
-        min=0,
-        max=10,
-        step=1,
-        v_model_number="state.count",
+        v_model_number="count",
         __properties=[("v_model_number", "v-model.number")],
     )
 

@@ -16,7 +16,7 @@ def update_ui():
         html.Div("count = {{ count }}")
         html.Div("tts = {{ tts }}")
         html.Button("Update template", click=update_ui)
-        html.Button("count++", click="state.count++")
+        html.Button("count++", click="count++")
 
 
 update_ui()
