@@ -17,6 +17,57 @@ function toRef(trame, name, triggers) {
   });
 }
 
+export function setup(props) {
+  const trame = window.Vue.inject("trame");
+  const tts = window.Vue.ref(0);
+  const modifiedState = {};
+  const publicAPI = { trame, window, utils, tts };
+
+  // Dynamic state reactivity
+  trame.state.getAllKeys().forEach((name) => {
+    publicAPI[name] = toRef(trame, name, modifiedState);
+  });
+
+  // Server update reactivity
+  const onDirty = ({ type, keys }) => {
+    if (type === "dirty-state") {
+      for (let i = 0; i < keys.length; i++) {
+        modifiedState[keys[i]]();
+      }
+
+      if (
+        keys.includes("trame__favicon") &&
+        trame.state.get("trame__favicon")
+      ) {
+        document.querySelector("link[rel=icon]").href =
+          trame.state.get("trame__favicon");
+      }
+      if (keys.includes("trame__title") && trame.state.get("trame__title")) {
+        document.title = trame.state.get("trame__title");
+      }
+    }
+  };
+
+  window.Vue.onMounted(() => {
+    trame.state.addListener(onDirty);
+  });
+
+  window.Vue.onBeforeUnmount(() => {
+    trame.state.removeListener(onDirty);
+  });
+
+  // Expose API
+  publicAPI.trigger = (...args) => trame.trigger(...args);
+  publicAPI.set = (name, value) => trame.state.set(name, value);
+  publicAPI.get = (name) => publicAPI[name];
+  publicAPI.setAll = (obj) => trame.state.update(obj);
+  publicAPI.flushState = (...keys) => trame.state.flush(...keys);
+  publicAPI.registerDecorator = (...args) =>
+    trame.state.registerDecorator(...args);
+
+  return publicAPI;
+}
+
 export default {
   props: {
     templateName: {
@@ -34,96 +85,42 @@ export default {
   },
   setup(props) {
     const trame = window.Vue.inject("trame");
-    const state = window.Vue.reactive({});
-    const modifiedState = {};
     const tts = window.Vue.ref(0);
-    const publicAPI = { trame, utils, state, tts };
-    let actionSubscription = null;
-
-    // Dynamic state reactivity
-    trame.state.getAllKeys().forEach((name) => {
-      publicAPI[name] = toRef(trame, name, modifiedState);
-    });
-    trame.state.getMutableStateKeys().forEach((name) => {
-      state[name] = publicAPI[name];
-    });
-
-    // template content
-    publicAPI.__template = window.Vue.computed(() => {
+    const componentName = window.Vue.computed(() => {
       let templateName = props.templateName;
       if (props.useUrl && vtkURLExtract.extractURLParameters()[props.urlKey]) {
         templateName = vtkURLExtract.extractURLParameters()[props.urlKey];
       }
-      return window.Vue.unref(publicAPI[`trame__template_${templateName}`]);
-    });
-    window.Vue.watch([publicAPI.__template], async () => {
-      await window.Vue.nextTick();
-      publicAPI.tts.value++;
+      return `trame-template-${templateName.toLowerCase()}`;
     });
 
-    // Server update reactivity
+    async function updateTemplate() {
+      await window.Vue.nextTick();
+      tts.value++;
+    }
+
     const onDirty = ({ type, keys }) => {
       if (type === "dirty-state") {
         for (let i = 0; i < keys.length; i++) {
-          modifiedState[keys[i]]();
-        }
-
-        if (
-          keys.includes("trame__favicon") &&
-          trame.state.get("trame__favicon")
-        ) {
-          document.querySelector("link[rel=icon]").href =
-            trame.state.get("trame__favicon");
-        }
-        if (keys.includes("trame__title") && trame.state.get("trame__title")) {
-          document.title = trame.state.get("trame__title");
+          const tName = keys[i]
+            .toLowerCase()
+            .replaceAll("_", "-")
+            .replaceAll("--", "-");
+          if (tName === componentName.value) {
+            updateTemplate();
+          }
         }
       }
     };
-
     window.Vue.onMounted(() => {
       trame.state.addListener(onDirty);
-
-      // js_call handling
-      function execAction(action) {
-        const { ref, type } = action;
-        const elem = trame.refs[ref];
-
-        if (elem && type === "method") {
-          const { method, args } = action;
-          elem[method](...args);
-        }
-        if (elem && type === "property") {
-          const { property, value } = action;
-          elem[property] = value;
-        }
-      }
-      actionSubscription = trame.client
-        .getRemote()
-        .Trame.subscribeToActions(([actions]) => actions.map(execAction));
     });
-
     window.Vue.onBeforeUnmount(() => {
       trame.state.removeListener(onDirty);
-      if (actionSubscription) {
-        trame?.client?.getRemote()?.Trame?.unsubscribe(actionSubscription);
-      }
     });
 
-    // Expose API
-    publicAPI.trigger = (...args) => trame.trigger(...args);
-    publicAPI.set = (name, value) => trame.state.set(name, value);
-    publicAPI.get = (name) => publicAPI[name];
-    publicAPI.setAll = (obj) => trame.state.update(obj);
-    publicAPI.flushState = (...keys) => trame.state.flush(...keys);
-    publicAPI.registerDecorator = (...args) =>
-      trame.state.registerDecorator(...args);
-
-    return function render() {
-      return window.Vue.h(
-        window.Vue.compile(window.Vue.unref(publicAPI.__template)),
-        publicAPI
-      );
-    };
+    return { tts, componentName };
   },
+  template:
+    '<component :key="tts" :is="componentName" :name="componentName" />',
 };

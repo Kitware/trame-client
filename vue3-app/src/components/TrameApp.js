@@ -1,3 +1,4 @@
+import { setup } from "./TrameTemplate";
 export default {
   props: {
     useUrl: {
@@ -13,18 +14,31 @@ export default {
     const refreshTS = window.Vue.ref(1);
     const subscriptions = [];
 
-    function onRefresh({ type }) {
-      if (type === "refresh") {
-        refreshTS.value++;
-      }
+    function registerComponent(name) {
+      const templateName = `trame-template-${name.toLowerCase().substring(16)}`;
+      const template = trame.state.get(name);
+      trame.app.component(templateName, {
+        props: ["name"],
+        setup,
+        template,
+      });
     }
 
-    function onReady({ type }) {
-      if (type === "ready") {
+    const stateListener = ({ type, keys }) => {
+      if (type === "dirty-state") {
+        for (let i = 0; i < keys.length; i++) {
+          const dirtyName = keys[i];
+          if (dirtyName.startsWith("trame__template_")) {
+            registerComponent(dirtyName);
+          }
+        }
+      } else if (type === "refresh") {
+        refreshTS.value++;
+      } else if (type === "ready") {
         ready.value = true;
         refreshTS.value++;
       }
-    }
+    };
 
     function onBusy(count) {
       busy.value = count;
@@ -46,14 +60,43 @@ export default {
       connected.value = trame.client.isConnected();
 
       // State handling
-      trame.state.addListener(onRefresh);
-      subscriptions.push(() => trame.state.removeListener(onRefresh));
-      trame.state.addListener(onReady);
-      subscriptions.push(() => trame.state.removeListener(onReady));
+      trame.state.addListener(stateListener);
+      subscriptions.push(() => trame.state.removeListener(stateListener));
       if (trame.state.ready) {
+        // Register components
+        const keys = trame.state.getAllKeys();
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          if (key.startsWith("trame__template_")) {
+            registerComponent(key);
+          }
+        }
+
+        // We are ready
         ready.value = true;
         connected.value = true;
       }
+
+      // js_call handling
+      function execAction(action) {
+        const { ref, type } = action;
+        const elem = trame.refs[ref];
+
+        if (elem && type === "method") {
+          const { method, args } = action;
+          elem[method](...args);
+        }
+        if (elem && type === "property") {
+          const { property, value } = action;
+          elem[property] = value;
+        }
+      }
+      const wslinkSub = trame.client
+        .getRemote()
+        .Trame.subscribeToActions(([actions]) => actions.map(execAction));
+      subscriptions.push(() =>
+        trame?.client?.getRemote()?.Trame?.unsubscribe(wslinkSub)
+      );
 
       // Attach lifecycles
       trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_connected");

@@ -3,8 +3,15 @@ import { SharedState } from "./state";
 import { decorate, setAddAttachment } from "./decorators";
 import utils from "../../utils";
 
-export function createTrameInstance() {
-  const trame = { client: null, state: null, config: null, utils, refs: {} };
+export function createTrameInstance(app) {
+  const trame = {
+    app,
+    client: null,
+    state: null,
+    config: null,
+    utils,
+    refs: {},
+  };
   let listeners = [];
   let initialized = false;
 
