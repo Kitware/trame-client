@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.4 (2023-03-06)
+### Fix
+* **html:** Add v-slot and v-model modifier ([`1863cc0`](https://github.com/Kitware/trame-client/commit/1863cc0cf5330c7bde9207787701d871cd019ec0))
+
 ## v2.7.3 (2023-02-26)
 ### Fix
 * **vue3:** Destruct from window ([`9350e37`](https://github.com/Kitware/trame-client/commit/9350e371625bd17ee11c3cf3157db63cc8f3c7a8))
