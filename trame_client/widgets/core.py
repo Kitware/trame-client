@@ -31,6 +31,7 @@ SHARED_ATTRIBUTES = [
     ["key", ":key"],
     ["v_on", "v-on"],
     ["v_bind", "v-bind"],
+    ["v_slot", "v-slot"],
     "v_text",
     "v_html",
     "v_show",
@@ -39,6 +40,9 @@ SHARED_ATTRIBUTES = [
     "v_else_if",
     "v_for",
     "v_model",
+    ["v_model_lazy", "v-model.lazy"],
+    ["v_model_number", "v-model.number"],
+    ["v_model_trim", "v-model.trim"],
     "v_pre",
     "v_once",
 ]
