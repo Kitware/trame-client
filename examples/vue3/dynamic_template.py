@@ -9,13 +9,14 @@ state, ctrl = server.state, server.controller
 state.count = 1
 
 
+@ctrl.set("update_ui")
 def update_ui():
     state.count += 1
     with DivLayout(server):
         html.Div(f"Static text {state.count}")
         html.Div("count = {{ count }}")
         html.Div("tts = {{ tts }}")
-        html.Button("Update template", click=update_ui)
+        html.Button("Update template", click=ctrl.update_ui)
         html.Button("count++", click="count++")
 
 
