@@ -183,9 +183,9 @@ export default {
       if (kwargs) {
         const keys = [];
         const values = [];
-        Object.entries(kwargs).forEach((key, value) => {
-          keys.push(key);
-          values.push(decorate(value));
+        Object.entries(kwargs).forEach((entry) => {
+          keys.push(entry[0]);
+          values.push(decorate(entry[1]));
         });
 
         const resolvedValues = await Promise.all(values);
