@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.5 (2023-03-27)
+### Fix
+* **kwargs:** Fix handling of vue3 of kwargs ([`2e8815e`](https://github.com/Kitware/trame-client/commit/2e8815e3ff8c4e853417128714a1103c585d3da2))
+* **kwargs:** Fix handling of vue2 of kwargs ([`28c463e`](https://github.com/Kitware/trame-client/commit/28c463e68f1faf306ed5fa89c0e62e7dcd439549))
+
+### Documentation
+* **example:** Make dynamic template hot reloadable ([`9dc58d4`](https://github.com/Kitware/trame-client/commit/9dc58d4ebf37cfd12b36a86e383f707eab73b2ea))
+
 ## v2.7.4 (2023-03-06)
 ### Fix
 * **html:** Add v-slot and v-model modifier ([`1863cc0`](https://github.com/Kitware/trame-client/commit/1863cc0cf5330c7bde9207787701d871cd019ec0))
