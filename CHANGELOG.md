@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.6 (2023-05-15)
+### Fix
+* **getter:** Enable reactive handling of dynamic name value ([`0576edd`](https://github.com/Kitware/trame-client/commit/0576eddc60b0ff329fbfa6d679de2b25650b2fb0))
+
 ## v2.7.5 (2023-03-27)
 ### Fix
 * **kwargs:** Fix handling of vue3 of kwargs ([`2e8815e`](https://github.com/Kitware/trame-client/commit/2e8815e3ff8c4e853417128714a1103c585d3da2))
