@@ -5,6 +5,7 @@ __all__ = [
     "ServerTemplate",
     "Style",
     "JSEval",
+    "Getter",
 ]
 
 
@@ -100,3 +101,20 @@ class Style(AbstractElement):
     def var_name(self):
         """Name the the state variable used by this widget"""
         return self._key
+
+
+# -----------------------------------------------------------------------------
+# TrameGetter
+# -----------------------------------------------------------------------------
+class Getter(AbstractElement):
+    """Provide means to extract a reactive state variable from its name"""
+
+    def __init__(self, children=None, value_name=None, **kwargs):
+        super().__init__("trame-getter", **kwargs)
+        self._attr_names += [
+            "name",
+        ]
+        if value_name:
+            self._attributes["slot"] = f'v-slot="{{ value: {value_name} }}"'
+        else:
+            self._attributes["slot"] = 'v-slot="{ value }"'
