@@ -107,14 +107,46 @@ class Style(AbstractElement):
 # TrameGetter
 # -----------------------------------------------------------------------------
 class Getter(AbstractElement):
-    """Provide means to extract a reactive state variable from its name"""
+    """Provide means to extract a reactive state variable from its name
 
-    def __init__(self, children=None, value_name=None, **kwargs):
+    :param name: Name of the state variable to extract. This can be an expression too.
+
+    :param value_name: Name of the JavaScript variable name (default: "value")
+    :type value_name: str
+
+    :param key_name: Name for the JavaScript variable that will hold the evaluate expression of the "name" property.
+
+    :param update_nested_name: Method name if you aim to update the nested structure.
+
+    :param update_name: Method name if you aim to update the full value.
+    """
+
+    def __init__(
+        self,
+        children=None,
+        value_name=None,
+        key_name=None,
+        update_nested_name=None,
+        update_name=None,
+        **kwargs,
+    ):
         super().__init__("trame-getter", **kwargs)
         self._attr_names += [
             "name",
         ]
+        extracts = []
+        if key_name:
+            extracts.append(f"keyName: {key_name}")
+
+        if update_nested_name:
+            extracts.append(f"updateNested: {update_nested_name}")
+
+        if update_name:
+            extracts.append(f"update: {update_name}")
+
         if value_name:
-            self._attributes["slot"] = f'v-slot="{{ value: {value_name} }}"'
+            extracts.append(f"value: {value_name}")
         else:
-            self._attributes["slot"] = 'v-slot="{ value }"'
+            extracts.append("value")
+
+        self._attributes["slot"] = f'v-slot="{{ { ", ".join(extracts) } }}"'

@@ -4,12 +4,31 @@ export default {
   props: ['name'],
   setup(props) {
     const trame = inject('trame');
-    const computed = ref(null);
+    const computedValue = ref(null);
+    const computedName = ref(null);
+
+    function updateNested(key, value) {
+      const newData = JSON.parse(JSON.stringify(trame.state.get(props.name)));
+      let current = newData;
+      const steps = String(key).split('.');
+      for (let i = 0; i < steps.length - 1; i++) {
+        current = current[steps[i]];
+      }
+      current[steps.at(-1)] = value;
+      trame.state.set(props.name, newData);
+    }
+
+    function update(value) {
+      trame.state.set(props.name, value);
+    }
 
     function updateState() {
       const newValue = trame.state.get(props.name);
-      if (newValue !== computed.value) {
-        computed.value = newValue;
+      if (computedName.value !== props.name) {
+        computedName.value = props.name;
+      }
+      if (newValue !== computedValue.value) {
+        computedValue.value = newValue;
       }
     }
 
@@ -24,7 +43,8 @@ export default {
       trame.$off('stateChange', updateState);
     });
 
-    return { computed };
+    return { computedValue, computedName, updateNested, update };
   },
-  template: '<slot :value="computed"></slot>',
+  template:
+    '<slot :keyName="computedName" :update="update" :updateNested="updateNested" :value="computedValue"></slot>',
 };
