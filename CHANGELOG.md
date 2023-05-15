@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.7.7 (2023-05-15)
+### Fix
+* **Getter:** Expose name, update(value), updateNested(path, value) ([`257669d`](https://github.com/Kitware/trame-client/commit/257669df9d7cc23e72860bc5cd3c9d7a82ed7482))
+
 ## v2.7.6 (2023-05-15)
 ### Fix
 * **getter:** Enable reactive handling of dynamic name value ([`0576edd`](https://github.com/Kitware/trame-client/commit/0576eddc60b0ff329fbfa6d679de2b25650b2fb0))
