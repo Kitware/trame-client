@@ -311,7 +311,12 @@ class AbstractElement:
 
     def __setitem__(self, name, value):
         if name in self._allowed_keys:
-            self._py_attr[name] = value
+            if value is None:
+                self._py_attr.pop(name, value)
+                self._attributes.pop(name, value)
+            else:
+                self._py_attr[name] = value
+
         else:
             print(f"Attribute {name} is not defined for {self._elem_name}")
 
@@ -330,7 +335,12 @@ class AbstractElement:
         elif name == "children":
             self._children = value
         elif name in self._allowed_keys:
-            self._py_attr[name] = value
+            if value is None:
+                self._py_attr.pop(name, value)
+                self._attributes.pop(name, value)
+            else:
+                self._py_attr[name] = value
+
         else:
             self.__dict__[name] = value
 
