@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.8.0 (2023-05-24)
+### Feature
+* **widget:** Remove attribute when setting to None ([`2f827cb`](https://github.com/Kitware/trame-client/commit/2f827cb6b22a5b86ec15baf6802f151be4caac95))
+
 ## v2.7.7 (2023-05-15)
 ### Fix
 * **Getter:** Expose name, update(value), updateNested(path, value) ([`257669d`](https://github.com/Kitware/trame-client/commit/257669df9d7cc23e72860bc5cd3c9d7a82ed7482))
