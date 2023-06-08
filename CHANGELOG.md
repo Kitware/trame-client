@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.9.0 (2023-06-08)
+
+### Feature
+
+* **jupyter:** Add display support for layouts ([`5373ac8`](https://github.com/Kitware/trame-client/commit/5373ac8f63df9707c2813a5f36976fe0aecc7d8c))
+
 ## v2.8.0 (2023-05-24)
 ### Feature
 * **widget:** Remove attribute when setting to None ([`2f827cb`](https://github.com/Kitware/trame-client/commit/2f827cb6b22a5b86ec15baf6802f151be4caac95))
