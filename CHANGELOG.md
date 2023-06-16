@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.9.2 (2023-06-16)
+
+### Fix
+
+* **testing:** Allow enable_testing to be used as decorator ([`ce6f784`](https://github.com/Kitware/trame-client/commit/ce6f784bb7a5681efe05359434f89c40b2a795a4))
+
 ## v2.9.1 (2023-06-16)
 
 ### Fix
