@@ -42,6 +42,8 @@ def enable_testing(server, *state_monitor):
     def print_server_port(**kwargs):
         print("SERVER_PORT:", server.port, flush=True)
 
+    return server
+
 
 class FixtureHelper:
     def __init__(self, root_path):
