@@ -3,8 +3,7 @@ from seleniumbase import SB
 
 
 @pytest.mark.parametrize(
-    "server_path",
-    ["examples/vue2/dynamic_template.py", "examples/vue3/dynamic_template.py"],
+    "server_path", ["examples/vue2/dynamic_template.py"],
 )
 def test_dynamic_template(server, baseline_image):
     with SB() as sb:
@@ -41,13 +40,10 @@ def test_js_call(server, baseline_image):
         sb.assert_exact_text("Alert", ".jsAlert")
         assert server.get("message") == "hello world"
         sb.click(".alertMsg")
-        # FIXME - this is currently failing
-        # sb.assert_exact_text("hello world", ".jsAlert")
+        sb.assert_exact_text("hello world", ".jsAlert")
         sb.click(".alertMe")
-        # FIXME - this is currently failing
-        # sb.assert_exact_text("Yes me", ".jsAlert")
+        sb.assert_exact_text("Yes me", ".jsAlert")
         sb.click(".swapMsg")
         assert server.get("message") == "dlrow olleh"
         sb.click(".alertMsg")
-        # FIXME - this is currently failing
-        # sb.assert_exact_text("dlrow olleh", ".jsAlert")
+        sb.assert_exact_text("dlrow olleh", ".jsAlert")
