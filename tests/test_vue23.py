@@ -26,8 +26,7 @@ def test_dynamic_template(server, baseline_image):
         sb.assert_exact_text("Static text 6", ".staticDiv")
         assert server.get("count") == 6
         sb.assert_exact_text("count = 6", ".countDiv")
-        # FIXME - this is currently failing
-        # sb.assert_exact_text("tts = 2", ".ttsDiv")
+        sb.assert_exact_text("tts = 2", ".ttsDiv")
         sb.check_window(name="final", level=3)
 
 
