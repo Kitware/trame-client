@@ -3,7 +3,8 @@ from seleniumbase import SB
 
 
 @pytest.mark.parametrize(
-    "server_path", ["examples/vue2/dynamic_template.py"],
+    "server_path",
+    ["examples/vue2/dynamic_template.py"],
 )
 def test_dynamic_template(server, baseline_image):
     with SB() as sb:
