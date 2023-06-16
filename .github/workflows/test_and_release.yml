@@ -34,14 +34,14 @@ jobs:
             name: "Linux",
             os: ubuntu-latest
           }
-        - {
-            name: "MacOSX",
-            os: macos-latest
-          }
-        - {
-            name: "Windows",
-            os: windows-latest
-          }
+        # - {
+        #     name: "MacOSX",
+        #     os: macos-latest
+        #   }
+        # - {
+        #     name: "Windows",
+        #     os: windows-latest
+        #   }
 
     defaults:
       run:
@@ -56,13 +56,44 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Install Chrome
+      run: |
+        sudo apt install google-chrome-stable
+
+    - name: Check the console scripts interface
+      run: |
+        pip install seleniumbase
+        seleniumbase
+        sbase
+
+    - name: Install chromedriver
+      run: |
+        seleniumbase install chromedriver
+
+    - name: Set Up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Build Vue2 App
+      run: |
+        cd vue2-app
+        npm ci
+        npm run build
+
+    - name: Build Vue3 App
+      run: |
+        cd vue3-app
+        npm ci
+        npm run build
+
     - name: Install and Run Tests
       run: |
         pip install .
         pip install -r tests/requirements.txt
         # Run the tests with coverage so we get a coverage report too
         pip install coverage
-        coverage run --source . -m pytest .
+        coverage run --source . -m pytest -s .
         # Print the coverage report
         coverage report -m
 

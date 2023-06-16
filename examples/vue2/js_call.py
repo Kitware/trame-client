@@ -1,6 +1,7 @@
 from trame.app import get_server
 from trame.widgets import client, html
 from trame.ui.html import DivLayout
+from trame_client.utils.testing import enable_testing
 
 server = get_server()
 server.client_type = "vue2"
@@ -14,14 +15,16 @@ def revert_message():
 with DivLayout(server) as layout:
     eval_js = client.JSEval(
         event=("message", "hello world"),
-        exec="alert($event)",
+        exec="window.document.querySelector('.jsAlert').innerHTML = $event",
     )
     ctrl.exec = eval_js.exec
     html.Div("{{ message }}")
-    html.Button("Exec", click=ctrl.exec)
-    html.Button("Exec with arg", click=(ctrl.exec, "['Yes me']"))
-    html.Button("Change message", click=revert_message)
+    html.Div("Alert", classes="jsAlert")
+    html.Button("Exec", click=ctrl.exec, classes="alertMsg")
+    html.Button("Exec with arg", click=(ctrl.exec, "['Yes me']"), classes="alertMe")
+    html.Button("Change message", click=revert_message, classes="swapMsg")
 
     # print(layout.html)
 
+enable_testing(server, "message")
 server.start()
