@@ -70,6 +70,23 @@ jobs:
       run: |
         seleniumbase install chromedriver
 
+    - name: Set Up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Build Vue2 App
+      run: |
+        cd vue2-app
+        npm ci
+        npm run build
+
+    - name: Build Vue3 App
+      run: |
+        cd vue3-app
+        npm ci
+        npm run build
+
     - name: Install and Run Tests
       run: |
         pip install .
