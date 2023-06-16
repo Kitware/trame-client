@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.9.1 (2023-06-16)
+
+### Fix
+
+* **testing:** Add testing utilities ([`a1c9c5c`](https://github.com/Kitware/trame-client/commit/a1c9c5c980f5a4b37b2c1b6d024ad39aa493c683))
+
 ## v2.9.0 (2023-06-08)
 
 ### Feature
