@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.9.4 (2023-06-23)
+
+### Fix
+
+* **testing:** Add utilities functions ([`68c8509`](https://github.com/Kitware/trame-client/commit/68c8509540bfc460919b3e478a323ada1e68ce44))
+
 ## v2.9.3 (2023-06-23)
 
 ### Fix
