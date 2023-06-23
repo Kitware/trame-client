@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.9.3 (2023-06-23)
+
+### Fix
+
+* **testing:** Add more testing helper ([`c5a4d9c`](https://github.com/Kitware/trame-client/commit/c5a4d9cd1f60f170a8250613cba9c5b87dc22e99))
+
 ## v2.9.2 (2023-06-16)
 
 ### Fix
