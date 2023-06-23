@@ -103,19 +103,26 @@ def set_browser_size(sb, width=300, height=300):
 
 def baseline_comparison(sb, check_baseline_path, threshold=0.1):
     baseline_test = Path(check_baseline_path)
-    baseline_ref = baseline_test.with_name("baseline_ref.png")
+    baseline_refs = baseline_test.parent.glob("baseline_ref*.png")
     baseline_diff = baseline_test.with_name("baseline_diff.png")
 
     img_test = Image.open(baseline_test)
-    img_ref = Image.open(baseline_ref)
-    img_diff = Image.new("RGBA", img_ref.size)
+    min_mismatch = 1000000
 
-    mismatch = pixelmatch(img_ref, img_test, img_diff, threshold=threshold)
-    img_diff.save(baseline_diff)
+    for baseline_ref in baseline_refs:
+        img_ref = Image.open(baseline_ref)
+        img_diff = Image.new("RGBA", img_ref.size)
+        baseline_diff = (
+            baseline_ref.parent / f"baseline_diff{baseline_ref.name[12:-4]}.png"
+        )
+
+        mismatch = pixelmatch(img_ref, img_test, img_diff, threshold=threshold)
+        img_diff.save(baseline_diff)
+        min_mismatch = min(min_mismatch, mismatch)
 
     sb.assert_true(
-        mismatch < threshold,
-        f"Baseline threshold {mismatch} < {threshold} ({baseline_diff})",
+        min_mismatch < threshold,
+        f"Baseline threshold {min_mismatch} < {threshold}",
     )
 
 
