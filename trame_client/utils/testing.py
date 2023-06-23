@@ -1,6 +1,13 @@
 import json
 from pathlib import Path
 from xprocess import ProcessStarter
+from PIL import Image
+from pixelmatch.contrib.PIL import pixelmatch
+
+
+# ---------------------------------------------------------
+# Pytest helpers
+# ---------------------------------------------------------
 
 
 class TrameServerMonitor:
@@ -65,8 +72,58 @@ class FixtureHelper:
                 "python3",
                 str(self.root_path / server_path),
                 "--server",
+                "--host",
+                "127.0.0.1",
                 "--port",
                 "0",
             ]
 
         return Path(server_path).name, Starter, TrameServerMonitor
+
+
+# ---------------------------------------------------------
+# Seleniumbase helper functions
+# ---------------------------------------------------------
+
+
+def set_browser_size(sb, width=300, height=300):
+    delta_width = 0
+    delta_height = 0
+    agent = sb.get_user_agent()
+    if "Firefox" in agent:
+        delta_height = 85
+    elif "Chrome" in agent:
+        delta_height = 0
+    elif "Safari" in agent:
+        delta_height = 0
+
+    sb.set_window_size(width + delta_width, height + delta_height)
+    wait_for_ready(sb)
+
+
+def baseline_comparison(sb, check_baseline_path, threshold=0.1):
+    baseline_test = Path(check_baseline_path)
+    baseline_ref = baseline_test.with_name("baseline_ref.png")
+    baseline_diff = baseline_test.with_name("baseline_diff.png")
+
+    img_test = Image.open(baseline_test)
+    img_ref = Image.open(baseline_ref)
+    img_diff = Image.new("RGBA", img_ref.size)
+
+    mismatch = pixelmatch(img_ref, img_test, img_diff, threshold=threshold)
+    img_diff.save(baseline_diff)
+
+    sb.assert_true(
+        mismatch < threshold,
+        f"Baseline threshold {mismatch} < {threshold} ({baseline_diff})",
+    )
+
+
+def wait_for_ready(sb, timeout=60):
+    for i in range(timeout):
+        print(f"wait_for_ready {i}")
+        if sb.is_element_present(".trame__loader"):
+            sb.sleep(1)
+        else:
+            print("Ready")
+            return

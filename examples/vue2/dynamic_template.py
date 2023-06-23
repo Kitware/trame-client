@@ -3,7 +3,7 @@ from trame.widgets import html
 from trame.ui.html import DivLayout
 from trame_client.utils.testing import enable_testing
 
-server = get_server()
+server = enable_testing(get_server(), "count")
 server.client_type = "vue2"
 state, ctrl = server.state, server.controller
 
@@ -21,5 +21,5 @@ def update_ui():
 
 
 update_ui()
-enable_testing(server, "count")
+
 server.start()

@@ -1,4 +1,6 @@
 pytest
 seleniumbase
+pixelmatch
+Pillow
 pytest-xprocess
 trame

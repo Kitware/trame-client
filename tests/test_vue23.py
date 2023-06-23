@@ -1,5 +1,6 @@
 import pytest
 from seleniumbase import SB
+from trame_client.utils.testing import wait_for_ready
 
 
 @pytest.mark.parametrize(
@@ -8,8 +9,9 @@ from seleniumbase import SB
 )
 def test_dynamic_template(server, baseline_image):
     with SB() as sb:
-        url = f"http://localhost:{server.port}/"
+        url = f"http://127.0.0.1:{server.port}/"
         sb.open(url)
+        wait_for_ready(sb, 60)
         sb.check_window(name="init", level=3)
         sb.assert_exact_text("Static text 2", ".staticDiv")
         sb.assert_exact_text("count = 2", ".countDiv")
@@ -36,8 +38,9 @@ def test_dynamic_template(server, baseline_image):
 )
 def test_js_call(server, baseline_image):
     with SB() as sb:
-        url = f"http://localhost:{server.port}/"
+        url = f"http://127.0.0.1:{server.port}/"
         sb.open(url)
+        wait_for_ready(sb, 60)
         sb.assert_exact_text("Alert", ".jsAlert")
         assert server.get("message") == "hello world"
         sb.click(".alertMsg")

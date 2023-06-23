@@ -3,7 +3,7 @@ from trame.widgets import client, html
 from trame.ui.html import DivLayout
 from trame_client.utils.testing import enable_testing
 
-server = get_server()
+server = enable_testing(get_server(), "message")
 server.client_type = "vue3"
 state, ctrl = server.state, server.controller
 
@@ -24,7 +24,4 @@ with DivLayout(server) as layout:
     html.Button("Exec with arg", click=(ctrl.exec, "['Yes me']"), classes="alertMe")
     html.Button("Change message", click=revert_message, classes="swapMsg")
 
-    # print(layout.html)
-
-enable_testing(server, "message")
 server.start()
