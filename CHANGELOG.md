@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.10.0 (2023-07-19)
+
+### Feature
+
+* **vue3:** Update vue version to latest ([`d49445c`](https://github.com/Kitware/trame-client/commit/d49445cebd89cfa2dca723c78ca96ba4e689e16c))
+
 ## v2.9.4 (2023-06-23)
 
 ### Fix
