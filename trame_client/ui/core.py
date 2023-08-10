@@ -1,4 +1,5 @@
 import os
+from ..utils.formatter import to_pretty_html
 
 
 def css_unit(v):
@@ -86,6 +87,9 @@ class AbstractLayout:
         Compute corresponding layout String which represent the html part.
         """
         return self.root.html
+
+    def __repr__(self):
+        return to_pretty_html(self.html)
 
     @property
     def server(self):

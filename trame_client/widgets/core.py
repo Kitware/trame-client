@@ -1,4 +1,5 @@
 from ..utils.defaults import TrameDefault
+from ..utils.formatter import to_pretty_html
 
 SHARED_ATTRIBUTES = [
     "accesskey",
@@ -484,6 +485,7 @@ class AbstractElement:
         Remove all children
         """
         self._children.clear()
+        return self
 
     def hide(self):
         """
@@ -564,6 +566,9 @@ class AbstractElement:
         except Exception as e:
             print(e)
             return f"<{self._elem_name} html-error />"
+
+    def __repr__(self):
+        return to_pretty_html(self.html)
 
     # -------------------------------------------------------------------------
     # Resource manager
