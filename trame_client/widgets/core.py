@@ -1,6 +1,27 @@
 from ..utils.defaults import TrameDefault
 from ..utils.formatter import to_pretty_html
 
+AVAILABLE_DIRECTIVES = [
+    ("v_text", "v-text"),
+    ("v_html", "v-html"),
+    ("v_show", "v-show"),
+    ("v_if", "v-if"),
+    ("v_else", "v-else"),
+    ("v_else_if", "v-else-if"),
+    ("v_for", "v-for"),
+    ("v_on", "v-on"),
+    ("v_bind", "v-bind"),
+    ("v_model", "v-model"),
+    ("v_model_lazy", "v-model.lazy"),
+    ("v_model_number", "v-model.number"),
+    ("v_model_trim", "v-model.trim"),
+    ("v_slot", "v-slot"),
+    ("v_pre", "v-pre"),
+    ("v_once", "v-once"),
+    ("v_memo", "v-memo"),
+    ("v_cloak", "v-cloak"),
+]
+
 SHARED_ATTRIBUTES = [
     "accesskey",
     "autocapitalize",
@@ -30,22 +51,6 @@ SHARED_ATTRIBUTES = [
     # --
     "ref",
     ["key", ":key"],
-    ["v_on", "v-on"],
-    ["v_bind", "v-bind"],
-    ["v_slot", "v-slot"],
-    "v_text",
-    "v_html",
-    "v_show",
-    "v_if",
-    "v_else",
-    "v_else_if",
-    "v_for",
-    "v_model",
-    ["v_model_lazy", "v-model.lazy"],
-    ["v_model_number", "v-model.number"],
-    ["v_model_trim", "v-model.trim"],
-    "v_pre",
-    "v_once",
 ]
 
 SHARED_EVENTS = [
@@ -262,7 +267,9 @@ class AbstractElement:
         self._server = kwargs.get("trame_server")
         self._elem_name = _elem_name
         self._allowed_keys = set()
-        self._attr_names = kwargs.get("__properties", []) + SHARED_ATTRIBUTES
+        self._attr_names = (
+            kwargs.get("__properties", []) + SHARED_ATTRIBUTES + AVAILABLE_DIRECTIVES
+        )
         self._event_names = kwargs.get("__events", []) + SHARED_EVENTS
 
         self._attributes = {}
@@ -289,6 +296,18 @@ class AbstractElement:
                         self._allowed_keys.add(item)
                     else:
                         self._allowed_keys.add(item[0])
+
+    # -------------------------------------------------------------------------
+    # Static helper for widgets
+    # -------------------------------------------------------------------------
+
+    @staticmethod
+    def register_directive(py_name, js_name=None):
+        global AVAILABLE_DIRECTIVES
+        if js_name is None:
+            AVAILABLE_DIRECTIVES.append(py_name)
+        else:
+            AVAILABLE_DIRECTIVES.append((py_name, js_name))
 
     # -------------------------------------------------------------------------
     # App associated to HTML element
