@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.11.0 (2023-08-10)
+
+### Feature
+
+* **repr:** Pretty print ([`2159799`](https://github.com/Kitware/trame-client/commit/215979995e465b12dc5f0d4ab7c04e2bd1670e0f))
+
 ## v2.10.0 (2023-07-19)
 
 ### Feature
