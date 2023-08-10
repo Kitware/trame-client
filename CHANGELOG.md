@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.11.1 (2023-08-10)
+
+### Fix
+
+* **directive:** Add helper to register directives ([`e2add71`](https://github.com/Kitware/trame-client/commit/e2add718de76d12bb486144b644eee02fb1deb50))
+
 ## v2.11.0 (2023-08-10)
 
 ### Feature
