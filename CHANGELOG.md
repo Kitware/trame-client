@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.11.2 (2023-08-14)
+
+### Fix
+
+* **vue3:** Getter helper is now working ([`0008761`](https://github.com/Kitware/trame-client/commit/00087613a6d9e5c408b39bdb4e74a3ad4e7ed4c5))
+
 ## v2.11.1 (2023-08-10)
 
 ### Fix
