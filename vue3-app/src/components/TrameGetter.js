@@ -46,5 +46,5 @@ export default {
     return { computedValue, computedName, updateNested, update };
   },
   template:
-    '<slot :name="computedName" :update="update" :updateNested="updateNested" :value="computedValue"></slot>',
+    '<slot :keyName="computedName" :update="update" :updateNested="updateNested" :value="computedValue"></slot>',
 };
