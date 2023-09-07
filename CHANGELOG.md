@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.11.3 (2023-09-07)
+
+### Fix
+
+* **router:** Add infrastructure to handle routes for vue3 ([`021f871`](https://github.com/Kitware/trame-client/commit/021f87133240878536e27356dc87feb79ce1784f))
+
 ## v2.11.2 (2023-08-14)
 
 ### Fix
