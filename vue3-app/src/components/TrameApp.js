@@ -106,6 +106,15 @@ export default {
       window.addEventListener("beforeunload", () =>
         trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited")
       );
+
+      // Handle router if available
+      const router = window.trame.utils.router;
+      const routes = trame.state.get("trame__routes");
+      if (routes?.length && router) {
+        routes.forEach((route) => {
+          router.addRoute(route);
+        });
+      }
     }
 
     onBeforeMount(() => {
