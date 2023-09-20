@@ -13,10 +13,17 @@ function reportWsError() {
   const elem = document.querySelector('.trame__message');
   if (elem) {
     elem.innerHTML = status.message || status.type;
+  } else {
+    console.error('WsError', status.message || status.type);
   }
 }
 
 async function initializeApplication(Vue) {
+  // Check if we need to override websocket
+  if (window?.parent?.trameJupyter?.init) {
+    window.WSLINK = window.parent.trameJupyter.init(window);
+  }
+
   // Add default trame components
   Vue.use(Trame);
 

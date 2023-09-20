@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@kitware/vtk.js": "^26.4.0",
-    "wslink": "^1.10.0"
+    "wslink": "^1.12.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",

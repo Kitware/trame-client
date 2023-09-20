@@ -1,4 +1,5 @@
 import os
+from typing import Callable
 from ..utils.formatter import to_pretty_html
 
 
@@ -10,22 +11,60 @@ def css_unit(v):
 
 
 # -----------------------------------------------------------------------------
-# URL Builder selector logic (TRAME_IFRAME_URL_BUILDER=[default,serverproxy])
+# IFrame builder (env TRAME_IFRAME_BUILDER)
+# => default, serverproxy, jupyter-extension, jupyter-hub
 # -----------------------------------------------------------------------------
-def iframe_url_builder_default(base_url, server_port, template_name):
-    return f"{base_url}:{server_port}/index.html?ui={template_name[16:]}&reconnect=auto"
 
 
-def iframe_url_builder_serverproxy(base_url, server_port, template_name):
-    return f"{base_url}/{server_port}/index.html?ui={template_name[16:]}&reconnect=auto"
+def iframe_url_builder_default(layout):
+    base_url = layout.iframe_base_url
+    server = layout.server
+    template_name = layout._template_name
+    src = f"{base_url}:{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
+    elem_id = f"{server.name}_{template_name}"
+    return f'<iframe id="{elem_id}" src="{src}" style="{layout.iframe_style}"></iframe>'
 
 
-def get_iframe_url_builder():
-    builder_type = os.environ.get("TRAME_IFRAME_URL_BUILDER", "default")
+def iframe_url_builder_serverproxy(layout):
+    base_url = layout.iframe_base_url
+    server = layout.server
+    template_name = layout._template_name
+    src = f"{base_url}/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
+    elem_id = f"{server.name}_{template_name}"
+    return f'<iframe id="{elem_id}" src="{src}" style="{layout.iframe_style}"></iframe>'
+
+
+def iframe_url_builder_jupyter_extension(layout):
+    from ..utils.jupyter import get_kernel_id
+
+    server = layout.server
+    template_name = layout._template_name
+    src = f"/trame-jupyter-server/{server.client_type}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+    elem_id = f"{server.name}_{template_name}"
+    return f'<iframe id="{elem_id}" src="{src}" data-kernel-id="{get_kernel_id()}" style="{layout.iframe_style}"></iframe>'
+
+
+def iframe_url_builder_jupyter_hub(layout):
+    server = layout.server
+    template_name = layout._template_name
+    src = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}/proxy/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
+    elem_id = f"{server.name}_{template_name}"
+    return f'<iframe id="{elem_id}" src="{src}" style="{layout.iframe_style}"></iframe>'
+
+
+def get_iframe_builder(name="default"):
+    if isinstance(name, Callable):
+        return name
+
+    builder_type = os.environ.get("TRAME_IFRAME_BUILDER", name)
     builder = iframe_url_builder_default
 
     if builder_type == "serverproxy":
         builder = iframe_url_builder_serverproxy
+    elif builder_type == "jupyter-extension":
+        builder = iframe_url_builder_jupyter_extension
+    elif builder_type == "jupyter-hub":
+        builder = iframe_url_builder_jupyter_hub
 
     return builder
 
@@ -51,7 +90,7 @@ class AbstractLayout:
         width="100%",
         height="600px",
         base_url="http://localhost",
-        url_builder=None,
+        iframe_builder=None,
         **kwargs,
     ):
         self._server = _server
@@ -61,11 +100,21 @@ class AbstractLayout:
         self._server.state[self._template_name] = ""
         self.iframe_style = f"border: none; width: {width}{css_unit(width)}; height: {height}{css_unit(height)};"
         self.iframe_base_url = base_url
+        self._iframe_builder = get_iframe_builder(iframe_builder)
 
-        if url_builder is None:
-            url_builder = get_iframe_url_builder()
+    @property
+    def iframe_builder(self):
+        """Instance of iframe builder responsible for generating the iframe tag for mainly for Jupyter"""
+        return self._iframe_builder
 
-        self.iframe_url_builder = url_builder
+    @iframe_builder.setter
+    def iframe_builder(self, name_or_fn):
+        """
+        Set iframe builder after construction.
+        Method expect a name of built-in (default, serverproxy, jupyter-extension, jupyter-hub)
+        or an actual function.
+        """
+        self._iframe_builder = get_iframe_builder(name_or_fn)
 
     @property
     def root(self):
@@ -148,13 +197,7 @@ class AbstractLayout:
                     <pre style="padding: 5px; border: solid 1px rgb(224,224,224); background: rgb(245,245,245);">await layout.ready</pre>
                     </div>"""
 
-        elem_id = f"{self.server.name}_{self._template_name}"
-        src = self.iframe_url_builder(
-            self.iframe_base_url, self.server.port, self._template_name
-        )
-        return (
-            f'<iframe id="{elem_id}" src="{src}" style="{self.iframe_style}"></iframe>'
-        )
+        return self.iframe_builder(self)
 
     @property
     def ipywidget(self):
