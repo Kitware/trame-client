@@ -7,6 +7,11 @@ import TrameUse from "./use";
 const { createApp } = window.Vue;
 
 async function start() {
+  // Check if we need to override websocket
+  if (window?.parent?.trameJupyter?.init) {
+    window.WSLINK = window.parent.trameJupyter.init(window);
+  }
+
   const app = createApp({ template: `<trame-app use-url />` });
   let trame = createTrameInstance(app);
   let config = wslink.configDecorator({

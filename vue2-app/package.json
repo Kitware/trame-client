@@ -13,7 +13,7 @@
     "core-js": "^3.28.0",
     "v-runtime-template": "^1.10.0",
     "vue": "^2.7.14",
-    "wslink": "^1.10.0"
+    "wslink": "^1.12.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
