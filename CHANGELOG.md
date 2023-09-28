@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.0 (2023-09-28)
+
+### Feature
+
+* **jupyter:** Add support for jupyter extension ([`6d2bc50`](https://github.com/Kitware/trame-client/commit/6d2bc50929128acd084580769797b2059ab4a56c))
+
 ## v2.11.3 (2023-09-07)
 
 ### Fix
