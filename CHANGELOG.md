@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.1 (2023-10-03)
+
+### Fix
+
+* **jupyter:** Kernel generate www when collocated with server ([`c883fae`](https://github.com/Kitware/trame-client/commit/c883faedd0325fbd604112ba7e2194c0a58d1b87))
+* **js:** Handle exception when accessing cross-origin parent window ([`9f12f69`](https://github.com/Kitware/trame-client/commit/9f12f69b3ed408f5b939e955b3bb985ceba9ff07))
+
 ## v2.12.0 (2023-09-28)
 
 ### Feature
