@@ -1,4 +1,6 @@
 import os
+import shutil
+from pathlib import Path
 from typing import Callable
 from ..utils.formatter import to_pretty_html
 
@@ -41,6 +43,18 @@ def iframe_url_builder_jupyter_extension(layout):
     template_name = layout._template_name
     src = f"/trame-jupyter-server/{server.client_type}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
     elem_id = f"{server.name}_{template_name}"
+
+    # Check if server/kernel are collocated
+    www_path = os.environ.get("TRAME_JUPYTER_EXTENSION")
+    if www_path and Path(www_path).exists():
+        server_www = Path(www_path) / "servers" / server.name
+        src = f"/trame-jupyter-server/servers/{server.name}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+        if not server_www.exists():
+            shutil.copytree(server._www, str(server_www.resolve()), dirs_exist_ok=True)
+            for sub_path, src_dir in server.serve.items():
+                dst_dir = server_www / sub_path
+                shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
+
     return f'<iframe id="{elem_id}" src="{src}" data-kernel-id="{get_kernel_id()}" style="{layout.iframe_style}"></iframe>'
 
 
