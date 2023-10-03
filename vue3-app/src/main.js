@@ -8,8 +8,13 @@ const { createApp } = window.Vue;
 
 async function start() {
   // Check if we need to override websocket
-  if (window?.parent?.trameJupyter?.init) {
-    window.WSLINK = window.parent.trameJupyter.init(window);
+  try {
+    // Can throw exception if parent is cross-origin
+    if (window?.parent?.trameJupyter?.init) {
+      window.WSLINK = window.parent.trameJupyter.init(window);
+    }
+  } catch (e) {
+    // eslint-disable-next-line
   }
 
   const app = createApp({ template: `<trame-app use-url />` });
