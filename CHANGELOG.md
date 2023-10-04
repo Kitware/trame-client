@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.2 (2023-10-04)
+
+### Fix
+
+* **jupyter:** Allow base url to be customized ([`547b388`](https://github.com/Kitware/trame-client/commit/547b388968774b6e791330de112cd320c1019b22))
+
 ## v2.12.1 (2023-10-03)
 
 ### Fix
