@@ -219,12 +219,15 @@ class AbstractLayout:
     def ipywidget(self):
         from ipywidgets.widgets import HTML
 
-        return HTML(self._jupyter_content())
+        return HTML(value=self._jupyter_content())
 
     def _ipython_display_(self):
         from IPython.display import display_html, display
 
-        try:
-            display(self.ipywidget)
-        except ImportError:
+        if os.environ.get("TRAME_IPYWIDGETS_DISABLE"):
             display_html(self._jupyter_content(), raw=True)
+        else:
+            try:
+                display(self.ipywidget)
+            except ImportError:
+                display_html(self._jupyter_content(), raw=True)
