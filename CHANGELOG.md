@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.4 (2023-10-05)
+
+### Fix
+
+* **ipywidget:** Can skip ipywidget even if available ([`091410b`](https://github.com/Kitware/trame-client/commit/091410b47bdc1cde402422deb5a116a798da82c7))
+
 ## v2.12.3 (2023-10-05)
 
 ### Fix
