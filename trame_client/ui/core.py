@@ -39,17 +39,18 @@ def iframe_url_builder_serverproxy(layout):
 def iframe_url_builder_jupyter_extension(layout):
     from ..utils.jupyter import get_kernel_id
 
+    www_endpoint = os.environ.get("TRAME_JUPYTER_ENDPOINT", "/trame-jupyter-server")
     server = layout.server
     template_name = layout._template_name
-    src = f"/trame-jupyter-server/{server.client_type}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+    src = f"{www_endpoint}/{server.client_type}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
     elem_id = f"{server.name}_{template_name}"
 
     # Check if server/kernel are collocated
-    www_path = os.environ.get("TRAME_JUPYTER_EXTENSION")
-    www_endpoint = os.environ.get("TRAME_JUPYTER_ENDPOINT", "/")
+    www_path = os.environ.get("TRAME_JUPYTER_WWW")
+
     if www_path and Path(www_path).exists():
         server_www = Path(www_path) / "servers" / server.name
-        src = f"{www_endpoint}trame-jupyter-server/servers/{server.name}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+        src = f"{www_endpoint}/servers/{server.name}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
         if not server_www.exists():
             shutil.copytree(server._www, str(server_www.resolve()), dirs_exist_ok=True)
             for sub_path, src_dir in server.serve.items():
