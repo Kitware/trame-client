@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.3 (2023-10-05)
+
+### Fix
+
+* **jupyter:** Better base url handling with extension ([`fdc7156`](https://github.com/Kitware/trame-client/commit/fdc7156f84d4a3bc5dd16c843396c03710a282dd))
+
 ## v2.12.2 (2023-10-04)
 
 ### Fix
