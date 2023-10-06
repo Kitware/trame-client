@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.5 (2023-10-06)
+
+### Fix
+
+* **global:** Expose state methods on global trame.state ([`0238651`](https://github.com/Kitware/trame-client/commit/02386519e1143255861b0fff1015e0ff41f56098))
+
 ## v2.12.4 (2023-10-05)
 
 ### Fix
