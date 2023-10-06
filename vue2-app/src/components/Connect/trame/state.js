@@ -8,11 +8,17 @@ import utils from '../../../utils';
 // Make utils global
 // ----------------------------------------------------------------------------
 
+const GLOBAL_STATE = {};
+
 if (!window.trame) {
   window.trame = {};
 }
 if (!window.trame.utils) {
   window.trame.utils = utils;
+}
+
+if (!window.trame.state) {
+  window.trame.state = GLOBAL_STATE;
 }
 
 // ----------------------------------------------------------------------------
@@ -396,6 +402,15 @@ export class TrameState {
           }
         };
         this.clientSub = this.trame.client.getRemote().Trame.subscribeToActions(this.onActions);
+
+        // Update global trame.state
+        GLOBAL_STATE.set = (k, v) => this.set(k, v);
+        GLOBAL_STATE.get = (k) => this.get(k);
+        GLOBAL_STATE.setAll = (obj) => this.setAll(obj);
+        GLOBAL_STATE.flushState = (...keys) => this.flushState(...keys);
+        GLOBAL_STATE.registerDecorator = (...args) => this.registerDecorator(...args);
+        GLOBAL_STATE.trigger = async (name, args = [], kwargs = {}) =>
+          this.trigger(name, args, kwargs);
       },
       beforeDestroy() {
         refCount--;
