@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.6 (2023-10-19)
+
+### Fix
+
+* **WebModule:** Add helper for serving web content ([`501caec`](https://github.com/Kitware/trame-client/commit/501caec55d65a34e62583dadf519726aa4944e3f))
+
 ## v2.12.5 (2023-10-06)
 
 ### Fix
