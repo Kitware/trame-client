@@ -272,6 +272,10 @@ class AbstractElement:
         )
         self._event_names = kwargs.get("__events", []) + SHARED_EVENTS
 
+        style = kwargs.get("style", None)
+        if type(style) is dict:
+            kwargs["style"] = " ".join([f"{k}: {v};" for k, v in style.items()])
+
         self._attributes = {}
         self._py_attr = kwargs
         self._children = []
