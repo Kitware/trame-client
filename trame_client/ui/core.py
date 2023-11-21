@@ -24,7 +24,13 @@ def iframe_url_builder_default(layout):
     template_name = layout._template_name
     src = f"{base_url}:{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
     elem_id = f"{server.name}_{template_name}"
-    return f'<iframe id="{elem_id}" src="{src}" style="{layout.iframe_style}"></iframe>'
+
+    return {
+        "id": elem_id,
+        "src": src,
+        "style": layout.iframe_style,
+        **layout.iframe_attrs,
+    }
 
 
 def iframe_url_builder_serverproxy(layout):
@@ -33,7 +39,13 @@ def iframe_url_builder_serverproxy(layout):
     template_name = layout._template_name
     src = f"{base_url}/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
     elem_id = f"{server.name}_{template_name}"
-    return f'<iframe id="{elem_id}" src="{src}" style="{layout.iframe_style}"></iframe>'
+
+    return {
+        "id": elem_id,
+        "src": src,
+        "style": layout.iframe_style,
+        **layout.iframe_attrs,
+    }
 
 
 def iframe_url_builder_jupyter_extension(layout):
@@ -57,7 +69,13 @@ def iframe_url_builder_jupyter_extension(layout):
                 dst_dir = server_www / sub_path
                 shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
 
-    return f'<iframe id="{elem_id}" src="{src}" data-kernel-id="{get_kernel_id()}" style="{layout.iframe_style}"></iframe>'
+    return {
+        "id": elem_id,
+        "src": src,
+        "style": layout.iframe_style,
+        "data-kernel-id": get_kernel_id(),
+        **layout.iframe_attrs,
+    }
 
 
 def iframe_url_builder_jupyter_hub(layout):
@@ -65,7 +83,13 @@ def iframe_url_builder_jupyter_hub(layout):
     template_name = layout._template_name
     src = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}/proxy/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
     elem_id = f"{server.name}_{template_name}"
-    return f'<iframe id="{elem_id}" src="{src}" style="{layout.iframe_style}"></iframe>'
+
+    return {
+        "id": elem_id,
+        "src": src,
+        "style": layout.iframe_style,
+        **layout.iframe_attrs,
+    }
 
 
 def get_iframe_builder(name="default"):
@@ -115,6 +139,7 @@ class AbstractLayout:
         self._template_name = f"trame__template_{template_name}"
         self._server.state[self._template_name] = ""
         self.iframe_style = f"border: none; width: {width}{css_unit(width)}; height: {height}{css_unit(height)};"
+        self.iframe_attrs = {}
         self.iframe_base_url = base_url
         self._iframe_builder = get_iframe_builder(iframe_builder)
 
@@ -213,7 +238,12 @@ class AbstractLayout:
                     <pre style="padding: 5px; border: solid 1px rgb(224,224,224); background: rgb(245,245,245);">await layout.ready</pre>
                     </div>"""
 
-        return self.iframe_builder(self)
+        attributes = self.iframe_builder(self)
+        attributes_str = " ".join(
+            f'{key}="{str(value)}"' for key, value in attributes.items()
+        )
+
+        return f"<iframe {attributes_str}></iframe>"
 
     @property
     def ipywidget(self):
