@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.12.7 (2023-11-27)
+
+### Fix
+
+* **jupyter:** Iframe builders return a dict instead of a str ([`083b046`](https://github.com/Kitware/trame-client/commit/083b046976365c3e222a83bb298bc1f2b755fb57))
+
 ## v2.12.6 (2023-10-19)
 
 ### Fix
