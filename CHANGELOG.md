@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.13.0 (2023-12-01)
+
+### Feature
+
+* **widget:** Allow style attr to be dict ([`11f4ca5`](https://github.com/Kitware/trame-client/commit/11f4ca504e0a64e198cbc2ec1fdcb62eb6295129))
+
 ## v2.12.7 (2023-11-27)
 
 ### Fix
