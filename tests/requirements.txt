@@ -4,4 +4,4 @@ pixelmatch
 Pillow
 pytest-xprocess
 trame
-trame-server>=2.13.0
+trame-server>=2.13.1

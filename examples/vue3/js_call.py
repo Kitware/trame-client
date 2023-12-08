@@ -3,8 +3,7 @@ from trame.widgets import client, html
 from trame.ui.html import DivLayout
 from trame_client.utils.testing import enable_testing
 
-server = enable_testing(get_server(), "message")
-server.client_type = "vue3"
+server = enable_testing(get_server(client_type="vue3"), "message")
 state, ctrl = server.state, server.controller
 
 
