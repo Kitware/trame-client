@@ -1,7 +1,7 @@
 from trame.app import get_server
 from trame_client.utils.testing import enable_testing
 
-server = get_server()
+server = get_server(client_type="vue3")
 server.state.count = 1
 server.state.trame__template_main = """
     <div>

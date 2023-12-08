@@ -2,8 +2,7 @@ from trame.app import get_server
 from trame.widgets import html, client
 from trame.ui.html import DivLayout
 
-server = get_server()
-server.client_type = "vue3"
+server = get_server(client_type="vue3")
 state, ctrl = server.state, server.controller
 
 dyna_var_count = 1

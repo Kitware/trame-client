@@ -1,3 +1,4 @@
+import logging
 from ..utils.defaults import TrameDefault
 from ..utils.formatter import to_pretty_html
 
@@ -61,6 +62,8 @@ SHARED_EVENTS = [
     "mouseleave",
     "contextmenu",
 ]
+
+logger = logging.getLogger(__name__)
 
 
 def py2js_key(key):
@@ -411,6 +414,8 @@ class AbstractElement:
                 if value is None:
                     continue
 
+                logger.info("js_key = %s", js_key)
+
                 if (
                     AbstractElement._debug
                     and js_key.startswith("v-")
@@ -422,29 +427,41 @@ class AbstractElement:
 
                 if isinstance(value, (tuple, list)):
                     if len(value) > 1:
-                        # handle vue3 syntax {name}.value / state.{name}
-                        if value[0].startswith("state."):
-                            self.server.state.setdefault(value[0][6:], value[1])
-                        elif value[0].endswith(".value"):
-                            self.server.state.setdefault(value[0][:-6], value[1])
-                        elif isinstance(value[1], TrameDefault):
+                        if isinstance(value[1], TrameDefault):
                             value[1].set_defaults(self.server)
                         else:
                             self.server.state.setdefault(value[0], value[1])
 
+                    logger.info("before: %s = %s", js_key, value[0])
+                    translated_value = (
+                        self.server.state.translator.translate_js_expression(
+                            self.server.state, value[0]
+                        )
+                    )
+                    logger.info("after: %s = %s", js_key, translated_value)
                     if js_key.startswith("v-"):
-                        self._attributes[name] = f'{js_key}="{value[0]}"'
+                        self._attributes[name] = f'{js_key}="{translated_value}"'
                     elif js_key.startswith(":"):
-                        self._attributes[name] = f'{js_key}="{value[0]}"'
+                        self._attributes[name] = f'{js_key}="{translated_value}"'
                     else:
-                        self._attributes[name] = f':{js_key}="{value[0]}"'
+                        self._attributes[name] = f':{js_key}="{translated_value}"'
                 elif isinstance(value, bool):
                     if value:
                         self._attributes[name] = js_key
                     else:
                         self._attributes[name] = f':{js_key}="false"'
                 elif isinstance(value, (str, int, float)):
-                    self._attributes[name] = f'{js_key}="{value}"'
+                    if js_key.startswith("v-") or js_key.startswith(":"):
+                        logger.info("before: %s = %s", js_key, value)
+                        translated_value = (
+                            self.server.state.translator.translate_js_expression(
+                                self.server.state, value
+                            )
+                        )
+                        logger.info("after: %s = %s", js_key, translated_value)
+                        self._attributes[name] = f'{js_key}="{translated_value}"'
+                    else:
+                        self._attributes[name] = f'{js_key}="{value}"'
                 else:
                     print(
                         f"Error: Don't know how to handle attribute name '{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
@@ -579,7 +596,12 @@ class AbstractElement:
                 out_buffer.append(f"<{self._elem_name} {self._attr_str()}>")
                 for child in self._children:
                     if isinstance(child, str):
-                        out_buffer.append(child)
+                        translated_value = (
+                            self.server.state.translator.translate_vue_templating(
+                                self.server.state, child
+                            )
+                        )
+                        out_buffer.append(translated_value)
                     else:
                         out_buffer.append(child.html)
                 out_buffer.append(f"</{self._elem_name}>")
@@ -587,7 +609,7 @@ class AbstractElement:
             else:
                 return f"<{self._elem_name} {self._attr_str()} />"
         except Exception as e:
-            print(e)
+            logger.error(e)
             return f"<{self._elem_name} html-error />"
 
     def __repr__(self):

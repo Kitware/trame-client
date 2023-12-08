@@ -28,6 +28,17 @@ def file_with_digest(file_path, digest=None, digest_size=40):
     return output_file
 
 
+def is_relative_to(path, *other_paths):
+    # Convert the input path and the base path into absolute paths
+    abs_path = path.resolve()
+    abs_other_paths = [Path(other).resolve() for other in other_paths]
+
+    # Check if the parts of the base paths are the beginning of the input path's parts
+    return all(
+        abs_path.parts[: len(base.parts)] == base.parts for base in abs_other_paths
+    )
+
+
 class WebModule:
     def __init__(self, vue_use=None, digest_size=6):
         self._digest_size = digest_size
@@ -47,7 +58,7 @@ class WebModule:
 
         for entry in self._serving_entries:
             fs_path, www_path = entry
-            if file_path.is_relative_to(fs_path):
+            if is_relative_to(file_path, fs_path):
                 if self._digest_size > 0:
                     file_path = file_with_digest(
                         file_path, digest_size=self._digest_size

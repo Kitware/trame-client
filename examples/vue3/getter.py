@@ -6,8 +6,7 @@ from trame.ui.vuetify3 import SinglePageLayout
 # Trame setup
 # -----------------------------------------------------------------------------
 
-server = get_server()
-server.client_type = "vue3"
+server = get_server(client_type="vue3")
 state, ctrl = server.state, server.controller
 
 state.message_1 = "Hello 1"

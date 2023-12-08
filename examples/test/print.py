@@ -2,7 +2,7 @@ from trame.app import get_server
 from trame.ui.html import DivLayout
 from trame.widgets import html
 
-server = get_server()
+server = get_server(client_type="vue3")
 
 # Test to dynamically add a fake directive
 html.Div.register_directive("v_seb_directive")

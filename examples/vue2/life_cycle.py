@@ -1,7 +1,6 @@
 from trame.app import get_server
 
-server = get_server()
-server.client_type = "vue2"
+server = get_server(client_type="vue2")
 ctrl = server.controller
 server.state.trame__template_main = "Life Cycle App"
 

@@ -1,7 +1,6 @@
 from trame.app import get_server
 
-server = get_server()
-server.client_type = "vue2"  # default until trame>=3.x
+server = get_server(client_type="vue2")
 state, ctrl = server.state, server.controller
 
 state.count = 2
