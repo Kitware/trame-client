@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v2.14.0 (2023-12-08)
+
+### Feature
+
+* **translator:** Template patching via translator ([`350bd63`](https://github.com/Kitware/trame-client/commit/350bd63a22d45c4c5f6e9b5df8fd91d3fb4c4091))
+
+### Fix
+
+* **py:** Remove python 3.9 requirement ([`17f2029`](https://github.com/Kitware/trame-client/commit/17f2029132b474730e2f794a5053971c39dc9cff))
+
 ## v2.13.0 (2023-12-01)
 
 ### Feature
