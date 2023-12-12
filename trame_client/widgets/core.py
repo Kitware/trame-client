@@ -1,3 +1,4 @@
+import sys
 import logging
 from ..utils.defaults import TrameDefault
 from ..utils.formatter import to_pretty_html
@@ -262,7 +263,7 @@ class AbstractElement:
     """
 
     _next_id = 1
-    _debug = False
+    _debug = "--debug" in sys.argv or "-d" in sys.argv
 
     def __init__(self, _elem_name, children=None, **kwargs):
         AbstractElement._next_id += 1
@@ -421,7 +422,7 @@ class AbstractElement:
                     and js_key.startswith("v-")
                     and not isinstance(value, (tuple, list))
                 ):
-                    print(
+                    logger.warn(
                         f'Warning: A Vue directive is evaluating your expression and trame would expect a tuple instead of a plain type. <{self._elem_name} {js_key}="{value}" ... />'
                     )
 
@@ -433,11 +434,22 @@ class AbstractElement:
                             self.server.state.setdefault(value[0], value[1])
 
                     logger.info("before: %s = %s", js_key, value[0])
-                    translated_value = (
-                        self.server.state.translator.translate_js_expression(
-                            self.server.state, value[0]
+                    if isinstance(value[0], str):
+                        translated_value = (
+                            self.server.state.translator.translate_js_expression(
+                                self.server.state, value[0]
+                            )
                         )
-                    )
+                    else:
+                        translated_value = str(value[0])
+                        if AbstractElement._debug:
+                            logger.warn(
+                                'Warning: <%s %s="..." /> is set with an (%s)',
+                                self._elem_name,
+                                js_key,
+                                type(value[0]),
+                            )
+
                     logger.info("after: %s = %s", js_key, translated_value)
                     if js_key.startswith("v-"):
                         self._attributes[name] = f'{js_key}="{translated_value}"'
