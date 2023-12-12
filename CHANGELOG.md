@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.14.1 (2023-12-12)
+
+### Fix
+
+* **debug:** Add helper for finding invalid args ([`d1d5c8f`](https://github.com/Kitware/trame-client/commit/d1d5c8f103ab359db2e002c4c68f7865cfcbc80e))
+
 ## v2.14.0 (2023-12-08)
 
 ### Feature
