@@ -462,18 +462,17 @@ class AbstractElement:
                         self._attributes[name] = js_key
                     else:
                         self._attributes[name] = f':{js_key}="false"'
-                elif isinstance(value, (str, int, float)):
+                elif isinstance(value, str):
                     if js_key.startswith("v-") or js_key.startswith(":"):
                         logger.info("before: %s = %s", js_key, value)
-                        translated_value = (
-                            self.server.state.translator.translate_js_expression(
-                                self.server.state, value
-                            )
+                        value = self.server.state.translator.translate_js_expression(
+                            self.server.state, value
                         )
-                        logger.info("after: %s = %s", js_key, translated_value)
-                        self._attributes[name] = f'{js_key}="{translated_value}"'
-                    else:
-                        self._attributes[name] = f'{js_key}="{value}"'
+                        logger.info("after: %s = %s", js_key, value)
+
+                    self._attributes[name] = f'{js_key}="{value}"'
+                elif isinstance(value, (int, float)):
+                    self._attributes[name] = f'{js_key}="{value}"'
                 else:
                     print(
                         f"Error: Don't know how to handle attribute name '{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
