@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.14.2 (2023-12-29)
+
+### Fix
+
+* **translation:** Proper type handling with state translation ([`37b0e08`](https://github.com/Kitware/trame-client/commit/37b0e08b17a115b8137b320acde9ff7750edbc27))
+
 ## v2.14.1 (2023-12-12)
 
 ### Fix
