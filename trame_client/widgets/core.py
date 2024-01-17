@@ -260,12 +260,18 @@ class AbstractElement:
     :param mouseleave: See |mdn_event_link| for more info
     :param contextmenu: See |mdn_event_link| for more info
 
+    Raw attributes
+
+    :param raw_attrs: List of string that will be added as-is in the generated template
+
+    >>> print(html.Template(raw_attrs=["v-slot:item.1", 'class="bg-red"', '@click.stop="a=2"']))
+    ... <Template v-slot:item.1 class="bg-red" @click.stop="a=2" />
     """
 
     _next_id = 1
     _debug = "--debug" in sys.argv or "-d" in sys.argv
 
-    def __init__(self, _elem_name, children=None, **kwargs):
+    def __init__(self, _elem_name, children=None, raw_attrs=None, **kwargs):
         AbstractElement._next_id += 1
         self._id = AbstractElement._next_id
         self._server = kwargs.get("trame_server")
@@ -283,6 +289,11 @@ class AbstractElement:
         self._attributes = {}
         self._py_attr = kwargs
         self._children = []
+
+        # Handle raw attributes if provided
+        if raw_attrs:
+            for idx, raw_value in enumerate(raw_attrs):
+                self._attributes[f"_raw_{idx}"] = raw_value
 
         if children:
             if isinstance(children, (list, tuple)):
