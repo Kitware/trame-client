@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.15.0 (2024-01-17)
+
+### Feature
+
+* **raw_attrs:** Widgets support raw_attrs at construction ([`131618a`](https://github.com/Kitware/trame-client/commit/131618a76f8d910e4007d14f6dc798a01d49da7d))
+
 ## v2.14.2 (2023-12-29)
 
 ### Fix
