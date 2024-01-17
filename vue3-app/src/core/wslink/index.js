@@ -25,7 +25,18 @@ const NOT_BUSY_LIST = [
 ];
 
 function configDecorator(config) {
+  const urlArgs = vtkURLExtract.extractURLParameters();
   const outputConfig = { ...config };
+
+  // Allow to load previously saved
+  if (urlArgs.c) {
+    try {
+      const savedConfig = JSON.parse(localStorage.getItem(urlArgs.c));
+      Object.assign(outputConfig, savedConfig);
+    } catch (e) {
+      // we are just trying our best here...
+    }
+  }
 
   // Process sessionURL
   if (outputConfig.sessionURL) {
