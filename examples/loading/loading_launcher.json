@@ -1,0 +1,22 @@
+
+{
+    "configuration": {
+        "host" : "localhost",
+        "port" : 8080,
+        "endpoint": "paraview",       
+        "content": "loading/loading_www",      
+        "proxy_file" : "loading/proxy-mapping.txt", 
+        "sessionURL" : "ws://${host}:${port}/ws",
+        "timeout" : 50,       
+        "log_dir" : "loading",             
+        "fields" : []
+    },
+    "resources" : [ { "host" : "localhost", "port_range" : [9001, 9020] } ],
+    "properties" : {},
+    "apps" : {
+        "trame" : {
+            "cmd" : ["python", "loading.py", "--port", "$port", "--server", "--authKey", "${secret}"],
+            "ready_line" : "App running at"
+        }
+    }
+}

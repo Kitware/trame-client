@@ -1,3 +1,4 @@
+import "./style.css";
 import vtkURLExtract from "@kitware/vtk.js/Common/Core/URLExtract";
 import wslink from "./core/wslink";
 import { handlePageResources } from "./core/trame/setup";
@@ -38,6 +39,7 @@ async function start() {
   function reportWsError(message) {
     if (trame) {
       console.log("about to replace template", message);
+      trame.state.set("trame_error_report_msg", message);
       let templateName = "trame__template_main";
       if (vtkURLExtract.extractURLParameters().ui) {
         templateName = `trame__template_${
@@ -47,10 +49,15 @@ async function start() {
       if (config.reconnect) {
         trame.state.set(
           templateName,
-          `<trame-reconnect message="${message}"/>`
+          trame.state.get("trame__template_error_reconnect") ||
+            `<trame-reconnect message="${message}"/>`
         );
       } else {
-        trame.state.set(templateName, `<trame-loading message="${message}"/>`);
+        trame.state.set(
+          templateName,
+          trame.state.get("trame__template_error") ||
+            `<trame-loading message="${message}"/>`
+        );
       }
       console.log("template replaced", trame.state.get(templateName));
     } else {
