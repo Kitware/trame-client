@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.16.0 (2024-02-14)
+
+### Feature
+
+* **loading:** Enable loading screen to be overriden ([`9d13b21`](https://github.com/Kitware/trame-client/commit/9d13b21a7bc99feef6621c1c538f7bb505282616))
+
 ## v2.15.0 (2024-01-17)
 
 ### Feature
