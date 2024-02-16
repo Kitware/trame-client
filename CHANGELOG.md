@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.16.1 (2024-02-16)
+
+### Fix
+
+* **docs:** Fix typo in CHANGELOG.md ([`9f1542a`](https://github.com/Kitware/trame-client/commit/9f1542a1751fae4114cc56607ad3a2c1ef4dde95))
+* **vue3:** Fix vue3 components remounting every time a key is added to state ([`417a71f`](https://github.com/Kitware/trame-client/commit/417a71f12993f19c6142fcf64d657d7026ab21b7))
+
 ## v2.16.0 (2024-02-14)
 
 ### Feature
