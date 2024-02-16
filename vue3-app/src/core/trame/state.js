@@ -53,20 +53,20 @@ export class SharedState {
       }
 
       this.mtime += 1;
-      let newKeyCount = 0;
+      const newKeys = [];
       for (let i = 0; i < updatedKeys.length; i++) {
         const key = updatedKeys[i];
         if (this.keyTS[key] === undefined) {
-          newKeyCount++;
+          newKeys.push(key);
         }
         this.keyTS[key] = this.mtime;
       }
 
-      if (newKeyCount) {
-        this.notifyListeners({ type: "refresh" });
-      } else {
-        this.notifyListeners({ type: "dirty-state", keys: updatedKeys });
+      if (newKeys.length > 0) {
+        this.notifyListeners({ type: "new-keys", keys: newKeys });
       }
+
+      this.notifyListeners({ type: "dirty-state", keys: updatedKeys });
     };
 
     this.subscriptions.push(

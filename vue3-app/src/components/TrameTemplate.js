@@ -40,6 +40,15 @@ export function setup() {
 
   // Server update reactivity
   const onDirty = ({ type, keys }) => {
+    if (type === "new-keys") {
+      for (let i = 0; i < keys.length; i++) {
+        const name = keys[i];
+        if (publicAPI[name] === undefined) {
+          publicAPI[name] = toRef(trame, name, modifiedState);
+        }
+      }
+    }
+
     if (type === "dirty-state") {
       for (let i = 0; i < keys.length; i++) {
         modifiedState[keys[i]]();
