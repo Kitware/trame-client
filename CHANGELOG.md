@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.16.2 (2024-03-03)
+
+### Fix
+
+* **template:** Allow template name with underscore ([`dedd0aa`](https://github.com/Kitware/trame-client/commit/dedd0aa413ee1adeb51d9df7c72e72ae00c941ec))
+
 ## v2.16.1 (2024-02-16)
 
 ### Fix
