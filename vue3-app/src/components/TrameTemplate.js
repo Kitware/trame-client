@@ -110,7 +110,9 @@ export default {
       if (props.useUrl && vtkURLExtract.extractURLParameters()[props.urlKey]) {
         templateName = vtkURLExtract.extractURLParameters()[props.urlKey];
       }
-      return `trame-template-${templateName.toLowerCase()}`;
+      return `trame-template-${templateName.toLowerCase()}`
+        .replaceAll("_", "-")
+        .replaceAll("--", "-");
     });
 
     async function updateTemplate() {
