@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.16.3 (2024-03-13)
+
+### Fix
+
+* Uniform __init__.py for package ([`589e617`](https://github.com/Kitware/trame-client/commit/589e61793d9903095673f353ddb9aeaa9fd6e0a2))
+
 ## v2.16.2 (2024-03-03)
 
 ### Fix
