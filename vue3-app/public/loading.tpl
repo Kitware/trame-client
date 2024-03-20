@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
-    <title>Loading...</title>
-    <style>
+<style>
       .text-no-select {
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -90,12 +84,8 @@
           transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
         }
       }
-    </style>
-  </head>
-  <body>
-      <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000;">
-        <div class="trame__loader"></div>
-        <div class="trame__message">Loading...</div>
-      </div>
-  </body>
-</html>
+</style>
+<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000;">
+  <div class="trame__loader"></div>
+  <div class="trame__message">Loading...</div>
+</div>
