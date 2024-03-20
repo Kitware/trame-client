@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.16.4 (2024-03-20)
+
+### Fix
+
+* **loading:** Use fetch instead of iframe ([`d21b992`](https://github.com/Kitware/trame-client/commit/d21b992def0cd96f393e891c139684e1a46a8059))
+
 ## v2.16.3 (2024-03-13)
 
 ### Fix
