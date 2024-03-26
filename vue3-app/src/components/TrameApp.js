@@ -18,11 +18,9 @@ export default {
     const subscriptions = [];
 
     function registerComponent(name) {
-      const templateName = `trame-template-${name
-        .toLowerCase()
-        .substring(16)
+      const templateName = `trame-template-${name.toLowerCase().substring(16)}`
         .replaceAll("_", "-")
-        .replaceAll("--", "-")}`;
+        .replaceAll("--", "-");
       const template = trame.state.get(name);
       trame.app.component(templateName, {
         props: ["name"],
