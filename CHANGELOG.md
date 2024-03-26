@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.16.5 (2024-03-26)
+
+### Fix
+
+* **template:** Properly template name mapping ([`589991f`](https://github.com/Kitware/trame-client/commit/589991fb086d3cadb9f8e9da1ccc6f848d342dfc))
+
 ## v2.16.4 (2024-03-20)
 
 ### Fix
