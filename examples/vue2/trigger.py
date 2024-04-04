@@ -1,4 +1,3 @@
-import os
 from trame.app import get_server
 from trame.widgets import html, client
 from trame.ui.html import DivLayout
