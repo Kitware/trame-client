@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.17.0 (2024-04-04)
+
+### Feature
+
+* **client:** Add ClientStateChange/ClientTriggers/LifeCycleMonitor/SizeObserver ([`5fa7fcf`](https://github.com/Kitware/trame-client/commit/5fa7fcfea4b5111ca9d60ac732b810cec803e52d))
+
 ## v2.16.5 (2024-03-26)
 
 ### Fix
