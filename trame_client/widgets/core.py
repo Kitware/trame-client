@@ -525,17 +525,17 @@ class AbstractElement:
                     if callable(trigger_name):
                         trigger_name = self.server.trigger_name(trigger_name)
                     if len(value) == 1:
-                        self._attributes[
-                            name
-                        ] = f"{js_key}=\"trigger('{trigger_name}')\""
+                        self._attributes[name] = (
+                            f"{js_key}=\"trigger('{trigger_name}')\""
+                        )
                     if len(value) == 2:
-                        self._attributes[
-                            name
-                        ] = f"{js_key}=\"trigger('{trigger_name}', {value[1]})\""
+                        self._attributes[name] = (
+                            f"{js_key}=\"trigger('{trigger_name}', {value[1]})\""
+                        )
                     if len(value) == 3:
-                        self._attributes[
-                            name
-                        ] = f"{js_key}=\"trigger('{trigger_name}', {value[1]}, {value[2]})\""
+                        self._attributes[name] = (
+                            f"{js_key}=\"trigger('{trigger_name}', {value[1]}, {value[2]})\""
+                        )
                 else:
                     print(
                         f"Error: Don't know how to handle event name '{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
@@ -608,9 +608,9 @@ class AbstractElement:
                 and self._attributes["ref"].startswith("ref=")
             ):
                 ref_name = self._attributes["ref"][5:-1]
-                self._attributes[
-                    "ref"
-                ] = f''':ref="(el) => trame.refs['{ref_name}'] = el"'''
+                self._attributes["ref"] = (
+                    f''':ref="(el) => trame.refs['{ref_name}'] = el"'''
+                )
 
             # Compute HTML str
             if len(self._children):

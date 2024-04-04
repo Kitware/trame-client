@@ -5,6 +5,10 @@ import TrameLoading from "./TrameLoading";
 import TrameReconnect from "./TrameReconnect";
 import TrameStyle from "./TrameStyle";
 import TrameTemplate from "./TrameTemplate";
+import TrameClientStateChange from "./TrameClientStateChange";
+import TrameClientTriggers from "./TrameClientTriggers";
+import TrameLifeCycleMonitor from "./TrameLifeCycleMonitor";
+import TrameSizeObserver from "./TrameSizeObserver";
 
 export default {
   TrameApp,
@@ -14,4 +18,8 @@ export default {
   TrameReconnect,
   TrameStyle,
   TrameTemplate,
+  TrameClientStateChange,
+  TrameClientTriggers,
+  TrameLifeCycleMonitor,
+  TrameSizeObserver,
 };

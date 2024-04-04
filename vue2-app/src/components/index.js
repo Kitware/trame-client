@@ -7,6 +7,10 @@ import TrameStateResolver from './StateResolver';
 import TrameStyle from './Style';
 import TrameExec from './TrameExec';
 import TrameGetter from './Getter';
+import TrameClientStateChange from './ClientStateChange';
+import TrameClientTriggers from './ClientTriggers';
+import TrameLifeCycleMonitor from './LifeCycleMonitor';
+import TrameSizeObserver from './SizeObserver';
 
 export default {
   TrameApp,
@@ -18,4 +22,8 @@ export default {
   TrameStyle,
   TrameExec,
   TrameGetter,
+  TrameClientStateChange,
+  TrameClientTriggers,
+  TrameLifeCycleMonitor,
+  TrameSizeObserver,
 };
