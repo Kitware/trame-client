@@ -81,7 +81,22 @@ def iframe_url_builder_jupyter_extension(layout):
 def iframe_url_builder_jupyter_hub(layout):
     server = layout.server
     template_name = layout._template_name
-    src = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}/proxy/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
+    src = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
+    elem_id = f"{server.name}_{template_name}"
+
+    return {
+        "id": elem_id,
+        "src": src,
+        "style": layout.iframe_style,
+        **layout.iframe_attrs,
+    }
+
+
+def iframe_url_builder_jupyter_hub_host(layout):
+    host = os.environ.get("HOSTNAME")
+    server = layout.server
+    template_name = layout._template_name
+    src = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{host}:{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
     elem_id = f"{server.name}_{template_name}"
 
     return {
@@ -96,6 +111,10 @@ def get_iframe_builder(name="default"):
     if isinstance(name, Callable):
         return name
 
+    # Try to detect JupyterHub automatically
+    if name == "default" and "JUPYTERHUB_SERVICE_PREFIX" in os.environ:
+        name = "jupyter-hub"
+
     builder_type = os.environ.get("TRAME_IFRAME_BUILDER", name)
     builder = iframe_url_builder_default
 
@@ -105,6 +124,8 @@ def get_iframe_builder(name="default"):
         builder = iframe_url_builder_jupyter_extension
     elif builder_type == "jupyter-hub":
         builder = iframe_url_builder_jupyter_hub
+    elif builder_type == "jupyter-hub-host":
+        builder = iframe_url_builder_jupyter_hub_host
 
     return builder
 
