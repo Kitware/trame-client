@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v2.17.1 (2024-04-05)
+
+### Fix
+
+* **jupyter-hub:** Fix url generator and add auto detect ([`3da386c`](https://github.com/Kitware/trame-client/commit/3da386c220a80fb1c5c7944efabe25e6806fca9f))
+
 ## v2.17.0 (2024-04-04)
 
 ### Feature
