@@ -8,8 +8,6 @@ export function setAddAttachment(fn) {
   CTX.addAttachement = fn;
 }
 
-const CHUNK_SIZE = 2000000; // 2 MB chunks
-
 export const fileHandler = {
   priority: 0,
   async decorate(value) {
@@ -23,22 +21,7 @@ export const fileHandler = {
         });
         reader.readAsArrayBuffer(value);
       });
-      let content = null;
-      if (arrayBuffer.byteLength < CHUNK_SIZE) {
-        content = CTX.addAttachement(arrayBuffer);
-      } else {
-        content = [];
-        let start = 0;
-        let end = CHUNK_SIZE;
-        while (start < arrayBuffer.byteLength) {
-          if (end > arrayBuffer.byteLength) {
-            end = arrayBuffer.byteLength;
-          }
-          content.push(CTX.addAttachement(arrayBuffer.slice(start, end)));
-          start = end;
-          end += CHUNK_SIZE;
-        }
-      }
+      const content = new DataView(arrayBuffer);
       return {
         name,
         lastModified,
