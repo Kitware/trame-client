@@ -1,6 +1,11 @@
 export default (session) => ({
   getArray(hash, binary = true) {
-    return session.call("viewport.geometry.array.get", [hash, binary]);
+    return session.call("viewport.geometry.array.get", [hash, binary]).then((res) => {
+      if (res.buffer) {
+        return new Blob([res]);
+      }
+      return res;
+    });
   },
   getViewState(viewId, newSubscription = false) {
     return session.call("viewport.geometry.view.get.state", [
