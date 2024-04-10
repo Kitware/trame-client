@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.0 (2024-04-10)
+
+### Feature
+
+* **wslink:** Use msgpack and chunking for ws data exchange ([`77e17f5`](https://github.com/Kitware/trame-client/commit/77e17f523ec912c16cd85376dc89d4e5ecdee5ab))
+
+### Fix
+
+* **msgpack:** Convert msgpack Uint8Array into blob for backward compatibility ([`566c274`](https://github.com/Kitware/trame-client/commit/566c27452bbe20be76d24061bdd00b7c837b9544))
+* **wslink:** Simplify file upload helper by removing chunking ([`f87d8de`](https://github.com/Kitware/trame-client/commit/f87d8deeaec8e80ecd0964d1c6e5c232155a998a))
+
+### Breaking
+
+* use wslink>=2 that deeply change network handling ([`77e17f5`](https://github.com/Kitware/trame-client/commit/77e17f523ec912c16cd85376dc89d4e5ecdee5ab))
+* this requires the new chunking wslink ([`f87d8de`](https://github.com/Kitware/trame-client/commit/f87d8deeaec8e80ecd0964d1c6e5c232155a998a))
+
 ## v2.17.1 (2024-04-05)
 
 ### Fix
