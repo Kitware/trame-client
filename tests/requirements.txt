@@ -3,5 +3,5 @@ seleniumbase
 pixelmatch
 Pillow
 pytest-xprocess
-trame
+trame>=3.6
 trame-server>=3

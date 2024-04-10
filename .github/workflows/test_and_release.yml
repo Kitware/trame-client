@@ -93,9 +93,9 @@ jobs:
         pip install -r tests/requirements.txt
         # Run the tests with coverage so we get a coverage report too
         pip install coverage
-        # TMP # coverage run --source . -m pytest -s .
+        # coverage run --source . -m pytest -s .
         # Print the coverage report
-        # TMP # coverage report -m
+        # coverage report -m
 
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v3
