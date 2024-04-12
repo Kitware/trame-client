@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.1 (2024-04-12)
+
+### Fix
+
+* **ClientTriggers:** Add built-in exit event ([`0103d30`](https://github.com/Kitware/trame-client/commit/0103d30bc56b2c341935d000f8e9b98cb552971b))
+
 ## v3.0.0 (2024-04-10)
 
 ### Feature
