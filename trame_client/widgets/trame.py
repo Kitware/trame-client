@@ -192,12 +192,23 @@ class ClientTriggers(AbstractElement):
 
     :param ref: Identifier for the client side DOM elem
     :param **kwargs: List of events to registers with their callbacks
+
+    Built-in events are:
+       - mounted
+       - created
+       - before_destroy
+       - before_unmount
+       - exit
     """
 
     def __init__(self, ref="trame_triggers", children=None, **kwargs):
         self.__name = ref
         super().__init__("trame-client-triggers", children=None, ref=ref, **kwargs)
         self._attr_names += ["ref"]
+        self._event_names += [
+            ("before_destroy", "beforeDestroy"),
+            ("before_unmount", "beforeUnmount"),
+        ]
         self._event_names += list(kwargs.keys())
 
     def call(self, method, *args):

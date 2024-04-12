@@ -1,7 +1,7 @@
 const { onMounted, onBeforeUnmount } = window.Vue;
 
 export default {
-  emits: ['mounted', 'created', 'beforeDestroy', 'beforeUnmount'],
+  emits: ['mounted', 'created', 'beforeDestroy', 'beforeUnmount', 'exit'],
   setup(props, { emit, expose }) {
     function emitTopic(topic, event) {
       emit(topic, event);
@@ -13,7 +13,9 @@ export default {
       emit('beforeUnmount');
     });
     expose({ emit: emitTopic });
-
+    window.addEventListener('beforeunload', () => {
+      emit('exit');
+    });
     emit('created');
     return { emit: emitTopic };
   },

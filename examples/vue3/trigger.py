@@ -40,6 +40,10 @@ def call_method_3():
     ctrl.call("method3")
 
 
+def client_exited():
+    print("client exited")
+
+
 # -----------------------------------------------------------------------------
 # UI setup
 # -----------------------------------------------------------------------------
@@ -56,6 +60,7 @@ with layout:
         method1="window.console.log('method 1', $event)",
         method2="window.console.log('method 2', $event)",
         method3="window.console.log('method 3', $event)",
+        exit=client_exited,
     )
     ctrl.call = client_triggers.call
 
