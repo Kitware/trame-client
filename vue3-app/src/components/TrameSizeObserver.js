@@ -12,7 +12,8 @@ export default {
     const elem = ref(null);
 
     function resize() {
-      const size = elem.value.getBoundingClientRect();
+      const { x, y, width, height } = elem.value.getBoundingClientRect();
+      const size = { x, y, width, height };
       const pixelRatio = window.devicePixelRatio;
       const dpi = 96 * pixelRatio;
       const event = { size, pixelRatio, dpi };
