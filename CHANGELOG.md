@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.2 (2024-04-17)
+
+### Fix
+
+* **SizeObserver:** New network don't properly handle native js type ([`d9f9871`](https://github.com/Kitware/trame-client/commit/d9f9871714661b6932070ca7060d4eb3ddcfa753))
+
 ## v3.0.1 (2024-04-12)
 
 ### Fix
