@@ -151,7 +151,7 @@ class AbstractLayout:
         width="100%",
         height="600px",
         base_url="http://localhost",
-        iframe_builder=None,
+        iframe_builder="default",
         **kwargs,
     ):
         self._server = _server
