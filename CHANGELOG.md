@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.3 (2024-05-16)
+
+### Fix
+
+* **jupyter:** Allow jupyter-hub to be autodetected ([`4ec5db2`](https://github.com/Kitware/trame-client/commit/4ec5db21cc855783decf51fe4835fcb2f20b269e))
+
 ## v3.0.2 (2024-04-17)
 
 ### Fix
