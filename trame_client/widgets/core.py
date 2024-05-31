@@ -341,6 +341,21 @@ class AbstractElement:
         """Update the associated server"""
         self._server = v
 
+    @property
+    def state(self):
+        """Return the associated server state"""
+        return self.server.state
+
+    @property
+    def ctrl(self):
+        """Return the associated server controller"""
+        return self.server.controller
+
+    @property
+    def ctx(self):
+        """Return the associated server context"""
+        return self.server.context
+
     # -------------------------------------------------------------------------
     # Buildin API
     # -------------------------------------------------------------------------
