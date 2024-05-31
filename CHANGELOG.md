@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.0 (2024-05-31)
+
+### Feature
+
+* **widget:** Add state/ctrl/context property ([`d12b475`](https://github.com/Kitware/trame-client/commit/d12b4751239f63be389cd13f319c467262206f6f))
+
 ## v3.0.3 (2024-05-16)
 
 ### Fix
