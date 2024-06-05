@@ -1,5 +1,10 @@
 {
   "name": "@kitware/trame",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "./dist/trame.umd.js",
+  "unpkg": "./dist/trame.umd.js",
+  "module": "./dist/trame.mjs",
   "scripts": {
     "build": "vite build --emptyOutDir",
     "debug": "vite build --sourcemap -m dev",
@@ -16,5 +21,9 @@
     "eslint-plugin-vue": "^9.3.0",
     "prettier": "^2.7.1",
     "vite": "^4.1.0"
-  }
+  },
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ]
 }
