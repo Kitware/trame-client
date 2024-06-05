@@ -1,0 +1,20 @@
+{
+  "name": "@kitware/trame",
+  "scripts": {
+    "build": "vite build --emptyOutDir",
+    "debug": "vite build --sourcemap -m dev",
+    "lint": "eslint . --ext .js --fix --ignore-path .gitignore --ignore-pattern public"
+  },
+  "dependencies": {
+    "@kitware/vtk.js": "^30.3.2",
+    "wslink": "^2.0.0"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.33.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "prettier": "^2.7.1",
+    "vite": "^4.1.0"
+  }
+}
