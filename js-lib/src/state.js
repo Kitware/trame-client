@@ -97,6 +97,9 @@ export class State {
   }
 
   canDirty(name) {
+    if (!this._state.trame__client_only) {
+      return true;
+    }
     return !this._state.trame__client_only.includes(name);
   }
 
@@ -154,7 +157,7 @@ export class State {
   }
 
   watch(keys, fn) {
-    const unsubscribe = this._watchers.on(keys, fn);
+    const unsubscribe = this._watchers.watch(keys, fn);
 
     // Call it right away with available values
     fn(...keys.map((v) => this._state[v]));
