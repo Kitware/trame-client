@@ -11,8 +11,8 @@ export class State {
     this._mtime = 0;
     this._ready = false;
     this._listeners =
-      oldState?._listeners || ListenerManager("trame state change");
-    this._watchers = oldState?._watchers || WatcherManager();
+      oldState?._listeners || new ListenerManager("trame state change");
+    this._watchers = oldState?._watchers || new WatcherManager();
     this._subscriptions = [];
     this._wslinkSubscriptions = [];
     this._subscriptions.push(

@@ -12,8 +12,18 @@
         <button class="subtract">Subtract</button> 
         <div class="count">from HTML</div>
     </main>
-	<script crossorigin="anonymous" src="https://www.unpkg.com/@kitware/trame@0.0.1/dist/trame.umd.js"></script>
+	<script crossorigin="anonymous" src="https://www.unpkg.com/@kitware/trame/dist/trame.umd.js"></script>
     <script>
+        const trame = new Trame();
+        trame.connect().then((config) => {
+            console.log(config);
+
+            trame.state.watch(["count"], (count) => {
+                document.querySelector(".count").innerHTML = count;
+            });
+            document.querySelector(".add").addEventListener("click", () => trame.trigger("add"));
+            document.querySelector(".subtract").addEventListener("click", () => trame.trigger("subtract"));
+        });
     </script>
   </body>
 </html>
