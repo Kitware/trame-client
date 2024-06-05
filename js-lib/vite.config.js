@@ -3,7 +3,7 @@ export default {
   build: {
     lib: {
       entry: "./src/main.js",
-      name: "trame",
+      name: "Trame",
       formats: ["es", "umd"],
       fileName: "trame",
     },
