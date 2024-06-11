@@ -1,6 +1,5 @@
 import "./style.css";
-// import Trame from "@kitware/trame";
-import Trame from "../../../dist/trame.mjs";
+import Trame from "@kitware/trame";
 import { setupCounter } from "./counter.js";
 
 document.querySelector("#app").innerHTML = `

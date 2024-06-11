@@ -12,6 +12,6 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "@kitware/trame": "^0.0.3"
+    "@kitware/trame": "^0.0.4"
   }
 }
