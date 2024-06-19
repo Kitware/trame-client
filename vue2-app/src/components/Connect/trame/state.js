@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import { loadScript, loadCSS } from '@kitware/vtk.js/IO/Core/ResourceLoader';
 import VRuntimeTemplate from 'v-runtime-template';
 import { decorate, registerDecorator } from './decorators';
 import utils from '../../../utils';
@@ -24,6 +23,55 @@ if (!window.trame.state) {
 // ----------------------------------------------------------------------------
 // Helper functions for state reactivity handling
 // ----------------------------------------------------------------------------
+var LOADED_URLS = [];
+
+export function loadScript(url) {
+  return new Promise(function (resolve, reject) {
+    if (LOADED_URLS.indexOf(url) === -1) {
+      LOADED_URLS.push(url);
+      var newScriptTag = document.createElement('script');
+      newScriptTag.type = 'text/javascript';
+      newScriptTag.src = url;
+      newScriptTag.onload = resolve;
+      newScriptTag.onerror = reject;
+      document.body.appendChild(newScriptTag);
+    } else {
+      resolve(false);
+    }
+  });
+}
+
+export function loadScriptAsModule(url) {
+  return new Promise(function (resolve, reject) {
+    if (LOADED_URLS.indexOf(url) === -1) {
+      LOADED_URLS.push(url);
+      var newScriptTag = document.createElement('script');
+      newScriptTag.type = 'module';
+      newScriptTag.src = url;
+      newScriptTag.onload = resolve;
+      newScriptTag.onerror = reject;
+      document.body.appendChild(newScriptTag);
+    } else {
+      resolve(false);
+    }
+  });
+}
+
+function loadCSS(url) {
+  return new Promise(function (resolve, reject) {
+    if (LOADED_URLS.indexOf(url) === -1) {
+      LOADED_URLS.push(url);
+      var newScriptTag = document.createElement('link');
+      newScriptTag.rel = 'stylesheet';
+      newScriptTag.href = url;
+      newScriptTag.onload = resolve;
+      newScriptTag.onerror = reject;
+      document.head.appendChild(newScriptTag);
+    } else {
+      resolve(false);
+    }
+  });
+}
 
 function createStateTS(keys) {
   const dataForStateTS = { tts: 0 };
@@ -126,6 +174,10 @@ export async function handlePageUpdate(modifiedKeys, state, exclude = []) {
 
   if (modifiedKeys.includes('trame__scripts')) {
     await loadURLs(state.trame__scripts.filter(filterFn), loadScript);
+  }
+
+  if (modifiedKeys.includes('trame__module_scripts')) {
+    await loadURLs(state.trame__module_scripts.filter(filterFn), loadScriptAsModule);
   }
 
   if (modifiedKeys.includes('trame__vue_use')) {
