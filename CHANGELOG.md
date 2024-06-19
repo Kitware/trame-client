@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.1 (2024-06-19)
+
+### Fix
+
+* **ready:** Remove unused future ([`9b1eb0c`](https://github.com/Kitware/trame-client/commit/9b1eb0cb3d622303ac153a85d5f78cf8777b3c1a))
+
+### Documentation
+
+* **js-lib:** Fix vite example ([`cc8ef8f`](https://github.com/Kitware/trame-client/commit/cc8ef8f845b352326cda6ca0f56f232788c376b8))
+
 ## v3.1.0 (2024-05-31)
 
 ### Feature
