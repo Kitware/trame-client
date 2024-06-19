@@ -2,8 +2,10 @@ import Vue from 'vue';
 import App from './components/App';
 import Trame from './use';
 
+import vtkURLExtract from '@kitware/vtk.js/Common/Core/URLExtract';
+
 import { setAddAttachment } from './components/Connect/trame/decorators';
-import { handlePageUpdate, GLOBAL_VUE_OPTIONS } from './components/Connect/trame/state';
+import { handlePageUpdate, loadScript, GLOBAL_VUE_OPTIONS } from './components/Connect/trame/state';
 import wslink from './components/Connect/wslink';
 
 const DEFAULT_CONNECTION_NAME = 'TrameConnect';
@@ -59,6 +61,13 @@ async function initializeApplication(Vue) {
     ...GLOBAL_VUE_OPTIONS,
     render: (h) => h(App),
   }).$mount('#app');
+}
+
+// Initialize service worker to override headers for SharedArrayBuffer
+// > Cross-Origin-Opener-Policy: same-origin
+// > Cross-Origin-Embedder-Policy: require-corp
+if (!vtkURLExtract.extractURLParameters().disableSharedArrayBuffer) {
+  loadScript('coi-serviceworker.min.js');
 }
 
 initializeApplication(Vue);

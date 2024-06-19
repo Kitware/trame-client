@@ -9,7 +9,7 @@
 
 var LOADED_URLS = [];
 
-function loadScript(url) {
+export function loadScript(url) {
   return new Promise(function (resolve, reject) {
     if (LOADED_URLS.indexOf(url) === -1) {
       LOADED_URLS.push(url);
@@ -25,7 +25,7 @@ function loadScript(url) {
   });
 }
 
-function loadScriptAsModule(url) {
+export function loadScriptAsModule(url) {
   return new Promise(function (resolve, reject) {
     if (LOADED_URLS.indexOf(url) === -1) {
       LOADED_URLS.push(url);

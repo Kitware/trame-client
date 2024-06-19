@@ -1,7 +1,7 @@
 import "./style.css";
 import vtkURLExtract from "@kitware/vtk.js/Common/Core/URLExtract";
 import wslink from "./core/wslink";
-import { handlePageResources } from "./core/trame/setup";
+import { handlePageResources, loadScript } from "./core/trame/setup";
 import { createTrameInstance } from "./core/trame";
 import TrameUse from "./use";
 
@@ -103,6 +103,13 @@ async function start() {
   }
 
   app.mount("#app");
+}
+
+// Initialize service worker to override headers for SharedArrayBuffer
+// > Cross-Origin-Opener-Policy: same-origin
+// > Cross-Origin-Embedder-Policy: require-corp
+if (!vtkURLExtract.extractURLParameters().disableSharedArrayBuffer) {
+  loadScript("coi-serviceworker.min.js");
 }
 
 start();
