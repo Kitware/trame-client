@@ -44,9 +44,6 @@ await trame.connect({ application: "trame" });
 // custom serializer registration for method/state
 trame.registerDecorator()
 
-// same as waiting on connect
-await trame.ready
-
 // Listen to connection status change
 const unsubscribeOnClose = trame.onClose((info) => {
     console.log("connection closed", info);

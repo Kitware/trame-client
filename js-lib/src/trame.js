@@ -21,10 +21,6 @@ export class Trame {
     this._errorListeners = new ListenerManager("trame connection error");
 
     // public objects
-    this.ready = new Promise((resolve, reject) => {
-      this._resolve = resolve;
-      this._reject = reject;
-    });
     this.client = null;
     this.state = null;
     this.config = null;
