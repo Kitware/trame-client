@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.0 (2024-06-19)
+
+### Feature
+
+* **SharedArrayBuffer:** Enable by default while adding a disable option ([`49df5ed`](https://github.com/Kitware/trame-client/commit/49df5edc52518c4eba918d81074b219d1e7c5e3e))
+* **vue2:** Add support for module scripts ([`9535d20`](https://github.com/Kitware/trame-client/commit/9535d205b486a7a65f997cebdfff1b0c9bac31c2))
+
 ## v3.1.1 (2024-06-19)
 
 ### Fix
