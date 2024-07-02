@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.1 (2024-07-02)
+
+### Fix
+
+* **numpy:** Add support for numpy 2.0 ([`b45403b`](https://github.com/Kitware/trame-client/commit/b45403bc3b684d0040c8ae1ae1014c88ce25a40b))
+
 ## v3.2.0 (2024-06-19)
 
 ### Feature
