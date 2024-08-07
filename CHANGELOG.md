@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.2 (2024-08-07)
+
+### Fix
+
+* **base:** Use <base> for relative url resolution ([`1e42189`](https://github.com/Kitware/trame-client/commit/1e4218967fa4bc6806233df9704ba074261782b8))
+
 ## v3.2.1 (2024-07-02)
 
 ### Fix
