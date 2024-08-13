@@ -219,6 +219,8 @@ class AbstractLayout:
 
     @property
     def ready(self):
+        """Start the server as a background task (if not already started)
+        and return the future that represent the status of that task."""
         if not self.server.running:
             # NoOp if already start[ing/ed]
             self.server.start(
@@ -268,6 +270,7 @@ class AbstractLayout:
 
     @property
     def ipywidget(self):
+        """Convert the UI into a ipywidget so it can be embedded in an ipywidget layout."""
         from ipywidgets.widgets import HTML
 
         return HTML(value=self._jupyter_content())

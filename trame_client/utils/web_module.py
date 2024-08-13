@@ -3,6 +3,7 @@ from pathlib import Path
 
 
 def file_digest(file_path):
+    """Return the hex digest of a file"""
     h = hashlib.sha256()
     b = bytearray(128 * 1024)
     mv = memoryview(b)
@@ -13,6 +14,7 @@ def file_digest(file_path):
 
 
 def file_with_digest(file_path, digest=None, digest_size=40):
+    """Write a new file sibbling to file_path with a digest hash in his name"""
     file_path = Path(file_path)
 
     if digest is None:
@@ -29,6 +31,7 @@ def file_with_digest(file_path, digest=None, digest_size=40):
 
 
 def is_relative_to(path, *other_paths):
+    """Helper to check that *other_paths are nested under path"""
     # Convert the input path and the base path into absolute paths
     abs_path = path.resolve()
     abs_other_paths = [Path(other).resolve() for other in other_paths]
@@ -40,6 +43,10 @@ def is_relative_to(path, *other_paths):
 
 
 class WebModule:
+    """Helper class to create/define a module while dynamically computing hash
+    to properly prevent invalid browser cache.
+    """
+
     def __init__(self, vue_use=None, digest_size=6):
         self._digest_size = digest_size
         self._serving_entries = []
@@ -70,6 +77,7 @@ class WebModule:
         raise ValueError(f"No parent found for {file_path}")
 
     def serve_directory(self, directory_to_serve, www_base_name):
+        """Register a new directory to serve with its alias endpoint"""
         fs_path = Path(directory_to_serve).resolve()
         if not fs_path.exists():
             raise ValueError(
@@ -84,16 +92,20 @@ class WebModule:
         self._serve[www_base_name] = str(fs_path)
 
     def add_script_file(self, file_path):
+        """Add a script file to serve while computing unique name and proper http path internally."""
         self._scripts.append(self._add_file(file_path))
 
     def add_style_file(self, file_path):
+        """Add a css file to serve while computing unique name and proper http path internally."""
         self._styles.append(self._add_file(file_path))
 
     def add_vue_use(self, vue_use):
+        """Register a vue plugin expression"""
         self._vue_use.append(vue_use)
 
     @property
     def module(self):
+        """Return the generated trame module as a dictionary."""
         return dict(
             serve=self._serve,
             scripts=self._scripts,
