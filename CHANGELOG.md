@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.3 (2024-08-13)
+
+### Fix
+
+* **api:** Add doc to method definition ([`7bdb00a`](https://github.com/Kitware/trame-client/commit/7bdb00a58448155225e0f15cdf8523dae578c307))
+
 ## v3.2.2 (2024-08-07)
 
 ### Fix
