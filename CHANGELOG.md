@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.4 (2024-08-14)
+
+### Fix
+
+* **SharedArrayBuffer:** Disable by default service worker ([`92e0659`](https://github.com/Kitware/trame-client/commit/92e0659457dc31b22806e14e4c2406d2f86fd4c6))
+
 ## v3.2.3 (2024-08-13)
 
 ### Fix
