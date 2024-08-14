@@ -108,7 +108,7 @@ async function start() {
 // Initialize service worker to override headers for SharedArrayBuffer
 // > Cross-Origin-Opener-Policy: same-origin
 // > Cross-Origin-Embedder-Policy: require-corp
-if (!vtkURLExtract.extractURLParameters().disableSharedArrayBuffer) {
+if (vtkURLExtract.extractURLParameters().enableSharedArrayBufferServiceWorker) {
   loadScript("coi-serviceworker.min.js");
 }
 

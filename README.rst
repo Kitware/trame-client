@@ -52,6 +52,39 @@ Enjoying trame?
 Share your experience `with a testimonial <https://github.com/Kitware/trame/issues/18>`_ or `with a brand approval <https://github.com/Kitware/trame/issues/19>`_.
 
 
+Runtime configuration
+-----------------------------------------------------------
+
+Trame client is the JS core of trame and can be tuned by url parameters. The table below list which parameters we process and how they affect the client.
+
+.. list-table:: URL parameters
+   :widths: 25 75
+   :header-rows: 0
+
+   * - enableSharedArrayBufferServiceWorker
+     - When set this will load an extra script that will use a service worker to enable SharedArrayBuffer
+   * - ui
+     - Layout name selector. When a trame app define several layout with different name, you can choose which layout should be displayed
+
+The table below leverage environment variables, mainly for the Jupyter Lab context and the iframe builder configuration.
+
+.. list-table:: Environment variables
+   :widths: 25 75
+   :header-rows: 0
+
+   * - TRAME_JUPYTER_ENDPOINT
+     - Used by the trame-jupyter-extension
+   * - TRAME_JUPYTER_WWW
+     - Used by the trame-jupyter-extension
+   * - JUPYTERHUB_SERVICE_PREFIX
+     - Used to figure out server proxy path for iframe builder
+   * - HOSTNAME
+     - When "jupyter-hub-host" is used as iframe builder, the hostname will be lookup using that environment variable
+   * - TRAME_IFRAME_BUILDER
+     - Specify which iframe builder should be used. If not provided we try to do some smart detection
+   * - TRAME_IPYWIDGETS_DISABLE
+     - Skip any iPyWidget iframe wrapping
+
 Development
 -----------------------------------------------------------
 
