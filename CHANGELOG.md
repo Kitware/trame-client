@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.5 (2024-08-15)
+
+### Fix
+
+* **security:** Clean url from trame search params ([`f0e093b`](https://github.com/Kitware/trame-client/commit/f0e093bdaf57a086ca0dfe82d5c67110f9124916))
+
 ## v3.2.4 (2024-08-14)
 
 ### Fix
