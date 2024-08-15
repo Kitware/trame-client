@@ -65,6 +65,8 @@ Trame client is the JS core of trame and can be tuned by url parameters. The tab
      - When set this will load an extra script that will use a service worker to enable SharedArrayBuffer
    * - ui
      - Layout name selector. When a trame app define several layout with different name, you can choose which layout should be displayed
+   * - remove
+     - By default the URL will be cleaned from trame config parameters (sessionURL, sessionManagerURL, secret, application) but if additional parameters should be removed as well but used in the launcher config, this can be achieved by adding a `&remove=param1,param2`.
 
 The table below leverage environment variables, mainly for the Jupyter Lab context and the iframe builder configuration.
 

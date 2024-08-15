@@ -25,6 +25,21 @@ async function start() {
     useUrl: true,
   });
 
+  // Clean URL params once config is generated
+  const params = new URL(window.location).searchParams;
+  const paramsToClean = [
+    "sessionURL",
+    "sessionManagerURL",
+    "secret",
+    "application",
+    "remove",
+  ].concat(params.get("remove")?.split(",") || []);
+  paramsToClean.forEach((v) => params.delete(v));
+  const cleanURL = `${window.location.pathname}${
+    params.size ? "?" : ""
+  }${params.toString()}${window.location.hash}`;
+  window.history.replaceState({}, document.title, cleanURL);
+
   // Handle connection
   trame.addConnectListener(() => {
     trame.client.onConnectionError((httpReq) => {

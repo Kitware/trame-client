@@ -119,6 +119,21 @@ function getClient(name) {
     );
   }
 
+  // Remove any URL parameters once config generated
+  const params = new URL(window.location).searchParams;
+  const paramsToClean = [
+    "sessionURL",
+    "sessionManagerURL",
+    "secret",
+    "application",
+    "remove",
+  ].concat(params.get("remove")?.split(",") || []);
+  paramsToClean.forEach((v) => params.delete(v));
+  const cleanURL = `${window.location.pathname}${
+    params.size ? "?" : ""
+  }${params.toString()}${window.location.hash}`;
+  window.history.replaceState({}, document.title, cleanURL);
+
   return client;
 }
 
