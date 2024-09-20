@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.1 (2024-09-20)
+
+### Fix
+
+* **script:** Add script tag to client widgets ([`1e94bdf`](https://github.com/Kitware/trame-client/commit/1e94bdf2e5e93c400ec515c1c0397310327af31b))
+
 ## v3.3.0 (2024-09-20)
 
 ### Feature
