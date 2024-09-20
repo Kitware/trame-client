@@ -275,6 +275,14 @@ class AbstractLayout:
 
         return HTML(value=self._jupyter_content())
 
+    @property
+    def url(self):
+        """Return application url if started"""
+        if not self.server.running:
+            return "Server is not running"
+
+        return self.iframe_builder(self)["src"]
+
     def _ipython_display_(self):
         from IPython.display import display_html, display
 
