@@ -5,6 +5,7 @@ import TrameReconnect from './Reconnect';
 import TrameTemplate from './ServerTemplate';
 import TrameStateResolver from './StateResolver';
 import TrameStyle from './Style';
+import TrameScript from './TrameScript';
 import TrameExec from './TrameExec';
 import TrameGetter from './Getter';
 import TrameClientStateChange from './ClientStateChange';
@@ -19,6 +20,7 @@ export default {
   TrameReconnect,
   TrameTemplate,
   TrameStateResolver,
+  TrameScript,
   TrameStyle,
   TrameExec,
   TrameGetter,

@@ -2,44 +2,49 @@ const { unref } = window.Vue;
 let ID = 1;
 
 function getNextId() {
-  return `trame_style_elem_${ID++}`;
+  return `trame_script_elem_${ID++}`;
 }
 
 export default {
   props: {
-    css: {
+    script: {
       type: String,
-      default: "",
+      default: '',
+    },
+    module: {
+      type: Boolean,
+      default: false,
     },
   },
   watch: {
-    css(cssContent) {
-      this.updateStyle(cssContent);
+    script(scriptContent) {
+      this.updateContent(scriptContent);
     },
   },
   created() {
     this.elemId = getNextId();
-    this.updateStyle(this.css);
+    this.updateContent(this.script);
   },
   beforeUnmount() {
-    this.removeStyle();
+    this.removeScript();
   },
   methods: {
-    updateStyle(cssContent) {
-      cssContent = unref(cssContent);
+    updateContent(scriptContent) {
+      scriptContent = unref(scriptContent);
       let elem = document.querySelector(`#${this.elemId}`);
-      if (cssContent) {
+      if (scriptContent) {
         if (!elem) {
-          elem = document.createElement("style");
+          elem = document.createElement('script');
           elem.id = this.elemId;
+          elem.type = this.module ? 'module' : 'text/javascript';
           document.head.appendChild(elem);
         }
-        elem.innerHTML = cssContent;
+        elem.innerHTML = scriptContent;
       } else {
-        this.removeStyle();
+        this.removeScript();
       }
     },
-    removeStyle() {
+    removeScript() {
       const elem = document.querySelector(`#${this.elemId}`);
       if (elem) {
         elem.parentNode.removeChild(elem);

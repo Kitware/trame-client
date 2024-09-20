@@ -3,6 +3,7 @@ from .core import AbstractElement
 __all__ = [
     "Loading",
     "ServerTemplate",
+    "Script",
     "Style",
     "JSEval",
     "Getter",
@@ -100,6 +101,38 @@ class Style(AbstractElement):
     def update(self, css_content):
         """Update style content"""
         self.server.state[self._key] = css_content
+
+    @property
+    def var_name(self):
+        """Name the the state variable used by this widget"""
+        return self._key
+
+
+# -----------------------------------------------------------------------------
+# TrameScript
+# -----------------------------------------------------------------------------
+class Script(AbstractElement):
+    """Provide means to inject a global script tag"""
+
+    def __init__(self, script_content=None, **kwargs):
+        super().__init__("trame-script", **kwargs)
+        self._key = f"trame__inline_script_{self._id}"
+        self._attributes["_script"] = f':script="{self._key}"'
+        self.server.state.setdefault(self._key, script_content)
+        self._attr_names += [
+            "module",  # type="module" or "text/javascript"
+            "async",
+            "crossorigin",
+            "defer",
+            "integrity",
+            "nomodule",
+            "referrerpolicy",
+            "src",
+        ]
+
+    def update(self, script_content):
+        """Update style content"""
+        self.server.state[self._key] = script_content
 
     @property
     def var_name(self):

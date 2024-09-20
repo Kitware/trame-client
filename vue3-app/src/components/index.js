@@ -3,6 +3,7 @@ import TrameExec from "./TrameExec";
 import TrameGetter from "./TrameGetter";
 import TrameLoading from "./TrameLoading";
 import TrameReconnect from "./TrameReconnect";
+import TrameScript from "./TrameScript";
 import TrameStyle from "./TrameStyle";
 import TrameTemplate from "./TrameTemplate";
 import TrameClientStateChange from "./TrameClientStateChange";
@@ -16,6 +17,7 @@ export default {
   TrameGetter,
   TrameLoading,
   TrameReconnect,
+  TrameScript,
   TrameStyle,
   TrameTemplate,
   TrameClientStateChange,
