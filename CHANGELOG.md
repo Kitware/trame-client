@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.0 (2024-09-20)
+
+### Feature
+
+* **url:** Can request url on layout when server started as task ([`f0584c1`](https://github.com/Kitware/trame-client/commit/f0584c1e4ccb7d0971107a4b5e0a3577234347f7))
+
+### Fix
+
+* **translation:** Auto translate state names in event too ([`46a2c74`](https://github.com/Kitware/trame-client/commit/46a2c74155cdb3046633a1ce424b39c69b552f70))
+
 ## v3.2.5 (2024-08-15)
 
 ### Fix
