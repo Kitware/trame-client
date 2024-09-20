@@ -469,7 +469,7 @@ class AbstractElement:
                     else:
                         translated_value = str(value[0])
                         if AbstractElement._debug:
-                            logger.warn(
+                            logger.warning(
                                 'Warning: <%s %s="..." /> is set with an (%s)',
                                 self._elem_name,
                                 js_key,
@@ -531,7 +531,12 @@ class AbstractElement:
                     continue
 
                 if isinstance(value, str):
-                    self._attributes[name] = f'{js_key}="{value}"'
+                    translated_value = (
+                        self.server.state.translator.translate_js_expression(
+                            self.server.state, value
+                        )
+                    )
+                    self._attributes[name] = f'{js_key}="{translated_value}"'
                 elif callable(value):
                     trigger_name = self.server.trigger_name(value)
                     self._attributes[name] = f"{js_key}=\"trigger('{trigger_name}')\""
@@ -544,12 +549,23 @@ class AbstractElement:
                             f"{js_key}=\"trigger('{trigger_name}')\""
                         )
                     if len(value) == 2:
+                        translated_value = (
+                            self.server.state.translator.translate_js_expression(
+                                self.server.state, value[1]
+                            )
+                        )
                         self._attributes[name] = (
-                            f"{js_key}=\"trigger('{trigger_name}', {value[1]})\""
+                            f"{js_key}=\"trigger('{trigger_name}', {translated_value})\""
                         )
                     if len(value) == 3:
+                        translated_value = (
+                            self.server.state.translator.translate_js_expression(
+                                self.server.state, value[1]
+                            )
+                        )
+                        # We don't want to translate kwargs as we may change keys rather than just values
                         self._attributes[name] = (
-                            f"{js_key}=\"trigger('{trigger_name}', {value[1]}, {value[2]})\""
+                            f"{js_key}=\"trigger('{trigger_name}', {translated_value}, {value[2]})\""
                         )
                 else:
                     print(
