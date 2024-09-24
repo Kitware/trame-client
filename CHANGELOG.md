@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.2 (2024-09-24)
+
+### Fix
+
+* **child-server:** Add support for child server in SizeObserver/Style/Script ([`ff498fd`](https://github.com/Kitware/trame-client/commit/ff498fde7ae8537082ca548312a470c2be84671a))
+
 ## v3.3.1 (2024-09-20)
 
 ### Fix
