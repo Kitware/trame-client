@@ -92,15 +92,18 @@ class JSEval(AbstractElement):
 class Style(AbstractElement):
     """Provide means to inject global CSS rules"""
 
+    _next_id = 0
+
     def __init__(self, css_content=None, **kwargs):
+        Style._next_id += 1
         super().__init__("trame-style", **kwargs)
-        self._key = f"trame__inline_style_{self._id}"
+        self._key = f"trame__inline_style_{Style._next_id}"
         self._attributes["_css"] = f':css="{self._key}"'
-        self.server.state.setdefault(self._key, css_content)
+        self.server.root_server.state.setdefault(self._key, css_content)
 
     def update(self, css_content):
         """Update style content"""
-        self.server.state[self._key] = css_content
+        self.server.root_server.state[self._key] = css_content
 
     @property
     def var_name(self):
@@ -114,11 +117,14 @@ class Style(AbstractElement):
 class Script(AbstractElement):
     """Provide means to inject a global script tag"""
 
+    _next_id = 0
+
     def __init__(self, script_content=None, **kwargs):
+        Script._next_id += 1
         super().__init__("trame-script", **kwargs)
-        self._key = f"trame__inline_script_{self._id}"
+        self._key = f"trame__inline_script_{Script._next_id}"
         self._attributes["_script"] = f':script="{self._key}"'
-        self.server.state.setdefault(self._key, script_content)
+        self.server.root_server.state.setdefault(self._key, script_content)
         self._attr_names += [
             "module",  # type="module" or "text/javascript"
             "async",
@@ -132,7 +138,7 @@ class Script(AbstractElement):
 
     def update(self, script_content):
         """Update style content"""
-        self.server.state[self._key] = script_content
+        self.server.root_server.state[self._key] = script_content
 
     @property
     def var_name(self):
@@ -303,8 +309,9 @@ class SizeObserver(AbstractElement):
     """
 
     def __init__(self, _name, **kwargs):
-        super().__init__("trame-size-observer", name=_name, **kwargs)
+        super().__init__("trame-size-observer", **kwargs)
         self._attr_names += [
             "name",
         ]
         self.server.state[_name] = None
+        self.name = self.server.translator.translate_key(_name)
