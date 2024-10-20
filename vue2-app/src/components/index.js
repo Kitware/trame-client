@@ -6,6 +6,7 @@ import TrameTemplate from './ServerTemplate';
 import TrameStateResolver from './StateResolver';
 import TrameStyle from './Style';
 import TrameScript from './TrameScript';
+import TrameDeepReactive from './TrameDeepReactive';
 import TrameExec from './TrameExec';
 import TrameGetter from './Getter';
 import TrameClientStateChange from './ClientStateChange';
@@ -22,6 +23,7 @@ export default {
   TrameStateResolver,
   TrameScript,
   TrameStyle,
+  TrameDeepReactive,
   TrameExec,
   TrameGetter,
   TrameClientStateChange,

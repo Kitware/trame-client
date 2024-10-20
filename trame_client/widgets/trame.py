@@ -9,6 +9,7 @@ __all__ = [
     "Getter",
     "ClientStateChange",
     "ClientTriggers",
+    "DeepReactive",
     "LifeCycleMonitor",
     "SizeObserver",
 ]
@@ -257,6 +258,35 @@ class ClientTriggers(AbstractElement):
         :param method: Key used in the kwargs at construction time
         """
         self.server.js_call(self.__name, "emit", method, *args)
+
+
+# -----------------------------------------------------------------------------
+# TrameDeepReactive
+# -----------------------------------------------------------------------------
+class DeepReactive(AbstractElement):
+    """Create a deeply reactive state from state variable name.
+    The provided name can not be reactive.
+    It needs to be statically defined in Python like in the example blow.
+
+    This component only works with client_type="vue3".
+
+       with DeepReactive(my_nested_var):
+          html.Input(v_model=my_nested_var.txt_1)
+          html.Input(v_model=my_nested_var.txt_2)
+    """
+
+    def __init__(
+        self,
+        name=None,
+        children=None,
+        **kwargs,
+    ):
+        super().__init__("trame-deep-reactive", children, name=name, **kwargs)
+        self._attr_names += [
+            "name",
+        ]
+
+        self._attributes["slot"] = f'v-slot="{{ value: {name} }}"'
 
 
 # -----------------------------------------------------------------------------

@@ -8,6 +8,7 @@ import TrameStyle from "./TrameStyle";
 import TrameTemplate from "./TrameTemplate";
 import TrameClientStateChange from "./TrameClientStateChange";
 import TrameClientTriggers from "./TrameClientTriggers";
+import TrameDeepReactive from "./TrameDeepReactive";
 import TrameLifeCycleMonitor from "./TrameLifeCycleMonitor";
 import TrameSizeObserver from "./TrameSizeObserver";
 
@@ -22,6 +23,7 @@ export default {
   TrameTemplate,
   TrameClientStateChange,
   TrameClientTriggers,
+  TrameDeepReactive,
   TrameLifeCycleMonitor,
   TrameSizeObserver,
 };
