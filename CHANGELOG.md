@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.4.0 (2024-10-20)
+
+### Feature
+
+* **DeepReactive:** Add vue3 component to enable deep reactivity ([`3ea4dc9`](https://github.com/Kitware/trame-client/commit/3ea4dc94a0cc8fd8515c5f5b1ce2c19dfb0d81ba))
+
 ## v3.3.2 (2024-09-24)
 
 ### Fix
