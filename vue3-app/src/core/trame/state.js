@@ -3,6 +3,44 @@ import { decorate, registerDecorator } from "./decorators";
 // ----------------------------------------------------------------------------
 // State helper
 // ----------------------------------------------------------------------------
+export class WatcherManager {
+  constructor() {
+    this.nextId = 1;
+    this.listeners = {};
+  }
+
+  watch(dependencies, callback) {
+    const key = `${this.nextId++}`;
+    this.listeners[key] = {
+      key,
+      dependencies,
+      callback,
+    };
+    const unsubscribe = () => delete this.listeners[key];
+    return unsubscribe;
+  }
+
+  notifyWatchers(changedKeys, fullState) {
+    const watchers = Object.values(this.listeners);
+    const keys = new Set(changedKeys);
+
+    for (let i = 0; i < watchers.length; i++) {
+      const { dependencies, callback } = watchers[i];
+      if (keys.intersection(new Set(dependencies)).size) {
+        const args = dependencies.map((v) => fullState[v]);
+        try {
+          callback(...args);
+        } catch (e) {
+          console.error(`Watcher error with dependencies: ${dependencies}`, e);
+        }
+      }
+    }
+  }
+
+  getWatchers() {
+    return Object.values(this.listeners);
+  }
+}
 
 export class SharedState {
   constructor(client) {
@@ -15,6 +53,7 @@ export class SharedState {
     this.mtime = 0;
     this.listeners = [];
     this.ready = false;
+    this._watchers = new WatcherManager();
 
     // bind decorator helper
     this.registerDecorator = registerDecorator;
@@ -77,6 +116,14 @@ export class SharedState {
         )
     );
 
+    this.subscriptions.push(
+      this.addListener(({ type, keys }) => {
+        if (type === "dirty-state") {
+          this._watchers.notifyWatchers(keys, this.state);
+        }
+      })
+    );
+
     // Keep it so we can call it on disconnect
     this._updateFromServer = updateFromServer;
   }
@@ -123,6 +170,15 @@ export class SharedState {
       return this.state;
     }
     return this.state[key];
+  }
+
+  watch(keys, fn) {
+    const unsubscribe = this._watchers.watch(keys, fn);
+
+    // Call it right away with available values
+    fn(...keys.map((v) => this.state[v]));
+
+    return unsubscribe;
   }
 
   async set(key, value) {
