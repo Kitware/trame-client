@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.0 (2024-11-18)
+
+### Feature
+
+* **vue3:** Add state.watch API ([#29](https://github.com/Kitware/trame-client/issues/29)) ([`d36a844`](https://github.com/Kitware/trame-client/commit/d36a8447367a58464f4149bea808aaa996ce6b35))
+
 ## v3.4.0 (2024-10-20)
 
 ### Feature
