@@ -1,1 +1,1 @@
-from trame_client.module import *
+from trame_client.module import *  # noqa F403

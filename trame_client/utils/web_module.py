@@ -85,7 +85,8 @@ class WebModule:
             )
         if www_base_name in self._serve:
             raise ValueError(
-                f"Entry for {www_base_name} is already set for {self._serve[www_base_name]} and want to override with {fs_path}"
+                f"Entry for {www_base_name} is already set for {self._serve[www_base_name]}"
+                f"and want to override with {fs_path}"
             )
 
         self._serving_entries.append((fs_path, www_base_name))

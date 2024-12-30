@@ -6556,7 +6556,7 @@ class Div(HtmlElement):
         ]
 
 
-class I(HtmlElement):
+class I(HtmlElement):  # noqa E742
     """
     Properties:
 

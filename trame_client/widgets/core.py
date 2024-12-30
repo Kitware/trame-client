@@ -449,7 +449,9 @@ class AbstractElement:
                     and not isinstance(value, (tuple, list))
                 ):
                     logger.warn(
-                        f'Warning: A Vue directive is evaluating your expression and trame would expect a tuple instead of a plain type. <{self._elem_name} {js_key}="{value}" ... />'
+                        "Warning: A Vue directive is evaluating your expression "
+                        "and trame would expect a tuple instead of a plain type. "
+                        f'<{self._elem_name} {js_key}="{value}" ... />'
                     )
 
                 if isinstance(value, (tuple, list)):
@@ -501,7 +503,8 @@ class AbstractElement:
                     self._attributes[name] = f'{js_key}="{value}"'
                 else:
                     print(
-                        f"Error: Don't know how to handle attribute name '{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
+                        "Error: Don't know how to handle attribute name "
+                        f"'{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
                     )
 
         return self
@@ -569,7 +572,8 @@ class AbstractElement:
                         )
                 else:
                     print(
-                        f"Error: Don't know how to handle event name '{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
+                        "Error: Don't know how to handle event name "
+                        f"'{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
                     )
         return self
 

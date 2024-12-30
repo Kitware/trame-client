@@ -54,7 +54,9 @@ def iframe_url_builder_jupyter_extension(layout):
     www_endpoint = os.environ.get("TRAME_JUPYTER_ENDPOINT", "/trame-jupyter-server")
     server = layout.server
     template_name = layout._template_name
-    src = f"{www_endpoint}/{server.client_type}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+    url_base = f"{www_endpoint}/{server.client_type}/index.html"
+    url_query = f"ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+    src = f"{url_base}?{url_query}"
     elem_id = f"{server.name}_{template_name}"
 
     # Check if server/kernel are collocated
@@ -62,7 +64,11 @@ def iframe_url_builder_jupyter_extension(layout):
 
     if www_path and Path(www_path).exists():
         server_www = Path(www_path) / "servers" / server.name
-        src = f"{www_endpoint}/servers/{server.name}/index.html?ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+        url_base = f"{www_endpoint}/servers/{server.name}/index.html"
+        url_query = (
+            f"ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+        )
+        src = f"{url_base}?{url_query}"
         if not server_www.exists():
             shutil.copytree(server._www, str(server_www.resolve()), dirs_exist_ok=True)
             for sub_path, src_dir in server.serve.items():
@@ -81,7 +87,11 @@ def iframe_url_builder_jupyter_extension(layout):
 def iframe_url_builder_jupyter_hub(layout):
     server = layout.server
     template_name = layout._template_name
-    src = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
+    url_base = (
+        f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{server.port}/index.html"
+    )
+    url_query = f"ui={template_name[16:]}&reconnect=auto"
+    src = f"{url_base}?{url_query}"
     elem_id = f"{server.name}_{template_name}"
 
     return {
@@ -96,7 +106,9 @@ def iframe_url_builder_jupyter_hub_host(layout):
     host = os.environ.get("HOSTNAME")
     server = layout.server
     template_name = layout._template_name
-    src = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{host}:{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
+    url_base = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{host}:{server.port}/index.html"
+    url_query = f"ui={template_name[16:]}&reconnect=auto"
+    src = f"{url_base}?{url_query}"
     elem_id = f"{server.name}_{template_name}"
 
     return {
@@ -181,7 +193,8 @@ class AbstractLayout:
     @property
     def root(self):
         """
-        Top level Vue component. Useful for providing / injecting into children components. Setting makes old root child of new root.
+        Top level Vue component. Useful for providing / injecting into children components.
+        Setting makes old root child of new root.
         """
         return self._current_root
 
@@ -255,11 +268,13 @@ class AbstractLayout:
 
     def _jupyter_content(self):
         if not self.server.running:
-            return """<div>
-                    The server is not running. Before displaying a trame layout you should await it to make sure it is ready.
-                    You should run the following code before displaying a layout.
-                    <pre style="padding: 5px; border: solid 1px rgb(224,224,224); background: rgb(245,245,245);">await layout.ready</pre>
-                    </div>"""
+            return """
+<div>
+The server is not running.
+Before displaying a trame layout you should await it to make sure it is ready.
+You should run the following code before displaying a layout.
+<pre style="padding: 5px; border: solid 1px rgb(224,224,224); background: rgb(245,245,245);">await layout.ready</pre>
+</div>"""
 
         attributes = self.iframe_builder(self)
         attributes_str = " ".join(

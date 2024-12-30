@@ -20,7 +20,9 @@ def main():
         app.ctrl.plus()
         one_of_the_app = app
 
-    # root_server.controller.on_server_ready.add(lambda **kwargs: print(json.dumps(root_server.state.to_dict(), indent=2)))
+    # root_server.controller.on_server_ready.add(
+    #   lambda **kwargs: print(json.dumps(root_server.state.to_dict(), indent=2))
+    # )
     root_server.controller.on_server_ready.add(
         lambda **kwargs: print("Root server ready")
     )

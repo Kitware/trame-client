@@ -4,3 +4,10 @@ graft trame_client/module/vue3-www
 recursive-exclude trame_client/module/vue2-www *.map
 recursive-exclude trame_client/module/vue3-www *.map
 include trame_client/LICENSE
+prune examples
+prune js-lib
+prune tests
+prune visual_baseline
+prune vue-app
+prune vue2-app
+prune vue3-app
