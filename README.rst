@@ -1,4 +1,6 @@
-trame-client: core client for trame
+.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-client
+
+trame-client: core client for trame |pypi_download|
 ===========================================================================
 
 .. image:: https://github.com/Kitware/trame-client/actions/workflows/test_and_release.yml/badge.svg
