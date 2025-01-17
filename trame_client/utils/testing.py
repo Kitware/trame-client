@@ -1,4 +1,5 @@
 import json
+import sys
 from pathlib import Path
 from xprocess import ProcessStarter
 from PIL import Image
@@ -11,17 +12,19 @@ from pixelmatch.contrib.PIL import pixelmatch
 
 
 class TrameServerMonitor:
-    def __init__(self, log_path):
+    def __init__(self, log_path, do_print_log_lines=False):
         self._log_path = log_path
         self._last_state = {}
         self.port = 0
+        self.do_print_log_lines = do_print_log_lines
         self.update()
 
     def update(self):
         last_state_line = "STATE: {}"
         with open(self._log_path, "r") as f:
             for line in f.readlines():
-                print(line)
+                if self.do_print_log_lines:
+                    print(line)
                 if "SERVER_PORT:" in line:
                     self.port = int(line[13:])
                 if line[:7] == "STATE: ":
@@ -69,7 +72,7 @@ class FixtureHelper:
 
             # command to start process
             args = [
-                "python3",
+                Path(sys.executable).as_posix(),
                 str(self.root_path / server_path),
                 "--server",
                 "--host",
