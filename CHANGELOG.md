@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v3.5.2 (2025-01-20)
+
+### Bug Fixes
+
+- **test**: Fix test helpers for Windows
+  ([`cd4b0d4`](https://github.com/Kitware/trame-client/commit/cd4b0d4496b7d83be3c879d9b036b52a630eae1d))
+
+* Use full current python path when running Selenium server python process * Fix port parsing in
+  xprocess logs for Windows * Add option to disable log prints to avoid test clutter
+
+### Continuous Integration
+
+- Skip changelog for codespell
+  ([`15c968d`](https://github.com/Kitware/trame-client/commit/15c968d798a022534c3ee9b26ca2e90bf54b7721))
+
+### Documentation
+
+- Update README.rst
+  ([`2e75d47`](https://github.com/Kitware/trame-client/commit/2e75d47533b545c2f2cbfb27a538468f15242b9b))
+
+- **js**: List JS dependency
+  ([`c87fa89`](https://github.com/Kitware/trame-client/commit/c87fa89d6b7fccded0095ae5bdcec49fcaa95242))
+
+
 ## v3.5.1 (2024-12-30)
 
 ### Bug Fixes
