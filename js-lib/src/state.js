@@ -116,14 +116,37 @@ export class State {
     });
   }
 
-  async set(key, value) {
-    // Prevent triggering change when same value is set
-    if (this._state[key] === value) {
+  async set(...keyAndValue) {
+    if (keyAndValue.length < 2) {
       return;
     }
+    const value = keyAndValue.pop();
+    const keys = keyAndValue;
+    let dirty = false;
+    keys.reduce((child, key, index) => {
+      if (typeof child !== "object") {
+        return child;
+      }
+      if (index === keys.length - 1) {
+        // Prevent triggering change when same value is set
+        if (this._state[key] !== value) {
+          child[key] = value; // Set the final value
+          dirty = true;
+        }
+      } else {
+        // Ensure each level exists
+        child[key] = child[key] ?? (typeof key == "string" ? {} : []);
+      }
+      return child[key];
+    }, this._state);
+
+    // Prevent triggering if there was an error or if same value is set
+    if (!dirty) {
+      return;
+    }
+    const key = keys[0];
 
     this._mtime += 1;
-    this._state[key] = value;
     this._keyTS[key] = this._mtime;
     this.dirty(key);
     await this.flush();
@@ -145,11 +168,14 @@ export class State {
     await this.flush();
   }
 
-  get(key) {
-    if (key === undefined) {
-      return this._state;
-    }
-    return this._state[key];
+  /**
+   * @param  {...any} key can be a single key, or a path of keys if each value is a dict
+   * If no param is given, the entire state is returned.
+   * @returns The state value identified by the key(s)
+   * @example get("a", "b", "c") will return state["a"]["b"]["c"]
+   */
+  get(...key) {
+    return key.reduce((child, key) => child && child[key], this._state);
   }
 
   onChange(fn) {
