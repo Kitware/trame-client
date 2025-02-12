@@ -1,6 +1,6 @@
 {
   "name": "@kitware/trame",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "main": "./dist/trame.umd.js",
   "unpkg": "./dist/trame.umd.js",

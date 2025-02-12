@@ -2,6 +2,12 @@ import { decorate } from "./decorators";
 import { ListenerManager, WatcherManager } from "./listeners";
 
 export class State {
+  /**
+   * State constructor
+   *
+   * @param {TrameClient} client managing the communication to the server
+   * @param {State} oldState previous state so we can keep existing listener
+   */
   constructor(client, oldState) {
     this._name = "undefined";
     this._client = client;
@@ -89,6 +95,9 @@ export class State {
     );
   }
 
+  /**
+   * Async method used to bootstrap state content.
+   */
   async loadState() {
     const { state, name } = await this._client.getRemote().Trame.getState();
     this._name = name;
@@ -96,6 +105,13 @@ export class State {
     this._ready = true;
   }
 
+  /**
+   * Return true if the given state variable can be modified and
+   * therefore can be sent to the server when changed.
+   *
+   * @param {string} name
+   * @return {boolean}
+   */
   canDirty(name) {
     if (!this._state.trame__client_only) {
       return true;
@@ -103,6 +119,11 @@ export class State {
     return !this._state.trame__client_only.includes(name);
   }
 
+  /**
+   * Mark any local state variables dirty using their name(s)
+   *
+   * @param  {...string} keys
+   */
   dirty(...keys) {
     keys.forEach((key) => {
       if (this.canDirty(key)) {
@@ -116,6 +137,16 @@ export class State {
     });
   }
 
+  /**
+   * Set a new value into the state with its key name and push
+   * the dirty state to the server. The returned promise can
+   * be use for waiting for network exchange completion.
+   *
+   * @param {string} key
+   * @param {any} value
+   *
+   * @return {Promise<void>} in case you want to wait for completion
+   */
   async set(key, value) {
     // Prevent triggering change when same value is set
     if (this._state[key] === value) {
@@ -129,10 +160,19 @@ export class State {
     await this.flush();
   }
 
+  /**
+   * @return {Array<string>} list of keys that compose the state
+   */
   getAllKeys() {
     return Object.keys(this._state);
   }
 
+  /**
+   * Update the state with a set of key/value pair.
+   *
+   * @param {Map<string, any>} obj
+   * @return {Promise<void>} in case you want to wait for completion
+   */
   async update(obj) {
     this._mtime += 1;
     for (const [key, value] of Object.entries(obj)) {
@@ -145,6 +185,10 @@ export class State {
     await this.flush();
   }
 
+  /**
+   * @param {string} key
+   * @returns the state value for that given key
+   */
   get(key) {
     if (key === undefined) {
       return this._state;
@@ -152,10 +196,32 @@ export class State {
     return this._state[key];
   }
 
+  /**
+   * Register function to listen to any change happening on the state.
+   * The function will receive a single object with the following structure.
+   *
+   *    {
+   *        type: "dirty-state",   # dirty-state or new-keys
+   *        keys: [...],           # list of key name affected
+   *    }
+   *
+   *
+   * @param {function} fn
+   * @return {function} unsubscribe function
+   */
   onChange(fn) {
     return this._listeners.on(fn);
   }
 
+  /**
+   * Register a listener for variable(s) change.
+   * The provided method will be called with all the listed keys
+   * as args.
+   *
+   * @param {Array<string>} keys
+   * @param {function} fn
+   * @return {function} unsubscribe function
+   */
   watch(keys, fn) {
     const unsubscribe = this._watchers.watch(keys, fn);
 
@@ -165,6 +231,9 @@ export class State {
     return unsubscribe;
   }
 
+  /**
+   * Delete state by unsubscribing to all its internal listeners
+   */
   delete() {
     while (this._wslinkSubscriptions.length) {
       this.client
@@ -176,6 +245,13 @@ export class State {
     }
   }
 
+  /**
+   * Push dirty data over the network.
+   * If any argument (state key name(s)) is provided,
+   * they will be marked dirty and pushed to the server.
+   *
+   * @param  {...string} keys
+   */
   async flush(...keys) {
     if (keys.length) {
       keys.forEach((key) => {
