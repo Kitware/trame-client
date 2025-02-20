@@ -2,10 +2,12 @@ import { State } from "./state";
 import { decorate, registerDecorator } from "./decorators";
 import { ListenerManager } from "./listeners";
 import wslink from "./wslink";
+import vtkWSLinkClient from "@kitware/vtk.js/IO/Core/WSLinkClient";
 
 /**
- * @typedef {Object} TrameClient
- * @property {string} sessionManagerURL (/paraview) http(s) url for launcher endpoint
+ * @typedef TrameConnectConfig
+ * @type {object}
+ * @property {string} sessionManagerURL (/paraview) http(s) url for the launcher endpoint
  * @property {string} sessionURL (/ws if no launcher) ws(s) url for WebSocket session endpoint
  * @property {string} application (trame) name for the session to launch
  * @property {string} secret (wslink-secret) authorization token for WebSocket connection
@@ -48,9 +50,13 @@ export class Trame {
     this._errorListeners = new ListenerManager("trame connection error");
 
     // public objects
+    /**@type{vtkWSLinkClient}*/
     this.client = null;
+    /**@type{State}*/
     this.state = null;
+    /**@type{TrameConnectConfig}*/
     this.config = null;
+    /**@type{Object.<string,any>}*/
     this.refs = {};
   }
 

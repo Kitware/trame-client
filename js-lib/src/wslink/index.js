@@ -73,6 +73,11 @@ function configDecorator(config) {
   return outputConfig;
 }
 
+/**
+ * Instantiate WSLinkClient with trame protocols
+ *
+ * @returns {vtkWSLinkClient}
+ */
 function createClient() {
   return vtkWSLinkClient.newInstance({
     protocols,
