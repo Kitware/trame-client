@@ -193,7 +193,7 @@ class Getter(AbstractElement):
         else:
             extracts.append("value")
 
-        self._attributes["slot"] = f'v-slot="{{ { ", ".join(extracts) } }}"'
+        self._attributes["slot"] = f'v-slot="{{ {", ".join(extracts)} }}"'
 
 
 # -----------------------------------------------------------------------------

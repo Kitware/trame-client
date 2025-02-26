@@ -41,7 +41,7 @@ def to_pretty_html(html_content: str) -> str:
         color = COLOR_PALETTE[int(indent / indent_step) % len(COLOR_PALETTE)]
 
         output_lines.append(
-            f"{color}{' '*indent}{line.replace(' >', '>')}{BgColors.ENDC}"
+            f"{color}{' ' * indent}{line.replace(' >', '>')}{BgColors.ENDC}"
         )
         if delta > 0:
             indent += compute_indent(line)
