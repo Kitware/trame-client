@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v3.6.0 (2025-02-26)
+
+### Documentation
+
+- **js**: Add doc string to JS API
+  ([`5c81263`](https://github.com/Kitware/trame-client/commit/5c81263670063a915c1c3a2a1e8c1df35ac63ea1))
+
+- **js-lib**: Update library to fix js-doc annotation
+  ([`533fbfd`](https://github.com/Kitware/trame-client/commit/533fbfd3b50c3e1ba01208c42b3c66497356aba2))
+
+### Features
+
+- **TrameComponent**: Provide helper class to handle method decoration
+  ([`53390eb`](https://github.com/Kitware/trame-client/commit/53390eb5178c8503b281da8298be58109ae750b3))
+
+
 ## v3.5.2 (2025-01-20)
 
 ### Bug Fixes
