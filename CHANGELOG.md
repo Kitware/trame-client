@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.6.1 (2025-03-24)
+
+### Bug Fixes
+
+- **vue2-app**: Fix URL params reading
+  ([`0a6d33a`](https://github.com/Kitware/trame-client/commit/0a6d33a579e195d7298d4a959755d9d8e32a83c9))
+
+
 ## v3.6.0 (2025-02-26)
 
 ### Documentation
