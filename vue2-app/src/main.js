@@ -35,14 +35,13 @@ async function initializeApplication(Vue) {
   Vue.use(Trame);
 
   // Connect to server
+  const config = wslink.configDecorator({
+    application: 'trame',
+    useUrl: true,
+  });
   const client = wslink.getClient(DEFAULT_CONNECTION_NAME);
   try {
-    await client.connect(
-      wslink.configDecorator({
-        application: 'trame',
-        useUrl: true,
-      })
-    );
+    await client.connect(config);
   } catch (e) {
     reportWsError();
     return;
