@@ -104,5 +104,5 @@ Build client side code base
 JavaScript dependency
 -----------------------------------------------------------
 
-This Python package bundle the following Vue.js libraries. For ``client_type="vue2"``, it exposes ``vue@2.7.16`` and for ``client_type="vue3"``, it exposes ``vue@3.4.21``.
+This Python package bundle the following Vue.js libraries. For ``client_type="vue2"``, it exposes ``vue@2.7.16`` and for ``client_type="vue3"``, it exposes ``vue@3.5.13``.
 If you would like us to upgrade any of those dependencies, `please reach out <https://www.kitware.com/trame/>`_.
