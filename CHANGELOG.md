@@ -1,6 +1,16 @@
 # CHANGELOG
 
 
+## v3.7.0 (2025-04-08)
+
+### Features
+
+- **vue3**: Update vue.js to v3.5.13
+  ([`acdb5f0`](https://github.com/Kitware/trame-client/commit/acdb5f00181e113b127d7765e39655b5392b8988))
+
+Co-authored-by: Justine Antoine <justine.antoine@kitware.com>
+
+
 ## v3.6.1 (2025-03-24)
 
 ### Bug Fixes
