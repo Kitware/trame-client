@@ -18,7 +18,14 @@ export default {
     function fetchValue() {
       trameStr = JSON.stringify(trame.state.get(props.name));
       if (trameStr !== refStr) {
-        Object.assign(value, JSON.parse(trameStr));
+        const updatedValue = JSON.parse(trameStr);
+        Object.assign(value, updatedValue);
+        const keyToDelete = Object.keys(value).filter(
+          (name) => !(name in updatedValue)
+        );
+        for (let i = 0; i < keyToDelete.length; i++) {
+          delete value[keyToDelete[i]];
+        }
       }
     }
 
