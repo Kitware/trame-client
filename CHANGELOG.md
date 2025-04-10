@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.7.1 (2025-04-10)
+
+### Bug Fixes
+
+- **DeepReactive**: Delete removed key
+  ([`00417f4`](https://github.com/Kitware/trame-client/commit/00417f4a213ce67122ddc9cbe40ccb808b7463f5))
+
+
 ## v3.7.0 (2025-04-08)
 
 ### Features
