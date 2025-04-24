@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v3.8.0 (2025-04-24)
+
+### Documentation
+
+- Update links in readme
+  ([`8e3e204`](https://github.com/Kitware/trame-client/commit/8e3e2042214fd238b628216bff48d1762adf50a3))
+
+### Features
+
+- **v_on**: Better handling events modifiers
+  ([`942cbe3`](https://github.com/Kitware/trame-client/commit/942cbe358772ed10d5a577fb087b01851e779cbd))
+
+
 ## v3.7.1 (2025-04-10)
 
 ### Bug Fixes
