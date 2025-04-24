@@ -1,9 +1,9 @@
 import sys
 import logging
-import inspect
 
-from ..utils.defaults import TrameDefault
-from ..utils.formatter import to_pretty_html
+from trame_client.utils.defaults import TrameDefault
+from trame_client.utils.formatter import to_pretty_html
+from trame_common.obj.component import TrameComponent
 
 AVAILABLE_DIRECTIVES = [
     ("v_text", "v-text"),
@@ -25,6 +25,74 @@ AVAILABLE_DIRECTIVES = [
     ("v_memo", "v-memo"),
     ("v_cloak", "v-cloak"),
 ]
+KEY_ALIAS = [
+    "enter",
+    "tab",
+    "delete",
+    "esc",
+    "space",
+    "left",
+    "up",
+    "right",
+    "down",
+]
+KEY_MODIFIER = ["ctrl", "alt", "shift", "meta"]
+MOUSE_BUTTONS = ["left", "right", "middle"]
+V_ON_MODIFIER = [
+    "stop",
+    "prevent",
+    "capture",
+    "self",
+    "once",
+    "left",
+    "right",
+    "middle",
+    "passive",
+]  # *KEY_ALIAS
+V_ON_TYPE_MOUSE = [
+    "click",
+    "dblclick",
+    "mousedown",
+    "mouseup",
+    "mousemove",
+    "mouseover",
+    "mouseout",
+    "mousewheel",
+]
+V_ON_TYPE_KEYBOARD = [
+    "keydown",
+    "keyup",
+    "keypress",
+]
+V_ON_TYPE_FORM = [
+    "submit",
+    "input",
+    "change",
+    "focus",
+    "blur",
+]
+V_ON_TYPE_TOUCH = [
+    "touchstart",
+    "touchmove",
+    "touchend",
+    "touchcancel",
+]
+V_ON_TYPE_UI = [
+    "scroll",
+    "resize",
+    "select",
+]
+V_ON_TYPE_ANIM = [
+    "animationstart",
+    "animationend",
+    "animationiteration",
+]
+V_ON_TYPE_TRANSITION = [
+    "transitionstart",
+    "transitionend",
+    "transitioncancel",
+]
+
 
 SHARED_ATTRIBUTES = [
     "accesskey",
@@ -57,20 +125,19 @@ SHARED_ATTRIBUTES = [
     ["key", ":key"],
 ]
 
+# !all modifiers should go through v_on_click_left_stop...
 SHARED_EVENTS = [
-    "click",
-    "mousedown",
-    "mouseup",
-    "mouseenter",
-    "mouseleave",
+    *V_ON_TYPE_MOUSE,
+    *V_ON_TYPE_KEYBOARD,
+    *V_ON_TYPE_FORM,
+    *V_ON_TYPE_TOUCH,
+    *V_ON_TYPE_UI,
+    *V_ON_TYPE_ANIM,
+    *V_ON_TYPE_TRANSITION,
     "contextmenu",
 ]
 
 logger = logging.getLogger(__name__)
-
-
-def can_be_decorated(x):
-    return inspect.ismethod(x) or inspect.isfunction(x)
 
 
 def py2js_key(key):
@@ -217,99 +284,33 @@ class VirtualNode:
         HTML_CTX.add_child(self)
 
 
-class TrameComponent:
-    """
-    Base trame class that has access to a trame server instance
-    on which we provide simple accessor and method decoration capabilities.
-    """
-
-    def __init__(self, server, ctx_name=None, **_):
-        """
-        Initialize TrameComponent with its server.
-
-        Keyword arguments:
-        server -- the server to link to (default None)
-        ctx_name -- name to use to bind current instance to server.context (default None)
-        """
-        self._server = server
-
-        if ctx_name:
-            self.ctx[ctx_name] = self
-
-        self._bind_annotated_methods()
-
-    @property
-    def server(self):
-        """Return the associated trame server instance"""
-        return self._server
-
-    @property
-    def state(self):
-        """Return the associated server state"""
-        return self.server.state
-
-    @property
-    def ctrl(self):
-        """Return the associated server controller"""
-        return self.server.controller
-
-    @property
-    def ctx(self):
-        """Return the associated server context"""
-        return self.server.context
-
-    def _bind_annotated_methods(self):
-        # Look for method decorator
-        for k in inspect.getmembers(self.__class__, can_be_decorated):
-            fn = getattr(self, k[0])
-
-            # Handle @state.change
-            s_translator = self.state.translator
-            if "_trame_state_change" in fn.__dict__:
-                state_change_names = fn.__dict__["_trame_state_change"]
-                logger.debug(
-                    f"state.change({[f'{s_translator.translate_key(v)}' for v in state_change_names]})({k[0]})"
-                )
-                self.state.change(*[f"{v}" for v in state_change_names])(fn)
-
-            # Handle @trigger
-            if "_trame_trigger_names" in fn.__dict__:
-                trigger_names = fn.__dict__["_trame_trigger_names"]
-                for trigger_name in trigger_names:
-                    logger.debug(f"trigger({trigger_name})({k[0]})")
-                    self.server.trigger(f"{trigger_name}")(fn)
-
-            # Handle @ctrl.[add, once, add_task, set]
-            if "_trame_controller" in fn.__dict__:
-                actions = fn.__dict__["_trame_controller"]
-                for action in actions:
-                    name = action.get("name")
-                    method = action.get("method")
-                    decorate = getattr(self.ctrl, method)
-                    logger.debug(f"ctrl.{method}({name})({k[0]})")
-                    decorate(name)(fn)
-
-    def _unbind_annotated_methods(self):
-        # Look for method decorator
-        for k in inspect.getmembers(self.__class__, can_be_decorated):
-            fn = getattr(self, k[0])
-
-            # Handle @state.change
-            methods_to_detach = {}
-            if "_trame_state_change" in fn.__dict__:
-                methods_to_detach.add(fn)
-
-            if methods_to_detach:
-                for fn_list in self.state._change_callbacks.values():
-                    to_remove = set(fn_list) | methods_to_detach
-                    for fn in to_remove:
-                        fn_list.remove(fn)
-
-            # Handle @trigger
-            # TODO
-
-            # Handle @ctrl
-            # TODO
+def _event_value_processing(server, js_key, value):
+    if isinstance(value, str):
+        translated_value = server.state.translator.translate_js_expression(
+            server.state, value
+        )
+        return f'{js_key}="{translated_value}"'
+    elif callable(value):
+        trigger_name = server.trigger_name(value)
+        return f"{js_key}=\"trigger('{trigger_name}')\""
+    elif isinstance(value, tuple):
+        trigger_name = value[0]
+        if callable(trigger_name):
+            trigger_name = server.trigger_name(trigger_name)
+        if len(value) == 1:
+            return f"{js_key}=\"trigger('{trigger_name}')\""
+        if len(value) == 2:
+            translated_value = server.state.translator.translate_js_expression(
+                server.state, value[1]
+            )
+            return f"{js_key}=\"trigger('{trigger_name}', {translated_value})\""
+        if len(value) == 3:
+            translated_value = server.state.translator.translate_js_expression(
+                server.state, value[1]
+            )
+            # We don't want to translate kwargs as we may change keys rather than just values
+            return f"{js_key}=\"trigger('{trigger_name}', {translated_value}, {value[2]})\""
+    return False
 
 
 class AbstractElement(TrameComponent):
@@ -608,6 +609,7 @@ class AbstractElement(TrameComponent):
         :param names: The names events to process
         :type names: *str
         """
+        processed_event = set()
         for _name in names:
             js_key = None
             name = _name
@@ -623,48 +625,44 @@ class AbstractElement(TrameComponent):
                 if value is None:
                     continue
 
-                if isinstance(value, str):
-                    translated_value = (
-                        self.server.state.translator.translate_js_expression(
-                            self.server.state, value
-                        )
-                    )
-                    self._attributes[name] = f'{js_key}="{translated_value}"'
-                elif callable(value):
-                    trigger_name = self.server.trigger_name(value)
-                    self._attributes[name] = f"{js_key}=\"trigger('{trigger_name}')\""
-                elif isinstance(value, tuple):
-                    trigger_name = value[0]
-                    if callable(trigger_name):
-                        trigger_name = self.server.trigger_name(trigger_name)
-                    if len(value) == 1:
-                        self._attributes[name] = (
-                            f"{js_key}=\"trigger('{trigger_name}')\""
-                        )
-                    if len(value) == 2:
-                        translated_value = (
-                            self.server.state.translator.translate_js_expression(
-                                self.server.state, value[1]
-                            )
-                        )
-                        self._attributes[name] = (
-                            f"{js_key}=\"trigger('{trigger_name}', {translated_value})\""
-                        )
-                    if len(value) == 3:
-                        translated_value = (
-                            self.server.state.translator.translate_js_expression(
-                                self.server.state, value[1]
-                            )
-                        )
-                        # We don't want to translate kwargs as we may change keys rather than just values
-                        self._attributes[name] = (
-                            f"{js_key}=\"trigger('{trigger_name}', {translated_value}, {value[2]})\""
-                        )
+                attribute = _event_value_processing(self.server, js_key, value)
+                if attribute is None:
+                    # no match
+                    pass
+                elif isinstance(attribute, str):
+                    self._attributes[name] = attribute
+                    processed_event.add(name)
                 else:
                     print(
                         "Error: Don't know how to handle event name "
                         f"'{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
                     )
+
+        # process v_on_....
+        for key_name in self._py_attr:
+            if key_name in processed_event:
+                continue
+
+            if key_name.startswith("v_on_"):
+                tokens = key_name.split("_")[2:]
+                js_key = f"@{'.'.join(tokens)}"
+                value = self._py_attr[key_name]
+
+                if value is None:
+                    continue
+
+                attribute = _event_value_processing(self.server, js_key, value)
+                if attribute is None:
+                    # no match
+                    pass
+                elif isinstance(attribute, str):
+                    self._attributes[name] = attribute
+                else:
+                    print(
+                        "Error: Don't know how to handle event name "
+                        f"'{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
+                    )
+
         return self
 
     def clear(self):
