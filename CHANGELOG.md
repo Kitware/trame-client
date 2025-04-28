@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v3.8.1 (2025-04-28)
+
+### Bug Fixes
+
+- **model/bind/event**: Fix event and directive processing
+  ([`c6f6138`](https://github.com/Kitware/trame-client/commit/c6f6138875201c23382965cf84d0263bea2a406f))
+
+- **mouse-event**: Add missing enter/leave
+  ([`dadd593`](https://github.com/Kitware/trame-client/commit/dadd593b250bb51b026a84a68ed875cef7b07373))
+
+
 ## v3.8.0 (2025-04-24)
 
 ### Documentation
