@@ -1,6 +1,6 @@
 from trame.app import get_server
-from trame.widgets import client, html
-from trame.ui.html import DivLayout
+from trame_client.widgets import client, html
+from trame_client.ui.html import DivLayout
 from trame_client.utils.testing import enable_testing
 
 server = enable_testing(get_server(client_type="vue3"), "message")

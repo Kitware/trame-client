@@ -5,8 +5,8 @@ from trame_client.widgets.core import TrameComponent
 from trame.decorators import change, controller, trigger
 from trame.app import get_server
 
-from trame.ui.html import DivLayout
-from trame.widgets import html
+from trame_client.ui.html import DivLayout
+from trame_client.widgets import html
 
 CLIENT_TYPE = "vue3"
 

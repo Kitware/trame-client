@@ -95,6 +95,7 @@ V_ON_TYPE_TRANSITION = [
     "transitioncancel",
 ]
 
+V_MODEL_MODIFIER = {"lazy", "number", "trim"}
 
 SHARED_ATTRIBUTES = [
     "accesskey",
@@ -518,7 +519,12 @@ class AbstractElement(TrameComponent):
         :param names: The names attribute to process
         :type names: *str
         """
-        for _name in names:
+        directives = [
+            name
+            for name in self._py_attr.keys()
+            if name.startswith("v_model_") or name.startswith("v_bind_")
+        ]
+        for _name in [*directives, *names]:
             js_key = None
             name = _name
             if isinstance(_name, (list, tuple)):
@@ -530,21 +536,21 @@ class AbstractElement(TrameComponent):
                     js_key = py2js_key(name)
                 value = self._py_attr[name]
 
+                # smart key handling
+                if name.startswith("v_model_"):
+                    model_name, *modifiers = name.split("_")[2:]
+                    if model_name in V_MODEL_MODIFIER and len(modifiers) == 0:
+                        js_key = f"v-model.{model_name}"
+                    else:
+                        js_key = f"v-model:{model_name}{'.' if len(modifiers) else ''}{'.'.join(modifiers)}"
+                elif name.startswith("v_bind_"):
+                    prop_name, *modifiers = name.split("_")[2:]
+                    js_key = f":{prop_name}{'.' if len(modifiers) else ''}{'.'.join(modifiers)}"
+
                 if value is None:
                     continue
 
                 logger.info("js_key = %s", js_key)
-
-                if (
-                    AbstractElement._debug
-                    and js_key.startswith("v-")
-                    and not isinstance(value, (tuple, list))
-                ):
-                    logger.warn(
-                        "Warning: A Vue directive is evaluating your expression "
-                        "and trame would expect a tuple instead of a plain type. "
-                        f'<{self._elem_name} {js_key}="{value}" ... />'
-                    )
 
                 if isinstance(value, (tuple, list)):
                     if len(value) > 1:
@@ -657,11 +663,11 @@ class AbstractElement(TrameComponent):
                     # no match
                     pass
                 elif isinstance(attribute, str):
-                    self._attributes[name] = attribute
+                    self._attributes[key_name] = attribute
                 else:
                     print(
                         "Error: Don't know how to handle event name "
-                        f"'{name}' with value '{value}' in {self.__class__}::{self._elem_name}"
+                        f"'{key_name}' with value '{value}' in {self.__class__}::{self._elem_name}"
                     )
 
         return self
