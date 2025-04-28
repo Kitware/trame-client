@@ -51,13 +51,15 @@ V_ON_MODIFIER = [
 ]  # *KEY_ALIAS
 V_ON_TYPE_MOUSE = [
     "click",
+    "contextmenu",
     "dblclick",
     "mousedown",
-    "mouseup",
+    "mouseenter",
+    "mouseleave",
     "mousemove",
-    "mouseover",
+    "mouseup",
     "mouseout",
-    "mousewheel",
+    "mouseover",
 ]
 V_ON_TYPE_KEYBOARD = [
     "keydown",
@@ -134,7 +136,6 @@ SHARED_EVENTS = [
     *V_ON_TYPE_UI,
     *V_ON_TYPE_ANIM,
     *V_ON_TYPE_TRANSITION,
-    "contextmenu",
 ]
 
 logger = logging.getLogger(__name__)
