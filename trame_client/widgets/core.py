@@ -134,9 +134,13 @@ SHARED_EVENTS = [
     *V_ON_TYPE_KEYBOARD,
     *V_ON_TYPE_FORM,
     *V_ON_TYPE_TOUCH,
-    *V_ON_TYPE_UI,
     *V_ON_TYPE_ANIM,
     *V_ON_TYPE_TRANSITION,
+    # -------------------------------------------------------------------------
+    # Should not enable by default as they tend to conflict with widget
+    # properties. Use v_on_{}= to enable any missing mapping.
+    # -------------------------------------------------------------------------
+    # *V_ON_TYPE_UI,
 ]
 
 logger = logging.getLogger(__name__)
