@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.8.2 (2025-05-06)
+
+### Bug Fixes
+
+- **event**: Remove scroll, resize, select from default
+  ([`804206e`](https://github.com/Kitware/trame-client/commit/804206e02e23d0f14685e8bac81393b951ff27b6))
+
+
 ## v3.8.1 (2025-04-28)
 
 ### Bug Fixes
