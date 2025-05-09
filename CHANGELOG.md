@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v3.9.0 (2025-05-09)
+
+### Bug Fixes
+
+- **html**: New generated html widgets
+  ([`c2e5c84`](https://github.com/Kitware/trame-client/commit/c2e5c844f8b53f3a9d2386093970469de9eb9d39))
+
+### Features
+
+- **html**: Update html/vue available components
+  ([`b3652d2`](https://github.com/Kitware/trame-client/commit/b3652d296da0652004ce5f1e8c18657dfa866751))
+
+
 ## v3.8.2 (2025-05-06)
 
 ### Bug Fixes
