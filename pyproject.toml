@@ -72,6 +72,8 @@ ignore = []
 fixable = ["ALL"]
 unfixable = []
 
+[tool.ruff.lint.per-file-ignores]
+"trame_client/widgets/html.py" = ["E742"]
 
 [tool.ruff.format]
 quote-style = "double"
