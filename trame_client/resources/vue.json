@@ -24,7 +24,9 @@
             "v_for",
             "v_model",
             "v_pre",
-            "v_once"
+            "v_once",
+            "v_memo",
+            "v_cloak"
         ]
     }
 }

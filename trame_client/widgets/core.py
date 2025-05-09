@@ -792,6 +792,11 @@ class HtmlElement(AbstractElement):
             self.server.enable_module(HtmlElement.MODULE)
 
 
+# -----------------------------------------------------------------------------
+# Vue based components
+# -----------------------------------------------------------------------------
+
+
 class Template(AbstractElement):
     """
     The standard html content template element. This is mostly used by |slot_doc_link|.
@@ -827,3 +832,254 @@ class Template(AbstractElement):
                         )
             else:
                 self._attr_names.append((f"v_slot_{safe_name}", f"v-slot:{slot_name}"))
+
+
+# -----------------------------------------------------------------------------
+
+
+class Component(AbstractElement):
+    """
+    Vue.js dynamic component element.
+
+    :param children: The children nested within this element
+    :type children:  str | list[trame.html.*] | trame.html.* | None
+    :param is_name: name of the component to map
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("component", children, **kwargs)
+        self._attr_names += [
+            ("is_name", "is"),
+        ]
+
+
+# -----------------------------------------------------------------------------
+
+
+class Transition(AbstractElement):
+    """
+    Vue.js Transition component element.
+    Provides animated transition effects to a single element or component.
+
+    Properties:
+
+    :param children: The children nested within this element
+    :type children:  str | list[trame.html.*] | trame.html.* | None
+    :param name: Used to automatically generate transition CSS class names.
+        e.g. `name: 'fade'` will auto expand to `.fade-enter`,
+        `.fade-enter-active`, etc.
+    :param css: Whether to apply CSS transition classes. (Default: true)
+    :param type: Specifies the type of transition events to wait for to
+        determine transition end timing. Default behavior is auto detecting
+        the type that has longer duration. (transition, animation)
+    :param duraction: Specifies explicit durations of the transition.
+        Default behavior is wait for the first `transitionend` or
+        `animationend` event on the root transition element.
+    :param mode: Controls the timing sequence of leaving/entering transitions.
+        Default behavior is simultaneous. ('in-out' | 'out-in' | 'default')
+    :param appear: Whether to apply transition on initial render.
+        (default: false)
+    :param enter_from_class: Props for customizing transition classes.
+    :param enter_active_class: Props for customizing transition classes.
+    :param enter_to_class: Props for customizing transition classes.
+    :param appear_from_class: Props for customizing transition classes.
+    :param appear_active_class: Props for customizing transition classes.
+    :param appear_to_class: Props for customizing transition classes.
+    :param leave_from_class: Props for customizing transition classes.
+    :param leave_active_class: Props for customizing transition classes.
+    :param leave_to_class: Props for customizing transition classes.
+
+    Events:
+
+    :param before_enter:
+    :param before_leave:
+    :param enter:
+    :param leave:
+    :param appear:
+    :param after_enter:
+    :param after_leave:
+    :param after_appear:
+    :param enter_cancelled:
+    :param leave_cancelled:
+    :param appear_cancelled:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("transition", children, **kwargs)
+        self._attr_names += [
+            "name",
+            "css",
+            "type",
+            "duraction",
+            "mode",
+            "appear",
+            ("enter_from_class", "enterFromClass"),
+            ("enter_active_class", "enterActiveClass"),
+            ("enter_to_class", "enterToClass"),
+            ("appear_from_class", "appearFromClass"),
+            ("appear_active_class", "appearActiveClass"),
+            ("appear_to_class", "appearToClass"),
+            ("leave_from_class", "leaveFromClass"),
+            ("leave_active_class", "leaveActiveClass"),
+            ("leave_to_class", "leaveToClass"),
+        ]
+        self._event_names += [
+            ("before_enter", "before-enter"),
+            ("before_leave", "before-leave"),
+            ("enter", "enter"),
+            ("leave", "leave"),
+            ("appear", "appear"),
+            ("after_enter", "after-enter"),
+            ("after_leave", "after-leave"),
+            ("after_appear", "after-appear"),
+            ("enter_cancelled", "enter-cancelled"),
+            ("leave_cancelled", "leave-cancelled"),
+            ("appear_cancelled", "appear-cancelled"),
+        ]
+
+
+# -----------------------------------------------------------------------------
+
+
+class TransitionGroup(AbstractElement):
+    """
+    Vue.js TransitionGroup component element.
+    Provides transition effects for multiple elements or components in a list.
+
+    Properties:
+
+    :param children: The children nested within this element
+    :type children:  str | list[trame.html.*] | trame.html.* | None
+
+    Events:
+
+    :param before_enter:
+    :param before_leave:
+    :param enter:
+    :param leave:
+    :param appear:
+    :param after_enter:
+    :param after_leave:
+    :param after_appear:
+    :param enter_cancelled:
+    :param leave_cancelled:
+    :param appear_cancelled:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("transition-group", children, **kwargs)
+        self._attr_names += [
+            "tag",
+            ("move_class", "moveClass"),
+        ]
+        self._event_names += [
+            ("before_enter", "before-enter"),
+            ("before_leave", "before-leave"),
+            ("enter", "enter"),
+            ("leave", "leave"),
+            ("appear", "appear"),
+            ("after_enter", "after-enter"),
+            ("after_leave", "after-leave"),
+            ("after_appear", "after-appear"),
+            ("enter_cancelled", "enter-cancelled"),
+            ("leave_cancelled", "leave-cancelled"),
+            ("appear_cancelled", "appear-cancelled"),
+        ]
+
+
+# -----------------------------------------------------------------------------
+
+
+class KeepAlive(AbstractElement):
+    """
+    Vue.js KeepAlive component element.
+    Caches dynamically toggled components wrapped inside.
+
+    Properties:
+
+    :param children: The children nested within this element
+    :type children:  str | list[trame.html.*] | trame.html.* | None
+    :param include: If specified, only components with names matched
+        by `include` will be cached.
+    :param exclude: Any component with a name matched by `exclude`
+        will not be cached.
+    :param max: The maximum number of component instances to cache.
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("keep-alive", children, **kwargs)
+        self._attr_names += [
+            "include",
+            "exclude",
+            "max",
+        ]
+
+
+# -----------------------------------------------------------------------------
+
+
+class Teleport(AbstractElement):
+    """
+    Vue.js Teleport component element.
+    Renders its slot content to another part of the DOM.
+
+    Properties:
+
+    :param children: The children nested within this element
+    :type children:  str | list[trame.html.*] | trame.html.* | None
+    :param to: Required. Specify target container.
+        Can either be a selector or an actual element.
+    :param disabled: When `true`, the content will remain in its original
+        location instead of moved into the target container.
+        Can be changed dynamically.
+    :param defer: When `true`, the Teleport will defer until other parts
+        of the application have been mounted before resolving its target.
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("teleport", children, **kwargs)
+        self._attr_names += [
+            "to",
+            "disabled",
+            "defer",
+        ]
+
+
+# -----------------------------------------------------------------------------
+
+
+class Suspense(AbstractElement):
+    """
+    Vue.js Suspense component element.
+    Used for orchestrating nested async dependencies in a component tree.
+
+    Properties:
+
+    :param children: The children nested within this element
+    :type children:  str | list[trame.html.*] | trame.html.* | None
+    :type timeout:
+    :type suspensible:
+
+    Events:
+
+    :param resolve:
+    :param pending:
+    :param fallback:
+
+    """
+
+    def __init__(self, children=None, **kwargs):
+        super().__init__("suspense", children, **kwargs)
+        self._attr_names += [
+            "timeout",
+            "suspensible",
+        ]
+        self._event_names += [
+            "resolve",
+            "pending",
+            "fallback",
+        ]

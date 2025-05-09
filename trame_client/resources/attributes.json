@@ -41,19 +41,8 @@
       "target",
       "type"
     ],
-    "applet": [
-      "align",
-      "alt",
-      "archive",
-      "code",
-      "codebase",
-      "height",
-      "hspace",
-      "name",
-      "object",
-      "vspace",
-      "width"
-    ],
+    "abbr": [],
+    "address": [],
     "area": [
       "alt",
       "coords",
@@ -68,6 +57,8 @@
       "target",
       "type"
     ],
+    "article": [],
+    "aside": [],
     "audio": [
       "autoplay",
       "controls",
@@ -79,7 +70,8 @@
     ],
     "b": [],
     "base": ["href", "target"],
-    "basefont": ["color", "face", "size"],
+    "bdi":[],
+    "bdo": ["dir"],
     "blockquote": ["cite"],
     "body": ["alink", "background", "bgcolor", "link", "text", "vlink"],
     "br": ["clear"],
@@ -97,18 +89,26 @@
     ],
     "canvas": ["height", "width"],
     "caption": ["align"],
+    "cite": [],
+    "code": [],
     "col": ["align", "char", "charoff", "span", "valign", "width"],
     "colgroup": ["align", "char", "charoff", "span", "valign", "width"],
     "data": ["value"],
+    "datalist": [],
+    "dd": [],
     "del": ["cite", "datetime"],
     "details": ["open"],
+    "dfn": [],
     "dialog": ["open"],
-    "dir": ["compact"],
     "div": ["align"],
     "dl": ["compact"],
+    "dt": [],
+    "em": [],
     "embed": ["height", "src", "type", "width"],
     "fieldset": ["disabled", "form", "name"],
-    "font": ["color", "face", "size"],
+    "figcaption": [],
+    "figure": [],
+    "footer": [],
     "form": [
       "accept",
       "accept-charset",
@@ -120,17 +120,6 @@
       "novalidate",
       "target"
     ],
-    "frame": [
-      "frameborder",
-      "longdesc",
-      "marginheight",
-      "marginwidth",
-      "name",
-      "noresize",
-      "scrolling",
-      "src"
-    ],
-    "frameset": ["cols", "rows"],
     "h1": ["align"],
     "h2": ["align"],
     "h3": ["align"],
@@ -138,6 +127,8 @@
     "h5": ["align"],
     "h6": ["align"],
     "head": ["profile"],
+    "header": [],
+    "hgroup": [],
     "hr": ["align", "noshade", "size", "width"],
     "html": ["manifest", "version"],
     "i": [],
@@ -217,7 +208,7 @@
       "width"
     ],
     "ins": ["cite", "datetime"],
-    "isindex": ["prompt"],
+    "kbd": [],
     "label": ["for", "form"],
     "legend": ["align"],
     "li": ["type", "value"],
@@ -240,10 +231,13 @@
       "target",
       "type"
     ],
+    "main": [],
     "map": ["name"],
+    "mark": [],
     "menu": ["compact"],
     "meta": ["charset", "content", "http-equiv", "media", "name", "scheme"],
     "meter": ["high", "low", "max", "min", "optimum", "value"],
+    "nav": [],
     "object": [
       "align",
       "archive",
@@ -270,9 +264,15 @@
     "output": ["for", "form", "name"],
     "p": ["align"],
     "param": ["name", "type", "value", "valuetype"],
+    "picture": [],
     "pre": ["width"],
     "progress": ["max", "value"],
     "q": ["cite"],
+    "rp": [],
+    "rt": [],
+    "ruby": [],
+    "s": [],
+    "samp": [],
     "script": [
       "async",
       "charset",
@@ -285,6 +285,8 @@
       "src",
       "type"
     ],
+    "search": [],
+    "section": [],
     "select": [
       "autocomplete",
       "disabled",
@@ -295,9 +297,15 @@
       "size"
     ],
     "slot": ["name"],
+    "small": [],
     "source": ["height", "media", "sizes", "src", "srcset", "type", "width"],
     "span": [],
+    "strong": [],
     "style": ["media", "type"],
+    "sub": [],
+    "summary":[],
+    "sup": [],
+    "svg": ["width", "height", "xmlns"],
     "table": [
       "align",
       "bgcolor",
@@ -360,9 +368,12 @@
     ],
     "thead": ["align", "char", "charoff", "valign"],
     "time": ["datetime"],
+    "title": [],
     "tr": ["align", "bgcolor", "char", "charoff", "valign"],
     "track": ["default", "kind", "label", "src", "srclang"],
+    "u": [],
     "ul": ["compact", "type"],
+    "var": [],
     "video": [
       "autoplay",
       "controls",
@@ -375,5 +386,6 @@
       "preload",
       "src",
       "width"
-    ]
+    ],
+    "wbr": []
   }
