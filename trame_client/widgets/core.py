@@ -493,7 +493,7 @@ class AbstractElement(TrameComponent):
                 self._py_attr[name] = value
 
         else:
-            self.__dict__[name] = value
+            super().__setattr__(name, value)
 
         if name in ["_attr_names", "_event_names"]:
             self._update_allowed_keys()
