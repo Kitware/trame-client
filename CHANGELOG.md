@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.9.1 (2025-06-04)
+
+### Bug Fixes
+
+- **widget**: Add getter/setter definition
+  ([`3aced83`](https://github.com/Kitware/trame-client/commit/3aced83117b50194b813cb6b91a7d3396211866f))
+
+
 ## v3.9.0 (2025-05-09)
 
 ### Bug Fixes
