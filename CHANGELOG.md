@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.9.2 (2025-08-04)
+
+### Bug Fixes
+
+- **js**: Allow script/css loading failure
+  ([`e46ccf3`](https://github.com/Kitware/trame-client/commit/e46ccf308a87b42fe84aa6b9fa41349f8276d9d4))
+
+
 ## v3.9.1 (2025-06-04)
 
 ### Bug Fixes
