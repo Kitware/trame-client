@@ -9,6 +9,13 @@
 
 var LOADED_URLS = [];
 
+function resolveWithError(resolve, msg) {
+  return () => {
+    console.error(msg);
+    resolve(false);
+  };
+}
+
 export function loadScript(url) {
   return new Promise(function (resolve, reject) {
     if (LOADED_URLS.indexOf(url) === -1) {
@@ -17,7 +24,10 @@ export function loadScript(url) {
       newScriptTag.type = "text/javascript";
       newScriptTag.src = url;
       newScriptTag.onload = resolve;
-      newScriptTag.onerror = reject;
+      newScriptTag.onerror = resolveWithError(
+        resolve,
+        `Failed loading script ${url}`
+      );
       document.body.appendChild(newScriptTag);
     } else {
       resolve(false);
@@ -33,7 +43,10 @@ export function loadScriptAsModule(url) {
       newScriptTag.type = "module";
       newScriptTag.src = url;
       newScriptTag.onload = resolve;
-      newScriptTag.onerror = reject;
+      newScriptTag.onerror = resolveWithError(
+        resolve,
+        `Failed loading script module ${url}`
+      );
       document.body.appendChild(newScriptTag);
     } else {
       resolve(false);
@@ -49,7 +62,10 @@ function loadCSS(url) {
       newScriptTag.rel = "stylesheet";
       newScriptTag.href = url;
       newScriptTag.onload = resolve;
-      newScriptTag.onerror = reject;
+      newScriptTag.onerror = resolveWithError(
+        resolve,
+        `Failed loading css ${url}`
+      );
       document.head.appendChild(newScriptTag);
     } else {
       resolve(false);
