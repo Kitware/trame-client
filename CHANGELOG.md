@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.10.0 (2025-08-18)
+
+### Features
+
+- **launcher**: Enable retry option on launcher
+  ([`8b1ae2d`](https://github.com/Kitware/trame-client/commit/8b1ae2dbc6b621c92f75d53843b61031e8a925d7))
+
+
 ## v3.9.2 (2025-08-04)
 
 ### Bug Fixes
