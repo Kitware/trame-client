@@ -1,0 +1,31 @@
+{
+  "configuration": {
+    "host": "localhost",
+    "port": 8080,
+    "endpoint": "paraview",
+    "content": "www",
+    "proxy_file": "www/proxy-mapping.txt",
+    "sessionURL": "ws://${host}:${port}/ws",
+    "timeout": 50,
+    "log_dir": "www",
+    "fields": []
+  },
+  "resources": [{ "host": "localhost", "port_range": [9001, 9001] }],
+  "properties": {},
+  "apps": {
+    "trame": {
+      "cmd": [
+        "python",
+        "retry.py",
+        "--port",
+        "$port",
+        "--server",
+        "--authKey",
+        "${secret}",
+        "--timeout",
+        "2"
+      ],
+      "ready_line": "App running at"
+    }
+  }
+}

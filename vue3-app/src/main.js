@@ -52,7 +52,7 @@ async function start() {
 
   // Handle client/server connection error
   function reportWsError(message) {
-    if (trame) {
+    if (trame && trame.state) {
       console.log("about to replace template", message);
       trame.state.set("trame_error_report_msg", message);
       let templateName = "trame__template_main";
@@ -77,7 +77,7 @@ async function start() {
       console.log("template replaced", trame.state.get(templateName));
     } else {
       app.unmount();
-      document.querySelector("#app").innerHTML(message);
+      document.querySelector("#app").innerHTML = message;
     }
   }
 
@@ -85,7 +85,7 @@ async function start() {
   try {
     config = await trame.connect(config);
   } catch (e) {
-    reportWsError("try/catch on connect()");
+    reportWsError(e?.response?.error || "try/catch on connect()");
     return;
   }
 
