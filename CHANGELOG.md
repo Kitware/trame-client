@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.10.1 (2025-08-18)
+
+### Bug Fixes
+
+- **retry**: Provide empty retry array in html
+  ([`9e7ee79`](https://github.com/Kitware/trame-client/commit/9e7ee79d9e055dbd45f6a995e09b835cdfa6baec))
+
+
 ## v3.10.0 (2025-08-18)
 
 ### Features
