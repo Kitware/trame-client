@@ -46,4 +46,5 @@ export default {
       }
     },
   },
+  template: `<slot />`,
 };

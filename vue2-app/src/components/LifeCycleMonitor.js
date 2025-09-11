@@ -56,4 +56,5 @@ export default {
       });
     }
   },
+  template: `<slot />`,
 };

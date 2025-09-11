@@ -62,4 +62,5 @@ export default {
       });
     }
   },
+  template: `<slot />`,
 };

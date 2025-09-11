@@ -19,4 +19,5 @@ export default {
     emit('created');
     return { emit: emitTopic };
   },
+  template: `<slot />`,
 };
