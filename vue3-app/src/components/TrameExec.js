@@ -13,4 +13,5 @@ export default {
     }
     return { exec };
   },
+  template: `<slot />`,
 };

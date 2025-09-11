@@ -32,4 +32,5 @@ export default {
       emit("change", props.value);
     }
   },
+  template: `<slot />`,
 };
