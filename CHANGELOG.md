@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.10.2 (2025-09-11)
+
+### Bug Fixes
+
+- Add default slot to components
+  ([`fbcdeea`](https://github.com/Kitware/trame-client/commit/fbcdeea32a2c02c329e3e637512757d884d92928))
+
+
 ## v3.10.1 (2025-08-18)
 
 ### Bug Fixes
