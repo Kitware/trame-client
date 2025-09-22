@@ -1,6 +1,6 @@
 pytest
 pytest-asyncio
-seleniumbase
+pytest-playwright
 pixelmatch
 Pillow
 pytest-xprocess

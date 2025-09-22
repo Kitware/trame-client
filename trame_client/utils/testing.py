@@ -5,6 +5,8 @@ from xprocess import ProcessStarter
 from PIL import Image
 from pixelmatch.contrib.PIL import pixelmatch
 
+from playwright.sync_api import expect, Page
+
 
 # ---------------------------------------------------------
 # Pytest helpers
@@ -84,56 +86,66 @@ class FixtureHelper:
         return Path(server_path).name, Starter, TrameServerMonitor
 
 
+def assert_images_match(img_test: Image, ref_path: Path, threshold=0.1):
+    img_ref = Image.open(ref_path)
+    img_diff = Image.new("RGBA", img_ref.size)
+    diff_path = ref_path.parent / f"diff_{ref_path.with_suffix('.png').name}"
+
+    mismatch = pixelmatch(img_ref, img_test, img_diff, threshold=threshold)
+    img_diff.save(diff_path)
+    assert mismatch < threshold
+
+
 # ---------------------------------------------------------
-# Seleniumbase helper functions
+# Playwright helpers
 # ---------------------------------------------------------
 
 
-def set_browser_size(sb, width=300, height=300):
-    delta_width = 0
-    delta_height = 0
-    agent = sb.get_user_agent()
-    if "Firefox" in agent:
-        delta_height = 85
-    elif "Chrome" in agent:
-        delta_height = 0
-    elif "Safari" in agent:
-        delta_height = 0
+def assert_screenshot_matches(
+    page: Page, ref_dir: Path, name: str, threshold: float = 0.1
+):
+    img_dir = ref_dir / name
+    ref_images = list(img_dir.glob("ref*.png"))
+    if not ref_images:
+        print(f"No reference images exist in {img_dir}. Creating one...")
+        img_dir.mkdir(parents=True, exist_ok=True)
+        ref_img_path = img_dir / "ref1.png"
+        page.screenshot(path=ref_img_path)
+        return
 
-    sb.set_window_size(width + delta_width, height + delta_height)
-    wait_for_ready(sb)
+    # Save the test image
+    test_img_path = img_dir / "test_image.png"
+    page.screenshot(path=test_img_path)
+    img_test = Image.open(test_img_path)
 
-
-def baseline_comparison(sb, check_baseline_path, threshold=0.1):
-    baseline_test = Path(check_baseline_path)
-    baseline_refs = baseline_test.parent.glob("baseline_ref*.png")
-    baseline_diff = baseline_test.with_name("baseline_diff.png")
-
-    img_test = Image.open(baseline_test)
-    min_mismatch = 1000000
-
-    for baseline_ref in baseline_refs:
-        img_ref = Image.open(baseline_ref)
-        img_diff = Image.new("RGBA", img_ref.size)
-        baseline_diff = (
-            baseline_ref.parent / f"baseline_diff{baseline_ref.name[12:-4]}.png"
-        )
-
-        mismatch = pixelmatch(img_ref, img_test, img_diff, threshold=threshold)
-        img_diff.save(baseline_diff)
-        min_mismatch = min(min_mismatch, mismatch)
-
-    sb.assert_true(
-        min_mismatch < threshold,
-        f"Baseline threshold {min_mismatch} < {threshold}",
-    )
-
-
-def wait_for_ready(sb, timeout=60):
-    for i in range(timeout):
-        print(f"wait_for_ready {i}")
-        if sb.is_element_present(".trame__loader"):
-            sb.sleep(1)
+    # If there are reference images, find one that matches
+    # Only write out image diffs if none succeed
+    for ref_img_path in ref_images:
+        try:
+            # `expect(page).to_have_screenshot()` is not yet supported
+            # in Python playwright, even though it is available in
+            # JavaScript... :-\
+            # Use our own comparison for now.
+            # expect(page).to_have_screenshot(threshold=threshold)
+            assert_images_match(img_test, ref_img_path, threshold)
+        except AssertionError:
+            # We'll just try the next one
+            continue
         else:
-            print("Ready")
+            # It matched. Return!
             return
+
+    raise AssertionError(f"No reference images matched in {img_dir}")
+
+
+def assert_snapshot_matches(page: Page, ref_dir: Path, name: str):
+    html = page.locator("html")
+    ref_path = ref_dir / f"{name}.yml"
+    if not ref_path.exists():
+        print(f"'{ref_path}' does not exist. Creating...")
+        with open(ref_path, "w") as wf:
+            wf.write(html.aria_snapshot())
+        return
+
+    with open(ref_path, "r") as rf:
+        expect(html).to_match_aria_snapshot(rf.read())
