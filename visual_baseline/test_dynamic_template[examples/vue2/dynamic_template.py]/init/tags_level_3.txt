@@ -1,1 +1,0 @@
-[["noscript", []], ["strong", []], ["div", []], ["div", [["class", ["staticDiv"]]]], ["div", [["class", ["countDiv"]]]], ["div", [["class", ["ttsDiv"]]]], ["button", [["class", ["updateBtn"]]]], ["button", [["class", ["plusBtn"]]]]]

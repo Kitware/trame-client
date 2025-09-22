@@ -1,5 +1,5 @@
 from trame.app import get_server
-from trame_client.widgets import client, html
+from trame.widgets import client, html
 from trame_client.ui.html import DivLayout
 from trame_client.utils.testing import enable_testing
 

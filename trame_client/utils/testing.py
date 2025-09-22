@@ -84,27 +84,7 @@ class FixtureHelper:
         return Path(server_path).name, Starter, TrameServerMonitor
 
 
-# ---------------------------------------------------------
-# Seleniumbase helper functions
-# ---------------------------------------------------------
-
-
-def set_browser_size(sb, width=300, height=300):
-    delta_width = 0
-    delta_height = 0
-    agent = sb.get_user_agent()
-    if "Firefox" in agent:
-        delta_height = 85
-    elif "Chrome" in agent:
-        delta_height = 0
-    elif "Safari" in agent:
-        delta_height = 0
-
-    sb.set_window_size(width + delta_width, height + delta_height)
-    wait_for_ready(sb)
-
-
-def baseline_comparison(sb, check_baseline_path, threshold=0.1):
+def baseline_comparison(check_baseline_path, threshold=0.1):
     baseline_test = Path(check_baseline_path)
     baseline_refs = baseline_test.parent.glob("baseline_ref*.png")
     baseline_diff = baseline_test.with_name("baseline_diff.png")
@@ -123,17 +103,20 @@ def baseline_comparison(sb, check_baseline_path, threshold=0.1):
         img_diff.save(baseline_diff)
         min_mismatch = min(min_mismatch, mismatch)
 
-    sb.assert_true(
-        min_mismatch < threshold,
-        f"Baseline threshold {min_mismatch} < {threshold}",
-    )
+    assert min_mismatch < threshold, f"Baseline threshold {min_mismatch} < {threshold}"
 
 
-def wait_for_ready(sb, timeout=60):
-    for i in range(timeout):
-        print(f"wait_for_ready {i}")
-        if sb.is_element_present(".trame__loader"):
-            sb.sleep(1)
-        else:
-            print("Ready")
-            return
+# ---------------------------------------------------------
+# Playwright helpers
+# ---------------------------------------------------------
+
+
+def assert_html_matches(html_str: str, ref_path: Path):
+    if not ref_path.exists():
+        print(f"'{ref_path}' does not exist. Creating...")
+        with open(ref_path, "w") as wf:
+            wf.write(html_str)
+        return
+
+    with open(ref_path, "r") as rf:
+        assert html_str == rf.read()

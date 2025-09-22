@@ -1,1 +1,0 @@
-[["noscript", []], ["strong", []], ["div", []], ["div", [["class", ["countValue"]], ["style", "padding: 20px; background: red;"]]], ["button", [["class", ["plusButton"]]]]]
