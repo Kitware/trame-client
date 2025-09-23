@@ -1,0 +1,4 @@
+- document:
+  - text: Static text 6 count = 6 tts = 2
+  - button "Update template"
+  - button "count++"
