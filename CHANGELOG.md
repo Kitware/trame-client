@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v3.10.3 (2025-09-23)
+
+### Bug Fixes
+
+- Trigger release
+  ([`e2a620c`](https://github.com/Kitware/trame-client/commit/e2a620c6e6b96068e103996961f42b37b3dd5bcf))
+
+Signed-off-by: Patrick Avery <patrick.avery@kitware.com>
+
+### Continuous Integration
+
+- **playwright**: Use playwright for tests instead of selenium
+  ([`cdd2e01`](https://github.com/Kitware/trame-client/commit/cdd2e01e6e98defaac0a4aa555f17b7f6c21ca61))
+
+Signed-off-by: Patrick Avery <patrick.avery@kitware.com>
+
+
 ## v3.10.2 (2025-09-11)
 
 ### Bug Fixes
