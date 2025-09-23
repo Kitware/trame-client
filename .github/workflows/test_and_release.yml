@@ -77,7 +77,7 @@ jobs:
       run: |
         pip install .
         pip install -r tests/requirements.txt
-        # Install playwright requirements
+        # Install requirements for playwright
         playwright install
         # Run the tests with coverage so we get a coverage report too
         pip install coverage
