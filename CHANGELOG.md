@@ -1,6 +1,16 @@
 # CHANGELOG
 
 
+## v3.10.4 (2025-09-23)
+
+### Bug Fixes
+
+- Change selenium requirement to playwright
+  ([`1870469`](https://github.com/Kitware/trame-client/commit/1870469f0c3c81d6abbf47f1ec610cce1aa43916))
+
+Signed-off-by: Patrick Avery <patrick.avery@kitware.com>
+
+
 ## v3.10.3 (2025-09-23)
 
 ### Bug Fixes
