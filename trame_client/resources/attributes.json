@@ -205,7 +205,8 @@
       "type",
       "usemap",
       "value",
-      "width"
+      "width",
+      "webkitdirectory"
     ],
     "ins": ["cite", "datetime"],
     "kbd": [],

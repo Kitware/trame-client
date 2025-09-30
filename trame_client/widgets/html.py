@@ -4471,6 +4471,7 @@ class Input(HtmlElement):
     :param type:
     :param usemap:
     :param value:
+    :param webkitdirectory:
     :param width:
 
     Events:
@@ -4560,6 +4561,7 @@ class Input(HtmlElement):
             "type",
             "usemap",
             "value",
+            "webkitdirectory",
             "width",
         ]
         self._event_names += [
