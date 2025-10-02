@@ -1,6 +1,6 @@
 [project]
 name = "trame-client"
-version = "3.10.4"
+version = "3.11.0"
 description = "Internal client of trame"
 authors = [
     {name = "Kitware Inc."},

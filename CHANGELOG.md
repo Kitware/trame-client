@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.11.0 (2025-10-02)
+
+### Features
+
+- **connect_parent**: Add flag to disable auto widget connection
+  ([`5ef388f`](https://github.com/Kitware/trame-client/commit/5ef388f972d6dec2ee115f833a8f580681a15409))
+
+
 ## v3.10.4 (2025-09-23)
 
 ### Bug Fixes
