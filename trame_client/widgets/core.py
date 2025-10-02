@@ -166,11 +166,12 @@ class ElementContextManager:
         if len(self.element_stack):
             self._server = self.element_stack[-1].server
 
-    def add_child(self, elem):
+    def add_child(self, elem, connect_parent=True):
         if len(self.element_stack):
             if elem.server is None:
                 elem.set_server(self.element_stack[-1].server)
-            self.element_stack[-1].add_child(elem)
+            if connect_parent:
+                self.element_stack[-1].add_child(elem)
 
         if elem.server is None:
             elem.set_server(self._server)
@@ -379,13 +380,25 @@ class AbstractElement(TrameComponent):
 
     :param ctx_name: name to attach instance to server.context if provided
 
+    DOM hierarchy handling:
+
+    :param connect_parent: True by default which means any widget instantiation will connect
+                           to the context manager widget that the current instance directly belong to.
+                           In some specific case, it could be useful to disable that behavior by
+                           setting it to False.
     """
 
     _next_id = 1
     _debug = "--debug" in sys.argv or "-d" in sys.argv
 
     def __init__(
-        self, _elem_name, children=None, raw_attrs=None, ctx_name=None, **kwargs
+        self,
+        _elem_name,
+        children=None,
+        raw_attrs=None,
+        ctx_name=None,
+        connect_parent=True,
+        **kwargs,
     ):
         AbstractElement._next_id += 1
         self._id = AbstractElement._next_id
@@ -417,7 +430,7 @@ class AbstractElement(TrameComponent):
                 self._children.append(children)
 
         # Add ourself to context if any
-        HTML_CTX.add_child(self)
+        HTML_CTX.add_child(self, connect_parent)
 
         super().__init__(self._server, ctx_name=ctx_name)
 
