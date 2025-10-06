@@ -1,6 +1,16 @@
 # CHANGELOG
 
 
+## v3.11.1 (2025-10-06)
+
+### Bug Fixes
+
+- **input**: Support webkitdirectory
+  ([`2c084c8`](https://github.com/Kitware/trame-client/commit/2c084c8d9580707cacef3fdd1e899ef9e4dd183f))
+
+Add support for webkitdirectory parameter for Input element
+
+
 ## v3.11.0 (2025-10-02)
 
 ### Features
