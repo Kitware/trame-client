@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v3.11.2 (2025-10-08)
+
+### Bug Fixes
+
+- **layout**: Add template name property in AbstractLayout
+  ([#48](https://github.com/Kitware/trame-client/pull/48),
+  [`852a461`](https://github.com/Kitware/trame-client/commit/852a4615f7821e61f1e4c24ab4fe44579c39cd3f))
+
+Co-authored-by: Justine Antoine <justine.antoine@kitware.com>
+
+
 ## v3.11.1 (2025-10-06)
 
 ### Bug Fixes
