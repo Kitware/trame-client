@@ -21,9 +21,10 @@ def css_unit(v):
 def iframe_url_builder_default(layout):
     base_url = layout.iframe_base_url
     server = layout.server
-    template_name = layout._template_name
-    src = f"{base_url}:{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
-    elem_id = f"{server.name}_{template_name}"
+    src = (
+        f"{base_url}:{server.port}/index.html?ui={layout.template_name}&reconnect=auto"
+    )
+    elem_id = f"{server.name}_{layout._template_name}"
 
     return {
         "id": elem_id,
@@ -36,9 +37,10 @@ def iframe_url_builder_default(layout):
 def iframe_url_builder_serverproxy(layout):
     base_url = layout.iframe_base_url
     server = layout.server
-    template_name = layout._template_name
-    src = f"{base_url}/{server.port}/index.html?ui={template_name[16:]}&reconnect=auto"
-    elem_id = f"{server.name}_{template_name}"
+    src = (
+        f"{base_url}/{server.port}/index.html?ui={layout.template_name}&reconnect=auto"
+    )
+    elem_id = f"{server.name}_{layout._template_name}"
 
     return {
         "id": elem_id,
@@ -53,11 +55,10 @@ def iframe_url_builder_jupyter_extension(layout):
 
     www_endpoint = os.environ.get("TRAME_JUPYTER_ENDPOINT", "/trame-jupyter-server")
     server = layout.server
-    template_name = layout._template_name
     url_base = f"{www_endpoint}/{server.client_type}/index.html"
-    url_query = f"ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+    url_query = f"ui={layout.template_name}&server={server.name}&wsProxy&reconnect=auto"
     src = f"{url_base}?{url_query}"
-    elem_id = f"{server.name}_{template_name}"
+    elem_id = f"{server.name}_{layout._template_name}"
 
     # Check if server/kernel are collocated
     www_path = os.environ.get("TRAME_JUPYTER_WWW")
@@ -66,7 +67,7 @@ def iframe_url_builder_jupyter_extension(layout):
         server_www = Path(www_path) / "servers" / server.name
         url_base = f"{www_endpoint}/servers/{server.name}/index.html"
         url_query = (
-            f"ui={template_name[16:]}&server={server.name}&wsProxy&reconnect=auto"
+            f"ui={layout.template_name}&server={server.name}&wsProxy&reconnect=auto"
         )
         src = f"{url_base}?{url_query}"
         if not server_www.exists():
@@ -86,13 +87,12 @@ def iframe_url_builder_jupyter_extension(layout):
 
 def iframe_url_builder_jupyter_hub(layout):
     server = layout.server
-    template_name = layout._template_name
     url_base = (
         f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{server.port}/index.html"
     )
-    url_query = f"ui={template_name[16:]}&reconnect=auto"
+    url_query = f"ui={layout.template_name}&reconnect=auto"
     src = f"{url_base}?{url_query}"
-    elem_id = f"{server.name}_{template_name}"
+    elem_id = f"{server.name}_{layout._template_name}"
 
     return {
         "id": elem_id,
@@ -105,11 +105,10 @@ def iframe_url_builder_jupyter_hub(layout):
 def iframe_url_builder_jupyter_hub_host(layout):
     host = os.environ.get("HOSTNAME")
     server = layout.server
-    template_name = layout._template_name
     url_base = f"{os.environ['JUPYTERHUB_SERVICE_PREFIX']}proxy/{host}:{server.port}/index.html"
-    url_query = f"ui={template_name[16:]}&reconnect=auto"
+    url_query = f"ui={layout.template_name}&reconnect=auto"
     src = f"{url_base}?{url_query}"
-    elem_id = f"{server.name}_{template_name}"
+    elem_id = f"{server.name}_{layout._template_name}"
 
     return {
         "id": elem_id,
@@ -175,6 +174,11 @@ class AbstractLayout:
         self.iframe_attrs = {}
         self.iframe_base_url = base_url
         self._iframe_builder = get_iframe_builder(iframe_builder)
+
+    @property
+    def template_name(self):
+        """Layout template name without the 'trame__template_' prefix"""
+        return self._template_name[16:]
 
     @property
     def iframe_builder(self):
