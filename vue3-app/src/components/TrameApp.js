@@ -105,8 +105,10 @@ export default {
 
       // Attach lifecycles
       trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_connected");
-      window.addEventListener("beforeunload", () =>
-        trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited")
+      window.addEventListener("beforeunload", () => {
+        trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
+        trame.client?.getConnection()?.getSession()?.close();
+      }
       );
 
       // Handle router if available
