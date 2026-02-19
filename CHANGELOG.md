@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.11.3 (2026-02-19)
+
+### Bug Fixes
+
+- **exit**: Close websocket on exit
+  ([`e8524b4`](https://github.com/Kitware/trame-client/commit/e8524b4b20a10b5664200a22b60dba6b0fa7c3a7))
+
+
 ## v3.11.2 (2025-10-08)
 
 ### Bug Fixes
