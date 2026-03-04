@@ -18,8 +18,7 @@
     "lint": "eslint . --ext .js --fix --ignore-path .gitignore --ignore-pattern public"
   },
   "dependencies": {
-    "@kitware/vtk.js": "^30.3.2",
-    "wslink": "^2.0.0"
+    "@kitware/wslink": "^2.5.4"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",

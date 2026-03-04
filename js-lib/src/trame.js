@@ -2,7 +2,7 @@ import { State } from "./state";
 import { decorate, registerDecorator } from "./decorators";
 import { ListenerManager } from "./listeners";
 import wslink from "./wslink";
-import vtkWSLinkClient from "@kitware/vtk.js/IO/Core/WSLinkClient";
+import vtkWSLinkClient from "@kitware/wslink/src/WsLinkClient";
 
 /**
  * @typedef TrameConnectConfig
