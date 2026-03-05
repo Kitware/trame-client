@@ -1,13 +1,14 @@
 {
   "name": "@kitware/trame",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "./dist/trame.umd.js",
   "unpkg": "./dist/trame.umd.js",
   "module": "./dist/trame.mjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kitware/trame-client.git"
+    "url": "https://github.com/Kitware/trame-client.git",
+    "directory": "js-lib"
   },
   "publishConfig": {
     "access": "public"
