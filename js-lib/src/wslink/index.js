@@ -1,6 +1,7 @@
-import vtkURLExtract from "@kitware/vtk.js/Common/Core/URLExtract";
-import SmartConnect from "wslink/src/SmartConnect";
-import vtkWSLinkClient from "@kitware/vtk.js/IO/Core/WSLinkClient";
+import SmartConnect from "@kitware/wslink/src/SmartConnect";
+import vtkWSLinkClient from "@kitware/wslink/src/WsLinkClient";
+
+import vtkURLExtract from "../URLExtract";
 
 import protocols from "./protocols";
 
