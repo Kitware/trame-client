@@ -3,6 +3,7 @@ import vtkURLExtract from "@kitware/vtk.js/Common/Core/URLExtract";
 import wslink from "./core/wslink";
 import { handlePageResources, loadScript } from "./core/trame/setup";
 import { createTrameInstance } from "./core/trame";
+import { registerPreprocessingLogic } from "./preprocessor/loader";
 import TrameUse from "./use";
 
 const { createApp } = window.Vue;
@@ -118,6 +119,8 @@ async function start() {
   }
 
   app.mount("#app");
+
+  registerPreprocessingLogic();
 }
 
 // Initialize service worker to override headers for SharedArrayBuffer
