@@ -19,7 +19,7 @@ __all__ = [
     "DeepReactive",
     "LifeCycleMonitor",
     "SizeObserver",
-    "PreProcessor"
+    "PreProcessor",
 ]
 
 
@@ -357,6 +357,7 @@ class SizeObserver(AbstractElement):
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class PreProcessingUnit:
     name: str
@@ -371,7 +372,11 @@ class PreProcessingUnit:
                 msg = f"String must be a valid URL. Received: '{self.module_script}'"
                 raise ValueError(msg)
         else:
-            dest_path = Path(__file__).parent.with_name("module") / "user_preprocessors_module_scripts" / self.module_script.name
+            dest_path = (
+                Path(__file__).parent.with_name("module")
+                / "user_preprocessors_module_scripts"
+                / self.module_script.name
+            )
             shutil.copy2(self.module_script, dest_path)
 
     @property
@@ -382,20 +387,23 @@ class PreProcessingUnit:
         return f"/__trame_client_preprocessors/{self.module_script.name}"
 
 
-
 # -----------------------------------------------------------------------------
 # TramePreProcessor
 # -----------------------------------------------------------------------------
 class PreProcessor(AbstractElement):
     preprocessor_map: ClassVar[dict[str, PreProcessingUnit]] = {}
 
-    def __init__(self, *, preprocessor: PreProcessingUnit | str, variable: str = "input_data", **kwargs):
+    def __init__(
+        self,
+        *,
+        preprocessor: PreProcessingUnit | str,
+        variable: str = "input_data",
+        **kwargs,
+    ):
         preprocessing_id = f"trame_client_preprocessing_{id(self)}"
 
         super().__init__(
-            "trame-pre-processor",
-            **kwargs,
-            preprocessing_function_key=preprocessing_id
+            "trame-pre-processor", **kwargs, preprocessing_function_key=preprocessing_id
         )
 
         self.variable = variable
@@ -406,28 +414,24 @@ class PreProcessor(AbstractElement):
         if isinstance(preprocessor, str):
             preprocessor = PreProcessor.preprocessor_map[preprocessor]
 
-        self.state["trame__client_preprocessing"].append({
-            "path": preprocessor.module_path,
-            "function": preprocessor.function_name,
-            "id": preprocessing_id
-        })
+        self.state["trame__client_preprocessing"].append(
+            {
+                "path": preprocessor.module_path,
+                "function": preprocessor.function_name,
+                "id": preprocessing_id,
+            }
+        )
 
         self._attr_names += [
             "trigger_on_change",
             "inputs",
-            ("preprocessing_function_key", "preprocessingFunctionKey")
+            ("preprocessing_function_key", "preprocessingFunctionKey"),
         ]
-        self._event_names += [
-            "success",
-            "failure",
-            "error",
-            "completed"
-        ]
+        self._event_names += ["success", "failure", "error", "completed"]
 
         self._attributes["slot"] = (
             f'v-slot:default="{{ input_data: {self.variable}, trigger_preprocessing }}"'
         )
-
 
     @property
     def input_data(self) -> str:
@@ -437,9 +441,13 @@ class PreProcessor(AbstractElement):
         return f"trigger_preprocessing({input_var})"
 
     @classmethod
-    def register_preprocessing_unit(cls, name: str, module_script: Path, function_name: str) -> PreProcessingUnit:
+    def register_preprocessing_unit(
+        cls, name: str, module_script: Path, function_name: str
+    ) -> PreProcessingUnit:
         if name in cls.preprocessor_map:
             logger.warning("overwriting already registered preprocessor %s", name)
 
-        cls.preprocessor_map[name] = PreProcessingUnit(name, module_script, function_name)
+        cls.preprocessor_map[name] = PreProcessingUnit(
+            name, module_script, function_name
+        )
         return cls.preprocessor_map[name]
