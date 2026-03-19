@@ -14,10 +14,13 @@ export const fileHandler = {
     if (value === null || value === undefined) return value;
     if (value.constructor && value.constructor === File) {
       const { name, lastModified, size, type } = value;
-      const arrayBuffer = await new Promise((resolve) => {
+      const arrayBuffer = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.addEventListener("loadend", () => {
           resolve(reader.result);
+        });
+        reader.addEventListener("error", () => {
+          reject(reader.error);
         });
         reader.readAsArrayBuffer(value);
       });
