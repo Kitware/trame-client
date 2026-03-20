@@ -14,20 +14,36 @@ export const fileHandler = {
     if (value === null || value === undefined) return value;
     if (value.constructor && value.constructor === File) {
       const { name, lastModified, size, type } = value;
-      const arrayBuffer = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.addEventListener('loadend', () => {
-          resolve(reader.result);
+
+      // Will be null in the event of an error on read, DataView otherwise
+      let content = null;
+      // Will be an error string if content failed to read, null otherwise
+      let error = null;
+
+      try {
+        const arrayBuffer = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.addEventListener('loadend', () => {
+            resolve(reader.result);
+          });
+          reader.addEventListener('error', () => {
+            reject(reader.error);
+          });
+          reader.readAsArrayBuffer(value);
         });
-        reader.readAsArrayBuffer(value);
-      });
-      const content = new DataView(arrayBuffer);
+
+        content = new DataView(arrayBuffer);
+      } catch (e) {
+        error = e?.message ?? String(e);
+      }
+
       return {
         name,
         lastModified,
         size,
         type,
         content,
+        error,
         // used by server to prevent sending those fields back to JS
         _filter: ['content'],
       };
@@ -44,13 +60,10 @@ export const fileListHandler = {
       return value;
     }
     if ((value.constructor && value.constructor === FileList) || value.length) {
-      const results = [];
-      /* eslint-disable no-await-in-loop */
-      for (let i = 0; i < value.length; i++) {
-        results.push(await fileHandler.decorate(value[i]));
-      }
-      /* eslint-enable no-await-in-loop */
-      return results;
+      const results = await Promise.allSettled(
+        Array.from(value).map((file) => fileHandler.decorate(file))
+      );
+      return results.map((result) => result.value);
     }
     return value;
   },
