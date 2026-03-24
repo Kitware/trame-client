@@ -1,6 +1,29 @@
 # CHANGELOG
 
 
+## v3.11.4 (2026-03-24)
+
+### Bug Fixes
+
+- **decorators**: Gracefully Handle `File` Read Errors
+  ([#53](https://github.com/Kitware/trame-client/pull/53),
+  [`f330811`](https://github.com/Kitware/trame-client/commit/f330811254ce8e28f7b13f1afb4355e27bf7b9c7))
+
+Used so files with read errors don't halt execution, instead are handled gracefully and submitted to
+  the server
+
+### Chores
+
+- **js**: Add type definitions to js-lib
+  ([`d2512ff`](https://github.com/Kitware/trame-client/commit/d2512ff681c54d920dea7f3a6e7ce9b5164b1922))
+
+- **js**: Advance @kitware/trame to v1.0.0
+  ([`b558e1d`](https://github.com/Kitware/trame-client/commit/b558e1d27b2e4dd409a6fad3f5caa20cba084bef))
+
+- **js**: Remove vtk.js dependency from js-lib
+  ([`ba2b813`](https://github.com/Kitware/trame-client/commit/ba2b8133824ae449344a7ba000ffa97ae850e04b))
+
+
 ## v3.11.3 (2026-02-19)
 
 ### Bug Fixes
