@@ -1,4 +1,4 @@
-async function load_module(path) {
+async function loadEsModule(path) {
     try {
         return await import(path);
     } catch (e) {
@@ -11,15 +11,18 @@ async function load_module(path) {
     }
 };
 
-async function register_preprocessor(module_path, function_name, preprocessor_id) {
-    let module;
-    try {
-        module = await load_module(module_path);
-    } catch (e) {
-        throw new Error(`Could not load module ${module_path}. Did you pass the correct module path?`, {
-            cause: e
-        });
+function lookupUmdModule(global_var_name) {
+    const module = window[global_var_name];
+
+    if (module) {
+        return Promise.resolve(module);
     }
+
+    const module_not_found_error = new ReferenceError(`UMD module not found at window.${global_var_name}`);
+    return Promise.reject(module_not_found_error);
+}
+
+function register_preprocessor({ module, module_path }, function_name, preprocessor_id) {
     const func = module[function_name];
 
     if (!func) {
@@ -39,9 +42,18 @@ export async function registerPreprocessingLogic() {
 
     for (const preprocessor of preprocessors) {
         console.debug("registering preprocessor ", preprocessor);
-        promises.push(
-            register_preprocessor(preprocessor.path, preprocessor.function, preprocessor.id)
-        );
+
+        const get_module_fn = preprocessor.module_type === "es" ? loadEsModule : lookupUmdModule;
+
+        const module_registration_promise = get_module_fn(preprocessor.path).catch((e) => {
+            throw new Error(`Could not load module ${preprocessor.path}. Did you pass the correct module path?`, {
+                cause: e
+            });
+        }).then((module) => {
+            register_preprocessor({ module, module_path: preprocessor.path }, preprocessor.function, preprocessor.id);
+        });
+
+        promises.push(module_registration_promise);
     }
 
     const preload_results = await Promise.allSettled(promises);
