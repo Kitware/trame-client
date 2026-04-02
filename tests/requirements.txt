@@ -5,4 +5,3 @@ pixelmatch
 Pillow
 pytest-xprocess
 trame>=3.6
-trame-server>=3
