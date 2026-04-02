@@ -1,4 +1,17 @@
+import logging
+import shutil
+from dataclasses import dataclass
+from pathlib import Path
+from typing import ClassVar
+from urllib.parse import urlparse
+
 from .core import AbstractElement
+from ..module import (
+    get_user_preprocessor_scripts_path,
+    get_user_preprocessor_es_scripts_path,
+    get_user_preprocessor_umd_scripts_path,
+    get_user_preprocessor_serve_url_prefix,
+)
 
 __all__ = [
     "Loading",
@@ -12,6 +25,7 @@ __all__ = [
     "DeepReactive",
     "LifeCycleMonitor",
     "SizeObserver",
+    "PreProcessor",
 ]
 
 
@@ -345,3 +359,141 @@ class SizeObserver(AbstractElement):
         ]
         self.server.state[_name] = None
         self.name = self.server.translator.translate_key(_name)
+
+
+logger = logging.getLogger(__name__)
+
+
+def clean_user_preprocessors_scripts(folder: Path):
+    files_to_keep = {"__init__.py", ".gitignore"}
+
+    for item in folder.iterdir():
+        if item.is_file() and item.name not in files_to_keep:
+            item.unlink()
+
+        if item.is_dir() and item.name not in files_to_keep:
+            clean_user_preprocessors_scripts(item)
+
+
+@dataclass
+class PreProcessingUnit:
+    name: str
+    module_script: Path | str
+    function_name: str
+    is_umd_module: bool
+    umd_global_var_name: str | None
+
+    def __post_init__(self):
+        if isinstance(self.module_script, str):
+            parsed = urlparse(self.module_script)
+
+            if not all([parsed.scheme, parsed.netloc]):
+                msg = f"String must be a valid URL. Received: '{self.module_script}'"
+                raise ValueError(msg)
+        else:
+            get_dest_base_path = (
+                get_user_preprocessor_umd_scripts_path
+                if self.is_umd_module
+                else get_user_preprocessor_es_scripts_path
+            )
+            shutil.copy2(
+                self.module_script, get_dest_base_path() / self.module_script.name
+            )
+
+    @property
+    def module_path(self) -> str:
+        if self.is_umd_module:
+            return self.umd_global_var_name
+
+        if isinstance(self.module_script, str):
+            # We have a URL, let's return it as-is
+            return self.module_script
+
+        url_prefix = get_user_preprocessor_serve_url_prefix()
+        es_module_prefix = get_user_preprocessor_es_scripts_path().name
+
+        return (url_prefix / es_module_prefix / self.module_script.name).as_posix()
+
+    @property
+    def module_type(self) -> str:
+        return "umd" if self.is_umd_module else "es"
+
+
+# -----------------------------------------------------------------------------
+# TramePreProcessor
+# -----------------------------------------------------------------------------
+class PreProcessor(AbstractElement):
+    preprocessor_map: ClassVar[dict[str, PreProcessingUnit]] = {}
+
+    def __init__(
+        self,
+        *,
+        preprocessor: PreProcessingUnit | str,
+        variable: str = "input_data",
+        **kwargs,
+    ):
+        preprocessing_id = f"trame_client_preprocessing_{id(self)}"
+
+        super().__init__(
+            "trame-pre-processor", **kwargs, preprocessing_function_key=preprocessing_id
+        )
+
+        self.variable = variable
+
+        if not self.state["trame__client_preprocessing"]:
+            self.state["trame__client_preprocessing"] = []
+
+        if isinstance(preprocessor, str):
+            preprocessor = PreProcessor.preprocessor_map[preprocessor]
+
+        self.state["trame__client_preprocessing"].append(
+            {
+                "module_type": preprocessor.module_type,
+                "path": preprocessor.module_path,
+                "function": preprocessor.function_name,
+                "id": preprocessing_id,
+            }
+        )
+
+        self._attr_names += [
+            "trigger_on_change",
+            "inputs",
+            ("preprocessing_function_key", "preprocessingFunctionKey"),
+        ]
+        self._event_names += ["success", "failure", "error", "completed"]
+
+        self._attributes["slot"] = (
+            f'v-slot:default="{{ input_data: {self.variable}, trigger_preprocessing }}"'
+        )
+
+    @property
+    def input_data(self) -> str:
+        return f"{self.variable}.value"
+
+    def trigger_preprocessing(self, input_var: str) -> str:
+        return f"trigger_preprocessing({input_var})"
+
+    @classmethod
+    def register_preprocessing_unit(
+        cls,
+        name: str,
+        module_script: Path,
+        function_name: str,
+        umd: bool = False,
+        umd_global_var_name: str | None = None,
+    ) -> PreProcessingUnit:
+        if name in cls.preprocessor_map:
+            logger.warning("overwriting already registered preprocessor %s", name)
+
+        # TODO: cleanup before first registration
+        if not cls.preprocessor_map:
+            clean_user_preprocessors_scripts(get_user_preprocessor_scripts_path())
+
+        cls.preprocessor_map[name] = PreProcessingUnit(
+            name,
+            module_script,
+            function_name,
+            is_umd_module=umd,
+            umd_global_var_name=umd_global_var_name,
+        )
+        return cls.preprocessor_map[name]

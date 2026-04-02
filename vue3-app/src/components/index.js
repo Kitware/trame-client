@@ -11,6 +11,7 @@ import TrameClientTriggers from "./TrameClientTriggers";
 import TrameDeepReactive from "./TrameDeepReactive";
 import TrameLifeCycleMonitor from "./TrameLifeCycleMonitor";
 import TrameSizeObserver from "./TrameSizeObserver";
+import TramePreProcessor from "./TramePreProcessor";
 
 export default {
   TrameApp,
@@ -26,4 +27,5 @@ export default {
   TrameDeepReactive,
   TrameLifeCycleMonitor,
   TrameSizeObserver,
+  TramePreProcessor
 };
