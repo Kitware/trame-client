@@ -1,4 +1,16 @@
+import logging
+import uuid
+from pathlib import Path
+
 from .core import AbstractElement
+from ..external_script_handler import (
+    UserDefinedFunction,
+    ExternalScript,
+    get_external_script_from_name,
+    register_user_provided_script,
+)
+
+logger = logging.getLogger(__name__)
 
 __all__ = [
     "Loading",
@@ -12,6 +24,8 @@ __all__ = [
     "DeepReactive",
     "LifeCycleMonitor",
     "SizeObserver",
+    "Handler",
+    "register_external_script",
 ]
 
 
@@ -345,3 +359,144 @@ class SizeObserver(AbstractElement):
         ]
         self.server.state[_name] = None
         self.name = self.server.translator.translate_key(_name)
+
+
+def register_external_script(
+    script_file_path: Path | str,
+    *,
+    function_names: list[str],
+    name: str | None = None,
+    umd: bool = False,
+    umd_global_var_name: str | None = None,
+) -> ExternalScript:
+    """
+    Register an external script that can be used together with the Handler widget.
+
+    Args:
+        script_file_path (Path | str):
+            The local of the script you want to register. Can be either a local or a remote script. Accepts:
+            - `Path`: local path to your script on the filesystem
+            - `str`: an valid URL to the script
+        function_names (list[str]): public API of your script that you want to expose to the Handler widget.
+            Accepts a list of function names that must be defined in your script.
+        name (str): a registration identifier for your script.
+            You may use it later to reference your script when instantiating the Handler widget.
+        umd (bool, optional): If true, your script is considered as a UMD module and treated as such.
+            For ES module, just keep the default value. Defaults to False.
+        umd_global_var_name (str | None):
+            Specify the global variable name the UMD module will use to register itself on the browser window object.
+            Required if and only if `umd` is set to True. Defaults to None.
+    """
+
+    # TODO - support inline scripts without functions to be called
+    assert len(function_names) > 0
+
+    if not name:
+        name = str(uuid.uuid4())
+
+    return register_user_provided_script(
+        script_file_path,
+        function_names=function_names,
+        name=name,
+        umd=umd,
+        umd_global_var_name=umd_global_var_name,
+    )
+
+
+# -----------------------------------------------------------------------------
+# Handler
+# -----------------------------------------------------------------------------
+class Handler(AbstractElement):
+    """
+    Facilitates the execution of registered JS functions and external scripts.
+
+    The Handler simplifies calling client-side logic registered via `register_external_script`.
+    It manages the execution flow between the Python state and JavaScript functions,
+    providing events to monitor execution status.
+
+    Args:
+        function (UserDefinedFunction | tuple[str, str] | ExternalScript | str):
+            The JavaScript function to execute. Accepts:
+            - `UserDefinedFunction`: Obtained from `ExternalScript.function`.
+            - `tuple[str, str]`: A `(module_name, function_name)` pair.
+            - `ExternalScript`: An object from `register_external_script` (must
+              contain exactly one function).
+            - `str`: The registration identifier of an external script.
+        variable (str): The name of the state variable to be passed as the
+            primary input to the function.
+        trigger_on_change (bool, optional): If True, the function is automatically
+            invoked whenever `variable` changes. Defaults to True.
+        inputs (dict, optional): A dictionary of additional key-value pairs
+            to be passed as arguments to the function. Defaults to None.
+
+    Events:
+        completed: A generic event emitted regardless of the execution outcome.
+        success: Emitted when the function executes and returns successfully.
+        failure: Emitted when the function reports a handled error.
+        error: Emitted when an unhandled exception occurs during execution.
+    """
+
+    def __init__(
+        self,
+        *,
+        function: UserDefinedFunction | tuple[str, str] | ExternalScript | str,
+        variable: str = "input_data",
+        **kwargs,
+    ):
+        external_script_id = f"trame_external_script{id(self)}"
+
+        super().__init__("trame-handler", **kwargs, function_key=external_script_id)
+
+        self.variable = variable
+
+        if not self.state["trame__client_external_scripts"]:
+            self.state["trame__client_external_scripts"] = []
+
+        if isinstance(function, UserDefinedFunction):
+            external_script = function.script
+            function_handle = function
+
+        if isinstance(function, tuple):
+            external_script = get_external_script_from_name(function[0])
+            function_handle = external_script.function(function[1])
+
+        if isinstance(function, ExternalScript):
+            external_script = function
+            function_handle = external_script.function()
+
+        if isinstance(function, str):
+            external_script = get_external_script_from_name(function)
+            function_handle = external_script.function()
+
+        self.state["trame__client_external_scripts"].append(
+            {
+                "module_type": external_script.module_type,
+                "path": external_script.module_path,
+                "function": function_handle.name,
+                "id": external_script_id,
+            }
+        )
+
+        self._attr_names += [
+            "trigger_on_change",
+            "inputs",
+            ("function_key", "functionKey"),
+        ]
+        self._event_names += ["success", "failure", "error", "completed"]
+
+        self._attributes["slot"] = (
+            f'v-slot:default="{{ input_data: {self.variable}, run }}"'
+        )
+
+    @property
+    def input_data(self) -> str:
+        """
+        Get the JS expression that references the handler's input data.
+        """
+        return f"{self.variable}.value"
+
+    def run(self, input_var: str) -> str:
+        """
+        Return a JS expression that will invoke the handler with the provided input_var as argument.
+        """
+        return f"run({input_var})"

@@ -44,7 +44,7 @@ build-backend = 'setuptools.build_meta'
 where = ["."]
 
 [tool.setuptools.package-data]
-
+"*" = ["trame_client/module/user_provided_scripts/es", "trame_client/module/user_provided_scripts/umd/.gitkeep"]
 
 [tool.semantic_release]
 version_toml = [
