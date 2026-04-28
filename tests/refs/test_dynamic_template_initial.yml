@@ -1,4 +1,4 @@
 - document:
-  - text: Static text 2 count = 2 tts = 0
-  - button "Update template"
-  - button "count++"
+    - text: Static text 2 count = 2 tts = 0
+    - button "Update template"
+    - button "count++"

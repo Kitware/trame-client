@@ -26,7 +26,7 @@ export default {
             emit("change", v);
           });
         }
-      }
+      },
     );
     if (props.triggerChangeOnCreate) {
       emit("change", props.value);

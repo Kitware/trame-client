@@ -1,25 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="" data-app-name="trame">
   <head>
-    <base href=".">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
-    <meta name="description" content="Application built with trame, a product from Kitware">
-    <meta name="keywords" content="trame, OpenSource, Stateful Python Application, Kitware">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <base href="." />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1"
+    />
+    <meta
+      name="description"
+      content="Application built with trame, a product from Kitware"
+    />
+    <meta
+      name="keywords"
+      content="trame, OpenSource, Stateful Python Application, Kitware"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <link rel="icon" href="<%= BASE_URL %>logo.png">
+    <link rel="icon" href="<%= BASE_URL %>logo.png" />
     <script src="vue.global.js"></script>
     <title>trame is built by Kitware</title>
   </head>
-  <body style="margin: 0; padding: 0;">
+  <body style="margin: 0; padding: 0">
     <noscript>
-      <strong>We're sorry but trame built by Kitware doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but trame built by Kitware doesn't work properly without
+        JavaScript enabled. Please enable it to continue.</strong
+      >
     </noscript>
     <div id="app"></div>
-    <script>fetch("./loading.tpl").then((r) => r.text()).then((c) => document.querySelector("#app").innerHTML = c)</script>
+    <script>
+      fetch('./loading.tpl')
+        .then((r) => r.text())
+        .then((c) => (document.querySelector('#app').innerHTML = c));
+    </script>
     <!-- built files will be auto injected -->
   </body>
 </html>

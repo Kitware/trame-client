@@ -43,7 +43,7 @@ class MessageChannelWebSocket {
             a: "s",
             b: tmp.buffer,
           },
-          [tmp.buffer]
+          [tmp.buffer],
         );
         return;
       }
@@ -52,7 +52,7 @@ class MessageChannelWebSocket {
           a: "s",
           b: data.buffer,
         },
-        [data.buffer]
+        [data.buffer],
       );
       return;
     }

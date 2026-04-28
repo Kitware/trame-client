@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export TRAME_CLIENT_TYPE=vue3
 
 rm -rf ./www/

@@ -100,7 +100,7 @@ export default {
         .getRemote()
         .Trame.subscribeToActions(([actions]) => actions.map(execAction));
       subscriptions.push(() =>
-        trame?.client?.getRemote()?.Trame?.unsubscribe(wslinkSub)
+        trame?.client?.getRemote()?.Trame?.unsubscribe(wslinkSub),
       );
 
       // Attach lifecycles
@@ -108,8 +108,7 @@ export default {
       window.addEventListener("beforeunload", () => {
         trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
         trame.client?.getConnection()?.getSession()?.close();
-      }
-      );
+      });
 
       // Handle router if available
       const router = window.trame.utils.router;

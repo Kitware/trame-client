@@ -27,14 +27,14 @@ export class State {
         if (v === 0) {
           this.flush();
         }
-      }).unsubscribe
+      }).unsubscribe,
     );
     this._subscriptions.push(
       this.onChange(({ type, keys }) => {
         if (type === "dirty-state") {
           this._watchers.notifyWatchers(keys, this._state);
         }
-      })
+      }),
     );
 
     this._updateFromServer = async (serverState) => {
@@ -90,8 +90,8 @@ export class State {
       this._client
         .getRemote()
         .Trame.subscribeToStateUpdate(([serverState]) =>
-          this._updateFromServer(serverState)
-        )
+          this._updateFromServer(serverState),
+        ),
     );
   }
 

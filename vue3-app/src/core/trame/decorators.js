@@ -61,7 +61,7 @@ export const fileListHandler = {
     }
     if ((value.constructor && value.constructor === FileList) || value.length) {
       const results = await Promise.allSettled(
-        Array.from(value).map((file) => fileHandler.decorate(file))
+        Array.from(value).map((file) => fileHandler.decorate(file)),
       );
       return results.map((result) => result.value);
     }

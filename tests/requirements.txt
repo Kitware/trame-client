@@ -1,8 +1,8 @@
+Pillow
+pixelmatch
 pytest
 pytest-asyncio
 pytest-playwright
-pixelmatch
-Pillow
 pytest-xprocess
 trame>=3.6
 trame-server>=3

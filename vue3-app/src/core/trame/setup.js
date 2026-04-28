@@ -26,7 +26,7 @@ export function loadScript(url) {
       newScriptTag.onload = resolve;
       newScriptTag.onerror = resolveWithError(
         resolve,
-        `Failed loading script ${url}`
+        `Failed loading script ${url}`,
       );
       document.body.appendChild(newScriptTag);
     } else {
@@ -45,7 +45,7 @@ export function loadScriptAsModule(url) {
       newScriptTag.onload = resolve;
       newScriptTag.onerror = resolveWithError(
         resolve,
-        `Failed loading script module ${url}`
+        `Failed loading script module ${url}`,
       );
       document.body.appendChild(newScriptTag);
     } else {
@@ -64,7 +64,7 @@ function loadCSS(url) {
       newScriptTag.onload = resolve;
       newScriptTag.onerror = resolveWithError(
         resolve,
-        `Failed loading css ${url}`
+        `Failed loading css ${url}`,
       );
       document.head.appendChild(newScriptTag);
     } else {
@@ -146,7 +146,7 @@ export async function handlePageResources(state) {
     // Invalid lib name
     if (!lib) {
       console.error(
-        `Lookup error: Vue.use(${libKey}, ${JSON.stringify(libOptions)})`
+        `Lookup error: Vue.use(${libKey}, ${JSON.stringify(libOptions)})`,
       );
       return;
     }

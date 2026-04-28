@@ -17,6 +17,7 @@ npm run build:components # build components library
 ```
 
 ### Lints and fixes files
+
 ```
 npm run lint
 ```

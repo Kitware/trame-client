@@ -4,7 +4,7 @@ import fmt from "./fmt";
 async function download(
   filename,
   contentOrPromise,
-  type = "application/octet-stream"
+  type = "application/octet-stream",
 ) {
   const content = await Promise.resolve(contentOrPromise);
   const blob = new Blob([content], { type });

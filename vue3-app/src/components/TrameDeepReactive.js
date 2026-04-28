@@ -21,7 +21,7 @@ export default {
         const updatedValue = JSON.parse(trameStr);
         Object.assign(value, updatedValue);
         const keyToDelete = Object.keys(value).filter(
-          (name) => !(name in updatedValue)
+          (name) => !(name in updatedValue),
         );
         for (let i = 0; i < keyToDelete.length; i++) {
           delete value[keyToDelete[i]];
