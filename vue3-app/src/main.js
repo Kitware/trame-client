@@ -67,13 +67,13 @@ async function start() {
         trame.state.set(
           templateName,
           trame.state.get("trame__template_error_reconnect") ||
-            `<trame-reconnect message="${message}"/>`
+            `<trame-reconnect message="${message}"/>`,
         );
       } else {
         trame.state.set(
           templateName,
           trame.state.get("trame__template_error") ||
-            `<trame-loading message="${message}"/>`
+            `<trame-loading message="${message}"/>`,
         );
       }
       console.log("template replaced", trame.state.get(templateName));
@@ -105,7 +105,7 @@ async function start() {
     }
   };
   window.addEventListener("error", (event) =>
-    console.error(`${event.type}: ${event.message}`)
+    console.error(`${event.type}: ${event.message}`),
   );
 
   // Setup trame app

@@ -467,7 +467,7 @@ class AbstractElement(TrameComponent):
         self._server = v
 
     # -------------------------------------------------------------------------
-    # Buildin API
+    # Building API
     # -------------------------------------------------------------------------
 
     def __getitem__(self, name):

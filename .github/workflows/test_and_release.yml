@@ -2,9 +2,9 @@ name: Test and Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   pre-commit:
@@ -30,10 +30,7 @@ jobs:
       matrix:
         python-version: ["3.12"]
         config:
-        - {
-            name: "Linux",
-            os: ubuntu-latest
-          }
+          - { name: "Linux", os: ubuntu-latest }
         # - {
         #     name: "MacOSX",
         #     os: macos-latest
@@ -48,45 +45,45 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v6
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v6
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Set Up Node
-      uses: actions/setup-node@v6
-      with:
-        node-version: 24
+      - name: Set Up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
 
-    - name: Build Vue2 App
-      run: |
-        cd vue2-app
-        npm ci
-        npm run build
+      - name: Build Vue2 App
+        run: |
+          cd vue2-app
+          npm ci
+          npm run build
 
-    - name: Build Vue3 App
-      run: |
-        cd vue3-app
-        npm ci
-        npm run build
+      - name: Build Vue3 App
+        run: |
+          cd vue3-app
+          npm ci
+          npm run build
 
-    - name: Install and Run Tests
-      run: |
-        pip install .
-        pip install -r tests/requirements.txt
-        # Install requirements for playwright
-        playwright install
-        # Run the tests with coverage so we get a coverage report too
-        pip install coverage
-        coverage run --source . -m pytest -s .
-        # Print the coverage report
-        coverage report -m
+      - name: Install and Run Tests
+        run: |
+          pip install .
+          pip install -r tests/requirements.txt
+          # Install requirements for playwright
+          playwright install
+          # Run the tests with coverage so we get a coverage report too
+          pip install coverage
+          coverage run --source . -m pytest -s .
+          # Print the coverage report
+          coverage report -m
 
-    - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v3
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
 
   test-npm-build:
     runs-on: ubuntu-latest
@@ -99,7 +96,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-      
+
       - name: Build js-lib
         run: |
           cd js-lib

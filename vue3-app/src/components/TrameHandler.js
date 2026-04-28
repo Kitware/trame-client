@@ -36,7 +36,8 @@ export default {
         additional_inputs = inputs;
       }
 
-      const user_logic_handle = window.TRAME_EXTERNAL_SCRIPTS[props.functionKey];
+      const user_logic_handle =
+        window.TRAME_EXTERNAL_SCRIPTS[props.functionKey];
 
       if (!user_logic_handle) {
         const message = `Could not find user script function ${props.functionKey}`;

@@ -30,7 +30,7 @@ export class Trame {
    *
    * @param {Object} wsProxy aim to provide a mean to provide your own websocket implementation.
    *        While it is not currently fully implemented, we use a similar infrastructure within
-   *        Jupyter to re-use their communication infrastructure rather than creating our own
+   *        Jupyter to reuse their communication infrastructure rather than creating our own
    *        websocket connection.
    */
   constructor(wsProxy) {
@@ -106,7 +106,7 @@ export class Trame {
    *
    *    {...input, secret, sessionURL}
    *
-   * The secret is used to autorized the connection on the given
+   * The secret is used to authorized the connection on the given
    * sessionURL. And works in pair with the --authKey arg.
    *
    *
@@ -138,12 +138,12 @@ export class Trame {
     this._subscriptions.push(
       this.client.onConnectionError((httpReq) => {
         this._errorListeners.emit(httpReq || "Connection error");
-      }).unsubscribe
+      }).unsubscribe,
     );
     this._subscriptions.push(
       this.client.onConnectionClose((httpReq) => {
         this._closeListeners.emit(httpReq || "Connection closed");
-      }).unsubscribe
+      }).unsubscribe,
     );
 
     await this.client.connect(config);
@@ -157,11 +157,11 @@ export class Trame {
       .getRemote()
       .Trame.subscribeToActions(([actions]) => actions.map(this._execAction));
     this._subscriptions.push(() =>
-      this.client?.getRemote()?.Trame.unsubscribe(wslinkSub)
+      this.client?.getRemote()?.Trame.unsubscribe(wslinkSub),
     );
     this.client?.getRemote()?.Trame?.lifeCycleUpdate("client_connected");
     window.addEventListener("beforeunload", () =>
-      this.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited")
+      this.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited"),
     );
 
     return this.config;
@@ -177,7 +177,7 @@ export class Trame {
   }
 
   /**
-   * Diconnect and ask the server to exit after the provided
+   * Disconnect and ask the server to exit after the provided
    * timeout in seconds.
    *
    * If we want to disconnect but let the server running,

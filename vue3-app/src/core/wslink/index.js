@@ -58,7 +58,7 @@ function configDecorator(config) {
 
   // Extract retry from html
   outputConfig.launcherRetry = JSON.parse(
-    document.querySelector("html").dataset.launcherRetry || "[]"
+    document.querySelector("html").dataset.launcherRetry || "[]",
   );
 
   const sessionManagerURL =

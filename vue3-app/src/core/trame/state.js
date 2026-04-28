@@ -112,8 +112,8 @@ export class SharedState {
       this.client
         .getRemote()
         .Trame.subscribeToStateUpdate(([serverState]) =>
-          updateFromServer(serverState)
-        )
+          updateFromServer(serverState),
+        ),
     );
 
     this.subscriptions.push(
@@ -121,7 +121,7 @@ export class SharedState {
         if (type === "dirty-state") {
           this._watchers.notifyWatchers(keys, this.state);
         }
-      })
+      }),
     );
 
     // Keep it so we can call it on disconnect
