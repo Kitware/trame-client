@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.12.1 (2026-04-29)
+
+### Bug Fixes
+
+- **ws**: Enable ws proxy via MessageChannel
+  ([`1af1f5d`](https://github.com/Kitware/trame-client/commit/1af1f5df04b6977bf161b43ba98a2c3ca053e007))
+
+
 ## v3.12.0 (2026-04-29)
 
 ### Continuous Integration
