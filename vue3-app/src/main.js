@@ -4,6 +4,7 @@ import wslink from "./core/wslink";
 import { handlePageResources, loadScript } from "./core/trame/setup";
 import { createTrameInstance } from "./core/trame";
 import { registerUserScripts } from "./user_script_handler";
+import { createMessageChannelWSFactory } from "./messageChannel";
 import TrameUse from "./use";
 
 const { createApp } = window.Vue;
@@ -12,7 +13,7 @@ async function start() {
   // Check if we need to override websocket
   try {
     // Can throw exception if parent is cross-origin
-    if (window?.parent?.trameJupyter?.init) {
+    if (!window.WSLINK && window?.parent?.trameJupyter?.init) {
       window.WSLINK = window.parent.trameJupyter.init(window);
     }
   } catch (e) {
@@ -123,11 +124,31 @@ async function start() {
   registerUserScripts();
 }
 
+const urlParams = vtkURLExtract.extractURLParameters();
 // Initialize service worker to override headers for SharedArrayBuffer
 // > Cross-Origin-Opener-Policy: same-origin
 // > Cross-Origin-Embedder-Policy: require-corp
-if (vtkURLExtract.extractURLParameters().enableSharedArrayBufferServiceWorker) {
+if (urlParams.enableSharedArrayBufferServiceWorker) {
   loadScript("coi-serviceworker.min.js");
 }
 
-start();
+if (urlParams.wsChannel) {
+  window.addEventListener("message", (event) => {
+    // Waiting for message initializing channel communication
+    // for websocket proxying
+    if (event.data !== "trame-ws-channel-init") {
+      // not for us! skip
+      return;
+    }
+
+    // Grab communication port and register fake WebSocket
+    window.WSLINK = {
+      createWebSocket: createMessageChannelWSFactory(event.ports[0]),
+    };
+
+    // Start trame client
+    start();
+  });
+} else {
+  start();
+}
