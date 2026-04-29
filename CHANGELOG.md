@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v3.12.0 (2026-04-29)
+
+### Continuous Integration
+
+- **tests**: Update python version
+  ([`dfa0b05`](https://github.com/Kitware/trame-client/commit/dfa0b052b917e6d509f224f0f6e0bb5fe32acef1))
+
+### Features
+
+- **Handler**: Add a client script dispatcher widget
+  ([`8b8aa26`](https://github.com/Kitware/trame-client/commit/8b8aa26fcb0c0e840b7067bb49c070ee65c3db92))
+
+This new Handler widget aims to allow library consumers to register JS module files with minimal
+  boilerplate, and later call functions defined in those registered scripts at runtime in the trame
+  client. Scripts can be either ES or UMD modules and can be registered from the local filesystem or
+  remote URL.
+
+
 ## v3.11.4 (2026-03-24)
 
 ### Bug Fixes
