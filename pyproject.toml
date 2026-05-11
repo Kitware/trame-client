@@ -26,10 +26,12 @@ classifiers = [
 [project.optional-dependencies]
 test = [
     "pytest",
+    "pytest-asyncio",
     "pytest-playwright",
     "pytest-xprocess",
     "Pillow",
     "pixelmatch",
+    "trame>=3.13",
 ]
 dev = [
     "pre-commit",
