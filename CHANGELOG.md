@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v3.12.2 (2026-05-11)
+
+### Bug Fixes
+
+- **user-script**: Remove invalid version
+  ([`94bed56`](https://github.com/Kitware/trame-client/commit/94bed56cbfd44520c6f8feb80fcd08233f8077e0))
+
+### Chores
+
+- Update pre-commit
+  ([`76eba1d`](https://github.com/Kitware/trame-client/commit/76eba1d1d95f07b0309d43ece545ef92015f25dd))
+
+Update pre-commit configuration to align with latest trame standards
+
+
 ## v3.12.1 (2026-04-29)
 
 ### Bug Fixes
