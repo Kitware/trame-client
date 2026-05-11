@@ -9,11 +9,11 @@
     "build:components": "vue-cli-service build --target lib --name trame-components --filename trame-components src/use.js --dest ./dist"
   },
   "dependencies": {
-    "@kitware/vtk.js": "^30.3.2",
-    "core-js": "^3.36.1",
+    "@kitware/vtk.js": "^35.14.4",
+    "core-js": "^3.49.0",
     "v-runtime-template": "^1.10.0",
     "vue": "^2.7.16",
-    "wslink": "^2.1.2"
+    "wslink": "^2.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
