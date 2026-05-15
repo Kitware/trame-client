@@ -8,15 +8,15 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore --ignore-pattern public"
   },
   "dependencies": {
-    "@kitware/vtk.js": "^30.3.2",
-    "wslink": "^2.4.0"
+    "@kitware/vtk.js": "^35.14.4",
+    "wslink": "^2.5.0"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.1.4",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "eslint": "^8.33.0",
-    "eslint-plugin-vue": "^9.3.0",
-    "prettier": "^2.7.1",
-    "vite": "^4.1.0"
+    "@rushstack/eslint-patch": "^1.4.0",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-vue": "^10.9.1",
+    "prettier": "^3.8.3",
+    "vite": "^8.0.11"
   }
 }
