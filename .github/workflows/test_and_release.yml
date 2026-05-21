@@ -72,8 +72,7 @@ jobs:
 
       - name: Install and Run Tests
         run: |
-          pip install .
-          pip install -r tests/requirements.txt
+          pip install .[test]
           # Install requirements for playwright
           playwright install
           # Run the tests with coverage so we get a coverage report too

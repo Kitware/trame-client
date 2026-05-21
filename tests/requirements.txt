@@ -1,8 +1,0 @@
-Pillow
-pixelmatch
-pytest
-pytest-asyncio
-pytest-playwright
-pytest-xprocess
-trame>=3.6
-trame-server>=3
