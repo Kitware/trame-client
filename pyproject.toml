@@ -25,6 +25,7 @@ classifiers = [
 
 [project.optional-dependencies]
 test = [
+    "numpy",
     "pytest",
     "pytest-asyncio",
     "pytest-playwright",

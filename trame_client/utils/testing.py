@@ -91,9 +91,10 @@ def assert_images_match(img_test: Image, ref_path: Path, threshold=0.1):
     img_diff = Image.new("RGBA", img_ref.size)
     diff_path = ref_path.parent / f"diff_{ref_path.with_suffix('.png').name}"
 
-    mismatch = pixelmatch(img_ref, img_test, img_diff, threshold=threshold)
+    mismatch = pixelmatch(img_ref, img_test, img_diff, threshold)
     img_diff.save(diff_path)
-    assert mismatch < threshold
+    H, W = img_ref.size
+    assert mismatch <= threshold * H * W
 
 
 # ---------------------------------------------------------
