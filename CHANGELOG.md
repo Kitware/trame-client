@@ -1,6 +1,30 @@
 # CHANGELOG
 
 
+## v3.12.3 (2026-05-26)
+
+### Bug Fixes
+
+- **testing**: Fix assert_images_match
+  ([`f7df995`](https://github.com/Kitware/trame-client/commit/f7df9956c85594b765a0b448fc0e99bd5cbbfc90))
+
+Fix assertion error in assert_images_match where was asserted that the total number of mismatched
+  pixels between the two images was inferior to a float between 0.0 and 1.0
+
+### Chores
+
+- Update JS dependencies ([#56](https://github.com/Kitware/trame-client/pull/56),
+  [`96a678e`](https://github.com/Kitware/trame-client/commit/96a678e1e2bc7f1ccc27939e44f1fa37d8c4727a))
+
+- Update test dependencies
+  ([`b77b7bc`](https://github.com/Kitware/trame-client/commit/b77b7bcb59a0f33440953c60d183891996031ea4))
+
+### Continuous Integration
+
+- Remove tests requirements.txt ([#59](https://github.com/Kitware/trame-client/pull/59),
+  [`2859dc1`](https://github.com/Kitware/trame-client/commit/2859dc19205c4d711ac2e9d403bb8abf3f2f9455))
+
+
 ## v3.12.2 (2026-05-11)
 
 ### Bug Fixes
