@@ -375,6 +375,7 @@ def register_external_script(
     Args:
         script_file_path (Path | str):
             The local of the script you want to register. Can be either a local or a remote script. Accepts:
+
             - `Path`: local path to your script on the filesystem
             - `str`: an valid URL to the script
         function_names (list[str]): public API of your script that you want to expose to the Handler widget.
@@ -414,13 +415,15 @@ class Handler(AbstractElement):
     It manages the execution flow between the Python state and JavaScript functions,
     providing events to monitor execution status.
 
+    For usage with the docker setup, please see `README_DOCKER.md <https://github.com/Kitware/trame-client/blob/master/examples/handler/README_DOCKER.md>`_.
+
     Args:
         function (UserDefinedFunction | tuple[str, str] | ExternalScript | str):
             The JavaScript function to execute. Accepts:
+
             - `UserDefinedFunction`: Obtained from `ExternalScript.function`.
             - `tuple[str, str]`: A `(module_name, function_name)` pair.
-            - `ExternalScript`: An object from `register_external_script` (must
-              contain exactly one function).
+            - `ExternalScript`: An object from `register_external_script` (must contain exactly one function).
             - `str`: The registration identifier of an external script.
         variable (str): The name of the state variable to be passed as the
             primary input to the function.
@@ -430,10 +433,11 @@ class Handler(AbstractElement):
             to be passed as arguments to the function. Defaults to None.
 
     Events:
-        completed: A generic event emitted regardless of the execution outcome.
-        success: Emitted when the function executes and returns successfully.
-        failure: Emitted when the function reports a handled error.
-        error: Emitted when an unhandled exception occurs during execution.
+
+        - completed: A generic event emitted regardless of the execution outcome.
+        - success: Emitted when the function executes and returns successfully.
+        - failure: Emitted when the function reports a handled error.
+        - error: Emitted when an unhandled exception occurs during execution.
     """
 
     def __init__(
