@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v3.13.0 (2026-06-09)
+
+### Documentation
+
+- **handler**: Docker information
+  ([`707995f`](https://github.com/Kitware/trame-client/commit/707995f68208e2301630aa001c876dc96ce01078))
+
+### Features
+
+- **google-colab**: Add support for google colab iframe
+  ([`eaba80b`](https://github.com/Kitware/trame-client/commit/eaba80b930de8747caabff2691c69dc2ced60bd4))
+
+
 ## v3.12.3 (2026-05-26)
 
 ### Bug Fixes
