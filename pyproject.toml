@@ -45,18 +45,28 @@ dev = [
 
 
 [build-system]
-requires = ['setuptools', 'wheel']
-build-backend = 'setuptools.build_meta'
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."]
+[tool.hatch.build]
+include = [
+  "/src/**/*.py",
+  "/src/trame_client/module/serve/**",
+  "src/trame_client/module/user_provided_scripts/**",
+]
 
-[tool.setuptools.package-data]
-"*" = ["trame_client/module/user_provided_scripts/es", "trame_client/module/user_provided_scripts/umd/.gitkeep"]
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/trame_client",
+    "src/trame",
+]
 
 [tool.semantic_release]
 version_toml = [
     "pyproject.toml:project.version",
+]
+version_variables = [
+    "src/trame_client/__init__.py:__version__",
 ]
 build_command = """
   python -m venv .venv
@@ -81,7 +91,7 @@ fixable = ["ALL"]
 unfixable = []
 
 [tool.ruff.lint.per-file-ignores]
-"trame_client/widgets/html.py" = ["E742"]
+"src/trame_client/widgets/html.py" = ["E742"]
 
 [tool.ruff.format]
 quote-style = "double"

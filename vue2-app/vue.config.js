@@ -8,6 +8,6 @@ module.exports = {
   },
   // productionSourceMap: false,
   runtimeCompiler: true,
-  outputDir: path.resolve(__dirname, '../trame_client/module/vue2-www'),
+  outputDir: path.resolve(__dirname, '../src/trame_client/module/vue2-www'),
   publicPath: './',
 };

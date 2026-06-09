@@ -10,7 +10,7 @@ ignore =
 
 exclude =
     # These are auto-generated. Just ignore any issues.
-    trame_client/widgets/html.py
+    src/trame_client/widgets/html.py
 
 per-file-ignores =
     # These directories will always contain "from ... import *"
