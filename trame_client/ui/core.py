@@ -118,13 +118,35 @@ def iframe_url_builder_jupyter_hub_host(layout):
     }
 
 
+def iframe_url_builder_google_colab(layout):
+    from google.colab.output import eval_js
+
+    server = layout.server
+    url_base = eval_js(f"google.colab.kernel.proxyPort({server.port})")
+    if url_base.endswith("/"):
+        url_base = url_base[:-1]
+
+    src = f"{url_base}/index.html?ui={layout.template_name}&reconnect=auto"
+    elem_id = f"{server.name}_{layout._template_name}"
+
+    return {
+        "id": elem_id,
+        "src": src,
+        "style": layout.iframe_style,
+        **layout.iframe_attrs,
+    }
+
+
 def get_iframe_builder(name="default"):
     if isinstance(name, Callable):
         return name
 
     # Try to detect JupyterHub automatically
-    if name == "default" and "JUPYTERHUB_SERVICE_PREFIX" in os.environ:
-        name = "jupyter-hub"
+    if name == "default":
+        if "JUPYTERHUB_SERVICE_PREFIX" in os.environ:
+            name = "jupyter-hub"
+        if "COLAB_RELEASE_TAG" in os.environ or "COLAB_BACKEND_VERSION" in os.environ:
+            name = "google-colab"
 
     builder_type = os.environ.get("TRAME_IFRAME_BUILDER", name)
     builder = iframe_url_builder_default
@@ -135,6 +157,8 @@ def get_iframe_builder(name="default"):
         builder = iframe_url_builder_jupyter_extension
     elif builder_type == "jupyter-hub":
         builder = iframe_url_builder_jupyter_hub
+    elif builder_type == "google-colab":
+        builder = iframe_url_builder_google_colab
     elif builder_type == "jupyter-hub-host":
         builder = iframe_url_builder_jupyter_hub_host
 
