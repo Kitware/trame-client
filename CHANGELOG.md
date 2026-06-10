@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v3.13.1 (2026-06-10)
+
+### Bug Fixes
+
+- **layout**: Provide a display_cell method for google-colab iframe display
+  ([`6011942`](https://github.com/Kitware/trame-client/commit/60119426a0b9e72ab7871e784f0008b5ca7aca76))
+
+- Move logic from trame-common to abstract layout on starting the iframe display in jupyter and
+  google-colab context
+
+
 ## v3.13.0 (2026-06-09)
 
 ### Documentation
