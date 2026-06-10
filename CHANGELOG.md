@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.13.2 (2026-06-10)
+
+### Bug Fixes
+
+- **translation**: Set state defaults on 'with' exit
+  ([`24a0dfa`](https://github.com/Kitware/trame-client/commit/24a0dfab9207e36c6318da7cef980a1deae04e0e))
+
+
 ## v3.13.1 (2026-06-10)
 
 ### Bug Fixes
