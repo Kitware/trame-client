@@ -1,9 +1,10 @@
-import sys
 import logging
+import sys
+
+from trame_common.obj.component import TrameComponent
 
 from trame_client.utils.defaults import TrameDefault
 from trame_client.utils.formatter import to_pretty_html
-from trame_common.obj.component import TrameComponent
 
 AVAILABLE_DIRECTIVES = [
     ("v_text", "v-text"),
@@ -794,6 +795,9 @@ class AbstractElement(TrameComponent):
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
         HTML_CTX.exit(self)
+
+        # flush defaults to state to enable valid translation
+        self.html
 
 
 class HtmlElement(AbstractElement):
