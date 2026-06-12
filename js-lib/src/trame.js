@@ -160,9 +160,6 @@ export class Trame {
       this.client?.getRemote()?.Trame.unsubscribe(wslinkSub),
     );
     this.client?.getRemote()?.Trame?.lifeCycleUpdate("client_connected");
-    window.addEventListener("beforeunload", () =>
-      this.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited"),
-    );
 
     return this.config;
   }
@@ -172,6 +169,7 @@ export class Trame {
    */
   disconnect() {
     if (this.isConnected()) {
+      this.client.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
       this.client.disconnect(0);
     }
   }
@@ -188,6 +186,7 @@ export class Trame {
    */
   exit(timeout = 60) {
     if (this.isConnected()) {
+      this.client.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
       this.client.disconnect(timeout);
     }
   }
