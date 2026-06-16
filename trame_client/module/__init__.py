@@ -1,9 +1,12 @@
 from pathlib import Path
+from trame_client import __version__
 
 USER_PROVIDED_SCRIPTS_DIR_PATH = Path(__file__).with_name("user_provided_scripts")
 USER_PROVIDED_UMD_SCRIPTS_DIR_PATH = USER_PROVIDED_SCRIPTS_DIR_PATH / "umd"
 USER_PROVIDED_ES_SCRIPTS_DIR_PATH = USER_PROVIDED_SCRIPTS_DIR_PATH / "es"
-USER_PROVIDED_SCRIPTS_SERVE_URL_PREFIX = Path("__trame_client_external_scripts")
+USER_PROVIDED_SCRIPTS_SERVE_URL_PREFIX = Path(
+    f"__trame_client_external_scripts_{__version__}"
+)
 
 
 def setup_handler_module(server):
