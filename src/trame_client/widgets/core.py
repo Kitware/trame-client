@@ -321,6 +321,16 @@ def _event_value_processing(server, js_key, value):
     return False
 
 
+def as_py_arg(iterable):
+    if iterable is None:
+        return None
+    for item in iterable:
+        if isinstance(item, str):
+            yield item
+        else:
+            yield item[0]
+
+
 class AbstractElement(TrameComponent):
     """
     A Vue component which can integrate with the rest of trame
@@ -417,6 +427,7 @@ class AbstractElement(TrameComponent):
 
         self._attributes = {}
         self._py_attr = kwargs
+        self._used_py_attr = {"trame_server"}
         self._children = []
 
         # Handle raw attributes if provided
@@ -542,6 +553,8 @@ class AbstractElement(TrameComponent):
             for name in self._py_attr.keys()
             if name.startswith("v_model_") or name.startswith("v_bind_")
         ]
+        self._used_py_attr.update(as_py_arg(directives))
+        self._used_py_attr.update(as_py_arg(names))
         for _name in [*directives, *names]:
             js_key = None
             name = _name
@@ -634,6 +647,7 @@ class AbstractElement(TrameComponent):
         :param names: The names events to process
         :type names: *str
         """
+        self._used_py_attr.update(as_py_arg(names))
         processed_event = set()
         for _name in names:
             js_key = None
@@ -740,6 +754,14 @@ class AbstractElement(TrameComponent):
         self._children.append(value)
 
     @property
+    def skipped_attributes(self):
+        """
+        Return the attribute names that are skipped from the HTML representation.
+        This can represent miss match property/event names or missing mapping.
+        """
+        return set(self._py_attr.keys()) - self._used_py_attr
+
+    @property
     def html(self):
         """
         Return a string representation of the HTML component
@@ -748,6 +770,13 @@ class AbstractElement(TrameComponent):
             # Build attributes
             self.attrs(*self._attr_names)
             self.events(*self._event_names)
+
+            if AbstractElement._debug and self.skipped_attributes:
+                logger.warning(
+                    "Warning: <%s %s /> attributes will be skipped",
+                    self._elem_name,
+                    "=... ".join([*self.skipped_attributes, ""]),
+                )
 
             # Patch ref to use trame registration
             if (
