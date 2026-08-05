@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.13.5 (2026-08-05)
+
+### Bug Fixes
+
+- **www**: Properly include web directory it package
+  ([`d39f5cb`](https://github.com/Kitware/trame-client/commit/d39f5cb30593a2e29388d93a317dc027ae92d124))
+
+
 ## v3.13.4 (2026-08-05)
 
 ### Bug Fixes
