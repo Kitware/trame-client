@@ -695,6 +695,7 @@ class AbstractElement(TrameComponent):
                     # no match
                     pass
                 elif isinstance(attribute, str):
+                    self._used_py_attr.add(key_name)
                     self._attributes[key_name] = attribute
                 else:
                     print(
