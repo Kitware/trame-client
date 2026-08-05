@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v3.13.3 (2026-08-05)
+
+### Bug Fixes
+
+- **debug**: Warn about skipped attributes when --debug
+  ([`5e5b184`](https://github.com/Kitware/trame-client/commit/5e5b1843c973284cc6431bfac2dfb94450c5eb8e))
+
+### Chores
+
+- Migrate from setup tools to hatchling
+  ([`ac7a8df`](https://github.com/Kitware/trame-client/commit/ac7a8df4a610db063cf2356963fb4e1450241de6))
+
+- **js-lib**: Replace 'beforeunload' by calling lifeCycleUpdate on disconnect/exit call
+  ([`6298d9a`](https://github.com/Kitware/trame-client/commit/6298d9ac72a9878ce047e73b2e2af46fa9d762e6))
+
+
 ## v3.13.2 (2026-06-10)
 
 ### Bug Fixes
