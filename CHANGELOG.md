@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.13.4 (2026-08-05)
+
+### Bug Fixes
+
+- **debug**: Include v_on_ attributes in processed events
+  ([`1ad8717`](https://github.com/Kitware/trame-client/commit/1ad8717f8be9507b8ba38d0b4dbee3a26ab68c25))
+
+
 ## v3.13.3 (2026-08-05)
 
 ### Bug Fixes
