@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.13.6 (2026-08-08)
+
+### Bug Fixes
+
+- **widgets**: Add __properties and __events to the skipped args
+  ([`54e190b`](https://github.com/Kitware/trame-client/commit/54e190bdb2089c361dc702e8ad6f8e614f2541c9))
+
+
 ## v3.13.5 (2026-08-05)
 
 ### Bug Fixes
