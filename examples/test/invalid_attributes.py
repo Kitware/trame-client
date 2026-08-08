@@ -8,6 +8,10 @@ print(
         a="Wrong",
         title="ok",
         another_wrong="wrong attr",
+        made="up",
+        clickable="clicked",
+        __properties=["made"],
+        __events=["clickable"],
     ).html
 )
 

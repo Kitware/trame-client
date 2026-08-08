@@ -427,7 +427,7 @@ class AbstractElement(TrameComponent):
 
         self._attributes = {}
         self._py_attr = kwargs
-        self._used_py_attr = {"trame_server"}
+        self._used_py_attr = {"trame_server", "__properties", "__events"}
         self._children = []
 
         # Handle raw attributes if provided
