@@ -70,6 +70,15 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build React App
+        run: |
+          cd react-app
+          npm ci
+          npm run lint
+          npm run typecheck
+          npm run test
+          npm run build
+
       - name: Install and Run Tests
         run: |
           pip install .[test]
@@ -115,6 +124,15 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build React App
+        run: |
+          cd react-app
+          npm ci
+          npm run lint
+          npm run typecheck
+          npm run test
+          npm run build
+
   release:
     needs: [pre-commit, pytest, test-npm-build]
     runs-on: ubuntu-latest
@@ -146,6 +164,12 @@ jobs:
       - name: Build Vue3 App
         run: |
           cd vue3-app
+          npm ci
+          npm run build
+
+      - name: Build React App
+        run: |
+          cd react-app
           npm ci
           npm run build
 

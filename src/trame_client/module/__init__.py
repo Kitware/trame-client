@@ -50,6 +50,11 @@ def setup(server, **kargs):
 
         server.enable_module(vue3)
         setup_handler_module(server)
+    elif client_type == "react":
+        from . import react
+
+        server.enable_module(react)
+        setup_handler_module(server)
     else:
         raise TypeError(
             f"Trying to initialize trame_client with unknown client_type={client_type}"

@@ -240,6 +240,15 @@ class AbstractLayout:
         """
         return self.root.html
 
+    @property
+    def react(self):
+        """
+        Compute corresponding layout JSON string for the react client.
+        """
+        from ..utils.react import to_react_template
+
+        return to_react_template(self.root)
+
     def __repr__(self):
         return to_pretty_html(self.html)
 
@@ -276,7 +285,10 @@ class AbstractLayout:
 
     def flush_content(self):
         """Push new content to client"""
-        self._server.state[self._template_name] = self.html
+        if getattr(self._server, "client_type", None) == "react":
+            self._server.state[self._template_name] = self.react
+        else:
+            self._server.state[self._template_name] = self.html
 
     # -------------------------------------------------------------------------
     # Resource manager

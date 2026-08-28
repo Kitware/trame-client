@@ -11,6 +11,10 @@ trame-client is the generic single page application that come with `trame <https
 trame-client provides the infrastructure on the client-side (browser) to connect to a trame server, synchronize
 its state with the server, make method call, load dynamically components and feed a dynamic template provided by the server.
 
+Three clients are provided, selected through ``client_type`` on the server:
+``vue2`` and ``vue3`` (Vue.js based) and ``react`` (native React, rendering a
+serialized component tree — see ``react-app/README.md``).
+
 This package is not supposed to be used by itself but rather should come as a dependency of **trame**.
 For any specificity, please refer to `the trame documentation <https://kitware.github.io/trame/>`_.
 

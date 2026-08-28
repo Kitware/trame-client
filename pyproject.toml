@@ -53,6 +53,7 @@ include = [
   "/src/**/*.py",
   "/src/trame_client/module/vue2-www/**",
   "/src/trame_client/module/vue3-www/**",
+  "/src/trame_client/module/react-www/**",
   "src/trame_client/module/user_provided_scripts/**",
 ]
 

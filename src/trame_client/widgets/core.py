@@ -25,6 +25,22 @@ AVAILABLE_DIRECTIVES = [
     ("v_once", "v-once"),
     ("v_memo", "v-memo"),
     ("v_cloak", "v-cloak"),
+    # r_* aliases: React-flavored spellings of the same structural directives,
+    # used by apps targeting client_type="react" (work with any client type).
+    ("r_text", "v-text"),
+    ("r_html", "v-html"),
+    ("r_show", "v-show"),
+    ("r_if", "v-if"),
+    ("r_else", "v-else"),
+    ("r_else_if", "v-else-if"),
+    ("r_for", "v-for"),
+    ("r_on", "v-on"),
+    ("r_bind", "v-bind"),
+    ("r_model", "v-model"),
+    ("r_model_lazy", "v-model.lazy"),
+    ("r_model_number", "v-model.number"),
+    ("r_model_trim", "v-model.trim"),
+    ("r_slot", "v-slot"),
 ]
 KEY_ALIAS = [
     "enter",
@@ -257,6 +273,15 @@ class VirtualNode:
 
         return "\n".join(out_buffer)
 
+    @property
+    def react_node(self):
+        """
+        Return a serializable react node representation of this VirtualNode
+        """
+        from trame_client.utils.react import to_react_node
+
+        return to_react_node(self)
+
     # -------------------------------------------------------------------------
     # Resource manager
     # -------------------------------------------------------------------------
@@ -292,33 +317,31 @@ class VirtualNode:
         HTML_CTX.add_child(self)
 
 
-def _event_value_processing(server, js_key, value):
+def _event_value_body(server, value):
+    """Return the JS body of an event handler or None if no match"""
     if isinstance(value, str):
-        translated_value = server.state.translator.translate_js_expression(
-            server.state, value
-        )
-        return f'{js_key}="{translated_value}"'
+        return server.state.translator.translate_js_expression(server.state, value)
     elif callable(value):
         trigger_name = server.trigger_name(value)
-        return f"{js_key}=\"trigger('{trigger_name}')\""
+        return f"trigger('{trigger_name}')"
     elif isinstance(value, tuple):
         trigger_name = value[0]
         if callable(trigger_name):
             trigger_name = server.trigger_name(trigger_name)
         if len(value) == 1:
-            return f"{js_key}=\"trigger('{trigger_name}')\""
+            return f"trigger('{trigger_name}')"
         if len(value) == 2:
             translated_value = server.state.translator.translate_js_expression(
                 server.state, value[1]
             )
-            return f"{js_key}=\"trigger('{trigger_name}', {translated_value})\""
+            return f"trigger('{trigger_name}', {translated_value})"
         if len(value) == 3:
             translated_value = server.state.translator.translate_js_expression(
                 server.state, value[1]
             )
             # We don't want to translate kwargs as we may change keys rather than just values
-            return f"{js_key}=\"trigger('{trigger_name}', {translated_value}, {value[2]})\""
-    return False
+            return f"trigger('{trigger_name}', {translated_value}, {value[2]})"
+    return None
 
 
 def as_py_arg(iterable):
@@ -426,6 +449,7 @@ class AbstractElement(TrameComponent):
             kwargs["style"] = " ".join([f"{k}: {v};" for k, v in style.items()])
 
         self._attributes = {}
+        self._attr_entries = {}
         self._py_attr = kwargs
         self._used_py_attr = {"trame_server", "__properties", "__events"}
         self._children = []
@@ -434,6 +458,7 @@ class AbstractElement(TrameComponent):
         if raw_attrs:
             for idx, raw_value in enumerate(raw_attrs):
                 self._attributes[f"_raw_{idx}"] = raw_value
+                self._attr_entries[f"_raw_{idx}"] = {"kind": "raw", "value": raw_value}
 
         if children:
             if isinstance(children, (list, tuple)):
@@ -490,6 +515,7 @@ class AbstractElement(TrameComponent):
             if value is None:
                 self._py_attr.pop(name, value)
                 self._attributes.pop(name, value)
+                self._attr_entries.pop(name, None)
             else:
                 self._py_attr[name] = value
 
@@ -514,6 +540,7 @@ class AbstractElement(TrameComponent):
             if value is None:
                 self._py_attr.pop(name, value)
                 self._attributes.pop(name, value)
+                self._attr_entries.pop(name, None)
             else:
                 self._py_attr[name] = value
 
@@ -537,6 +564,11 @@ class AbstractElement(TrameComponent):
         of themself like VSelect in Vuetify.
         """
         self._attributes["__tts"] = f':key="`w{self._id}-${{tts}}`"'
+        self._attr_entries["__tts"] = {
+            "kind": "bind",
+            "key": "key",
+            "expr": f"`w{self._id}-${{tts}}`",
+        }
         return self
 
     def attrs(self, *names):
@@ -551,7 +583,7 @@ class AbstractElement(TrameComponent):
         directives = [
             name
             for name in self._py_attr.keys()
-            if name.startswith("v_model_") or name.startswith("v_bind_")
+            if name.startswith(("v_model_", "r_model_", "v_bind_", "r_bind_"))
         ]
         self._used_py_attr.update(as_py_arg(directives))
         self._used_py_attr.update(as_py_arg(names))
@@ -568,13 +600,13 @@ class AbstractElement(TrameComponent):
                 value = self._py_attr[name]
 
                 # smart key handling
-                if name.startswith("v_model_"):
+                if name.startswith(("v_model_", "r_model_")):
                     model_name, *modifiers = name.split("_")[2:]
                     if model_name in V_MODEL_MODIFIER and len(modifiers) == 0:
                         js_key = f"v-model.{model_name}"
                     else:
                         js_key = f"v-model:{model_name}{'.' if len(modifiers) else ''}{'.'.join(modifiers)}"
-                elif name.startswith("v_bind_"):
+                elif name.startswith(("v_bind_", "r_bind_")):
                     prop_name, *modifiers = name.split("_")[2:]
                     js_key = f":{prop_name}{'.' if len(modifiers) else ''}{'.'.join(modifiers)}"
 
@@ -610,15 +642,40 @@ class AbstractElement(TrameComponent):
                     logger.info("after: %s = %s", js_key, translated_value)
                     if js_key.startswith("v-"):
                         self._attributes[name] = f'{js_key}="{translated_value}"'
+                        self._attr_entries[name] = {
+                            "kind": "directive",
+                            "key": js_key,
+                            "expr": translated_value,
+                        }
                     elif js_key.startswith(":"):
                         self._attributes[name] = f'{js_key}="{translated_value}"'
+                        self._attr_entries[name] = {
+                            "kind": "bind",
+                            "key": js_key[1:],
+                            "expr": translated_value,
+                        }
                     else:
                         self._attributes[name] = f':{js_key}="{translated_value}"'
+                        self._attr_entries[name] = {
+                            "kind": "bind",
+                            "key": js_key,
+                            "expr": translated_value,
+                        }
                 elif isinstance(value, bool):
                     if value:
                         self._attributes[name] = js_key
+                        self._attr_entries[name] = {
+                            "kind": "static",
+                            "key": js_key,
+                            "value": True,
+                        }
                     else:
                         self._attributes[name] = f':{js_key}="false"'
+                        self._attr_entries[name] = {
+                            "kind": "bind",
+                            "key": js_key,
+                            "expr": "false",
+                        }
                 elif isinstance(value, str):
                     if js_key.startswith("v-") or js_key.startswith(":"):
                         logger.info("before: %s = %s", js_key, value)
@@ -628,8 +685,31 @@ class AbstractElement(TrameComponent):
                         logger.info("after: %s = %s", js_key, value)
 
                     self._attributes[name] = f'{js_key}="{value}"'
+                    if js_key.startswith("v-"):
+                        self._attr_entries[name] = {
+                            "kind": "directive",
+                            "key": js_key,
+                            "expr": value,
+                        }
+                    elif js_key.startswith(":"):
+                        self._attr_entries[name] = {
+                            "kind": "bind",
+                            "key": js_key[1:],
+                            "expr": value,
+                        }
+                    else:
+                        self._attr_entries[name] = {
+                            "kind": "static",
+                            "key": js_key,
+                            "value": value,
+                        }
                 elif isinstance(value, (int, float)):
                     self._attributes[name] = f'{js_key}="{value}"'
+                    self._attr_entries[name] = {
+                        "kind": "static",
+                        "key": js_key,
+                        "value": value,
+                    }
                 else:
                     print(
                         "Error: Don't know how to handle attribute name "
@@ -664,12 +744,18 @@ class AbstractElement(TrameComponent):
                 if value is None:
                     continue
 
-                attribute = _event_value_processing(self.server, js_key, value)
+                body = _event_value_body(self.server, value)
+                attribute = False if body is None else f'{js_key}="{body}"'
                 if attribute is None:
                     # no match
                     pass
                 elif isinstance(attribute, str):
                     self._attributes[name] = attribute
+                    self._attr_entries[name] = {
+                        "kind": "event",
+                        "key": js_key[1:],
+                        "expr": body,
+                    }
                     processed_event.add(name)
                 else:
                     print(
@@ -682,7 +768,7 @@ class AbstractElement(TrameComponent):
             if key_name in processed_event:
                 continue
 
-            if key_name.startswith("v_on_"):
+            if key_name.startswith(("v_on_", "r_on_")):
                 tokens = key_name.split("_")[2:]
                 js_key = f"@{'.'.join(tokens)}"
                 value = self._py_attr[key_name]
@@ -690,13 +776,19 @@ class AbstractElement(TrameComponent):
                 if value is None:
                     continue
 
-                attribute = _event_value_processing(self.server, js_key, value)
+                body = _event_value_body(self.server, value)
+                attribute = False if body is None else f'{js_key}="{body}"'
                 if attribute is None:
                     # no match
                     pass
                 elif isinstance(attribute, str):
                     self._used_py_attr.add(key_name)
                     self._attributes[key_name] = attribute
+                    self._attr_entries[key_name] = {
+                        "kind": "event",
+                        "key": js_key[1:],
+                        "expr": body,
+                    }
                 else:
                     print(
                         "Error: Don't know how to handle event name "
@@ -717,6 +809,11 @@ class AbstractElement(TrameComponent):
         Hide element while keeping it in the DOM. (display: none)
         """
         self._attributes["__style"] = 'style="display: none"'
+        self._attr_entries["__style"] = {
+            "kind": "static",
+            "key": "style",
+            "value": "display: none",
+        }
 
     def add_child(self, child):
         """
@@ -811,6 +908,31 @@ class AbstractElement(TrameComponent):
         except Exception as e:
             logger.error(e)
             return f"<{self._elem_name} html-error />"
+
+    @property
+    def react_node(self):
+        """
+        Return a serializable react node representation of this element.
+        Used when server.client_type == "react".
+        """
+        from trame_client.utils.react import to_react_node
+
+        try:
+            # Build attributes
+            self.attrs(*self._attr_names)
+            self.events(*self._event_names)
+
+            if AbstractElement._debug and self.skipped_attributes:
+                logger.warning(
+                    "Warning: <%s %s /> attributes will be skipped",
+                    self._elem_name,
+                    "=... ".join([*self.skipped_attributes, ""]),
+                )
+
+            return to_react_node(self)
+        except Exception as e:
+            logger.error(e)
+            return {"tag": self._elem_name, "attrs": {"data-error": True}}
 
     def __repr__(self):
         return to_pretty_html(self.html)
