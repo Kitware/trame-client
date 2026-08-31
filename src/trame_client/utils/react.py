@@ -30,7 +30,6 @@ Node schema (version 1)::
     }
 """
 
-import json
 import re
 
 MUSTACHE_RE = re.compile(r"\{\{(.*?)\}\}", re.DOTALL)
@@ -126,13 +125,11 @@ def to_react_node(elem):
     if isinstance(elem, str):
         return {"tag": "__fragment", "children": split_text(elem)}
 
-    server = getattr(elem, "server", None)
-
     if not hasattr(elem, "_elem_name"):
         # VirtualNode and other child containers
         return {
             "tag": "__fragment",
-            "children": _children_to_react(elem.children, server),
+            "children": _children_to_react(elem.children, elem.server),
         }
 
     node = {"tag": elem._elem_name}
@@ -190,7 +187,7 @@ def to_react_node(elem):
     if raw:
         node["raw"] = raw
 
-    children = _children_to_react(elem.children, server)
+    children = _children_to_react(elem.children, elem.server)
     if children:
         node["children"] = children
 
@@ -210,6 +207,6 @@ def _children_to_react(children, server=None):
 
 
 def to_react_template(root):
-    """Serialize a layout root into the JSON string pushed to the client"""
+    """Serialize a layout root into the native dict pushed to the client"""
     node = root.react_node if hasattr(root, "react_node") else to_react_node(root)
-    return json.dumps({"version": 1, "root": node})
+    return {"version": 1, "root": node}

@@ -243,7 +243,7 @@ class AbstractLayout:
     @property
     def react(self):
         """
-        Compute corresponding layout JSON string for the react client.
+        Compute corresponding layout structure for the react client.
         """
         from ..utils.react import to_react_template
 

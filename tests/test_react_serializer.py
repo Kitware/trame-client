@@ -1,5 +1,3 @@
-import json
-
 from trame.app import get_server
 from trame.ui.html import DivLayout
 from trame.widgets import html
@@ -100,7 +98,7 @@ def test_layout_flush_react_payload():
     with DivLayout(server):
         html.Button("Go", click="go()")
 
-    payload = json.loads(server.state["trame__template_main"])
+    payload = server.state["trame__template_main"]
     assert payload["version"] == 1
     assert payload["root"]["tag"] == "div"
     button = payload["root"]["children"][0]

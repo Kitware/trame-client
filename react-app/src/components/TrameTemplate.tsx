@@ -8,15 +8,19 @@ import TrameNode from "../renderer/TrameNode";
 import { useTrame, useTrameState } from "../renderer/hooks";
 import type { TrameJsonNode, TrameTemplatePayload } from "../types";
 
-function parsePayload(payload: unknown): TrameJsonNode | null {
+function extractRoot(payload: unknown): TrameJsonNode | null {
   if (!payload) return null;
-  try {
-    const { root } = JSON.parse(payload as string) as TrameTemplatePayload;
-    return root;
-  } catch (e) {
-    console.error("trame: invalid react template payload", e);
-    return null;
+  if (typeof payload === "string") {
+    try {
+      const parsed = JSON.parse(payload) as TrameTemplatePayload;
+      return parsed.root ?? null;
+    } catch (e) {
+      console.error("trame: invalid react template payload", e);
+      return null;
+    }
   }
+  const { root } = payload as TrameTemplatePayload;
+  return root ?? null;
 }
 
 export default function TrameTemplate({
@@ -43,7 +47,7 @@ export default function TrameTemplate({
   }
   const key = stateKey || `trame__template_${name}`;
   const payload = trame.state.get(key);
-  const root = useMemo(() => parsePayload(payload), [payload]);
+  const root = useMemo(() => extractRoot(payload), [payload]);
 
   // favicon / title side effects (parity with vue clients)
   const favicon = trame.state.get("trame__favicon");

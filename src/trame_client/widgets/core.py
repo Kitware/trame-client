@@ -664,11 +664,18 @@ class AbstractElement(TrameComponent):
                 elif isinstance(value, bool):
                     if value:
                         self._attributes[name] = js_key
-                        self._attr_entries[name] = {
-                            "kind": "static",
-                            "key": js_key,
-                            "value": True,
-                        }
+                        if js_key.startswith("v-"):
+                            self._attr_entries[name] = {
+                                "kind": "directive",
+                                "key": js_key,
+                                "expr": True,
+                            }
+                        else:
+                            self._attr_entries[name] = {
+                                "kind": "static",
+                                "key": js_key,
+                                "value": True,
+                            }
                     else:
                         self._attributes[name] = f':{js_key}="false"'
                         self._attr_entries[name] = {

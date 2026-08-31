@@ -4,7 +4,7 @@ import * as ReactDOMBase from "react-dom";
 import ReactDOM from "react-dom/client";
 import vtkURLExtract from "@kitware/vtk.js/Common/Core/URLExtract";
 import wslink from "./core/wslink";
-import { handlePageResources, loadScript } from "./core/trame/setup";
+import { handlePageResources } from "./core/trame/setup";
 import { createTrameInstance } from "./core/trame";
 import { registerUserScripts } from "./user_script_handler";
 import { createMessageChannelWSFactory } from "./messageChannel";
@@ -22,10 +22,10 @@ window.React = React;
 window.ReactDOM = { ...ReactDOMBase, ...ReactDOM };
 
 function errorPayload(tag: string, message: string) {
-  return JSON.stringify({
+  return {
     version: 1,
     root: { tag, attrs: { message } },
-  });
+  };
 }
 
 async function start() {
@@ -151,12 +151,6 @@ async function start() {
 }
 
 const urlParams = vtkURLExtract.extractURLParameters() as any;
-// Initialize service worker to override headers for SharedArrayBuffer
-// > Cross-Origin-Opener-Policy: same-origin
-// > Cross-Origin-Embedder-Policy: require-corp
-if (urlParams.enableSharedArrayBufferServiceWorker) {
-  loadScript("coi-serviceworker.min.js");
-}
 
 if (urlParams.wsChannel) {
   window.addEventListener("message", (event) => {
