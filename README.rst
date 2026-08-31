@@ -101,6 +101,24 @@ Build client side code base
     npm run build            # build trame client application
     cd -
 
+Python environment setup
+
+.. code-block:: console
+
+    # Create venv and install all dependencies
+    uv sync --all-extras --dev
+
+    # Activate environment
+    source .venv/bin/activate
+
+    # Install commit analysis
+    pre-commit install
+    pre-commit install --hook-type commit-msg
+
+    # Run pre-commit
+    pre-commit run --all-files
+
+
 JavaScript dependency
 -----------------------------------------------------------
 
