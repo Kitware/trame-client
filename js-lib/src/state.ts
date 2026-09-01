@@ -1,14 +1,35 @@
+import type { vtkWSLinkClient } from "@kitware/wslink/src/WsLinkClient";
 import { decorate } from "./decorators";
 import { ListenerManager, WatcherManager } from "./listeners";
 
+export interface StateChangeEvent {
+  type: "dirty-state" | "new-keys";
+  keys: string[];
+}
+
 export class State {
+  private _name: string;
+  private _client: vtkWSLinkClient;
+  private _dirtyKeys: Set<string>;
+  private _state: Record<string, any>;
+  private _keyTS: Record<string, number>;
+  private _mtime: number;
+  private _ready: boolean;
+  private _listeners: ListenerManager;
+  private _watchers: WatcherManager;
+  private _subscriptions: Array<() => void>;
+  private _wslinkSubscriptions: any[];
+  private _updateFromServer: (
+    serverState: Record<string, any>,
+  ) => Promise<void>;
+
   /**
    * State constructor
    *
-   * @param {TrameClient} client managing the communication to the server
-   * @param {State} oldState previous state so we can keep existing listener
+   * @param client managing the communication to the server
+   * @param oldState previous state so we can keep existing listener
    */
-  constructor(client, oldState) {
+  constructor(client: vtkWSLinkClient, oldState?: State | null) {
     this._name = "undefined";
     this._client = client;
     this._dirtyKeys = new Set();
@@ -37,8 +58,8 @@ export class State {
       }),
     );
 
-    this._updateFromServer = async (serverState) => {
-      const updatedKeys = [];
+    this._updateFromServer = async (serverState: Record<string, any>) => {
+      const updatedKeys: string[] = [];
       const allKeys = Object.keys(serverState);
       for (let i = 0; i < allKeys.length; i++) {
         let modified = true;
@@ -71,7 +92,7 @@ export class State {
       }
 
       this._mtime += 1;
-      const newKeys = [];
+      const newKeys: string[] = [];
       for (let i = 0; i < updatedKeys.length; i++) {
         const key = updatedKeys[i];
         if (this._keyTS[key] === undefined) {
@@ -89,7 +110,7 @@ export class State {
     this._wslinkSubscriptions.push(
       this._client
         .getRemote()
-        .Trame.subscribeToStateUpdate(([serverState]) =>
+        .Trame.subscribeToStateUpdate(([serverState]: [Record<string, any>]) =>
           this._updateFromServer(serverState),
         ),
     );
@@ -98,7 +119,7 @@ export class State {
   /**
    * Async method used to bootstrap state content.
    */
-  async loadState() {
+  async loadState(): Promise<void> {
     const { state, name } = await this._client.getRemote().Trame.getState();
     this._name = name;
     this._updateFromServer(state);
@@ -108,11 +129,8 @@ export class State {
   /**
    * Return true if the given state variable can be modified and
    * therefore can be sent to the server when changed.
-   *
-   * @param {string} name
-   * @return {boolean}
    */
-  canDirty(name) {
+  canDirty(name: string): boolean {
     if (!this._state.trame__client_only) {
       return true;
     }
@@ -121,10 +139,8 @@ export class State {
 
   /**
    * Mark any local state variables dirty using their name(s)
-   *
-   * @param  {...string} keys
    */
-  dirty(...keys) {
+  dirty(...keys: string[]): void {
     keys.forEach((key) => {
       if (this.canDirty(key)) {
         this._dirtyKeys.add(key);
@@ -142,12 +158,9 @@ export class State {
    * the dirty state to the server. The returned promise can
    * be use for waiting for network exchange completion.
    *
-   * @param {string} key
-   * @param {any} value
-   *
-   * @return {Promise<void>} in case you want to wait for completion
+   * @return in case you want to wait for completion
    */
-  async set(key, value) {
+  async set(key: string, value: any): Promise<void> {
     // Prevent triggering change when same value is set
     if (this._state[key] === value) {
       return;
@@ -161,19 +174,18 @@ export class State {
   }
 
   /**
-   * @return {Array<string>} list of keys that compose the state
+   * @return list of keys that compose the state
    */
-  getAllKeys() {
+  getAllKeys(): string[] {
     return Object.keys(this._state);
   }
 
   /**
    * Update the state with a set of key/value pair.
    *
-   * @param {Map<string, any>} obj
-   * @return {Promise<void>} in case you want to wait for completion
+   * @return in case you want to wait for completion
    */
-  async update(obj) {
+  async update(obj: Record<string, any>): Promise<void> {
     this._mtime += 1;
     for (const [key, value] of Object.entries(obj)) {
       if (this._state[key] !== value) {
@@ -186,10 +198,14 @@ export class State {
   }
 
   /**
-   * @param {string} key
+   * @returns the full state
+   */
+  get(): Record<string, any>;
+  /**
    * @returns the state value for that given key
    */
-  get(key) {
+  get(key: string): any;
+  get(key?: string): any {
     if (key === undefined) {
       return this._state;
     }
@@ -205,11 +221,9 @@ export class State {
    *        keys: [...],           # list of key name affected
    *    }
    *
-   *
-   * @param {function} fn
-   * @return {function} unsubscribe function
+   * @return unsubscribe function
    */
-  onChange(fn) {
+  onChange(fn: (event: StateChangeEvent) => void): () => void {
     return this._listeners.on(fn);
   }
 
@@ -218,11 +232,9 @@ export class State {
    * The provided method will be called with all the listed keys
    * as args.
    *
-   * @param {Array<string>} keys
-   * @param {function} fn
-   * @return {function} unsubscribe function
+   * @return unsubscribe function
    */
-  watch(keys, fn) {
+  watch(keys: string[], fn: (...values: any[]) => void): () => void {
     const unsubscribe = this._watchers.watch(keys, fn);
 
     // Call it right away with available values
@@ -234,14 +246,14 @@ export class State {
   /**
    * Delete state by unsubscribing to all its internal listeners
    */
-  delete() {
+  delete(): void {
     while (this._wslinkSubscriptions.length) {
-      this.client
+      this._client
         .getRemote()
         .Trame.unsubscribe(this._wslinkSubscriptions.pop());
     }
     while (this._subscriptions.length) {
-      this._subscriptions.pop()();
+      this._subscriptions.pop()!();
     }
   }
 
@@ -249,10 +261,8 @@ export class State {
    * Push dirty data over the network.
    * If any argument (state key name(s)) is provided,
    * they will be marked dirty and pushed to the server.
-   *
-   * @param  {...string} keys
    */
-  async flush(...keys) {
+  async flush(...keys: (string | string[])[]): Promise<void> {
     if (keys.length) {
       keys.forEach((key) => {
         if (Array.isArray(key)) {
@@ -264,8 +274,8 @@ export class State {
     }
 
     if (this._dirtyKeys.size && !this._client.isBusy()) {
-      const waitOn = [];
-      const keys = [];
+      const waitOn: Promise<any>[] = [];
+      const keys: string[] = [];
       this._dirtyKeys.forEach((key) => {
         waitOn.push(decorate(this._state[key]));
         keys.push(key);

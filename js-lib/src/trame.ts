@@ -1,26 +1,46 @@
+import type { vtkWSLinkClient } from "@kitware/wslink/src/WsLinkClient";
 import { State } from "./state";
-import { decorate, registerDecorator } from "./decorators";
+import { decorate, registerDecorator, type Decorator } from "./decorators";
 import { ListenerManager } from "./listeners";
 import wslink from "./wslink";
-import vtkWSLinkClient from "@kitware/wslink/src/WsLinkClient";
 
-/**
- * @typedef TrameConnectConfig
- * @type {object}
- * @property {string} sessionManagerURL (/paraview) http(s) url for the launcher endpoint
- * @property {string} sessionURL (/ws if no launcher) ws(s) url for WebSocket session endpoint
- * @property {string} application (trame) name for the session to launch
- * @property {string} secret (wslink-secret) authorization token for WebSocket connection
- * @property {object} wsProxy A way to inject alternative WebSocket connection
- */
+export interface TrameConnectConfig {
+  /** (/paraview) http(s) url for the launcher endpoint */
+  sessionManagerURL?: string;
+  /** (/ws if no launcher) ws(s) url for WebSocket session endpoint */
+  sessionURL?: string;
+  /** (trame) name for the session to launch */
+  application?: string;
+  /** (wslink-secret) authorization token for WebSocket connection */
+  secret?: string;
+  /** A way to inject alternative WebSocket connection */
+  wsProxy?: any;
+  /** Extract additional connection arguments from the current URL */
+  useUrl?: boolean;
+  [key: string]: any;
+}
 
-/**
- * @typedef {Object} Decorator
- * @property {number} priority
- * @property {function} decorate: async function aiming to return the value as is or modify it.
- */
+interface TrameAction {
+  ref: string;
+  type: string;
+  method: string;
+  args: any[];
+}
 
 export class Trame {
+  private _initialized: boolean;
+  private _nextListenerId: number;
+  private _wsProxy: any;
+  private _subscriptions: Array<() => void>;
+  private _execAction: (action: TrameAction) => void;
+  private _closeListeners: ListenerManager;
+  private _errorListeners: ListenerManager;
+
+  client: vtkWSLinkClient | null;
+  state: State | null;
+  config: TrameConnectConfig | null;
+  refs: Record<string, any>;
+
   /**
    * Create a trame object that once connectect will have the following set of properties:
    *  - client: Object responsible for handling the network communication with the server.
@@ -28,12 +48,12 @@ export class Trame {
    *  - config: connection configuration provided as a response to the launcher.
    *  - refs: dictionary mapping a user element name to an object on which method can be called.
    *
-   * @param {Object} wsProxy aim to provide a mean to provide your own websocket implementation.
+   * @param wsProxy aim to provide a mean to provide your own websocket implementation.
    *        While it is not currently fully implemented, we use a similar infrastructure within
    *        Jupyter to reuse their communication infrastructure rather than creating our own
    *        websocket connection.
    */
-  constructor(wsProxy) {
+  constructor(wsProxy?: any) {
     this._initialized = false;
     this._nextListenerId = 1;
     this._wsProxy = wsProxy;
@@ -50,24 +70,18 @@ export class Trame {
     this._errorListeners = new ListenerManager("trame connection error");
 
     // public objects
-    /**@type{vtkWSLinkClient}*/
     this.client = null;
-    /**@type{State}*/
     this.state = null;
-    /**@type{TrameConnectConfig}*/
     this.config = null;
-    /**@type{Object.<string,any>}*/
     this.refs = {};
   }
 
   /**
    * Return the status of the client connection.
    * Is trame fully initialized and connected to its server or no?
-   *
-   * @return {Boolean}
    */
-  isConnected() {
-    return this._initialized && this.client?.isConnected();
+  isConnected(): boolean {
+    return Boolean(this._initialized && this.client?.isConnected());
   }
 
   /**
@@ -109,12 +123,11 @@ export class Trame {
    * The secret is used to authorized the connection on the given
    * sessionURL. And works in pair with the --authKey arg.
    *
-   *
-   * @param {TrameConnectConfig} config
-   * @return {Promise<TrameConnectConfig>} the updated configuration once
-   *         fully connected
+   * @return the updated configuration once fully connected
    */
-  async connect(config) {
+  async connect(
+    config?: TrameConnectConfig | null,
+  ): Promise<TrameConnectConfig | undefined> {
     if (this.isConnected()) {
       console.error("Trame.connect() when already connected");
       return;
@@ -122,7 +135,7 @@ export class Trame {
 
     while (this._subscriptions.length) {
       try {
-        this._subscriptions.pop()();
+        this._subscriptions.pop()!();
       } catch (e) {
         console.error("Try to unsubscribe from previous trame client", e);
       }
@@ -146,7 +159,7 @@ export class Trame {
       }).unsubscribe,
     );
 
-    await this.client.connect(config);
+    await this.client.connect(config ?? {});
     this.config = this.client.getConfig();
     this.state = new State(this.client, this.state);
     await this.state.loadState();
@@ -155,7 +168,9 @@ export class Trame {
     // Listen to client
     const wslinkSub = this.client
       .getRemote()
-      .Trame.subscribeToActions(([actions]) => actions.map(this._execAction));
+      .Trame.subscribeToActions(([actions]: [TrameAction[]]) =>
+        actions.map(this._execAction),
+      );
     this._subscriptions.push(() =>
       this.client?.getRemote()?.Trame.unsubscribe(wslinkSub),
     );
@@ -167,10 +182,10 @@ export class Trame {
   /**
    * Disconnect the current connection and stop the server right away.
    */
-  disconnect() {
+  disconnect(): void {
     if (this.isConnected()) {
-      this.client.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
-      this.client.disconnect(0);
+      this.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
+      this.client?.disconnect(0);
     }
   }
 
@@ -181,23 +196,21 @@ export class Trame {
    * If we want to disconnect but let the server running,
    * you can set the timeout to -1.
    *
-   * @param {number} timeout (default: 60s) time after
+   * @param timeout (default: 60s) time after
    *        which the server will exit automatically.
    */
-  exit(timeout = 60) {
+  exit(timeout = 60): void {
     if (this.isConnected()) {
-      this.client.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
-      this.client.disconnect(timeout);
+      this.client?.getRemote()?.Trame?.lifeCycleUpdate("client_exited");
+      this.client?.disconnect(timeout);
     }
   }
 
   /**
    * Try to reconnect reusing the previously saved configuration
    * which should have a sessionURL and secret.
-   *
-   * @return {Promise<TrameConnectConfig>}
    */
-  async reconnect() {
+  async reconnect(): Promise<TrameConnectConfig | undefined> {
     return this.connect(this.config);
   }
 
@@ -205,10 +218,9 @@ export class Trame {
    * Register a function that should be called if the connection
    * get closed.
    *
-   * @param {function} fn
-   * @return {function} to call in case you want to unsubscribe.
+   * @return function to call in case you want to unsubscribe.
    */
-  onClose(fn) {
+  onClose(fn: (...args: any[]) => void): () => void {
     return this._closeListeners.on(fn);
   }
 
@@ -216,33 +228,31 @@ export class Trame {
    * Register a function that should be called if the connection
    * trigger an error and close.
    *
-   * @param {function} fn
-   * @return {function} to call in case you want to unsubscribe.
+   * @return function to call in case you want to unsubscribe.
    */
-  onError(fn) {
+  onError(fn: (...args: any[]) => void): () => void {
     return this._errorListeners.on(fn);
   }
 
   /**
    * Register a decorator that aim extend JavaScript structure serialization
-   *
-   * @param {Decorator} decorator
    */
-  registerDecorator(decorator) {
+  registerDecorator(decorator: Decorator): void {
     registerDecorator(decorator);
   }
 
   /**
    * Trigger a method call on the server using its name
    *
-   * @param {string} name
-   * @param {Array<any>} args
-   * @param {Map<string, any>} kwargs
-   * @return {Promise<any>} result from server method call
+   * @return result from server method call
    */
-  async trigger(name, args = [], kwargs = {}) {
-    let decoratedArgs = [];
-    const decoratedKwargs = {};
+  async trigger(
+    name: string,
+    args: any[] = [],
+    kwargs: Record<string, any> = {},
+  ): Promise<any> {
+    let decoratedArgs: any[] = [];
+    const decoratedKwargs: Record<string, any> = {};
 
     if (args) {
       const decorateArgs = args.map((arg) => decorate(arg));
@@ -250,8 +260,8 @@ export class Trame {
     }
 
     if (kwargs) {
-      const keys = [];
-      const values = [];
+      const keys: string[] = [];
+      const values: Promise<any>[] = [];
       Object.entries(kwargs).forEach((entry) => {
         keys.push(entry[0]);
         values.push(decorate(entry[1]));
@@ -264,7 +274,7 @@ export class Trame {
     }
 
     return await this.client
-      .getRemote()
+      ?.getRemote()
       .Trame.trigger(name, decoratedArgs, decoratedKwargs);
   }
 }
