@@ -1,33 +1,40 @@
-function compareDecorator(a, b) {
+export interface Decorator {
+  priority: number;
+  decorate(value: any): Promise<any>;
+}
+
+function compareDecorator(a: Decorator, b: Decorator): number {
   return a.priority - b.priority;
 }
 
-export const fileHandler = {
+export const fileHandler: Decorator = {
   priority: 0,
-  async decorate(value) {
+  async decorate(value: any): Promise<any> {
     if (value === null || value === undefined) return value;
     if (value.constructor && value.constructor === File) {
-      const { name, lastModified, size, type } = value;
+      const { name, lastModified, size, type } = value as File;
 
       // Will be null in the event of an error on read, DataView otherwise
-      let content = null;
+      let content: DataView | null = null;
       // Will be an error string if content failed to read, null otherwise
-      let error = null;
+      let error: string | null = null;
 
       try {
-        const arrayBuffer = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.addEventListener("loadend", () => {
-            resolve(reader.result);
-          });
-          reader.addEventListener("error", () => {
-            reject(reader.error);
-          });
-          reader.readAsArrayBuffer(value);
-        });
+        const arrayBuffer = await new Promise<ArrayBuffer>(
+          (resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener("loadend", () => {
+              resolve(reader.result as ArrayBuffer);
+            });
+            reader.addEventListener("error", () => {
+              reject(reader.error);
+            });
+            reader.readAsArrayBuffer(value);
+          },
+        );
 
         content = new DataView(arrayBuffer);
-      } catch (e) {
+      } catch (e: any) {
         error = e?.message ?? String(e);
       }
 
@@ -46,41 +53,43 @@ export const fileHandler = {
   },
 };
 
-export const fileListHandler = {
+export const fileListHandler: Decorator = {
   priority: 0,
-  async decorate(value) {
+  async decorate(value: any): Promise<any> {
     if (value === null || value === undefined) return value;
     if (typeof value === "string") {
       return value;
     }
     if ((value.constructor && value.constructor === FileList) || value.length) {
       const results = await Promise.allSettled(
-        Array.from(value).map((file) => fileHandler.decorate(file)),
+        Array.from(value as ArrayLike<File>).map((file) =>
+          fileHandler.decorate(file),
+        ),
       );
-      return results.map((result) => result.value);
+      return results.map((result: any) => result.value);
     }
     return value;
   },
 };
 
-export const fileInObjectHandler = {
+export const fileInObjectHandler: Decorator = {
   priority: 0,
-  async decorate(value) {
+  async decorate(value: any): Promise<any> {
     if (value === null || value === undefined) return value;
     if (typeof value === "string") {
       return value;
     }
     if (value.constructor && value.constructor === Object) {
-      const newValue = {};
+      const newValue: Record<string, any> = {};
       const names = Object.keys(value);
-      /* eslint-disable no-await-in-loop */
+
       for (let i = 0; i < names.length; i++) {
         const name = names[i];
         newValue[name] = value[name];
         newValue[name] = await fileListHandler.decorate(newValue[name]);
         newValue[name] = await fileHandler.decorate(newValue[name]);
       }
-      /* eslint-enable no-await-in-loop */
+
       return newValue;
     }
     return value;
@@ -91,22 +100,26 @@ export const fileInObjectHandler = {
 // API
 // ----------------------------------------------------------------------------
 
-const STATE_DECORATORS = [fileHandler, fileListHandler, fileInObjectHandler];
+const STATE_DECORATORS: Decorator[] = [
+  fileHandler,
+  fileListHandler,
+  fileInObjectHandler,
+];
 
-export function registerDecorator(decorator) {
+export function registerDecorator(decorator: Decorator): void {
   STATE_DECORATORS.push(decorator);
   STATE_DECORATORS.sort(compareDecorator);
 }
 
-export async function decorate(value) {
+export async function decorate(value: any): Promise<any> {
   let result = value;
-  /* eslint-disable no-await-in-loop */
+
   for (let i = 0; i < STATE_DECORATORS.length; i++) {
     if (result === null || result === undefined) {
       return result;
     }
     result = await STATE_DECORATORS[i].decorate(result);
   }
-  /* eslint-enable no-await-in-loop */
+
   return result;
 }

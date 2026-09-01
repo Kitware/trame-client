@@ -32,7 +32,7 @@ const result = await trame.trigger("name", [arg_0, arg_1], {
 
 // Register JS object so Python can make method calls
 // py => server.js_call("name", "method", arg_0, arg_1)
-trame.refs[("name", js_object)];
+trame.refs["name"] = js_object;
 ```
 
 More API examples

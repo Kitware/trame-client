@@ -1,8 +1,8 @@
-function identity(i) {
+function identity<T>(i: T): T {
   return i;
 }
 
-function toNativeType(str) {
+function toNativeType(str: any): any {
   if (str === null || str === "null") {
     return null;
   }
@@ -23,7 +23,7 @@ function toNativeType(str) {
     return str
       .substring(1, str.length - 1)
       .split(",")
-      .map((s) => toNativeType(s.trim()));
+      .map((s: string) => toNativeType(s.trim()));
   }
 
   if (str === "" || Number.isNaN(Number(str))) {
@@ -35,9 +35,9 @@ function toNativeType(str) {
 
 function extractURLParameters(
   castToNativeType = true,
-  query = window.location.search,
-) {
-  const summary = {};
+  query: string = window.location.search,
+): Record<string, any> {
+  const summary: Record<string, any> = {};
   const convert = castToNativeType ? toNativeType : identity;
   const params = new URLSearchParams(query);
   params.forEach((value, key) => {

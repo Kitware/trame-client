@@ -1,18 +1,22 @@
 export class ListenerManager {
-  constructor(name) {
+  name: string;
+  nextId: number;
+  listeners: Record<string, (...args: any[]) => void>;
+
+  constructor(name: string) {
     this.name = name;
     this.nextId = 1;
     this.listeners = {};
   }
 
-  on(fn) {
+  on(fn: (...args: any[]) => void): () => void {
     const key = `${this.nextId++}`;
     this.listeners[key] = fn;
     const unsubscribe = () => delete this.listeners[key];
     return unsubscribe;
   }
 
-  emit(...args) {
+  emit(...args: any[]): void {
     const listeners = Object.values(this.listeners);
     for (let i = 0; i < listeners.length; i++) {
       try {
@@ -23,18 +27,30 @@ export class ListenerManager {
     }
   }
 
-  getListeners() {
+  getListeners(): Array<(...args: any[]) => void> {
     return Object.values(this.listeners);
   }
 }
 
+interface Watcher {
+  key: string;
+  dependencies: string[];
+  callback: (...args: any[]) => void;
+}
+
 export class WatcherManager {
+  nextId: number;
+  listeners: Record<string, Watcher>;
+
   constructor() {
     this.nextId = 1;
     this.listeners = {};
   }
 
-  watch(dependencies, callback) {
+  watch(
+    dependencies: string[],
+    callback: (...args: any[]) => void,
+  ): () => void {
     const key = `${this.nextId++}`;
     this.listeners[key] = {
       key,
@@ -45,7 +61,7 @@ export class WatcherManager {
     return unsubscribe;
   }
 
-  notifyWatchers(changedKeys, fullState) {
+  notifyWatchers(changedKeys: string[], fullState: Record<string, any>): void {
     const watchers = Object.values(this.listeners);
     const keys = new Set(changedKeys);
 
@@ -62,7 +78,7 @@ export class WatcherManager {
     }
   }
 
-  getWatchers() {
+  getWatchers(): Watcher[] {
     return Object.values(this.listeners);
   }
 }

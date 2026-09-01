@@ -2,19 +2,20 @@ import SmartConnect from "@kitware/wslink/src/SmartConnect";
 import vtkWSLinkClient from "@kitware/wslink/src/WsLinkClient";
 
 import vtkURLExtract from "../URLExtract";
+import type { TrameConnectConfig } from "../trame";
 
 import protocols from "./protocols";
 
 vtkWSLinkClient.setSmartConnectClass(SmartConnect);
 
-const WS_PROTOCOL = {
+const WS_PROTOCOL: Record<string, string> = {
   "http:": "ws:",
   "https:": "wss:",
   "ws:": "ws:",
   "wss:": "wss:",
 };
 
-const NOT_BUSY_LIST = [
+const NOT_BUSY_LIST: string[] = [
   // *
   "unsubscribe",
   // SyncView
@@ -25,7 +26,7 @@ const NOT_BUSY_LIST = [
   "subscribeToViewChange",
 ];
 
-function configDecorator(config) {
+function configDecorator(config: TrameConnectConfig): TrameConnectConfig {
   const outputConfig = { ...config };
 
   // Process sessionURL
@@ -41,7 +42,7 @@ function configDecorator(config) {
     }
 
     // handle variable replacement
-    const use_mapping = {
+    const use_mapping: Record<string, string> = {
       use_hostname: httpURL.hostname,
       use_host: httpURL.host,
     };
@@ -55,10 +56,10 @@ function configDecorator(config) {
 
   // Extract app-name from html
   outputConfig.application =
-    document.querySelector("html").dataset.appName || outputConfig.application;
+    document.documentElement.dataset.appName || outputConfig.application;
 
   const sessionManagerURL =
-    document.querySelector("html").dataset.sessionManagerUrl ||
+    document.documentElement.dataset.sessionManagerUrl ||
     outputConfig.sessionManagerURL;
   if (sessionManagerURL) {
     outputConfig.sessionManagerURL = sessionManagerURL;
@@ -76,8 +77,6 @@ function configDecorator(config) {
 
 /**
  * Instantiate WSLinkClient with trame protocols
- *
- * @returns {vtkWSLinkClient}
  */
 function createClient() {
   return vtkWSLinkClient.newInstance({
