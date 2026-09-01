@@ -58,12 +58,6 @@ const unsubscribeOnError = trame.onError((info) => {
 });
 unsubscribeOnError();
 
-// Listen to connection status change
-const unsubscribeOnDisconnect = trame.onDisconnect(() => {
-  console.log("Client is disconnecting");
-});
-unsubscribeOnDisconnect();
-
 // Ask server to exit and disconnect
 trame.exit(timeout);
 
