@@ -37,6 +37,7 @@ test = [
 dev = [
     "pre-commit",
     "ruff",
+    "nox",
 ]
 
 [build-system]
