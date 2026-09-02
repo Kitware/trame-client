@@ -116,7 +116,10 @@ Python environment setup
     pre-commit install --hook-type commit-msg
 
     # Run pre-commit
-    pre-commit run --all-files
+    nox -s pre_commit
+
+    # Run tests for only 1 python version
+    nox -s tests-3.12
 
 
 JavaScript dependency
