@@ -50,6 +50,11 @@ def setup(server, **kargs):
 
         server.enable_module(vue3)
         setup_handler_module(server)
+    elif client_type == "react":
+        # No client bundle yet (see docs/adding-support-for-react/): nothing
+        # to serve, but widget construction (trame_client.widgets.react)
+        # shouldn't be blocked from building/inspecting its tree in Python.
+        pass
     else:
         raise TypeError(
             f"Trying to initialize trame_client with unknown client_type={client_type}"
