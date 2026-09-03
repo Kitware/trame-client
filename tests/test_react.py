@@ -19,11 +19,11 @@ def test_react_bind_and_callback():
             max=10,
             step=1,
             value=react.Bind("count", count=2),
-            onChange=react.Callback("count = Number(e.target.value)"),
-            onDoubleClick=react.Callback("count = 2 * count", modifiers=["prevent"]),
+            on_change=react.Callback("count = Number(e.target.value)"),
+            on_double_click=react.Callback("count = 2 * count", modifiers=["prevent"]),
         )
-        html.Button("Reset", onClick=react.Callback(reset))
-        html.Button("Reset 4", onClick=react.Callback(reset, args="[4]", kwargs="{}"))
+        html.Button("Reset", on_click=react.Callback(reset))
+        html.Button("Reset 4", on_click=react.Callback(reset, args="[4]", kwargs="{}"))
 
     assert server.state.count == 2
 
