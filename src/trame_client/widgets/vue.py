@@ -9,12 +9,13 @@ template compiler.
 `HtmlElement` (this module) is that rendering implementation: `AbstractElement`
 instantiates one per widget instance (as `self._impl`, see `core.py`) whenever
 `self.server.client_type` is `"vue2"` or `"vue3"`, and delegates every kwargs
-/rendering concern to it. A widget declares its Vue-specific properties by
-extending the instance's `props`/`events` lists, e.g.:
+/rendering concern to it. A widget declares its Vue-specific properties via
+`self.props`/`self.events` (aliases onto `self._impl.props`/`self._impl.events`,
+see `core.py`), e.g.:
 
     if self.server.client_type in VUE_CLIENT_TYPES:
-        self._impl.props += ["title"]
-        self._impl.events += ["click"]
+        self.props += ["title"]
+        self.events += ["click"]
 
 A sibling module (e.g. `react.py`, with its own `HtmlElement`) can implement
 the same interface for another `client_type` without `AbstractElement` (or
@@ -522,7 +523,7 @@ class Template(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("template", children, **kwargs)
-        self._attr_names += ["v_slot"]
+        self.props += ["v_slot"]
         for slot_name in Template.slot_names:
             safe_name = slot_name.replace("-", "_").replace(".", "_")
             if "<name>" in safe_name:
@@ -531,14 +532,14 @@ class Template(AbstractElement):
                 for key in kwargs:
                     if key.startswith(header):
                         dyna_name = key[len(header) : -len(tail)]
-                        self._attr_names.append(
+                        self.props.append(
                             (
                                 f"v_slot_{safe_header}{dyna_name}{safe_tail}",
                                 f"v-slot:{header}{dyna_name}{tail}",
                             )
                         )
             else:
-                self._attr_names.append((f"v_slot_{safe_name}", f"v-slot:{slot_name}"))
+                self.props.append((f"v_slot_{safe_name}", f"v-slot:{slot_name}"))
 
 
 # -----------------------------------------------------------------------------
@@ -555,7 +556,7 @@ class Component(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("component", children, **kwargs)
-        self._attr_names += [
+        self.props += [
             ("is_name", "is"),
         ]
 
@@ -614,7 +615,7 @@ class Transition(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("transition", children, **kwargs)
-        self._attr_names += [
+        self.props += [
             "name",
             "css",
             "type",
@@ -631,7 +632,7 @@ class Transition(AbstractElement):
             ("leave_active_class", "leaveActiveClass"),
             ("leave_to_class", "leaveToClass"),
         ]
-        self._event_names += [
+        self.events += [
             ("before_enter", "before-enter"),
             ("before_leave", "before-leave"),
             ("enter", "enter"),
@@ -677,11 +678,11 @@ class TransitionGroup(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("transition-group", children, **kwargs)
-        self._attr_names += [
+        self.props += [
             "tag",
             ("move_class", "moveClass"),
         ]
-        self._event_names += [
+        self.events += [
             ("before_enter", "before-enter"),
             ("before_leave", "before-leave"),
             ("enter", "enter"),
@@ -718,7 +719,7 @@ class KeepAlive(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("keep-alive", children, **kwargs)
-        self._attr_names += [
+        self.props += [
             "include",
             "exclude",
             "max",
@@ -749,7 +750,7 @@ class Teleport(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("teleport", children, **kwargs)
-        self._attr_names += [
+        self.props += [
             "to",
             "disabled",
             "defer",
@@ -781,11 +782,11 @@ class Suspense(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("suspense", children, **kwargs)
-        self._attr_names += [
+        self.props += [
             "timeout",
             "suspensible",
         ]
-        self._event_names += [
+        self.events += [
             "resolve",
             "pending",
             "fallback",
