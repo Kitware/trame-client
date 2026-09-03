@@ -297,7 +297,9 @@ class Slot(_ReactNode):
 # Global HTML attributes / DOM events every react element recognizes by
 # default, mirroring vue.SHARED_ATTRIBUTES/SHARED_EVENTS in spirit. A bare
 # string means the python kwarg and the react prop share the same (already
-# camelCase) name; a (python_name, react_name) tuple is for the rest.
+# camelCase) name; a (python_name, react_name) tuple is for the rest - every
+# SHARED_EVENTS entry is one of these, so Python callers use snake_case
+# (onClick= becomes on_click=) while the wire/react prop name stays camelCase.
 SHARED_PROPS = [
     ("classes", "className"),
     "id",
@@ -315,28 +317,28 @@ SHARED_PROPS = [
 ]
 
 SHARED_EVENTS = [
-    "onClick",
-    "onDoubleClick",
-    "onContextMenu",
-    "onMouseDown",
-    "onMouseUp",
-    "onMouseEnter",
-    "onMouseLeave",
-    "onMouseMove",
-    "onMouseOver",
-    "onMouseOut",
-    "onKeyDown",
-    "onKeyUp",
-    "onKeyPress",
-    "onSubmit",
-    "onInput",
-    "onChange",
-    "onFocus",
-    "onBlur",
-    "onTouchStart",
-    "onTouchMove",
-    "onTouchEnd",
-    "onTouchCancel",
+    ("on_click", "onClick"),
+    ("on_double_click", "onDoubleClick"),
+    ("on_context_menu", "onContextMenu"),
+    ("on_mouse_down", "onMouseDown"),
+    ("on_mouse_up", "onMouseUp"),
+    ("on_mouse_enter", "onMouseEnter"),
+    ("on_mouse_leave", "onMouseLeave"),
+    ("on_mouse_move", "onMouseMove"),
+    ("on_mouse_over", "onMouseOver"),
+    ("on_mouse_out", "onMouseOut"),
+    ("on_key_down", "onKeyDown"),
+    ("on_key_up", "onKeyUp"),
+    ("on_key_press", "onKeyPress"),
+    ("on_submit", "onSubmit"),
+    ("on_input", "onInput"),
+    ("on_change", "onChange"),
+    ("on_focus", "onFocus"),
+    ("on_blur", "onBlur"),
+    ("on_touch_start", "onTouchStart"),
+    ("on_touch_move", "onTouchMove"),
+    ("on_touch_end", "onTouchEnd"),
+    ("on_touch_cancel", "onTouchCancel"),
 ]
 
 
