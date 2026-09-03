@@ -17,11 +17,14 @@ just delegates to it, so adding a new `client_type` only means adding a new
 sibling module with its own `HtmlElement` implementation - `AbstractElement`
 itself never needs to change.
 
-`_attr_names`/`_event_names` are kept working as aliases onto
-`self._impl.props`/`self._impl.events`: every widget package across the trame
-ecosystem declares its properties with `self._attr_names += [...]` /
-`self._event_names += [...]` inside its own `__init__`, so those names have to
-keep resolving to whatever the active implementation considers its props/events.
+`self.props`/`self.events` are aliases onto `self._impl.props`/`self._impl.events`
+- the preferred way for a widget to declare its properties:
+`self.props += [...]` / `self.events += [...]`. `_attr_names`/`_event_names`
+are kept working as the exact same aliases purely for backward compatibility:
+every widget package across the trame ecosystem already declares its
+properties with `self._attr_names += [...]` / `self._event_names += [...]`
+inside its own `__init__`, so those names have to keep resolving to whatever
+the active implementation considers its props/events.
 """
 
 from trame_common.obj.component import TrameComponent
@@ -339,11 +342,13 @@ class AbstractElement(TrameComponent):
             print(f"Attribute {name} is not defined for {self._elem_name}")
 
     def __getattr__(self, name):
-        # Backward-compat aliases: widgets across the trame ecosystem declare
-        # their properties with `self._attr_names += [...]` / `self._event_names += [...]`.
-        if name == "_attr_names":
+        # self.props/self.events: aliases onto self._impl.props/self._impl.events.
+        # _attr_names/_event_names are the same aliases, kept for widgets
+        # across the trame ecosystem that declare their properties with
+        # `self._attr_names += [...]` / `self._event_names += [...]`.
+        if name in {"props", "_attr_names"}:
             return self._impl.props
-        if name == "_event_names":
+        if name in {"events", "_event_names"}:
             return self._impl.events
 
         if name[0] == "_":
@@ -356,9 +361,9 @@ class AbstractElement(TrameComponent):
 
     def __setattr__(self, name, value):
         # Backward-compat aliases (see __getattr__ above)
-        if name == "_attr_names":
+        if name in {"props", "_attr_names"}:
             self._impl.props = value
-        elif name == "_event_names":
+        elif name in {"events", "_event_names"}:
             self._impl.events = value
         elif name[0] == "_":
             self.__dict__[name] = value
