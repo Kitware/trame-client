@@ -14,7 +14,7 @@ describe("makeCallbackHandler", () => {
   it("calls trame.trigger with correctly-evaluated args/kwargs", () => {
     const { trame } = createFakeTrame();
     const handler = makeCallbackHandler(
-      { callback: { trigger: "foo", args: { js: "[e.target.value]" } } },
+      { callback: { trigger: "foo", args: { js: "[$event.target.value]" } } },
       undefined,
       trame,
     );
@@ -27,7 +27,7 @@ describe("makeCallbackHandler", () => {
   it("evaluates a plain js callback expression against the merged scope", () => {
     const { trame, setState } = createFakeTrame({ count: 1 });
     const handler = makeCallbackHandler(
-      { callback: { js: "count = Number(e.target.value)" } },
+      { callback: { js: "count = Number($event.target.value)" } },
       undefined,
       trame,
     );

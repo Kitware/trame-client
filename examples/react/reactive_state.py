@@ -18,12 +18,12 @@ class TestReact(TrameApp):
                 max=10,
                 step=1,
                 value=react.Bind("count", count=2),
-                on_change=react.Callback("count = Number(e.target.value)"),
+                on_change=react.Callback("count = Number($event.target.value)"),
             )
             html.Button("Reset", on_click=react.Callback(self.reset))
             html.Input(
                 value=react.Bind("text", text="Hello world"),
-                on_change=react.Callback("text = e.target.value"),
+                on_change=react.Callback("text = $event.target.value"),
             )
             html.Button("Add todo", on_click=react.Callback(self.add_todo, "[text]"))
 

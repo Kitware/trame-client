@@ -48,7 +48,7 @@ export function makeCallbackHandler({ callback, modifiers }, scope, trame) {
   return (event) => {
     modifiers?.forEach((m) => MODIFIER_HANDLERS[m]?.(event));
     const merged = buildMergedScope(
-      extendScope(scope, ["e"], [event]),
+      extendScope(scope, ["$event"], [event]),
       trame.state,
     );
     if ("js" in callback) {

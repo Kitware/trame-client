@@ -44,7 +44,7 @@ html.Input(type="range", min=0, max=10, step=1, v_model_number=("count", 2))
 html.Input(
     type="range", min=0, max=10, step=1,
     value=react.Bind("count", count=2),
-    onChange=react.Callback("count = Number(e.target.value)"),
+    onChange=react.Callback("count = Number($event.target.value)"),
 )
 ```
 
@@ -146,7 +146,7 @@ self.server.js_call("my_input", "focus")
 | `"{{ count }}"` in children | `react.Bind("count")` as its own child in a list |
 | `v_if="expr"` | `with react.If(value="expr"):` |
 | `v_for="item in items"` | `with react.For(items="items", name="item"):` |
-| `v_model_number="count"` | `value=react.Bind("count")`, `onChange=react.Callback("count = Number(e.target.value)")` |
+| `v_model_number="count"` | `value=react.Bind("count")`, `onChange=react.Callback("count = Number($event.target.value)")` |
 | `@click="trigger('fn')"` / `click=self.fn` | `onClick=react.Callback(self.fn)` |
 | `click=(self.fn, "[4]", "{}")` | `onClick=react.Callback(self.fn, "[4]", "{}")` |
 | `v_on_dblclick_prevent="expr"` | `onDoubleClick=react.Callback("expr", modifiers=["prevent"])` |

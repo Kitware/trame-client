@@ -125,7 +125,7 @@ class ReactImplementation(TrameApp):
             html.Input(
                 type="range", min=0, max=10, step=1,
                 value=react.Bind("count", count=2),
-                onChange=react.Callback("count = Number(e.target.value)"),
+                onChange=react.Callback("count = Number($event.target.value)"),
                 onDoubleClick=react.Callback("count = 2 * count", modifiers=["prevent"]),
             )
             html.Button(
@@ -171,7 +171,7 @@ For react
       "max": 10,
       "step": 1,
       "value": { "js": "count" },
-      "onChange": { "callback": { "js": "count = Number(e.target.value)" } },
+      "onChange": { "callback": { "js": "count = Number($event.target.value)" } },
       "onDoubleClick": {
         "callback": { "js": "count = 2 * count" },
         "modifiers": ["prevent"]
@@ -257,7 +257,7 @@ html.Li("{{ item }}", v_for="item in Object.keys(obj)")
 ```python
 html.Input(
     value=react.Bind("count", count=2),
-    onChange=react.Callback("count=Number(e.target.value)", modifiers=["prevent"])
+    onChange=react.Callback("count=Number($event.target.value)", modifiers=["prevent"])
 )
 ```
 

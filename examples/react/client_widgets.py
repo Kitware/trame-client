@@ -167,7 +167,7 @@ class ClientWidgetsApp(TrameApp):
             html.P("Trigger arbitrary JS from the server, with a bound payload.")
             js_eval = client.JSEval(
                 event="Hello from JSEval!",
-                exec=react.Callback("window.alert(e)"),
+                exec=react.Callback("window.alert($event)"),
             )
             html.Button("Show alert", on_click=react.Callback(js_eval.exec))
 

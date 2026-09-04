@@ -138,7 +138,7 @@ expression actually reads is the common, readable pattern.
 
 ```python
 # Raw JS expression, evaluated client-side
-html.Input(onChange=react.Callback("count = Number(e.target.value)"))
+html.Input(onChange=react.Callback("count = Number($event.target.value)"))
 
 # Python callable, invoked server-side
 html.Button("Reset", onClick=react.Callback(self.reset))
@@ -147,7 +147,7 @@ html.Button("Reset", onClick=react.Callback(self.reset))
 # (JS expression strings, evaluated client-side and sent along with the call)
 html.Button("Reset to 4", onClick=react.Callback(self.reset, "[4]", "{}"))
 
-# Event modifiers - run e.preventDefault(), e.stopPropagation(), etc.
+# Event modifiers - run $event.preventDefault(), $event.stopPropagation(), etc.
 # before the callback fires
 html.Input(
     onDoubleClick=react.Callback(
@@ -174,7 +174,7 @@ To create an input whose value both reflects and updates state, pair
 html.Input(
     type="range", min=0, max=10, step=1,
     value=react.Bind("count", count=2),
-    onChange=react.Callback("count = Number(e.target.value)"),
+    onChange=react.Callback("count = Number($event.target.value)"),
 )
 ```
 
@@ -299,7 +299,7 @@ class TodoApp(TrameApp):
             html.Input(
                 type="range", min=0, max=10, step=1,
                 value=react.Bind("count", count=2),
-                onChange=react.Callback("count = Number(e.target.value)"),
+                onChange=react.Callback("count = Number($event.target.value)"),
             )
             html.Button("Reset", onClick=react.Callback(self.reset))
 
