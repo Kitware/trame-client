@@ -7,12 +7,26 @@ import ReactFor from "./ReactFor.jsx";
 import TrameLoading from "./TrameLoading.jsx";
 import TrameTemplate from "./TrameTemplate.jsx";
 import TrameReconnect from "./TrameReconnect.jsx";
+import TrameJSEval from "./TrameJSEval.jsx";
+import TrameStyle from "./TrameStyle.jsx";
+import TrameScript from "./TrameScript.jsx";
+import TrameClientStateChange from "./TrameClientStateChange.jsx";
+import TrameClientTriggers from "./TrameClientTriggers.jsx";
+import TrameLifeCycleMonitor from "./TrameLifeCycleMonitor.jsx";
+import TrameSizeObserver from "./TrameSizeObserver.jsx";
 
 // Registered once at module load, before first render (§6 of the plan).
 registerTag("ReactIf", ReactIf);
 registerTag("ReactFor", ReactFor);
 registerTag("trame-loading", TrameLoading);
 registerTag("trame-template", TrameTemplate);
+registerTag("trame-exec", TrameJSEval);
+registerTag("trame-style", TrameStyle);
+registerTag("trame-script", TrameScript);
+registerTag("trame-client-state-change", TrameClientStateChange);
+registerTag("trame-client-triggers", TrameClientTriggers);
+registerTag("trame-life-cycle-monitor", TrameLifeCycleMonitor);
+registerTag("trame-size-observer", TrameSizeObserver);
 
 // Responsibilities ported from vue3-app/src/components/TrameApp.js, minus
 // per-`trame__template_*`-name dynamic-component registration (no Vue-style
