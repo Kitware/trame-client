@@ -1,4 +1,9 @@
 import "./style.css";
+
+import React from "react";
+import * as ReactDOMBase from "react-dom";
+import ReactDOM from "react-dom/client";
+
 import { createRoot } from "react-dom/client";
 import Trame, { configDecorator, extractURLParameters } from "@kitware/trame";
 import { handlePageResources } from "./setup";
@@ -26,6 +31,10 @@ async function start() {
   // TrameNode resolves tags from (runtime/tags.js).
   window.trame = trame;
   window.trame.registerTag = registerTag;
+
+  // Expose React
+  window.React = React;
+  window.ReactDOM = { ...ReactDOMBase, ...ReactDOM };
 
   let config = configDecorator({
     application: "trame",

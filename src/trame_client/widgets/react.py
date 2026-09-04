@@ -314,6 +314,7 @@ SHARED_PROPS = [
     "tabIndex",
     "ref",
     "key",
+    "value",
 ]
 
 SHARED_EVENTS = [

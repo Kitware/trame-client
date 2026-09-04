@@ -6,6 +6,8 @@
 //   4. trame__title   : browser tab title
 // ----------------------------------------------------------------------------
 
+import { registerTag } from "./runtime/tags";
+
 var LOADED_URLS = [];
 
 function resolveWithError(resolve, msg) {
@@ -117,6 +119,12 @@ export async function handlePageResources(state) {
   await loadURLs(state.trame__styles ?? [], loadCSS);
   await loadURLs(state.trame__scripts ?? [], loadScript);
   await loadURLs(state.trame__module_scripts ?? [], loadScriptAsModule);
+
+  (state.trame__react_use ?? []).forEach((name) => {
+    const obj = window[name];
+    console.log("Install react", name, obj);
+    obj?.install?.(registerTag);
+  });
 
   if (state.trame__favicon) {
     document.querySelector("link[rel=icon]").href = state.trame__favicon;
