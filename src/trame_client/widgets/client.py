@@ -3,6 +3,7 @@ import uuid
 from pathlib import Path
 
 from .core import AbstractElement
+from .react import Bind as ReactBind
 from ..external_script_handler import (
     UserDefinedFunction,
     ExternalScript,
@@ -86,13 +87,20 @@ class JSEval(AbstractElement):
         super().__init__("trame-exec", children, **kwargs)
         JSEval._next_id += 1
         self.__ref = kwargs.get("ref", f"trame_exec_ref_{JSEval._next_id}")
-        self._attributes["ref"] = f'ref="{self.__ref}"'
         self._attr_names += [
             "event",
         ]
-        self._event_names += [
-            "exec",
-        ]
+        if self.server.client_type == "react":
+            # "ref" is already a SHARED_PROPS entry for react (unlike vue,
+            # which needs a raw `ref="..."` template fragment) - just set it
+            # as an ordinary prop.
+            self.ref = self.__ref
+            self._event_names += [("exec", "onExec")]
+        else:
+            self._attributes["ref"] = f'ref="{self.__ref}"'
+            self._event_names += [
+                "exec",
+            ]
 
     def exec(self, event=None):
         if event is None:
@@ -113,8 +121,12 @@ class Style(AbstractElement):
         Style._next_id += 1
         super().__init__("trame-style", **kwargs)
         self._key = f"trame__inline_style_{Style._next_id}"
-        self._attributes["_css"] = f':css="{self._key}"'
         self.server.root_server.state.setdefault(self._key, css_content)
+        if self.server.client_type == "react":
+            self._attr_names += [("css", "css")]
+            self.css = ReactBind(self._key)
+        else:
+            self._attributes["_css"] = f':css="{self._key}"'
 
     def update(self, css_content):
         """Update style content"""
@@ -138,8 +150,12 @@ class Script(AbstractElement):
         Script._next_id += 1
         super().__init__("trame-script", **kwargs)
         self._key = f"trame__inline_script_{Script._next_id}"
-        self._attributes["_script"] = f':script="{self._key}"'
         self.server.root_server.state.setdefault(self._key, script_content)
+        if self.server.client_type == "react":
+            self._attr_names += [("script", "script")]
+            self.script = ReactBind(self._key)
+        else:
+            self._attributes["_script"] = f':script="{self._key}"'
         self._attr_names += [
             "module",  # type="module" or "text/javascript"
             "async",
@@ -229,12 +245,26 @@ class ClientStateChange(AbstractElement):
 
     def __init__(self, children=None, **kwargs):
         super().__init__("trame-client-state-change", children, **kwargs)
-        self._attr_names += [
-            ("value", ":value"),
-            "immediate",
-            ("trigger_on_create", "triggerChangeOnCreate"),
-        ]
-        self._event_names += ["change"]
+        if self.server.client_type == "react":
+            # Unlike vue's dynamic `:value="expr"` binding, react needs an
+            # explicit Bind so the value is actually reactively evaluated
+            # client-side rather than serialized as a literal string.
+            self._attr_names += [
+                "value",
+                "immediate",
+                ("trigger_on_create", "triggerChangeOnCreate"),
+            ]
+            value = self.value
+            if not isinstance(value, ReactBind):
+                self.value = ReactBind(value)
+            self._event_names += [("change", "onChange")]
+        else:
+            self._attr_names += [
+                ("value", ":value"),
+                "immediate",
+                ("trigger_on_create", "triggerChangeOnCreate"),
+            ]
+            self._event_names += ["change"]
 
 
 # -----------------------------------------------------------------------------
