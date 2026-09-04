@@ -43,7 +43,7 @@ def test_react_if_for(server, page):
     # Bind: initial value round-trips from Python state
     expect(count_value).to_have_text("2")
 
-    # Callback with a JS expression (`count = Number(e.target.value)`):
+    # Callback with a JS expression (`count = Number($event.target.value)`):
     # exercises client-side reactivity without a server round trip.
     slider.fill("7")
     slider.dispatch_event("change")

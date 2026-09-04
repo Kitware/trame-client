@@ -25,7 +25,7 @@ with DivLayout(server) as layout:
         step=1,
         classes="countSlider",
         value=react.Bind("count"),
-        on_change=react.Callback("count = Number(e.target.value)"),
+        on_change=react.Callback("count = Number($event.target.value)"),
     )
     html.Button("Reset", classes="resetButton", on_click=react.Callback(reset))
     html.Button(

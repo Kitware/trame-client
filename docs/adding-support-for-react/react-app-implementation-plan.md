@@ -317,7 +317,7 @@ const MODIFIER_HANDLERS = { prevent: (e) => e.preventDefault(), stop: (e) => e.s
 function makeCallbackHandler({ callback, modifiers }, scope, trame) {
   return (event) => {
     modifiers?.forEach((m) => MODIFIER_HANDLERS[m]?.(event));
-    const merged = buildMergedScope(extendScope(scope, ["e"], [event]), trame.state);
+    const merged = buildMergedScope(extendScope(scope, ["$event"], [event]), trame.state);
     if ("js" in callback) {
       compile(callback.js)(merged);
       return;
@@ -329,7 +329,7 @@ function makeCallbackHandler({ callback, modifiers }, scope, trame) {
 }
 ```
 
-- The DOM event is exposed as an ordinary scope binding under the name `e` (matching `react.py`/`react-getting-started.md`'s convention exactly, e.g. `onChange=react.Callback("count = Number(e.target.value)")`), via the same `extendScope` mechanism as loop vars.
+- The DOM event is exposed as an ordinary scope binding under the name `$event` (matching `react.py`/`react-getting-started.md`'s convention exactly, e.g. `onChange=react.Callback("count = Number($event.target.value)")`), via the same `extendScope` mechanism as loop vars.
 - `callback.args`/`callback.kwargs` are themselves `{js: "..."}`-wrapped expression strings (per `react.py`'s `Callback.to_json`), evaluated fresh **at call time** against the scope captured when the handler was created — correct, since Python's `args`/`kwargs` are meant to be re-evaluated per call, not memoized as a static value.
 - **Memoization**: `useResolvedNode` (§2.2) already memoizes the whole `callbacks` map per node via one `useMemo` keyed on a content hash (`key + JSON.stringify(spec)`) plus `scope`/`trame` identity — avoids minting a fresh function every render (the "freshly-minted functions" problem flagged in `react-scoped-slots.md` §6 / `react-fine-grained-reactivity.md` §1) while still correctly re-minting when `scope` changes (e.g., each `For` row is a distinct component instance via `key`, so this mostly guards the same instance's scope value changing across renders without a full remount).
 
@@ -480,7 +480,7 @@ with DivLayout(server) as layout:
     html.Input(
         type="range", min=0, max=10, step=1,
         value=react.Bind("count", count=2),
-        onChange=react.Callback("count = Number(e.target.value)"),
+        onChange=react.Callback("count = Number($event.target.value)"),
     )
     html.Button("Reset", onClick=react.Callback(reset))
     with react.If(value="todos.length > 0"):
@@ -506,7 +506,7 @@ server.start()
 - `runtime/expr.test.js` — same expression string reuses the cached `Function`; dependency tracking records only identifiers actually read (a ternary only tracks its taken branch); a scope-chain local shadowing a same-named state key is never tracked as a `state.watch` dependency (the critical regression case).
 - `components/TrameNode.test.jsx` (`@testing-library/react` + a fake `trame`) — renders a `{tag:"div", props:{className:"x"}, children:["hi"]}` tree to the expected DOM; a `{"js":"count"}` child re-renders only when `count` changes (render-count spy); `ref="name"` populates `trame.refs.name` on mount, removes it on unmount.
 - `components/ReactFor.test.jsx` — each row's scope correctly isolates its own loop variable (row *N* must not see row *N-1*'s value).
-- `runtime/resolveNode.test.js` — `{callback:{trigger:"foo", args:{js:"[e.target.value]"}}}` calls `trame.trigger("foo", [value], {})` with correctly-evaluated args; `modifiers:["prevent"]` calls `event.preventDefault()`.
+- `runtime/resolveNode.test.js` — `{callback:{trigger:"foo", args:{js:"[$event.target.value]"}}}` calls `trame.trigger("foo", [value], {})` with correctly-evaluated args; `modifiers:["prevent"]` calls `event.preventDefault()`.
 
 No browser/e2e suite is proposed here beyond the manual smoke test — the repo's root `tests/` already has Playwright coverage for vue2/vue3 per `noxfile.py`; extending that to drive `react-app` once built is a natural, separate follow-up.
 
@@ -520,7 +520,7 @@ Cross-checked against the actual repo state (2026-09-03, branch `add-react-suppo
 - `js-lib/src/trame.ts`'s `Trame` class already exposes `client`, `state`, `config`, `refs`, `connect()`, `trigger()`, `onClose()`, `onError()` exactly as this plan assumes; `state.watch(keys, fn)` (`js-lib/src/state.ts`) calls `fn` immediately with current values on subscribe, which `useSyncExternalStore` depends on for its synchronous initial snapshot.
 - `js-lib/tests/helpers/fakeClient.ts` is a ready-made fake `vtkWSLinkClient` (`getState`, `updateState`, `trigger`, `subscribeToStateUpdate`, `subscribeToActions`, connect/disconnect/busy) — reuse this pattern (or the same helper via a relative import) for `react-app`'s own vitest suite rather than re-inventing a fake client.
 - `tests/test_react.py` confirms the exact wire shapes this plan relies on: `{"js": ...}` leaves for `Bind`, `{"callback": {...}, "modifiers": [...]}` for `Callback` (with `trigger`/`args`/`kwargs` sub-keys when wrapping a Python callable), `{"tag": "ReactIf"/"ReactFor", "props": {...}, "children": [...]}` for structural nodes, and `{"slot": {"params": [...], "children": [...]}}` for `Slot`. It also confirms `key=` can itself be a `Bind` (`html.Li([...], key=react.Bind("todo"))` serializes to `"key": {"js": "todo"}`), validating §2's `computeNodeKey` needing to handle a `{js: ...}` leaf, not just plain scalars.
-- `react-getting-started.md` and the `onChange=react.Callback("count = Number(e.target.value)")` examples confirm the DOM event is referenced as `e` in author-facing JS expressions, not `$event` — §4 (`makeCallbackHandler`) binds the scope variable as `e` accordingly.
+- `react-getting-started.md` and the `onChange=react.Callback("count = Number($event.target.value)")` examples confirm the DOM event is referenced as `$event` in author-facing JS expressions — §4 (`makeCallbackHandler`) binds the scope variable as `$event` accordingly.
 - `widgets/core.py`'s `AbstractElement.__init__` dispatches `self._impl = _get_impl_class(self.server.client_type)(self, kwargs)`, and already has a `client_type == "react"` branch returning `react.HtmlElement` — so the Python side is fully wired up to produce trees for any widget once `self.server.client_type == "react"`; only the client bundle and `module/__init__.py`'s dispatch (§8) are missing.
 - `widgets/trame.py`'s `Loading` (`_elem_name = "trame-loading"`, attr `message`) and `ServerTemplate` (`_elem_name = "trame-template"`, attrs `name`→`templateName`, `use_url`→`useUrl`, `url_key`→`urlKey`) both declare their attrs via `self._attr_names += [...]`, which `widgets/core.py`'s backward-compat aliasing routes to `self._impl.props` — i.e. `react.HtmlElement` (already implemented) picks these up automatically through the existing `props`/`SHARED_PROPS` mechanism; no Python-side change is needed for these two widgets, only client-side `TrameLoading`/`TrameTemplate` components registered under those exact tag strings (§6/§7).
 - `noxfile.py`'s existing `VUE_APPS` dict and `_ensure_vue_apps_built` helper, and `pyproject.toml`'s `[tool.hatch.build] include` list, were read directly to confirm the exact edits described in §8 are additive (new dict entry / new glob line) rather than requiring restructuring.

@@ -19,7 +19,7 @@ def test_react_bind_and_callback():
             max=10,
             step=1,
             value=react.Bind("count", count=2),
-            on_change=react.Callback("count = Number(e.target.value)"),
+            on_change=react.Callback("count = Number($event.target.value)"),
             on_double_click=react.Callback("count = 2 * count", modifiers=["prevent"]),
         )
         html.Button("Reset", on_click=react.Callback(reset))
@@ -45,7 +45,9 @@ def test_react_bind_and_callback():
                     "max": 10,
                     "step": 1,
                     "value": {"js": "count"},
-                    "onChange": {"callback": {"js": "count = Number(e.target.value)"}},
+                    "onChange": {
+                        "callback": {"js": "count = Number($event.target.value)"}
+                    },
                     "onDoubleClick": {
                         "callback": {"js": "count = 2 * count"},
                         "modifiers": ["prevent"],
