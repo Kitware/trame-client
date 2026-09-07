@@ -54,6 +54,28 @@ describe("TrameNode", () => {
     expect(screen.getByText("2")).toBeTruthy();
   });
 
+  it("a style prop mixing static values with a {js: ...} entry resolves both and reacts to state changes", () => {
+    const { trame, setState } = createFakeTrame({ color: "red" });
+    renderTree(
+      {
+        tag: "div",
+        props: {
+          style: { fontWeight: "bold", color: { js: "color" } },
+        },
+        children: ["hi"],
+      },
+      trame,
+    );
+
+    const el = screen.getByText("hi");
+    expect(el.style.fontWeight).toBe("bold");
+    expect(el.style.color).toBe("red");
+
+    act(() => setState({ color: "blue" }));
+    expect(el.style.color).toBe("blue");
+    expect(el.style.fontWeight).toBe("bold");
+  });
+
   it("ref='name' populates trame.refs.name on mount, removes it on unmount", () => {
     const { trame } = createFakeTrame();
     const { unmount } = renderTree(

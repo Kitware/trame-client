@@ -1,6 +1,40 @@
 import { describe, expect, it, vi } from "vitest";
-import { makeCallbackHandler } from "../../src/runtime/resolveNode";
+import {
+  classifyProps,
+  makeCallbackHandler,
+} from "../../src/runtime/resolveNode";
 import { createFakeTrame } from "../helpers/fakeTrame";
+
+describe("classifyProps", () => {
+  it("splits a dict-valued prop mixing static entries with {js: ...} leaves into `composites`, leaving other props alone", () => {
+    const { reactive, composites, static_ } = classifyProps({
+      style: { fontWeight: "bold", color: { js: "color" } },
+      title: "hi",
+      value: { js: "count" },
+    });
+
+    expect(reactive).toEqual([["value", "count"]]);
+    expect(static_).toEqual([["title", "hi"]]);
+    expect(composites).toEqual([
+      [
+        "style",
+        {
+          static: { fontWeight: "bold" },
+          reactiveEntries: [["color", { js: "color" }]],
+        },
+      ],
+    ]);
+  });
+
+  it("treats a fully-static dict-valued prop as static, not a composite", () => {
+    const { composites, static_ } = classifyProps({
+      style: { fontWeight: "bold", color: "red" },
+    });
+
+    expect(composites).toEqual([]);
+    expect(static_).toEqual([["style", { fontWeight: "bold", color: "red" }]]);
+  });
+});
 
 function fakeEvent(value) {
   return {

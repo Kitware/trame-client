@@ -187,6 +187,22 @@ def test_react_hide_merges_with_existing_style():
     assert div.html["props"]["style"] == {"color": "red", "display": "none"}
 
 
+def test_react_bind_inside_style():
+    server = get_server("test_react_bind_inside_style", client_type="react")
+    div = html.Div(
+        trame_server=server,
+        style={
+            "fontWeight": "bold",
+            "color": react.Bind("color", color="red"),
+        },
+    )
+    assert div.html["props"]["style"] == {
+        "fontWeight": "bold",
+        "color": {"js": "color"},
+    }
+    assert server.state.color == "red"
+
+
 def test_react_bind_applies_trame_default():
     server = get_server("test_react_bind_applies_trame_default", client_type="react")
     div = html.Div(trame_server=server, title=react.Bind("t", t=TrameDefault(x=1)))

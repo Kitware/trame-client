@@ -4,6 +4,15 @@ import { buildMergedScope, extendScope } from "./scope";
 import { compile, createSnapshotCache, evalTracked } from "./expr";
 import TrameNode from "../components/TrameNode.jsx";
 
+// A dict-valued prop (e.g. `style={"color": react.Bind(...)}`, see
+// react.py's HtmlElement._serialize_value) that mixes static entries with
+// nested `{"js": ...}` markers - resolved as a unit below (one composite
+// object per prop) rather than flattened into `reactive`, so its static
+// entries survive untouched alongside the per-key reactive ones.
+function isReactiveLeaf(value) {
+  return value !== null && typeof value === "object" && "js" in value;
+}
+
 // Pure, non-hook classification of node.props - cheap object walk. Ordered
 // by prop KEY first ("ref" is always a plain string, never wrapped), then by
 // VALUE SHAPE (matching react-refs.md §5 / react-scoped-slots.md §4).
@@ -11,6 +20,7 @@ export function classifyProps(props) {
   const reactive = [];
   const callbacks = [];
   const slots = [];
+  const composites = [];
   const static_ = [];
   let ref;
 
@@ -19,7 +29,7 @@ export function classifyProps(props) {
       ref = value;
       return;
     }
-    if (value !== null && typeof value === "object") {
+    if (value !== null && typeof value === "object" && !Array.isArray(value)) {
       if ("js" in value) {
         reactive.push([key, value.js]);
         return;
@@ -32,11 +42,21 @@ export function classifyProps(props) {
         slots.push([key, value.slot]);
         return;
       }
+      const reactiveEntries = Object.entries(value).filter(([, v]) =>
+        isReactiveLeaf(v),
+      );
+      if (reactiveEntries.length) {
+        const staticEntries = Object.fromEntries(
+          Object.entries(value).filter(([, v]) => !isReactiveLeaf(v)),
+        );
+        composites.push([key, { static: staticEntries, reactiveEntries }]);
+        return;
+      }
     }
     static_.push([key, value]);
   });
 
-  return { reactive, callbacks, slots, ref, static_ };
+  return { reactive, callbacks, slots, composites, ref, static_ };
 }
 
 const MODIFIER_HANDLERS = {
@@ -77,9 +97,8 @@ function makeSlotRenderProp({ params, children }, scope) {
 export function useResolvedNode(node, scope) {
   const { trame, getRefCallback } = useTrame();
 
-  const { reactive, callbacks, slots, ref, static_ } = classifyProps(
-    node.props,
-  );
+  const { reactive, callbacks, slots, composites, ref, static_ } =
+    classifyProps(node.props);
 
   const trackedKeys = useMemo(() => {
     const merged = buildMergedScope(scope, trame.state);
@@ -87,25 +106,60 @@ export function useResolvedNode(node, scope) {
     reactive.forEach(([, expr]) =>
       evalTracked(expr, merged).keys.forEach((k) => keys.add(k)),
     );
+    composites.forEach(([, { reactiveEntries }]) =>
+      reactiveEntries.forEach(([, v]) =>
+        evalTracked(v.js, merged).keys.forEach((k) => keys.add(k)),
+      ),
+    );
     return [...keys];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reactive, scope, trame.state]);
+  }, [reactive, composites, scope, trame.state]);
 
   const snapshotCacheRef = useRef(null);
   if (snapshotCacheRef.current === null)
     snapshotCacheRef.current = createSnapshotCache();
 
+  // One nested cache per composite prop key (e.g. "style"), reused across
+  // calls - a bare `{...staticProps, ...evaluated}` object literal would be a
+  // fresh reference on every getSnapshot() call even when nothing in it
+  // changed, defeating snapshotCacheRef's own Object.is check on that key and
+  // recreating exactly the infinite-render-loop risk createSnapshotCache
+  // above exists to prevent.
+  const compositeCachesRef = useRef(null);
+  if (compositeCachesRef.current === null)
+    compositeCachesRef.current = new Map();
+
   const reactiveValues = useSyncExternalStore(
     (onChange) => trame.state.watch(trackedKeys, onChange),
-    () =>
-      snapshotCacheRef.current(
-        Object.fromEntries(
-          reactive.map(([key, expr]) => [
-            key,
-            evalTracked(expr, buildMergedScope(scope, trame.state)).value,
-          ]),
+    () => {
+      const merged = buildMergedScope(scope, trame.state);
+      return snapshotCacheRef.current({
+        ...Object.fromEntries(
+          reactive.map(([key, expr]) => [key, evalTracked(expr, merged).value]),
         ),
-      ),
+        ...Object.fromEntries(
+          composites.map(([key, { static: staticProps, reactiveEntries }]) => {
+            let cache = compositeCachesRef.current.get(key);
+            if (!cache) {
+              cache = createSnapshotCache();
+              compositeCachesRef.current.set(key, cache);
+            }
+            return [
+              key,
+              cache({
+                ...staticProps,
+                ...Object.fromEntries(
+                  reactiveEntries.map(([subKey, v]) => [
+                    subKey,
+                    evalTracked(v.js, merged).value,
+                  ]),
+                ),
+              }),
+            ];
+          }),
+        ),
+      });
+    },
   );
 
   const callbackDepKey = callbacks
