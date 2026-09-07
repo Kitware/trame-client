@@ -193,6 +193,8 @@ class Getter(AbstractElement):
     :param update_nested_name: Method name if you aim to update the nested structure.
 
     :param update_name: Method name if you aim to update the full value.
+
+    Not implemented for client_type="react".
     """
 
     def __init__(
@@ -205,6 +207,10 @@ class Getter(AbstractElement):
         **kwargs,
     ):
         super().__init__("trame-getter", **kwargs)
+        if self.server.client_type == "react":
+            raise NotImplementedError(
+                "client.Getter is not implemented for client_type='react'"
+            )
         self._attr_names += [
             "name",
         ]
@@ -468,6 +474,8 @@ class Handler(AbstractElement):
         - success: Emitted when the function executes and returns successfully.
         - failure: Emitted when the function reports a handled error.
         - error: Emitted when an unhandled exception occurs during execution.
+
+    Not implemented for client_type="react".
     """
 
     def __init__(
@@ -480,6 +488,11 @@ class Handler(AbstractElement):
         external_script_id = f"trame_external_script{id(self)}"
 
         super().__init__("trame-handler", **kwargs, function_key=external_script_id)
+
+        if self.server.client_type == "react":
+            raise NotImplementedError(
+                "client.Handler is not implemented for client_type='react'"
+            )
 
         self.variable = variable
 
