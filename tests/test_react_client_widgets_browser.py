@@ -20,7 +20,8 @@ def test_react_client_widgets(server, page):
     assert bg == "rgb(255, 0, 0)"
 
     # SizeObserver: writes the observed box's dimensions into state.
-    box_size = server.get("box_size")
-    assert box_size is not None
+    # This happens asynchronously after the browser-side ResizeObserver
+    # fires, so poll instead of reading the state once.
+    box_size = server.wait_for("box_size")
     assert box_size["size"]["width"] > 0
     assert box_size["size"]["height"] > 0
