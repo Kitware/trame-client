@@ -70,6 +70,7 @@ jobs:
           cd js-lib
           npm ci
           npm run typecheck
+          npm test
           npm run build
 
       - name: Build Vue2 App
@@ -82,6 +83,13 @@ jobs:
         run: |
           cd vue3-app
           npm ci
+          npm run build
+
+      - name: Build React App
+        run: |
+          cd react-app
+          npm ci
+          npm test
           npm run build
 
   release:
@@ -106,6 +114,12 @@ jobs:
         with:
           node-version: 24
 
+      - name: Build js-lib
+        run: |
+          cd js-lib
+          npm ci
+          npm run build
+
       - name: Build Vue2 App
         run: |
           cd vue2-app
@@ -115,6 +129,12 @@ jobs:
       - name: Build Vue3 App
         run: |
           cd vue3-app
+          npm ci
+          npm run build
+
+      - name: Build React App
+        run: |
+          cd react-app
           npm ci
           npm run build
 
