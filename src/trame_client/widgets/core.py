@@ -350,6 +350,10 @@ class AbstractElement(TrameComponent):
             return self._impl.props
         if name in {"events", "_event_names"}:
             return self._impl.events
+        if name == "literal_children":
+            # Only meaningful for client_type="react" (react.HtmlElement) -
+            # absent under vue, where this whole indirection doesn't apply.
+            return getattr(self._impl, "literal_children", False)
 
         if name[0] == "_":
             raise AttributeError()
@@ -365,6 +369,8 @@ class AbstractElement(TrameComponent):
             self._impl.props = value
         elif name in {"events", "_event_names"}:
             self._impl.events = value
+        elif name == "literal_children":
+            self._impl.literal_children = value
         elif name[0] == "_":
             self.__dict__[name] = value
         elif name == "children":

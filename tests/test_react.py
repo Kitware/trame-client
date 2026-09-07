@@ -194,6 +194,25 @@ def test_react_bind_applies_trame_default():
     assert server.state.x == 1
 
 
+def test_react_literal_children_flag():
+    server = get_server("test_react_literal_children_flag", client_type="react")
+
+    div = html.Div(trame_server=server)
+    assert div.literal_children is False
+    assert "literalChildren" not in div.html
+
+    select = html.Div(trame_server=server)
+    select.literal_children = True
+    with select:
+        html.Span("Vanilla", value="vanilla")
+
+    tree = select.html
+    assert tree["literalChildren"] is True
+    assert tree["children"] == [
+        {"tag": "span", "props": {"value": "vanilla"}, "children": ["Vanilla"]}
+    ]
+
+
 def test_react_tts_sensitive_is_a_noop():
     server = get_server("test_react_tts_sensitive_is_a_noop", client_type="react")
     div = html.Div(trame_server=server)

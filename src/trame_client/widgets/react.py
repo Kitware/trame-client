@@ -355,6 +355,7 @@ class HtmlElement:
         self._elem = elem
         self._hidden = False
         self._tts_sensitive = False
+        self.literal_children = False
 
         self.props = kwargs.get("__properties", []) + SHARED_PROPS
         self.events = kwargs.get("__events", []) + SHARED_EVENTS
@@ -440,11 +441,20 @@ class HtmlElement:
             style["display"] = "none"
             props["style"] = style
 
-        return {
+        result = {
             "tag": elem._elem_name,
             "props": props,
             "children": _serialize_children(elem._children, elem.server),
         }
+        if self.literal_children:
+            # See react-app/src/runtime/resolveLiteralChildren.js: some
+            # components (MUI's Select/Tabs/RadioGroup/...) read
+            # `child.props.value` / `child.props.children` straight off their
+            # `children` array via `React.Children`, before anything renders
+            # - the usual lazy per-node wrapper defeats that, since those
+            # props would live on the wrapper instead of on a real element.
+            result["literalChildren"] = True
+        return result
 
     def hide(self):
         self._hidden = True

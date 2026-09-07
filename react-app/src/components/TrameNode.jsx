@@ -4,6 +4,7 @@ import { useResolvedNode } from "../runtime/resolveNode";
 import { createSnapshotCache, evalTracked } from "../runtime/expr";
 import { buildMergedScope } from "../runtime/scope";
 import { resolveTag, isStructuralTag } from "../runtime/tags";
+import { useLiteralChildren } from "../runtime/resolveLiteralChildren";
 
 function isBindLeaf(node) {
   return node !== null && typeof node === "object" && !Array.isArray(node) && "js" in node;
@@ -64,6 +65,17 @@ function TrameNodeOne({ node, scope }) {
     // WHAT EXTENDED SCOPE their children render, which a pre-resolved child
     // element can't express.
     return createElement(Component, { ...props, rawChildren: node.children, scope });
+  }
+
+  // node.literalChildren (react.py's `literal_children` widget flag) is
+  // static per tree position - like node.tag, it never toggles across
+  // re-renders of the same node - so this conditional hook call is safe,
+  // the same assumption the early returns above already make about a node's
+  // shape being stable (see resolveLiteralChildren.js for why this exists).
+  if (node.literalChildren) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const literalChildren = useLiteralChildren(node.children, scope);
+    return createElement(Component, props, literalChildren);
   }
 
   const children = node.children?.length
