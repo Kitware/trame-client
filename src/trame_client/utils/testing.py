@@ -1,5 +1,6 @@
 import json
 import sys
+import time
 from pathlib import Path
 from xprocess import ProcessStarter
 from PIL import Image
@@ -41,6 +42,26 @@ class TrameServerMonitor:
     def get(self, name):
         self.update()
         return self._last_state.get(name)
+
+    def wait_for(
+        self, name, predicate=lambda value: value is not None, timeout=5, interval=0.1
+    ):
+        """Poll the server state log until `predicate(value)` is truthy.
+
+        Useful for state that is written asynchronously (e.g. after a
+        browser-side ResizeObserver round-trip) and can't be awaited via a
+        DOM-based `expect(...)`.
+        """
+        deadline = time.time() + timeout
+        value = self.get(name)
+        while not predicate(value):
+            if time.time() >= deadline:
+                raise AssertionError(
+                    f"Timed out waiting for state {name!r} (last value: {value!r})"
+                )
+            time.sleep(interval)
+            value = self.get(name)
+        return value
 
 
 def print_state(**kwargs):
