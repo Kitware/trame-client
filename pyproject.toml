@@ -33,6 +33,7 @@ test = [
     "Pillow",
     "pixelmatch",
     "trame>=3.13",
+    "trame-server>=3.15",
 ]
 dev = [
     "pre-commit",
