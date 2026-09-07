@@ -79,9 +79,11 @@ class Bind:
     `state.setdefault(key, value)` call per kwarg - independent of what the
     expression itself references.
 
-    Usable as a prop value (`value=react.Bind("count", count=2)`) or directly
-    inside a `children` list (`html.Div(["count = ", react.Bind("count")])`),
-    see `react-text-interpolation.md`.
+    Usable as a prop value (`value=react.Bind("count", count=2)`), directly
+    inside a `children` list (`html.Div(["count = ", react.Bind("count")])`,
+    see `react-text-interpolation.md`), or nested inside a dict-valued prop
+    such as `style` (`style={"color": react.Bind("color", color="red")}`) -
+    the surrounding dict's other entries stay static.
     """
 
     def __init__(self, js_expression, **state_defaults):
@@ -398,6 +400,16 @@ class HtmlElement:
     def _serialize_value(self, name, value, server):
         if isinstance(value, (Bind, Callback, Slot)):
             return value.to_json(server)
+        if isinstance(value, dict):
+            # A dict-valued prop (e.g. `style={"color": react.Bind(...)}`) may
+            # mix plain values with `Bind`/`Callback` entries - recurse so the
+            # client sees a plain object with per-key `{"js": ...}` markers
+            # instead of an un-serialized Python object (react-app's
+            # `classifyProps` resolves those nested markers individually).
+            return {
+                key: self._serialize_value(name, item, server)
+                for key, item in value.items()
+            }
         return value
 
     def render(self):
