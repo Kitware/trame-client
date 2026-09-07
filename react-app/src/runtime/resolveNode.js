@@ -7,7 +7,7 @@ import TrameNode from "../components/TrameNode.jsx";
 // Pure, non-hook classification of node.props - cheap object walk. Ordered
 // by prop KEY first ("ref" is always a plain string, never wrapped), then by
 // VALUE SHAPE (matching react-refs.md §5 / react-scoped-slots.md §4).
-function classifyProps(props) {
+export function classifyProps(props) {
   const reactive = [];
   const callbacks = [];
   const slots = [];
