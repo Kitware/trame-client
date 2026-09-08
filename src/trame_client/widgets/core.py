@@ -286,6 +286,7 @@ class AbstractElement(TrameComponent):
         children=None,
         ctx_name=None,
         connect_parent=True,
+        literal_children=False,
         **kwargs,
     ):
         AbstractElement._next_id += 1
@@ -307,6 +308,7 @@ class AbstractElement(TrameComponent):
 
         # Client_type specific implementation (vue.HtmlElement, react.HtmlElement, ...)
         self._impl = _get_impl_class(self.server.client_type)(self, kwargs)
+        self._impl.literal_children = literal_children
 
         super().__init__(self._server, ctx_name=ctx_name)
 
