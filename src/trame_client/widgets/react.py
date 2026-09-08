@@ -146,10 +146,15 @@ def _serialize_children(children, server):
             out_buffer.append(child)
         elif isinstance(child, Bind):
             out_buffer.append(child.to_json(server))
-        elif hasattr(child, "html"):
-            out_buffer.append(child.html)
         else:
-            out_buffer.append(child)
+            # `child.html` is a property (recursively rendering child's own
+            # subtree) - `hasattr(child, "html")` would compute it once just
+            # to answer the question, then a second time right after to use
+            # it. That 2x-per-level doubling compounds multiplicatively with
+            # tree depth (2**depth), so a single `getattr(..., None)` here is
+            # what keeps a deeply nested tree linear instead of exponential.
+            html = getattr(child, "html", None)
+            out_buffer.append(child if html is None else html)
     return out_buffer
 
 
