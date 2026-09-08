@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { act } from "react";
+import { act, Children, cloneElement } from "react";
 import { render, screen, cleanup } from "@testing-library/react";
 import { afterEach } from "vitest";
 import { TrameContext } from "../../src/runtime/trameContext";
 import { createRefRegistry } from "../../src/runtime/refs";
+import { registerTag } from "../../src/runtime/tags";
 import TrameNode from "../../src/components/TrameNode.jsx";
 import { createFakeTrame } from "../helpers/fakeTrame";
 
@@ -88,5 +89,37 @@ describe("TrameNode", () => {
 
     unmount();
     expect(trame.refs.myRef).toBeUndefined();
+  });
+
+  it("forwards props a parent injects via cloneElement onto a wrapped child's real element", () => {
+    // Mimics MUI compound components (Tabs/RadioGroup/ButtonGroup/...) that
+    // clone each of their `children` to graft on props like `onClick` -
+    // without needing literal_children, since this one doesn't read anything
+    // off `child.props` before cloning (contrast with resolveLiteralChildren
+    // .test.jsx's FakeSelect, which does and so still needs that flag).
+    function FakeGroup({ children }) {
+      return (
+        <div data-testid="group">
+          {Children.map(children, (child) => cloneElement(child, { extra: "injected" }))}
+        </div>
+      );
+    }
+    function FakeItem({ label, extra }) {
+      return <div data-testid="item">{label}-{extra}</div>;
+    }
+    registerTag("fake-group", FakeGroup);
+    registerTag("fake-item", FakeItem);
+
+    const { trame } = createFakeTrame();
+    renderTree(
+      {
+        tag: "fake-group",
+        props: {},
+        children: [{ tag: "fake-item", props: { label: "a" }, children: [] }],
+      },
+      trame,
+    );
+
+    expect(screen.getByTestId("item").textContent).toBe("a-injected");
   });
 });
