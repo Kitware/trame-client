@@ -12,6 +12,7 @@ import TrameApp from "./components/TrameApp.jsx";
 import TrameLoading from "./components/TrameLoading.jsx";
 import TrameReconnect from "./components/TrameReconnect.jsx";
 import { registerTag } from "./runtime/tags";
+import utils from "@vue3-utils";
 
 async function start() {
   // Check if we need to override websocket
@@ -29,8 +30,9 @@ async function start() {
   // build-time import access to this app's modules) can reach the live
   // trame instance and register their own tags against the same registry
   // TrameNode resolves tags from (runtime/tags.js).
+  trame.registerTag = registerTag;
+  trame.utils = utils;
   window.trame = trame;
-  window.trame.registerTag = registerTag;
 
   // Expose React
   window.React = React;
