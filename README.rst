@@ -1,4 +1,4 @@
-.. |pypi_download| image:: https://img.shields.io/pypi/dm/trame-client
+.. |pypi_download| image:: https://kitware.github.io/trame/downloads/trame-client.svg
 
 trame-client: core client for trame |pypi_download|
 ===========================================================================
