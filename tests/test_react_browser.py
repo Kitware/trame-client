@@ -70,3 +70,25 @@ def test_react_if_for(server, page):
     expect(page.locator(".todoList")).to_have_count(0)
     expect(page.locator(".emptyMsg")).to_have_text("No todos left")
     assert server.get("todos") == []
+
+
+@pytest.mark.parametrize("server_path", ["examples/react/dynamic_template.py"])
+def test_react_dynamic_template(server, page):
+    url = f"http://127.0.0.1:{server.port}/"
+    page.goto(url)
+
+    static_div = page.locator(".staticDiv")
+    count_div = page.locator(".countDiv")
+
+    expect(static_div).to_have_text("Static text 2")
+    expect(count_div).to_have_text("count = 2")
+
+    # react.Bind updates client-side without a server round trip.
+    page.locator(".plusBtn").click()
+    expect(count_div).to_have_text("count = 3")
+
+    # VirtualNode.clear() + refill re-flushes the layout template.
+    page.locator(".updateBtn").click()
+    expect(static_div).to_have_text("Static text 4")
+    expect(count_div).to_have_text("count = 4")
+    assert server.get("count") == 4

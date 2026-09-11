@@ -221,6 +221,23 @@ def register_directive(py_name, js_name=None):
         AVAILABLE_DIRECTIVES.append((py_name, js_name))
 
 
+def render_virtual_node(children, server):
+    """
+    Serialize a `core.VirtualNode` to a Vue template-fragment string.
+    """
+    out_buffer = []
+    try:
+        for elem in children:
+            if isinstance(elem, str):
+                out_buffer.append(elem)
+            else:
+                out_buffer.append(elem.html)
+    except Exception as e:
+        print(e)
+
+    return "\n".join(out_buffer)
+
+
 class HtmlElement:
     """
     Vue2/Vue3 rendering implementation for a single `AbstractElement`

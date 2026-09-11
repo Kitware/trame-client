@@ -158,6 +158,17 @@ def _serialize_children(children, server):
     return out_buffer
 
 
+def render_virtual_node(children, server):
+    """
+    Serialize a `core.VirtualNode` to a transparent `ReactFragment` node.
+    """
+    return {
+        "tag": "ReactFragment",
+        "props": {},
+        "children": _serialize_children(children, server),
+    }
+
+
 # -----------------------------------------------------------------------------
 # Structural nodes - If / For / Slot
 # -----------------------------------------------------------------------------
