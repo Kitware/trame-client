@@ -96,7 +96,9 @@ V_ON_TYPE_FORM = [
     "input",
     "change",
     "focus",
+    "focusin",
     "blur",
+    "focusout",
 ]
 V_ON_TYPE_TOUCH = [
     "touchstart",

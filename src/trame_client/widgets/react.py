@@ -358,6 +358,10 @@ SHARED_EVENTS = [
     ("on_touch_move", "onTouchMove"),
     ("on_touch_end", "onTouchEnd"),
     ("on_touch_cancel", "onTouchCancel"),
+    ("on_animation_start", "onAnimationStart"),
+    ("on_animation_end", "onAnimationEnd"),
+    ("on_animation_iteration", "onAnimationIteration"),
+    ("on_transition_end", "onTransitionEnd"),
 ]
 
 

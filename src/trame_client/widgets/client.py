@@ -2,6 +2,7 @@ import logging
 import uuid
 from pathlib import Path
 
+from .adapter import ClientAdapter
 from .core import AbstractElement
 from .react import Bind as ReactBind
 from ..external_script_handler import (
@@ -26,6 +27,7 @@ __all__ = [
     "LifeCycleMonitor",
     "SizeObserver",
     "Handler",
+    "ClientAdapter",
     "register_external_script",
 ]
 
