@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { TrameContext } from "../runtime/trameContext";
 import { createRefRegistry } from "../runtime/refs";
 import { registerTag } from "../runtime/tags";
@@ -18,6 +18,8 @@ import TrameSizeObserver from "./TrameSizeObserver.jsx";
 // Registered once at module load, before first render (§6 of the plan).
 registerTag("ReactIf", ReactIf);
 registerTag("ReactFor", ReactFor);
+// Transparent container emitted by core.VirtualNode under client_type="react".
+registerTag("ReactFragment", Fragment);
 registerTag("trame-loading", TrameLoading);
 registerTag("trame-template", TrameTemplate);
 registerTag("trame-exec", TrameJSEval);

@@ -1,9 +1,10 @@
 """
 The trame widget tree, shared by every `client_type`.
 
-`ElementContextManager`/`HTML_CTX` and `VirtualNode` are framework-agnostic:
-they only manage the python-side parent/child stack used by the
-`with widget:` context-manager idiom.
+`ElementContextManager`/`HTML_CTX` manage the python-side parent/child stack
+used by the `with widget:` context-manager idiom. `VirtualNode.html` is the
+only client-specific part: the active client module renders it (a template
+string fragment for Vue, a dict node for React).
 
 `AbstractElement` is the base every trame widget (across the whole trame
 ecosystem) is built on, so it stays defined here rather than moving behind a
@@ -148,19 +149,13 @@ class VirtualNode:
     @property
     def html(self):
         """
-        Return a string representation of the HTML component
-        """
-        out_buffer = []
-        try:
-            for elem in self._children:
-                if isinstance(elem, str):
-                    out_buffer.append(elem)
-                else:
-                    out_buffer.append(elem.html)
-        except Exception as e:
-            print(e)
+        Return the active client's representation of this node.
 
-        return "\n".join(out_buffer)
+        A template string fragment for Vue, a dict node for React.
+        """
+        return _get_client_module(self._server.client_type).render_virtual_node(
+            self._children, self._server
+        )
 
     # -------------------------------------------------------------------------
     # Resource manager
@@ -197,17 +192,24 @@ class VirtualNode:
         HTML_CTX.add_child(self)
 
 
-def _get_impl_class(client_type):
+def _get_client_module(client_type):
+    """
+    Return the `vue` or `react` module for the given `client_type`.
+    """
     if client_type in VUE_CLIENT_TYPES:
         from . import vue
 
-        return vue.HtmlElement
-    elif client_type == "react":
+        return vue
+    if client_type == "react":
         from . import react
 
-        return react.HtmlElement
+        return react
 
     raise TypeError(f"Unsupported client_type={client_type!r}")
+
+
+def _get_impl_class(client_type):
+    return _get_client_module(client_type).HtmlElement
 
 
 class AbstractElement(TrameComponent):

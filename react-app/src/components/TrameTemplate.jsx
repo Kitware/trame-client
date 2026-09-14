@@ -18,5 +18,7 @@ export default function TrameTemplate({ templateName = "main", urlKey = "ui", us
     (cb) => trame.state.watch([stateKey], cb),
     () => trame.state.get(stateKey),
   );
-  return <TrameNode nodes={tree} scope={undefined} />;
+  // Key by template name so reusing this component for a different template
+  // remounts the subtree instead of reusing the previous template's DOM nodes.
+  return <TrameNode key={stateKey} nodes={tree} scope={undefined} />;
 }

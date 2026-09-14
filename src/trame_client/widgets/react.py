@@ -158,6 +158,17 @@ def _serialize_children(children, server):
     return out_buffer
 
 
+def render_virtual_node(children, server):
+    """
+    Serialize a `core.VirtualNode` to a transparent `ReactFragment` node.
+    """
+    return {
+        "tag": "ReactFragment",
+        "props": {},
+        "children": _serialize_children(children, server),
+    }
+
+
 # -----------------------------------------------------------------------------
 # Structural nodes - If / For / Slot
 # -----------------------------------------------------------------------------
@@ -347,6 +358,10 @@ SHARED_EVENTS = [
     ("on_touch_move", "onTouchMove"),
     ("on_touch_end", "onTouchEnd"),
     ("on_touch_cancel", "onTouchCancel"),
+    ("on_animation_start", "onAnimationStart"),
+    ("on_animation_end", "onAnimationEnd"),
+    ("on_animation_iteration", "onAnimationIteration"),
+    ("on_transition_end", "onTransitionEnd"),
 ]
 
 
