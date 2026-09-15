@@ -6,24 +6,12 @@ from urllib.parse import urlparse
 from .utils.web_module import file_digest
 
 from .module import (
-    USER_PROVIDED_SCRIPTS_DIR_PATH,
     USER_PROVIDED_SCRIPTS_SERVE_URL_PREFIX,
     USER_PROVIDED_UMD_SCRIPTS_DIR_PATH,
     USER_PROVIDED_ES_SCRIPTS_DIR_PATH,
 )
 
 logger = logging.getLogger(__name__)
-
-
-def clean_user_provided_scripts(folder: Path):
-    files_to_keep = {"__init__.py", ".gitignore"}
-
-    for item in folder.iterdir():
-        if item.is_file() and item.name not in files_to_keep:
-            item.unlink()
-
-        if item.is_dir() and item.name not in files_to_keep:
-            clean_user_provided_scripts(item)
 
 
 @dataclass
@@ -123,9 +111,6 @@ def register_user_provided_script(
 ) -> ExternalScript:
     if name in EXTERNAL_SCRIPTS_MAP:
         logger.warning("overwriting already registered script %s", name)
-
-    if not EXTERNAL_SCRIPTS_MAP:
-        clean_user_provided_scripts(USER_PROVIDED_SCRIPTS_DIR_PATH)
 
     EXTERNAL_SCRIPTS_MAP[name] = ExternalScript(
         name,
