@@ -1,9 +1,27 @@
+import atexit
+import os
+import shutil
+import tempfile
 from pathlib import Path
 
-USER_PROVIDED_SCRIPTS_DIR_PATH = Path(__file__).with_name("user_provided_scripts")
+# Registered scripts are copied to a temporary directory that is served to the client and removed at process exit.
+_TMP_DIR_PATH = Path(tempfile.mkdtemp(prefix="trame-client-"))
+_TMP_DIR_PID = os.getpid()
+
+
+@atexit.register
+def _cleanup_tmp_dir():
+    if os.getpid() == _TMP_DIR_PID:
+        shutil.rmtree(_TMP_DIR_PATH, ignore_errors=True)
+
+
+USER_PROVIDED_SCRIPTS_DIR_PATH = _TMP_DIR_PATH
 USER_PROVIDED_UMD_SCRIPTS_DIR_PATH = USER_PROVIDED_SCRIPTS_DIR_PATH / "umd"
 USER_PROVIDED_ES_SCRIPTS_DIR_PATH = USER_PROVIDED_SCRIPTS_DIR_PATH / "es"
 USER_PROVIDED_SCRIPTS_SERVE_URL_PREFIX = Path("__trame_client_external_scripts")
+
+USER_PROVIDED_ES_SCRIPTS_DIR_PATH.mkdir()
+USER_PROVIDED_UMD_SCRIPTS_DIR_PATH.mkdir()
 
 
 def setup_handler_module(server):
