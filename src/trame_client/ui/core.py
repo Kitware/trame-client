@@ -340,10 +340,11 @@ You should run the following code before displaying a layout.
     async def display_cell(self, *, height=None, width=None):
         from IPython.display import clear_output
 
-        height = height or "100%"
-        width = width or "100%"
+        if height or width:
+            height = height or "100%"
+            width = width or "100%"
+            self.iframe_style = f"border: none; width: {width}{css_unit(width)}; height: {height}{css_unit(height)};"
 
-        self.iframe_style = f"border: none; width: {width}{css_unit(width)}; height: {height}{css_unit(height)};"
         await self.ready
         clear_output(wait=True)
         self._ipython_display_()
