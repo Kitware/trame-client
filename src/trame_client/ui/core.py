@@ -13,6 +13,43 @@ def css_unit(v):
 
 
 # -----------------------------------------------------------------------------
+# JupyterLab add-on CSS to style trame-iframe
+# -----------------------------------------------------------------------------
+
+JUPYTER_CSS = """
+/* default height in Jupyter */
+.trame-iframe {
+    min-height: 600px;
+}
+
+/* stretch to full height when its own tab (detached cell output) */
+.lm-Widget.jupyter-widgets.widget-inline-hbox.widget-html:has(iframe[id*='trame__template']) {
+    height: 100%;
+}
+.jp-LinkedOutputView .jp-OutputArea-child:has(iframe[id*='trame__template']) {
+    height: 100%;
+}
+.jp-LinkedOutputView .trame-iframe {
+    min-height: 100%;
+}
+"""
+
+JUPYTER_CSS_LOADED = False
+
+
+def add_jupyter_css(*_):
+    from IPython.display import display_html
+
+    global JUPYTER_CSS_LOADED
+
+    if JUPYTER_CSS_LOADED:
+        return
+
+    display_html(f"<style>{JUPYTER_CSS}</style>", raw=True)
+    JUPYTER_CSS_LOADED = True
+
+
+# -----------------------------------------------------------------------------
 # IFrame builder (env TRAME_IFRAME_BUILDER)
 # => default, serverproxy, jupyter-extension, jupyter-hub
 # -----------------------------------------------------------------------------
@@ -195,7 +232,7 @@ class AbstractLayout:
         self._template_name = f"trame__template_{template_name}"
         self._server.state[self._template_name] = ""
         self.iframe_style = f"border: none; width: {width}{css_unit(width)}; height: {height}{css_unit(height)};"
-        self.iframe_attrs = {}
+        self.iframe_attrs = {"class": "trame-iframe"}
         self.iframe_base_url = base_url
         self._iframe_builder = get_iframe_builder(iframe_builder)
 
@@ -336,6 +373,9 @@ You should run the following code before displaying a layout.
                 display(self.ipywidget)
             except ImportError:
                 display_html(self._jupyter_content(), raw=True)
+
+        # Make sure add-on CSS is available
+        add_jupyter_css()
 
     async def display_cell(self, *, height=None, width=None):
         from IPython.display import clear_output
