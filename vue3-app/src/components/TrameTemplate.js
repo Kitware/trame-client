@@ -51,7 +51,15 @@ export function setup() {
 
     if (type === "dirty-state") {
       for (let i = 0; i < keys.length; i++) {
-        modifiedState[keys[i]]();
+        const name = keys[i];
+        if (modifiedState[name] === undefined) {
+          // A key whose ref we never built: either it appeared without a
+          // "new-keys" announcement, or its name collides with a member of the
+          // template API (set, get, trigger, window, ...) that the "new-keys"
+          // branch above declines to shadow. Nothing to trigger.
+          continue;
+        }
+        modifiedState[name]();
       }
 
       if (

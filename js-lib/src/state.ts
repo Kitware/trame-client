@@ -11,6 +11,7 @@ export class State {
   private _name: string;
   private _client: vtkWSLinkClient;
   private _dirtyKeys: Set<string>;
+  private _pushFailed: boolean;
   private _state: Record<string, any>;
   private _keyTS: Record<string, number>;
   private _mtime: number;
@@ -33,6 +34,7 @@ export class State {
     this._name = "undefined";
     this._client = client;
     this._dirtyKeys = new Set();
+    this._pushFailed = false;
     this._state = {};
     this._keyTS = {};
     this._mtime = 0;
@@ -141,11 +143,25 @@ export class State {
    * Mark any local state variables dirty using their name(s)
    */
   dirty(...keys: string[]): void {
+    const newKeys: string[] = [];
     keys.forEach((key) => {
       if (this.canDirty(key)) {
         this._dirtyKeys.add(key);
       }
+      if (this._keyTS[key] === undefined) {
+        newKeys.push(key);
+      }
+      this._keyTS[key] = this._mtime;
     });
+
+    // A key created on the client is new to the listeners too. Announce it the
+    // same way a key coming from the server is, or a listener that builds its
+    // per-key structures on "new-keys" has none when the "dirty-state" for that
+    // key reaches it.
+    if (newKeys.length > 0) {
+      this._listeners.emit({ type: "new-keys", keys: newKeys });
+    }
+
     // Make sure client side is aware of that change...
     this._listeners.emit({
       type: "dirty-state",
@@ -168,7 +184,6 @@ export class State {
 
     this._mtime += 1;
     this._state[key] = value;
-    this._keyTS[key] = this._mtime;
     this.dirty(key);
     await this.flush();
   }
@@ -190,7 +205,6 @@ export class State {
     for (const [key, value] of Object.entries(obj)) {
       if (this._state[key] !== value) {
         this._state[key] = value;
-        this._keyTS[key] = this._mtime;
         this.dirty(key);
       }
     }
@@ -283,12 +297,31 @@ export class State {
       this._dirtyKeys.clear();
       const values = await Promise.all(waitOn);
       const deltaState = keys.map((key, i) => ({ key, value: values[i] }));
+      let pushed = true;
       if (this._client.isConnected()) {
-        await this._client.getRemote().Trame.updateState(deltaState);
+        try {
+          await this._client.getRemote().Trame.updateState(deltaState);
+        } catch (e) {
+          // The transport can die between isConnected() and the call landing.
+          // Keep those keys dirty so the next flush sends them, rather than
+          // rejecting a promise nobody is waiting on: set() is routinely called
+          // without await, so the rejection would surface as an unhandled one.
+          pushed = false;
+          keys.forEach((key) => this._dirtyKeys.add(key));
+          // Once per outage: the busy counter flushes on every change, so an
+          // unreachable server would otherwise be reported several times a second.
+          if (!this._pushFailed) {
+            this._pushFailed = true;
+            console.log("Could not push state, keys stay dirty", keys, e);
+          }
+        }
       }
+      this._pushFailed = !pushed;
 
       // Make sure we don't leave any pending update...
-      if (this._dirtyKeys.size) {
+      // Only when the push went through: re-flushing the keys we just put back
+      // would spin against a transport that is still down.
+      if (pushed && this._dirtyKeys.size) {
         this.flush();
       }
     }

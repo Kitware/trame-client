@@ -96,7 +96,14 @@ async function start() {
   console.error = (...args) => {
     try {
       if (trame.client.isConnected()) {
-        trame.client.getRemote().Trame.sendError(args.join(" "));
+        // Forwarding is best effort: the connection can be gone even when the
+        // client still believes it is up, and a failure to report an error must
+        // not itself become an unhandled rejection. It is printed locally either
+        // way, in the finally below.
+        trame.client
+          .getRemote()
+          .Trame.sendError(args.join(" "))
+          ?.catch?.(() => {});
       }
     } catch (e) {
       _error(e);

@@ -122,6 +122,35 @@ describe("State", () => {
     expect(state.canDirty("free")).toBe(true);
   });
 
+  it("onChange() reports a key created on the client as a new key too", async () => {
+    const { state } = await makeState({ a: 1 });
+    await state.loadState();
+
+    const events: any[] = [];
+    state.onChange((event) => events.push(event));
+
+    await state.set("brandNewKey", "hello");
+
+    expect(events).toEqual([
+      { type: "new-keys", keys: ["brandNewKey"] },
+      { type: "dirty-state", keys: ["brandNewKey"] },
+    ]);
+  });
+
+  it("a failed push keeps its keys dirty instead of rejecting", async () => {
+    const { state, fake } = await makeState({ a: 1 });
+    await state.loadState();
+    fake.setPushFails(true);
+
+    // set() is routinely called without await, so a rejection here is an
+    // unhandled one; the edit is kept for the next flush instead.
+    await expect(state.set("a", 2)).resolves.toBeUndefined();
+
+    fake.setPushFails(false);
+    await state.flush();
+    expect(fake.getServerState().a).toBe(2);
+  });
+
   it("delete() unsubscribes from the wslink client without throwing", async () => {
     const { state, fake } = await makeState({ a: 1 });
     await state.loadState();

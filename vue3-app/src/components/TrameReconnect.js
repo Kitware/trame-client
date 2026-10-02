@@ -23,7 +23,14 @@ export default {
     let retryCount = 0;
 
     async function connect() {
-      await trame.connect();
+      try {
+        await trame.connect();
+      } catch (e) {
+        // An attempt made while the server is still down is expected to fail;
+        // the next tick tries again. Reported, not thrown: nothing awaits the
+        // timer's call, so throwing here is only an unhandled rejection.
+        console.log("Reconnection attempt failed", e);
+      }
     }
 
     function resetRetry() {
