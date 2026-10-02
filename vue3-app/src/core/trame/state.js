@@ -43,17 +43,31 @@ export class WatcherManager {
 }
 
 export class SharedState {
-  constructor(client) {
+  /**
+   * @param client managing the communication with the server
+   * @param oldState previous state, when reconnecting, so the listeners and
+   *        watchers registered by the UI outlive the session they were made in.
+   *        Matches js-lib's `State(client, oldState)`.
+   */
+  constructor(client, oldState = null) {
     this.name = "Default trame application";
     this.client = client;
+    // wslink subscriptions, released with Trame.unsubscribe()
     this.subscriptions = [];
+    // local unsubscribe functions owned by this instance
+    this.unsubscribes = [];
     this.dirtyKeys = new Set();
+    this.pushFailed = false;
     this.state = {};
     this.keyTS = {};
     this.mtime = 0;
-    this.listeners = [];
+    this.listeners = oldState?.listeners || [];
     this.ready = false;
-    this._watchers = new WatcherManager();
+    //: A state stops emitting once its session is gone -- see `retire()`. The
+    //: listener array is SHARED with the state that replaces this one, so an
+    //: emit from here after that handover reaches the live UI.
+    this.retired = false;
+    this._watchers = oldState?._watchers || new WatcherManager();
 
     // bind decorator helper
     this.registerDecorator = registerDecorator;
@@ -116,7 +130,7 @@ export class SharedState {
         ),
     );
 
-    this.subscriptions.push(
+    this.unsubscribes.push(
       this.addListener(({ type, keys }) => {
         if (type === "dirty-state") {
           this._watchers.notifyWatchers(keys, this.state);
@@ -136,18 +150,44 @@ export class SharedState {
     this.ready = true;
   }
 
+  /**
+   * Stop emitting, without touching the listener array: the state that replaces
+   * this one inherits that array, and the components on it are live.
+   *
+   * A reply can already be inside wslink's decoder when the socket closes, so an
+   * abandoned `loadState()` CAN still resolve, minutes later and after a fresh
+   * session has loaded. Everything it does to its own copy of the state is
+   * harmless; what is not harmless is the "new-keys"/"dirty-state"/"ready" it
+   * emits on the way, because `ready` remounts the keyed template under a UI
+   * that has already recovered.
+   */
+  retire() {
+    this.retired = true;
+  }
+
   notifyListeners(even) {
+    if (this.retired) {
+      return;
+    }
     for (let i = 0; i < this.listeners.length; i++) {
       this.listeners[i](even);
     }
   }
 
+  /**
+   * @return unsubscribe function
+   */
   addListener(listener) {
     this.listeners.push(listener);
+    return () => this.removeListener(listener);
   }
 
   removeListener(listener) {
-    this.listeners = this.listeners.filter((l) => l !== listener);
+    // in place, so a listener registered on a previous session keeps working
+    const index = this.listeners.indexOf(listener);
+    if (index !== -1) {
+      this.listeners.splice(index, 1);
+    }
   }
 
   getAllKeys() {
@@ -160,8 +200,26 @@ export class SharedState {
   }
 
   delete() {
+    const skip = (e) =>
+      console.log("Skipping subscription we could not release", e);
     while (this.subscriptions.length) {
-      this.client.getRemote().Trame.unsubscribe(this.subscriptions.pop());
+      const subscription = this.subscriptions.pop();
+      try {
+        // Both halves are needed: wslink's unsubscribe throws synchronously on a
+        // malformed argument and REJECTS on a subscription the session does not
+        // hold -- the second being normal during teardown, where it would land as
+        // an unhandled rejection in the middle of a reconnect.
+        this.client.getRemote().Trame.unsubscribe(subscription)?.catch?.(skip);
+      } catch (e) {
+        skip(e);
+      }
+    }
+    while (this.unsubscribes.length) {
+      try {
+        this.unsubscribes.pop()();
+      } catch (e) {
+        console.log("Skipping listener we could not release", e);
+      }
     }
   }
 
@@ -187,19 +245,17 @@ export class SharedState {
       return;
     }
 
-    this.ts += 1;
+    this.mtime += 1;
     this.state[key] = value;
-    this.keyTS[key] = this.ts;
     this.dirty(key);
     await this.flush();
   }
 
   async update(obj) {
-    this.ts += 1;
+    this.mtime += 1;
     for (const [key, value] of Object.entries(obj)) {
       if (this.state[key] !== value) {
         this.state[key] = value;
-        this.keyTS[key] = this.ts;
         this.dirty(key);
       }
     }
@@ -207,15 +263,32 @@ export class SharedState {
   }
 
   canDirty(name) {
+    if (!this.state.trame__client_only) {
+      return true;
+    }
     return !this.state.trame__client_only.includes(name);
   }
 
   dirty(...keys) {
+    const newKeys = [];
     keys.forEach((key) => {
       if (this.canDirty(key)) {
         this.dirtyKeys.add(key);
       }
+      if (this.keyTS[key] === undefined) {
+        newKeys.push(key);
+      }
+      this.keyTS[key] = this.mtime;
     });
+
+    // A key created on the client is new to the listeners too. Announce it the
+    // same way a key coming from the server is, or a listener that builds its
+    // per-key structures on "new-keys" has none when the "dirty-state" for that
+    // key reaches it.
+    if (newKeys.length > 0) {
+      this.notifyListeners({ type: "new-keys", keys: newKeys });
+    }
+
     // Make sure client side is aware of that change...
     this.notifyListeners({
       type: "dirty-state",
@@ -244,12 +317,31 @@ export class SharedState {
       this.dirtyKeys.clear();
       const values = await Promise.all(waitOn);
       const deltaState = keys.map((key, i) => ({ key, value: values[i] }));
+      let pushed = true;
       if (this.client.isConnected()) {
-        await this.client.getRemote().Trame.updateState(deltaState);
+        try {
+          await this.client.getRemote().Trame.updateState(deltaState);
+        } catch (e) {
+          // The transport can die between isConnected() and the call landing.
+          // Keep those keys dirty so the next flush sends them, rather than
+          // rejecting a promise nobody is waiting on: set() is routinely called
+          // without await, so the rejection would surface as an unhandled one.
+          pushed = false;
+          keys.forEach((key) => this.dirtyKeys.add(key));
+          // Once per outage: the busy counter flushes on every change, so an
+          // unreachable server would otherwise be reported several times a second.
+          if (!this.pushFailed) {
+            this.pushFailed = true;
+            console.log("Could not push state, keys stay dirty", keys, e);
+          }
+        }
       }
+      this.pushFailed = !pushed;
 
       // Make sure we don't leave any pending update...
-      if (this.dirtyKeys.size) {
+      // Only when the push went through: re-flushing the keys we just put back
+      // would spin against a transport that is still down.
+      if (pushed && this.dirtyKeys.size) {
         this.flush();
       }
     }

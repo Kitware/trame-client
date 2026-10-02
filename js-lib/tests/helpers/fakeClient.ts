@@ -12,6 +12,7 @@ export type TriggerHandler = (...args: any[]) => any;
  */
 export function createFakeClient(initialServerState: Record<string, any> = {}) {
   let connected = false;
+  let pushFails = false;
   let serverState: Record<string, any> = { ...initialServerState };
   const stateUpdateListeners: Array<(args: [Record<string, any>]) => void> = [];
   const actionsListeners: Array<(args: [any[]]) => void> = [];
@@ -29,6 +30,10 @@ export function createFakeClient(initialServerState: Record<string, any> = {}) {
       })),
       updateState: vi.fn(
         async (changes: Array<{ key: string; value: any }>) => {
+          if (pushFails) {
+            // wslink rejects with a plain object, not an Error
+            throw { code: -32099, message: "RPC call unsuccessful" };
+          }
           // Mirrors trame_server: the sender's own values are applied
           // locally but not echoed back to it (skip_last_active_client).
           changes.forEach(({ key, value }) => {
@@ -96,6 +101,10 @@ export function createFakeClient(initialServerState: Record<string, any> = {}) {
     },
     getServerState() {
       return serverState;
+    },
+    /** Make every subsequent updateState RPC fail, as a dead transport does. */
+    setPushFails(value: boolean) {
+      pushFails = value;
     },
     /** Simulate the server unilaterally broadcasting new/changed state, e.g. from another client. */
     pushServerState(partial: Record<string, any>) {

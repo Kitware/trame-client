@@ -96,12 +96,21 @@ export default {
           elem[property] = value;
         }
       }
-      const wslinkSub = trame.client
+      // The client is captured, not read back from `trame` when the teardown runs:
+      // by then a reconnect has already replaced it, and handing this subscription
+      // to the NEW session rejects with "not subscribed".
+      const client = trame.client;
+      const wslinkSub = client
         .getRemote()
         .Trame.subscribeToActions(([actions]) => actions.map(execAction));
-      subscriptions.push(() =>
-        trame?.client?.getRemote()?.Trame?.unsubscribe(wslinkSub),
-      );
+      subscriptions.push(() => {
+        // An unsubscribe from a session that is already gone is not a problem
+        // worth an unhandled rejection.
+        client
+          ?.getRemote()
+          ?.Trame?.unsubscribe(wslinkSub)
+          ?.catch?.(() => {});
+      });
 
       // Attach lifecycles
       trame.client?.getRemote()?.Trame?.lifeCycleUpdate("client_connected");

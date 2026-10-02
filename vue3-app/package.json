@@ -5,7 +5,9 @@
   "scripts": {
     "build": "vite build --emptyOutDir",
     "debug": "vite build --sourcemap -m dev",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore --ignore-pattern public"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore --ignore-pattern public",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@kitware/vtk.js": "^35.14.4",
@@ -16,7 +18,9 @@
     "@vue/eslint-config-prettier": "^10.2.0",
     "eslint": "^10.3.0",
     "eslint-plugin-vue": "^10.9.1",
+    "jsdom": "^27.4.0",
     "prettier": "^3.8.3",
-    "vite": "^8.0.11"
+    "vite": "^8.0.11",
+    "vitest": "^4.1.11"
   }
 }
