@@ -1,6 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const hoisted = vi.hoisted(() => ({ clients: [], makeClient: null }));
+const hoisted = vi.hoisted(() => ({
+  clients: [],
+  makeClient: null,
+  /** a one-shot failure for the NEXT client built, used for the fallback case */
+  nextConnectFails: null,
+  /** what the NEXT client reports from `getConfig()` -- a launcher's answer */
+  nextConfig: null,
+}));
 
 vi.mock("../src/core/wslink", () => ({
   default: {
@@ -23,7 +30,9 @@ function createFakeClient() {
     serverState: { trame__client_only: [], trame__template_main: "<div/>" },
     /** when true, getState() returns a promise that never settles */
     holdBootstrap: false,
-    connectFails: null,
+    /** rejects whatever `holdBootstrap` is holding, so `doConnect` fails LATE */
+    failBootstrapLater: null,
+    connectFails: hoisted.nextConnectFails,
     connected: false,
     isBusy: () => false,
     isConnected: () => client.connected,
@@ -34,7 +43,10 @@ function createFakeClient() {
       client.connected = true;
       return client;
     }),
-    getConfig: () => ({ application: "trame", client: client.id }),
+    /** what a launcher answered with, if a test set one up */
+    config: hoisted.nextConfig,
+    getConfig: () =>
+      client.config ?? { application: "trame", client: client.id },
     getConnection: () => ({
       getSession: () => ({ addAttachment: () => {} }),
     }),
@@ -42,7 +54,9 @@ function createFakeClient() {
       Trame: {
         getState: vi.fn(() =>
           client.holdBootstrap
-            ? new Promise(() => {})
+            ? new Promise((_resolve, reject) => {
+                client.failBootstrapLater = reject;
+              })
             : Promise.resolve({
                 name: "test",
                 state: { ...client.serverState },
@@ -64,6 +78,8 @@ function createFakeClient() {
       errorListeners.forEach((cb) => cb("Connection error"));
     },
   };
+  hoisted.nextConnectFails = null;
+  hoisted.nextConfig = null;
   hoisted.clients.push(client);
   return client;
 }
@@ -307,5 +323,276 @@ describe("trame.connect", () => {
 
     await trame.connect({});
     expect(listener).toHaveBeenCalledTimes(2);
+  });
+
+  it("a client listener hears a real connect, and sees the client it made", async () => {
+    const trame = createTrameInstance({});
+    const listener = vi.fn(() => trame.client);
+    trame.addClientListener(listener);
+    expect(listener).not.toHaveBeenCalled();
+
+    await trame.connect({});
+    expect(listener).toHaveBeenCalledTimes(1);
+    expect(listener.mock.results.at(-1).value).toBe(trame.client);
+
+    await trame.connect({});
+    expect(listener).toHaveBeenCalledTimes(2);
+    expect(listener.mock.results.at(-1).value).toBe(trame.client);
+  });
+
+  it("a client listener is told how the route for this connection was chosen", async () => {
+    // How the route was chosen is knowable only here. It is not the same question as
+    // "is this the same server", which the two cases below pin down.
+    const trame = createTrameInstance({});
+    const seen = [];
+    trame.addClientListener((connection) => seen.push(connection));
+
+    await trame.connect({});
+    expect(seen).toEqual([{ reusedSession: false, firstConnection: true }]);
+
+    await trame.connect();
+    expect(seen.at(-1)).toEqual({
+      reusedSession: true,
+      firstConnection: false,
+    });
+  });
+
+  it("reusedSession is route intent, NOT an attestation of the server", async () => {
+    // The flag is `usedRemembered`, decided before the connect. Ask to resume route A,
+    // have the server answer with B, and it still reads `true` -- correctly, under the
+    // contract it actually has. Nothing on the client can attest that the process on
+    // the other end is the same one, and this case exists so that nobody documents it
+    // as if it could.
+    const trame = createTrameInstance({});
+    const seen = [];
+    trame.addClientListener((connection) => seen.push(connection));
+
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=A",
+    };
+    await trame.connect({ application: "trame" });
+
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=B",
+    };
+    await trame.connect();
+
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith(
+      expect.objectContaining({ sessionURL: "ws://host/proxy?sessionid=A" }),
+    );
+    expect(trame.config.sessionURL).toBe("ws://host/proxy?sessionid=B");
+    expect(seen.at(-1)).toEqual({
+      reusedSession: true,
+      firstConnection: false,
+    });
+  });
+
+  it("an explicit config on the very same route is not a reuse", async () => {
+    // The other side of the same contract: a caller that passes the route itself has
+    // not asked the client to resume anything, so the flag is false even though the
+    // session is demonstrably the same one.
+    const trame = createTrameInstance({});
+    const seen = [];
+    trame.addClientListener((connection) => seen.push(connection));
+
+    const route = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=A",
+    };
+    hoisted.nextConfig = route;
+    await trame.connect(route);
+    hoisted.nextConfig = route;
+    await trame.connect(route);
+
+    expect(trame.config.sessionURL).toBe(route.sessionURL);
+    expect(seen.at(-1)).toEqual({
+      reusedSession: false,
+      firstConnection: false,
+    });
+  });
+
+  it("a replay carries no connection, because it is not one", async () => {
+    // `addClientListener` tells a late listener about the client that already exists.
+    // A listener acting on the DETAILS of a new connection must not act on that, and
+    // the absence of details is what says so.
+    const trame = createTrameInstance({});
+    await trame.connect({});
+    const seen = [];
+    trame.addClientListener((connection) => seen.push(connection));
+    expect(seen).toEqual([undefined]);
+
+    trame.notifyClientReplaced();
+    expect(seen).toEqual([undefined, undefined]);
+  });
+
+  it("a client listener added late is told at once, like a connect listener", async () => {
+    const trame = createTrameInstance({});
+    await trame.connect({});
+    const listener = vi.fn();
+    trame.addClientListener(listener);
+    expect(listener).toHaveBeenCalledTimes(1);
+  });
+
+  it("notifyClientReplaced reaches client listeners and NOT connect listeners", async () => {
+    // `connect()` is not the only thing that assigns `trame.client`: an instrumenting
+    // layer can wrap it and put the wrapper back, after the connect that notified
+    // everyone. Saying so must not look like a connection, because a connect listener
+    // is a LIFECYCLE consumer -- `TrameApp`'s announces `client_connected`, registers a
+    // `beforeunload` and installs the template -- and none of that has happened again.
+    const trame = createTrameInstance({});
+    await trame.connect({});
+    const onConnect = vi.fn();
+    const onClient = vi.fn(() => trame.client);
+    trame.addConnectListener(onConnect);
+    trame.addClientListener(onClient);
+    expect(onConnect).toHaveBeenCalledTimes(1);
+    expect(onClient).toHaveBeenCalledTimes(1);
+
+    const wrapper = Object.create(trame.client);
+    trame.client = wrapper;
+    trame.notifyClientReplaced();
+
+    expect(onConnect).toHaveBeenCalledTimes(1);
+    expect(onClient).toHaveBeenCalledTimes(2);
+    expect(onClient.mock.results.at(-1).value).toBe(wrapper);
+  });
+
+  it("a reconnect goes back to the session this page is already on", async () => {
+    // `TrameReconnect` calls `connect()` with no config. Without the session it
+    // already had, the client asks the session manager for a new one -- and behind a
+    // launcher that is a different worker process, so everything the user changed on the
+    // old one is gone.
+    const trame = createTrameInstance({});
+    const before = hoisted.clients.length;
+    // What the session manager answered with on the first connect.
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=A",
+    };
+    await trame.connect({ application: "trame" });
+    expect(trame.config.sessionURL).toBe("ws://host/proxy?sessionid=A");
+
+    await trame.connect();
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith(
+      expect.objectContaining({ sessionURL: "ws://host/proxy?sessionid=A" }),
+    );
+    expect(hoisted.clients.length).toBeGreaterThan(before + 1);
+  });
+
+  it("a session that will not take us back is not retried forever", async () => {
+    const trame = createTrameInstance({});
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=A",
+    };
+    await trame.connect({ application: "trame" });
+
+    hoisted.nextConnectFails = new Error("that worker is gone");
+    await expect(trame.connect()).rejects.toThrow("that worker is gone");
+
+    // ...and the NEXT attempt asks for a fresh session instead of the dead one.
+    await trame.connect();
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith(undefined);
+  });
+
+  it("a transport lost while reusing the session lets the next retry ask for a new one", async () => {
+    // Retirement rejects the DEFERRED while `doConnect` is still waiting on a call
+    // wslink may never settle, so the rejection handler in `connect` never runs on
+    // this path. Without forgetting the session here, every remaining retry asks for
+    // the same dead worker and the page never falls back.
+    const trame = createTrameInstance({});
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=A",
+    };
+    await trame.connect({ application: "trame" });
+
+    hoisted.makeClient = () => {
+      const client = createFakeClient();
+      client.holdBootstrap = true;
+      return client;
+    };
+    const retried = trame.connect();
+    await Promise.resolve();
+    const held = hoisted.clients.at(-1);
+    expect(held.connect).toHaveBeenCalledWith(
+      expect.objectContaining({ sessionURL: "ws://host/proxy?sessionid=A" }),
+    );
+    held.killTransport();
+    await expect(retried).rejects.toThrow(/Connection closed/);
+
+    hoisted.makeClient = createFakeClient;
+    await trame.connect();
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith(undefined);
+  });
+
+  it("an attempt failing late cannot forget a session a newer one established", async () => {
+    // The config object is not a safe token: `getConfig()` may hand back the very
+    // object that was passed in, so an old attempt's `requested === lastConfig` can be
+    // true of a session it has nothing to do with. The generation is the token.
+    const trame = createTrameInstance({});
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=A",
+    };
+    await trame.connect({ application: "trame" });
+
+    // An attempt that reuses A and is left hanging.
+    hoisted.makeClient = () => {
+      const client = createFakeClient();
+      client.holdBootstrap = true;
+      return client;
+    };
+    const stuck = trame.connect();
+    await Promise.resolve();
+    const held = hoisted.clients.at(-1);
+
+    // Meanwhile a fresh attempt establishes a session and remembers it.
+    hoisted.makeClient = createFakeClient;
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=B",
+    };
+    // The stuck attempt is still `pending`, so retire it first the way a drop does.
+    held.killTransport();
+    await expect(stuck).rejects.toThrow(/Connection closed/);
+    await trame.connect({ application: "trame" });
+    expect(trame.config.sessionURL).toBe("ws://host/proxy?sessionid=B");
+
+    // Now the old attempt's bootstrap finally REJECTS -- late, long after a newer
+    // attempt established B. That lands in `connect`'s rejection handler, which is
+    // the path the generation guards.
+    held.failBootstrapLater(new Error("that bootstrap never finished"));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    await trame.connect();
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith(
+      expect.objectContaining({ sessionURL: "ws://host/proxy?sessionid=B" }),
+    );
+  });
+
+  it("an explicit config always wins over the remembered one", async () => {
+    const trame = createTrameInstance({});
+    hoisted.nextConfig = {
+      application: "trame",
+      sessionURL: "ws://host/proxy?sessionid=A",
+    };
+    await trame.connect({ application: "trame" });
+    await trame.connect({ application: "other" });
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith({
+      application: "other",
+    });
+  });
+
+  it("a removed client listener is not called again", async () => {
+    const trame = createTrameInstance({});
+    await trame.connect({});
+    const listener = vi.fn();
+    trame.addClientListener(listener);
+    trame.removeClientListener(listener);
+    trame.notifyClientReplaced();
+    expect(listener).toHaveBeenCalledTimes(1);
   });
 });
