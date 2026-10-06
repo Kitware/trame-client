@@ -308,4 +308,75 @@ describe("trame.connect", () => {
     await trame.connect({});
     expect(listener).toHaveBeenCalledTimes(2);
   });
+
+  it("a reconnect goes back to the session this page is already on", async () => {
+    // `TrameReconnect` calls `connect()` with no config, and without one the
+    // client asks the session manager -- behind a launcher that is a different
+    // worker process, so everything the user changed on the old one is gone.
+    // The fake client reports its own id in its config, so the config a retry
+    // asks for names the session it is going back to.
+    const trame = createTrameInstance({});
+    await trame.connect({ application: "trame" });
+    const session = trame.config;
+
+    await trame.connect();
+
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith(session);
+  });
+
+  it("a session that will not take us back is never swapped for a new one", async () => {
+    const trame = createTrameInstance({});
+    await trame.connect({ application: "trame" });
+    const session = trame.config;
+
+    hoisted.makeClient = () => {
+      const client = createFakeClient();
+      client.connectFails = new Error("that worker is gone");
+      return client;
+    };
+    await expect(trame.connect()).rejects.toThrow("that worker is gone");
+    await expect(trame.connect()).rejects.toThrow("that worker is gone");
+
+    // Every retry asked for the same session, and none of them asked the
+    // session manager for a new one.
+    for (const client of hoisted.clients.slice(1)) {
+      expect(client.connect).toHaveBeenCalledWith(session);
+    }
+  });
+
+  it("a transport lost while reconnecting still goes back to the same session", async () => {
+    // Retirement rejects the DEFERRED while `doConnect` is still parked on a
+    // call wslink may never settle, so this path never reaches `connect`'s own
+    // rejection handler. It must not become a way to drift onto a new session.
+    const trame = createTrameInstance({});
+    await trame.connect({ application: "trame" });
+    const session = trame.config;
+
+    hoisted.makeClient = () => {
+      const client = createFakeClient();
+      client.holdBootstrap = true;
+      return client;
+    };
+    const retried = trame.connect();
+    retried.catch(() => {});
+    await settle();
+    hoisted.clients.at(-1).killTransport();
+    await expect(retried).rejects.toThrow("Connection closed while connecting");
+
+    hoisted.makeClient = createFakeClient;
+    await trame.connect();
+
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith(session);
+  });
+
+  it("an explicit config always wins over the session we are on", async () => {
+    const trame = createTrameInstance({});
+    await trame.connect({ application: "trame" });
+
+    await trame.connect({ application: "other" });
+
+    expect(hoisted.clients.at(-1).connect).toHaveBeenCalledWith({
+      application: "other",
+    });
+  });
 });

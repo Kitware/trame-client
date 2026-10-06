@@ -13,6 +13,10 @@ export function createTrameInstance(app) {
     refs: {},
   };
   let listeners = [];
+  //: The config of the session this page is on, kept once a connection has
+  //: actually completed so a half-finished bootstrap cannot pin the page to a
+  //: session it never loaded. A reconnect goes back to it; see `trame.connect`.
+  let lastConfig = null;
   let initialized = false;
   //: The connect attempt in flight, if any. An attempt OWNS the transport it is
   //: bootstrapping on: wslink never settles a call that was in flight when the
@@ -123,6 +127,7 @@ export function createTrameInstance(app) {
     // abandoned bootstrap.
     attempt.completed = true;
     initialized = true;
+    lastConfig = trame.config;
     notifyConnection();
     return trame.config;
   }
@@ -143,7 +148,14 @@ export function createTrameInstance(app) {
       attempt.reject = reject;
     });
     pending = attempt;
-    doConnect(config, attempt).then(
+    // A reconnect carries no config of its own -- `TrameReconnect` calls
+    // `connect()` with nothing -- and without one the client goes back to the
+    // session manager, which behind a launcher hands out a DIFFERENT worker
+    // process: the page comes back empty while everything the user did is on the
+    // old one. So a reconnect goes back to the session this page is on, and only
+    // to that one. If it is really gone, `TrameReconnect` gives up after its
+    // retries and asks for a page reload.
+    doConnect(config ?? lastConfig, attempt).then(
       (result) => {
         if (pending === attempt) {
           pending = null;
