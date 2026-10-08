@@ -32,6 +32,20 @@ from trame_common.obj.component import TrameComponent
 
 from ..utils.formatter import to_pretty_html
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    # These are accessed through the module's __getattr__ below
+    from .vue import (
+        Component,
+        KeepAlive,
+        Suspense,
+        Teleport,
+        Template,
+        Transition,
+        TransitionGroup,
+    )
+
 VUE_CLIENT_TYPES = {"vue2", "vue3"}
 
 # Vue-only widgets (Template, Transition, ...) re-exported here for backward
