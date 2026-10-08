@@ -37,13 +37,13 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     # These are accessed through the module's __getattr__ below
     from .vue import (
-        Component,
-        KeepAlive,
-        Suspense,
-        Teleport,
-        Template,
-        Transition,
-        TransitionGroup,
+        Component as Component,
+        KeepAlive as KeepAlive,
+        Suspense as Suspense,
+        Teleport as Teleport,
+        Template as Template,
+        Transition as Transition,
+        TransitionGroup as TransitionGroup,
     )
 
 VUE_CLIENT_TYPES = {"vue2", "vue3"}
