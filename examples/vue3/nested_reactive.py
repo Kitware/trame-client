@@ -86,7 +86,7 @@ with DivLayout(server) as layout:
                 ],
             )
 
-    # New deep reactive
+    # New deep reactive (Vue3 only)
     with client.DeepReactive("nested_2") as dr:
         with html.Div("Nested 2 - {{ nested_2.a }}"):
             html.Input(type="range", v_model="nested_2.a", min=1, max=10, step=1)
